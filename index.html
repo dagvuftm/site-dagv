@@ -1477,98 +1477,389 @@
     </section>
 
     <!-- ===================== EVENTOS ===================== -->
-    <section id="events" class="events section">
+    <!-- ═══════════════════════════════════════════════════════
+         INSTITUIÇÕES ACADÊMICAS — redesenhado (v106)
+         5 cards: Ligas · Cursinho Carolina · PET · Repr. · CEPOP
+         ═══════════════════════════════════════════════════════ -->
+
+    <!-- ── Estilos adicionais: card Representações Estudantis (design v2) ── -->
+    <style>
+      /* ── Fundo com degradê exato da referência ── */
+      #events.inst-section {
+        background: linear-gradient(
+          105deg,
+          #450020 0%,
+          #520025 30%,
+          #5d0029 60%,
+          #6b0130 100%
+        );
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Textura de linhas diagonais finas sobre o fundo */
+      #events.inst-section::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+          repeating-linear-gradient(
+            -55deg,
+            transparent 0px, transparent 28px,
+            rgba(255,255,255,.022) 28px, rgba(255,255,255,.022) 29px
+          ),
+          repeating-linear-gradient(
+            35deg,
+            transparent 0px, transparent 48px,
+            rgba(255,255,255,.012) 48px, rgba(255,255,255,.012) 49px
+          );
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* Garante que o conteúdo fica acima da textura */
+      #events.inst-section .container { position: relative; z-index: 1; }
+
+      /* ── Badge "Ecossistema Acadêmico" em dourado ── */
+      #events .section-tag {
+        background: rgba(232,160,32,.15);
+        color: #e8a020;
+        border-color: rgba(232,160,32,.35);
+      }
+
+      /* ── Título com sublinhado dourado abaixo de todo o texto ── */
+      #events .section-title {
+        color: rgba(255,255,255,.95);
+        display: block;
+        padding-bottom: .6rem;
+        border-bottom: 3px solid;
+        border-image: linear-gradient(90deg, #c8830a, #e8a020, #f5c842) 1;
+      }
+
+      #events .section-desc {
+        color: rgba(255,255,255,.72);
+      }
+
+      /* Faixa dourada no topo do card de Representações */
+      .inst-card__stripe--repr {
+        height: 4px;
+        background: linear-gradient(90deg, #7a5900, var(--clr-accent));
+        flex-shrink: 0;
+      }
+
+      /* Remove o __top padrão e usa layout horizontal no body */
+      .inst-card__body--repr {
+        flex-direction: row !important;
+        align-items: flex-start;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        padding: 1.6rem 1.75rem 1.5rem;
+      }
+
+      /* Coluna de info lateral */
+      .inst-card__body--repr .inst-card__info {
+        flex: 1;
+        min-width: 160px;
+        display: flex;
+        flex-direction: column;
+        gap: .65rem;
+      }
+
+      /* Ícone dourado — removido; usa inst-card__icon-wrap padrão */
+
+      /* Badge dourado */
+      .inst-badge--repr {
+        display: inline-flex;
+        align-items: center;
+        gap: .3em;
+        font-size: .7rem;
+        font-weight: 700;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        padding: .22em .75em;
+        border-radius: var(--radius-pill);
+        background: rgba(232,160,32,.12);
+        color: #7a5900;
+        align-self: flex-start;
+      }
+
+      /* Lista de sub-itens */
+      .inst-sub-list {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+        margin-top: .25rem;
+        flex: 2;
+        min-width: 220px;
+      }
+
+      .inst-sub-item {
+        display: flex;
+        align-items: center;
+        gap: .75rem;
+        padding: .6rem .9rem;
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--clr-gray-1);
+        background: var(--clr-off);
+        text-decoration: none;
+        color: inherit;
+        transition: background 220ms, border-color 220ms, transform 200ms;
+      }
+
+      .inst-sub-item:hover {
+        background: var(--clr-green-light);
+        border-color: var(--clr-green);
+        transform: translateX(3px);
+      }
+
+      .inst-sub-item__icon {
+        width: 30px;
+        height: 30px;
+        border-radius: 6px;
+        background: var(--clr-green-light);
+        color: var(--clr-green);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: .85rem;
+        flex-shrink: 0;
+        transition: background 220ms, color 220ms;
+      }
+
+      .inst-sub-item:hover .inst-sub-item__icon {
+        background: var(--clr-green);
+        color: var(--clr-white);
+      }
+
+      .inst-sub-item__label {
+        font-size: .85rem;
+        font-weight: 700;
+        color: var(--clr-dark);
+        flex: 1;
+      }
+
+      .inst-sub-item__sub {
+        font-size: .75rem;
+        color: var(--clr-gray-2);
+        display: block;
+        font-weight: 400;
+      }
+
+      .inst-sub-item__arr {
+        font-size: .7rem;
+        color: var(--clr-gray-2);
+        transition: color 220ms, transform 220ms;
+      }
+
+      .inst-sub-item:hover .inst-sub-item__arr {
+        color: var(--clr-green);
+        transform: translateX(3px);
+      }
+
+      /* Responsividade: mobile empilha */
+      @media (max-width: 600px) {
+        .inst-card__body--repr {
+          flex-direction: column !important;
+        }
+        .inst-sub-list {
+          min-width: 0;
+        }
+      }
+    </style>
+
+    <section id="events" class="inst-section section" aria-labelledby="inst-title">
       <div class="container">
 
         <div class="section-header" data-aos="fade-up">
-          <span class="section-tag">Agenda</span>
-          <h2 class="section-title">Instituições Acadêmicas</h2>
-          <p class="section-desc">Fique por dentro das iniciativas, projetos e eventos promovidos pelo DAGV.</p>
+          <span class="section-tag">Ecossistema Acadêmico</span>
+          <h2 class="section-title" id="inst-title">Instituições Acadêmicas</h2>
+          <p class="section-desc">
+            Conheça as iniciativas, programas e entidades que compõem o ecossistema
+            estudantil da Medicina UFTM e que contam com o apoio do DAGV.
+          </p>
         </div>
 
-        <div class="events__grid">
+        <div class="inst-grid">
 
-          <article class="event-card" data-aos="fade-up" data-aos-delay="0">
-            <div class="event-card__badge event-card__badge--ongoing">Em andamento</div>
-            <div class="event-card__icon"><i class="fa-solid fa-graduation-cap"></i></div>
-            <div class="event-card__content">
-              <span class="event-card__date"><i class="fa-regular fa-calendar"></i> 2026</span>
-              <h3 class="event-card__title">Cursinho Carolina</h3>
-              <p class="event-card__desc">Curso pré-vestibular social e gratuito voltado a estudantes de baixa renda, mantido pelo DAGV como projeto de extensão.</p>
-              <a href="https://dagvmeduftm.wordpress.com/cursinho-carolina/" target="_blank" rel="noopener" class="event-card__link">
-                Saiba mais <i class="fa-solid fa-arrow-right"></i>
+          <!-- ① Ligas Acadêmicas ─────────────────────────── -->
+          <article class="inst-card inst-card--ligas" data-aos="fade-up" data-aos-delay="0">
+            <div class="inst-card__top">
+              <div class="inst-card__icon-wrap">
+                <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+              </div>
+              <div class="inst-card__label">Ativo · 12+ ligas</div>
+            </div>
+            <div class="inst-card__body">
+              <h3 class="inst-card__title">Ligas Acadêmicas</h3>
+              <p class="inst-card__desc">
+                Grupos de estudo extracurriculares em diversas especialidades médicas,
+                que promovem ensino, pesquisa e extensão além da grade curricular.
+              </p>
+            </div>
+            <div class="inst-card__footer">
+              <div class="inst-card__tags">
+                <span class="inst-tag"><i class="fa-solid fa-book-open" aria-hidden="true"></i> Ensino</span>
+                <span class="inst-tag"><i class="fa-solid fa-microscope" aria-hidden="true"></i> Pesquisa</span>
+                <span class="inst-tag"><i class="fa-solid fa-hands-holding-circle" aria-hidden="true"></i> Extensão</span>
+              </div>
+              <a href="ligas.html" class="inst-card__cta">
+                Conhecer ligas <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
               </a>
             </div>
           </article>
 
-          <article class="event-card" data-aos="fade-up" data-aos-delay="100">
-            <div class="event-card__badge event-card__badge--upcoming">Em breve</div>
-            <div class="event-card__icon"><i class="fa-solid fa-users"></i></div>
-            <div class="event-card__content">
-              <span class="event-card__date"><i class="fa-regular fa-calendar"></i> 2026</span>
-              <h3 class="event-card__title">Recepção dos Calouros</h3>
-              <p class="event-card__desc">Recepção oficial dos novos estudantes de Medicina da UFTM, com apresentação do curso, do DAGV e atividades de integração.</p>
-              <a href="#contact" class="event-card__link">
-                Saiba mais <i class="fa-solid fa-arrow-right"></i>
+          <!-- ② Cursinho Carolina ──────────────────────────── -->
+          <article class="inst-card inst-card--carolina" data-aos="fade-up" data-aos-delay="80">
+            <div class="inst-card__top">
+              <div class="inst-card__icon-wrap">
+                <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+              </div>
+              <div class="inst-card__label">Projeto social · Gratuito</div>
+            </div>
+            <div class="inst-card__body">
+              <h3 class="inst-card__title">Cursinho Carolina</h3>
+              <p class="inst-card__desc">
+                Curso pré-vestibular social e gratuito mantido pelo DAGV como projeto
+                de extensão, voltado a estudantes de baixa renda de Uberaba.
+              </p>
+            </div>
+            <div class="inst-card__footer">
+              <div class="inst-card__tags">
+                <span class="inst-tag"><i class="fa-solid fa-heart" aria-hidden="true"></i> Extensão social</span>
+                <span class="inst-tag"><i class="fa-solid fa-users" aria-hidden="true"></i> Comunidade</span>
+              </div>
+              <a href="https://dagvmeduftm.wordpress.com/cursinho-carolina/" target="_blank" rel="noopener" class="inst-card__cta">
+                Saiba mais <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
               </a>
             </div>
           </article>
 
-          <article class="event-card" data-aos="fade-up" data-aos-delay="200">
-            <div class="event-card__badge event-card__badge--ongoing">Ativo</div>
-            <div class="event-card__icon"><i class="fa-solid fa-flask"></i></div>
-            <div class="event-card__content">
-              <span class="event-card__date"><i class="fa-regular fa-calendar"></i> 2026</span>
-              <h3 class="event-card__title">Ligas Acadêmicas</h3>
-              <p class="event-card__desc">Grupos de estudo extracurriculares em diversas especialidades médicas, apoiados e incentivados pelo DAGV.</p>
-              <a href="https://dagvmeduftm.wordpress.com/ligas-academicas/" target="_blank" rel="noopener" class="event-card__link">
-                Ver ligas <i class="fa-solid fa-arrow-right"></i>
+          <!-- ③ PET Medicina ────────────────────────────────── -->
+          <article class="inst-card inst-card--pet" data-aos="fade-up" data-aos-delay="160">
+            <div class="inst-card__top">
+              <div class="inst-card__icon-wrap">
+                <i class="fa-solid fa-flask-vial" aria-hidden="true"></i>
+              </div>
+              <div class="inst-card__label">Programa federal · MEC</div>
+            </div>
+            <div class="inst-card__body">
+              <h3 class="inst-card__title">PET Medicina</h3>
+              <p class="inst-card__desc">
+                Programa de Educação Tutorial com atividades de pesquisa, ensino e
+                extensão em parceria com o DAGV e a coordenação do curso.
+              </p>
+            </div>
+            <div class="inst-card__footer">
+              <div class="inst-card__tags">
+                <span class="inst-tag"><i class="fa-solid fa-flask" aria-hidden="true"></i> Pesquisa</span>
+                <span class="inst-tag"><i class="fa-solid fa-chalkboard-teacher" aria-hidden="true"></i> Tutorial</span>
+              </div>
+              <a href="https://dagvmeduftm.wordpress.com/pet-medicina-1/" target="_blank" rel="noopener" class="inst-card__cta">
+                Conhecer <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
               </a>
             </div>
           </article>
 
-          <article class="event-card" data-aos="fade-up" data-aos-delay="300">
-            <div class="event-card__badge event-card__badge--past">Realizado</div>
-            <div class="event-card__icon"><i class="fa-solid fa-music"></i></div>
-            <div class="event-card__content">
-              <span class="event-card__date"><i class="fa-regular fa-calendar"></i> 2025</span>
-              <h3 class="event-card__title">Arraiá Carolina</h3>
-              <p class="event-card__desc">Festa junina solidária organizada pelo DAGV para arrecadação de fundos para o Cursinho Carolina.</p>
-              <a href="#contact" class="event-card__link">
-                Ver galeria <i class="fa-solid fa-arrow-right"></i>
+          <!-- ④ Representações Estudantis (card agrupado) ──── -->
+          <article class="inst-card inst-card--repr" data-aos="fade-up" data-aos-delay="240" style="cursor:default;">
+            <div class="inst-card__stripe inst-card__stripe--repr"></div>
+            <div class="inst-card__body inst-card__body--repr">
+
+              <!-- Info lateral -->
+              <div class="inst-card__info">
+                <div class="inst-card__logo-wrap">
+                  <div class="inst-card__icon-wrap">
+                    <i class="fa-solid fa-landmark" aria-hidden="true"></i>
+                  </div>
+                </div>
+                <span class="inst-badge inst-badge--repr">
+                  <i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Representação
+                </span>
+                <h3 class="inst-card__title">Representações<br/>Estudantis</h3>
+                <p class="inst-card__desc">
+                  Entidades que representam os estudantes em âmbito local,
+                  regional e nacional.
+                </p>
+              </div>
+
+              <!-- Sub-cards das entidades -->
+              <div class="inst-sub-list">
+                <a href="https://dagvmeduftm.wordpress.com/denem/"
+                   target="_blank" rel="noopener"
+                   class="inst-sub-item"
+                   aria-label="DENEM – Direção Executiva Nacional dos Estudantes de Medicina">
+                  <div class="inst-sub-item__icon">
+                    <i class="fa-solid fa-globe" aria-hidden="true"></i>
+                  </div>
+                  <div>
+                    <span class="inst-sub-item__label">DENEM</span>
+                    <span class="inst-sub-item__sub">Representação Nacional</span>
+                  </div>
+                  <i class="fa-solid fa-chevron-right inst-sub-item__arr" aria-hidden="true"></i>
+                </a>
+
+                <a href="https://dagvmeduftm.wordpress.com/dce-uftm/"
+                   target="_blank" rel="noopener"
+                   class="inst-sub-item"
+                   aria-label="DCE UFTM – Diretório Central dos Estudantes">
+                  <div class="inst-sub-item__icon">
+                    <i class="fa-solid fa-building-columns" aria-hidden="true"></i>
+                  </div>
+                  <div>
+                    <span class="inst-sub-item__label">DCE UFTM</span>
+                    <span class="inst-sub-item__sub">Diretório Central dos Estudantes</span>
+                  </div>
+                  <i class="fa-solid fa-chevron-right inst-sub-item__arr" aria-hidden="true"></i>
+                </a>
+
+                <a href="https://dagvmeduftm.wordpress.com/cvu-uberaba/"
+                   target="_blank" rel="noopener"
+                   class="inst-sub-item"
+                   aria-label="CVU Uberaba – Centro de Vivência Universitária">
+                  <div class="inst-sub-item__icon">
+                    <i class="fa-solid fa-city" aria-hidden="true"></i>
+                  </div>
+                  <div>
+                    <span class="inst-sub-item__label">CVU Uberaba</span>
+                    <span class="inst-sub-item__sub">Centro de Vivência Universitária</span>
+                  </div>
+                  <i class="fa-solid fa-chevron-right inst-sub-item__arr" aria-hidden="true"></i>
+                </a>
+              </div>
+
+            </div>
+          </article>
+
+          <!-- ⑤ CEPOP UFTM ───────────────────────────────────── -->
+          <article class="inst-card inst-card--cepop" data-aos="fade-up" data-aos-delay="320">
+            <div class="inst-card__top">
+              <div class="inst-card__icon-wrap">
+                <i class="fa-solid fa-landmark" aria-hidden="true"></i>
+              </div>
+              <div class="inst-card__label">Políticas estudantis · UFTM</div>
+            </div>
+            <div class="inst-card__body">
+              <h3 class="inst-card__title">CEPOP UFTM</h3>
+              <p class="inst-card__desc">
+                Centro de Políticas Públicas e Avaliação da Educação da UFTM,
+                articulando representação estudantil e políticas institucionais.
+              </p>
+            </div>
+            <div class="inst-card__footer">
+              <div class="inst-card__tags">
+                <span class="inst-tag"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i> Políticas</span>
+                <span class="inst-tag"><i class="fa-solid fa-university" aria-hidden="true"></i> Institucional</span>
+              </div>
+              <a href="https://dagvmeduftm.wordpress.com/cepop-uftm/" target="_blank" rel="noopener" class="inst-card__cta">
+                Saiba mais <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
               </a>
             </div>
           </article>
 
-          <article class="event-card" data-aos="fade-up" data-aos-delay="400">
-            <div class="event-card__badge event-card__badge--past">Realizado</div>
-            <div class="event-card__icon"><i class="fa-solid fa-award"></i></div>
-            <div class="event-card__content">
-              <span class="event-card__date"><i class="fa-regular fa-calendar"></i> 2025</span>
-              <h3 class="event-card__title">Semana Acadêmica</h3>
-              <p class="event-card__desc">Evento com palestras, workshops e mesas redondas com profissionais e pesquisadores de diversas áreas da Medicina.</p>
-              <a href="#contact" class="event-card__link">
-                Saiba mais <i class="fa-solid fa-arrow-right"></i>
-              </a>
-            </div>
-          </article>
-
-          <article class="event-card" data-aos="fade-up" data-aos-delay="500">
-            <div class="event-card__badge event-card__badge--ongoing">Ativo</div>
-            <div class="event-card__icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
-            <div class="event-card__content">
-              <span class="event-card__date"><i class="fa-regular fa-calendar"></i> 2026</span>
-              <h3 class="event-card__title">PET Medicina</h3>
-              <p class="event-card__desc">Programa de Educação Tutorial com atividades de pesquisa, extensão e integração acadêmica em parceria com o DAGV.</p>
-              <a href="https://dagvmeduftm.wordpress.com/pet-medicina-1/" target="_blank" rel="noopener" class="event-card__link">
-                Conhecer <i class="fa-solid fa-arrow-right"></i>
-              </a>
-            </div>
-          </article>
-
-        </div>
-
+        </div><!-- /inst-grid -->
       </div>
+    </section>
+
     </section>
 
     <!-- ===================== EVENTOS ACADÊMICOS – v76 ========================

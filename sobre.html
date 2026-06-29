@@ -254,7 +254,7 @@
     Visual diferenciado: proporção retangular, fundo mais escuro com textura
     de pontos em vez do grid de linhas do index/historico
   */
-  .intro-visual {
+  /* .intro-visual {
     background: linear-gradient(160deg, #3d0018 0%, var(--clr-green-dark) 60%, #5e0029 100%);
     border-radius: var(--radius-lg);
     aspect-ratio: 4 / 3;
@@ -270,7 +270,7 @@
     box-shadow: 0 20px 60px rgba(26,0,16,.25);
   }
 
-  /* Padrão de pontos em vez de grade de linhas */
+  /* Padrão de pontos em vez de grade de linhas 
   .intro-visual::before {
     content: '';
     position: absolute; inset: 0;
@@ -278,7 +278,7 @@
     background-size: 22px 22px;
   }
 
-  /* Barra dourada horizontal na base */
+  /* Barra dourada horizontal na base 
   .intro-visual::after {
     content: '';
     position: absolute;
@@ -286,6 +286,40 @@
     height: 3px;
     background: linear-gradient(90deg, transparent, var(--clr-accent), transparent);
     border-radius: 2px;
+  } */
+   .intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    align-items: center;
+    margin-top: var(--space-xl);
+  }
+
+  /* Removeu-se o fundo, proporção fixa, bordas e sombras do quadrado */
+  .intro-visual {
+    max-width: 480px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  /* Desativa os padrões de pontos e a linha dourada que decoravam o quadrado */
+  .intro-visual::before,
+  .intro-visual::after {
+    display: none !important;
+  }
+
+  /* Nova estilização focada apenas na imagem e na sua sombra */
+  .intro-visual__img {
+    max-width: 100%;
+    height: auto;
+    max-height: 280px; /* Ajuste a altura máxima como preferir */
+    object-fit: contain;
+    
+    /* O drop-shadow aplica a sombra contornando as letras/desenho do logo (PNG transparente), 
+       e não um bloco quadrado perfeito */
+    filter: drop-shadow(0 15px 25px rgba(26, 0, 16, 0.2));
   }
 
   .intro-visual__icon {
@@ -817,6 +851,9 @@
   @media (max-width: 768px) {
     .intro-grid  { grid-template-columns: 1fr; }
     .intro-visual { max-width: 100%; aspect-ratio: 16/9; }
+    .intro-visual__img {
+      max-height: 300px;
+    }
     .mvv-grid { grid-template-columns: 1fr; }
     .sobre-hero__orb--1 { width: 280px; height: 280px; }
     .sobre-stat::after { display: none; }
@@ -853,6 +890,9 @@
   }
 
   @media (max-width: 500px) {
+    .intro-visual__img {
+      max-height: 140px;
+    }
     .sobre-hero__actions {
       flex-direction: column;
       align-items: stretch;
@@ -1198,10 +1238,13 @@
 
         <div class="intro-grid">
           <div class="intro-visual" data-aos="fade-right">
-            <i class="intro-visual__icon fa-solid fa-building-columns" aria-hidden="true"></i>
+            <img src="img/logooriginal.png" alt="Descrição da imagem do DAGV" class="intro-visual__img">
+            <!-- <i class="intro-visual__icon fa-solid fa-building-columns" aria-hidden="true"></i>
             <span class="intro-visual__tag">Representação estudantil</span>
-            <span class="intro-visual__year" aria-hidden="true">DAGV</span>
+            <span class="intro-visual__year" aria-hidden="true">DAGV</span> -->
           </div>
+
+          
 
           <div class="intro-text" data-aos="fade-left" data-aos-delay="100">
             <span class="intro-text__tag">Identidade</span>
@@ -1358,7 +1401,7 @@
           <div class="gaspar-portrait" data-aos="fade-right">
             <div class="gaspar-portrait__top">
               <div class="gaspar-portrait__avatar" aria-hidden="true">
-                <i class="fa-solid fa-user-doctor"></i>
+                 <img src="img/fotoGV.png" alt="Descrição da imagem do DAGV" class="intro-visual__img">
               </div>
               <div class="gaspar-portrait__name">Gaspar de Oliveira Vianna</div>
               <div class="gaspar-portrait__dates">1885 — 1914</div>
