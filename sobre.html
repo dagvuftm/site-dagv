@@ -190,8 +190,10 @@
 
   .sobre-stats__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem 0;
+    max-width: 700px;
+    margin-inline: auto;
   }
 
   .sobre-stat {
@@ -212,7 +214,7 @@
 
   .sobre-stat__num {
     font-family: var(--font-display);
-    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    font-size: clamp(1.4rem, 4vw, 3.2rem);
     font-weight: 700;
     color: var(--clr-accent);
     line-height: 1;
@@ -818,7 +820,7 @@
     .mvv-grid { grid-template-columns: 1fr; }
     .sobre-hero__orb--1 { width: 280px; height: 280px; }
     .sobre-stat::after { display: none; }
-    .sobre-stat { border-bottom: 1px solid rgba(255,255,255,.07); padding-block: 1rem; }
+    .sobre-stat { border-bottom: 1px solid rgba(255,255,255,.07); padding: .6rem .4rem; text-align: center; }
     .sobre-stat:last-child { border-bottom: none; }
 
     .sobre-hero__actions {
@@ -868,7 +870,8 @@
     .sobre-cta__actions .btn { width: 100%; justify-content: center; }
     .gaspar-portrait__facts { grid-template-columns: 1fr; }
     .timeline { padding-left: 2.5rem; }
-    .sobre-stats__grid { grid-template-columns: 1fr 1fr; }
+    .sobre-stats__grid { grid-template-columns: repeat(3, 1fr); max-width: 700px; margin-inline: auto; }
+    .sobre-stat__label { font-size: .65rem; letter-spacing: .05em; }
     .mvv-card { border-radius: var(--radius-sm); }
 
     /* Botões âncora: empilhados 1 por linha em mobile pequeno */
