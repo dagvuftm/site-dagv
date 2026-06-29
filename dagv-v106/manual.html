@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Manual do Estudante DAGV – Tudo o que você precisa saber sobre horas complementares, campi, restaurante universitário e muito mais." />
+  <title>Manual do Estudante – DAGV | Medicina UFTM</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/sidemenu.css" />
+
+  <style>
+  /* ============================================================
+     manual.html — estilos exclusivos desta página
+     Paleta, tipografia e tokens herdados de styles.css.
+     ============================================================ */
+
+  /* ── Hero ─────────────────────────────────────────────────── */
+  .manual-hero {
+    position: relative;
+    min-height: 52vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse 80% 100% at 0% 60%, #3d0018 0%, var(--clr-green-dark) 38%, transparent 72%),
+      linear-gradient(160deg, var(--clr-green-dark) 0%, var(--clr-green) 50%, #1a0010 100%);
+    padding-top:    calc(var(--header-h) + 5rem);
+    padding-bottom: 5rem;
+  }
+  .manual-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(-55deg,
+        rgba(255,255,255,.025) 0px, rgba(255,255,255,.025) 1px,
+        transparent 1px, transparent 36px);
+    pointer-events: none;
+  }
+  .manual-hero__orb {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .manual-hero__orb--1 {
+    width: 480px; height: 480px;
+    border: 58px solid rgba(232,160,32,.08);
+    top: -160px; left: -130px;
+  }
+  .manual-hero__orb--2 {
+    width: 240px; height: 240px;
+    border: 32px solid rgba(255,255,255,.05);
+    bottom: -60px; right: 7%;
+  }
+  .manual-hero__stripe {
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 5px;
+    background: linear-gradient(to bottom,
+      transparent 0%, var(--clr-accent) 25%,
+      rgba(255,255,255,.55) 50%, var(--clr-accent) 75%, transparent 100%);
+    opacity: .4;
+    pointer-events: none;
+  }
+  .manual-hero__content {
+    position: relative; z-index: 2;
+    max-width: 800px; text-align: center;
+    padding-inline: var(--space-md);
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .manual-hero__eyebrow {
+    display: inline-flex; align-items: center; gap: .55em;
+    font-size: .73rem; font-weight: 700; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--clr-accent);
+    background: rgba(232,160,32,.1);
+    border: 1px solid rgba(232,160,32,.28);
+    border-radius: var(--radius-pill);
+    padding: .32em 1.1em; margin-bottom: var(--space-md);
+    animation: slideUp .7s var(--ease) both;
+  }
+  .manual-hero__title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 6vw, 4rem);
+    font-weight: 700; color: var(--clr-white);
+    line-height: 1.1; margin-bottom: .75rem;
+    animation: slideUp .85s var(--ease) .08s both;
+  }
+  .manual-hero__title em {
+    font-style: italic; color: var(--clr-accent);
+    text-decoration: underline;
+    text-decoration-color: rgba(232,160,32,.3);
+    text-underline-offset: 7px;
+    text-decoration-thickness: 2px;
+  }
+  .manual-hero__desc {
+    font-size: 1.02rem; color: rgba(255,255,255,.72);
+    max-width: 580px; line-height: 1.78;
+    margin-bottom: var(--space-lg);
+    animation: slideUp 1s var(--ease) .18s both;
+    border-bottom: 2px solid rgba(232,160,32,.2);
+    padding-bottom: var(--space-md);
+  }
+  .manual-hero__nav {
+    display: flex; gap: .5rem; flex-wrap: wrap;
+    justify-content: center;
+    animation: slideUp 1s var(--ease) .25s both;
+  }
+  .manual-hero__nav-btn {
+    display: inline-flex; align-items: center; gap: .45em;
+    font-size: .8rem; font-weight: 600;
+    color: rgba(255,255,255,.78);
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: var(--radius-pill);
+    padding: .45em 1.2em; text-decoration: none;
+    transition: background var(--dur-fast), border-color var(--dur-fast), color var(--dur-fast);
+  }
+  .manual-hero__nav-btn:hover {
+    background: rgba(255,255,255,.18);
+    border-color: rgba(255,255,255,.42);
+    color: var(--clr-white);
+  }
+
+  /* ── Sticky anchor bar ─────────────────────────────────────── */
+  .manual-anchors {
+    background: #fdf4f7;
+    border-bottom: 2px solid var(--clr-gray-1);
+    border-top: 1px solid var(--clr-gray-1);
+    position: sticky; top: var(--header-h); z-index: 100;
+    padding-block: .65rem;
+  }
+  .manual-anchors__list {
+    display: flex; flex-wrap: wrap; gap: .25rem;
+    justify-content: center; padding-inline: var(--space-md);
+  }
+  .manual-anchors__link {
+    display: flex; align-items: center; gap: .4em;
+    font-size: .8rem; font-weight: 600; color: var(--clr-gray-3);
+    padding: .4em 1em; border-radius: var(--radius-sm);
+    white-space: nowrap; text-decoration: none;
+    border: 1px solid transparent;
+    transition: background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast);
+  }
+  .manual-anchors__link:hover, .manual-anchors__link.active {
+    background: var(--clr-green-light);
+    color: var(--clr-green);
+    border-color: rgba(147,1,66,.15);
+  }
+
+  /* ── Section base ──────────────────────────────────────────── */
+  .manual-section { padding-block: var(--space-2xl); }
+  .manual-section--alt {
+    background: #fdf4f7;
+    border-top: 1px solid var(--clr-gray-1);
+    border-bottom: 1px solid var(--clr-gray-1);
+  }
+
+  /* ── Info cards ────────────────────────────────────────────── */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+  }
+  .info-card {
+    background: var(--clr-white);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--clr-gray-1);
+    padding: var(--space-lg) var(--space-md);
+    box-shadow: var(--shadow-sm);
+    display: flex; flex-direction: column; gap: .75rem;
+    transition: transform var(--dur-med) var(--ease), box-shadow var(--dur-med) var(--ease);
+  }
+  .info-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+  .info-card__icon {
+    width: 52px; height: 52px;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, var(--clr-green-dark), var(--clr-green));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.35rem; color: var(--clr-accent);
+    box-shadow: 0 4px 14px rgba(147,1,66,.25);
+  }
+  .info-card__title {
+    font-family: var(--font-display);
+    font-size: 1.05rem; font-weight: 700; color: var(--clr-dark);
+  }
+  .info-card__text { font-size: .9rem; color: var(--clr-gray-3); line-height: 1.72; flex: 1; }
+  .info-card__link {
+    display: inline-flex; align-items: center; gap: .4em;
+    font-size: .82rem; font-weight: 600; color: var(--clr-green);
+    text-decoration: none; margin-top: auto;
+    transition: gap var(--dur-fast);
+  }
+  .info-card__link:hover { gap: .65em; }
+
+  /* ── Detail block (horas complementares) ──────────────────── */
+  .detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: var(--space-xl);
+    align-items: start;
+    margin-top: var(--space-xl);
+  }
+  .detail-text p {
+    font-size: .98rem; color: var(--clr-gray-3); line-height: 1.84; margin-bottom: 1rem;
+  }
+  .detail-text p:last-child { margin-bottom: 0; }
+  .detail-text strong { color: var(--clr-dark); }
+
+  .detail-box {
+    background: linear-gradient(155deg, var(--clr-green-dark) 0%, var(--clr-green) 60%, #5e0029 100%);
+    border-radius: var(--radius-lg);
+    padding: 2.2rem 2rem;
+    box-shadow: 0 20px 56px rgba(26,0,16,.22);
+    border: 1px solid rgba(232,160,32,.15);
+    position: relative; overflow: hidden;
+  }
+  .detail-box::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(255,255,255,.055) 1.5px, transparent 1.5px);
+    background-size: 20px 20px; pointer-events: none;
+  }
+  .detail-box::after {
+    content: ''; position: absolute; bottom: 0; left: 8%; right: 8%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--clr-accent), transparent);
+    border-radius: 2px;
+  }
+  .detail-box__title {
+    position: relative; z-index: 1;
+    font-family: var(--font-display); font-size: 1rem; font-weight: 700;
+    color: var(--clr-white); margin-bottom: 1.2rem;
+    padding-bottom: .85rem;
+    border-bottom: 1px solid rgba(232,160,32,.25);
+  }
+  .detail-box__title i { color: var(--clr-accent); margin-right: .45rem; }
+  .detail-items { position: relative; z-index: 1; display: flex; flex-direction: column; gap: .85rem; }
+  .detail-item {
+    display: flex; align-items: flex-start; gap: .7rem;
+    font-size: .87rem; color: rgba(255,255,255,.78); line-height: 1.55;
+  }
+  .detail-item i { color: var(--clr-accent); font-size: .82rem; flex-shrink: 0; margin-top: .18rem; }
+  .detail-item strong { color: rgba(255,255,255,.95); }
+  .detail-box__note {
+    position: relative; z-index: 1;
+    margin-top: 1.4rem; padding-top: 1.1rem;
+    border-top: 1px solid rgba(255,255,255,.1);
+    font-size: .8rem; color: rgba(255,255,255,.5);
+    line-height: 1.6; font-style: italic;
+  }
+
+  /* ── Campus cards ──────────────────────────────────────────── */
+  .campus-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+  }
+  .campus-card {
+    background: var(--clr-white);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--clr-gray-1);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--dur-med) var(--ease), box-shadow var(--dur-med) var(--ease);
+  }
+  .campus-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+  .campus-card__header {
+    background: linear-gradient(135deg, var(--clr-green-dark) 0%, var(--clr-green) 100%);
+    padding: 1.4rem 1.6rem 1.1rem;
+    display: flex; align-items: flex-start; gap: .9rem;
+  }
+  .campus-card__icon {
+    width: 46px; height: 46px;
+    border-radius: var(--radius-sm);
+    background: rgba(255,255,255,.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.25rem; color: var(--clr-accent); flex-shrink: 0;
+  }
+  .campus-card__name {
+    font-family: var(--font-display); font-size: 1rem; font-weight: 700;
+    color: var(--clr-white); line-height: 1.25;
+  }
+  .campus-card__tag {
+    font-size: .65rem; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--clr-accent);
+    display: block; margin-bottom: .2rem;
+  }
+  .campus-card__body { padding: 1.3rem 1.6rem 1.6rem; display: flex; flex-direction: column; gap: .75rem; }
+  .campus-card__address {
+    font-size: .85rem; color: var(--clr-gray-2);
+    display: flex; align-items: flex-start; gap: .5rem; line-height: 1.5;
+  }
+  .campus-card__address i { color: var(--clr-green); margin-top: .15rem; flex-shrink: 0; font-size: .8rem; }
+  .campus-card__activities { display: flex; flex-direction: column; gap: .35rem; }
+  .campus-card__activity {
+    font-size: .86rem; color: var(--clr-gray-3); line-height: 1.55;
+    padding-left: 1rem; position: relative;
+  }
+  .campus-card__activity::before {
+    content: '›'; position: absolute; left: 0;
+    color: var(--clr-green); font-weight: 700;
+  }
+  .campus-card__link {
+    display: inline-flex; align-items: center; gap: .4em;
+    font-size: .82rem; font-weight: 600; color: var(--clr-green);
+    text-decoration: none; margin-top: .3rem;
+    transition: gap var(--dur-fast);
+  }
+  .campus-card__link:hover { gap: .65em; }
+
+  /* ── RU — tabela de preços + horários ─────────────────────── */
+  .ru-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    align-items: start;
+    margin-top: var(--space-xl);
+  }
+  .ru-block__title {
+    font-family: var(--font-display); font-size: 1.05rem; font-weight: 700;
+    color: var(--clr-dark); margin-bottom: var(--space-sm);
+    display: flex; align-items: center; gap: .5rem;
+  }
+  .ru-block__title i { color: var(--clr-green); }
+
+  .ru-table {
+    width: 100%; border-collapse: collapse;
+    font-size: .9rem;
+  }
+  .ru-table th {
+    background: linear-gradient(135deg, var(--clr-green-dark), var(--clr-green));
+    color: var(--clr-white); font-weight: 700;
+    padding: .65rem 1rem; text-align: left;
+    font-size: .78rem; letter-spacing: .05em;
+  }
+  .ru-table th:first-child { border-radius: var(--radius-sm) 0 0 0; }
+  .ru-table th:last-child  { border-radius: 0 var(--radius-sm) 0 0; }
+  .ru-table td {
+    padding: .65rem 1rem;
+    border-bottom: 1px solid var(--clr-gray-1);
+    color: var(--clr-gray-3);
+    vertical-align: middle;
+  }
+  .ru-table tr:last-child td { border-bottom: none; }
+  .ru-table tr:nth-child(even) td { background: #fdf4f7; }
+  .ru-table .ru-price {
+    font-weight: 700; color: var(--clr-green);
+    font-size: .95rem;
+  }
+  .ru-table .ru-free { color: var(--clr-accent); font-weight: 700; }
+
+  .ru-schedule { display: flex; flex-direction: column; gap: .9rem; }
+  .ru-meal {
+    background: var(--clr-white);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--clr-gray-1);
+    border-left: 4px solid var(--clr-green);
+    padding: 1rem 1.2rem;
+    transition: border-left-color var(--dur-fast), box-shadow var(--dur-fast);
+  }
+  .ru-meal:hover { border-left-color: var(--clr-accent); box-shadow: var(--shadow-sm); }
+  .ru-meal__name {
+    font-weight: 700; font-size: .95rem; color: var(--clr-dark); margin-bottom: .3rem;
+    display: flex; align-items: center; gap: .5rem;
+  }
+  .ru-meal__name i { color: var(--clr-green); font-size: .85rem; }
+  .ru-meal__hours { font-size: .85rem; color: var(--clr-gray-2); }
+
+  .ru-notice {
+    background: var(--clr-green-light);
+    border-left: 4px solid var(--clr-accent);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 1rem 1.2rem;
+    margin-top: var(--space-md);
+    font-size: .88rem; color: var(--clr-gray-3); line-height: 1.65;
+  }
+  .ru-notice strong { color: var(--clr-dark); }
+
+  /* ── CTA footer ────────────────────────────────────────────── */
+  .manual-cta {
+    background:
+      radial-gradient(ellipse 60% 80% at 50% 50%, var(--clr-green-dark) 0%, transparent 70%),
+      linear-gradient(220deg, #1a0010 0%, var(--clr-green) 55%, var(--clr-green-dark) 100%);
+    padding-block: var(--space-2xl);
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .manual-cta::before {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(-45deg,
+        rgba(255,255,255,.022) 0px, rgba(255,255,255,.022) 1px,
+        transparent 1px, transparent 28px);
+  }
+  .manual-cta::after {
+    content: ''; position: absolute;
+    top: 0; left: 15%; right: 15%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--clr-accent), transparent);
+    border-radius: 1px;
+  }
+  .manual-cta__content { position: relative; z-index: 1; }
+  .manual-cta h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700; color: var(--clr-white); margin-bottom: var(--space-sm);
+  }
+  .manual-cta p {
+    font-size: 1.05rem; color: rgba(255,255,255,.72);
+    max-width: 540px; margin-inline: auto;
+    line-height: 1.78; margin-bottom: var(--space-lg);
+  }
+  .manual-cta__actions {
+    display: flex; gap: var(--space-sm); justify-content: center; flex-wrap: wrap;
+  }
+  .btn--accent { background: var(--clr-accent); color: var(--clr-dark); font-weight: 700; }
+  .btn--accent:hover {
+    background: #f5b230; transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(232,160,32,.45);
+  }
+  .btn--ghost-white {
+    background: transparent; color: var(--clr-white);
+    border: 2px solid rgba(255,255,255,.42); font-weight: 600;
+  }
+  .btn--ghost-white:hover {
+    background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.72);
+    transform: translateY(-2px);
+  }
+
+  /* ── back link ─────────────────────────────────────────────── */
+  .back-link {
+    display: inline-flex; align-items: center; gap: .5rem;
+    font-size: .95rem; font-weight: 600; color: var(--clr-green);
+    padding: .6rem 1.2rem; border: 2px solid var(--clr-green);
+    border-radius: var(--radius-pill); text-decoration: none;
+    transition: background var(--dur-fast), color var(--dur-fast);
+  }
+  .back-link:hover { background: var(--clr-green); color: var(--clr-white); }
+  .back-section { text-align: center; padding-block: var(--space-xl); }
+
+  /* ── Responsividade ────────────────────────────────────────── */
+  @media (max-width: 900px) {
+    .detail-grid { grid-template-columns: 1fr; }
+    .detail-box  { max-width: 520px; }
+    .ru-grid     { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .info-grid   { grid-template-columns: 1fr; }
+    .campus-grid { grid-template-columns: 1fr; }
+    .manual-hero__nav { flex-direction: column; align-items: stretch; }
+    .manual-hero__nav-btn { justify-content: center; }
+    .manual-cta__actions { flex-direction: column; align-items: stretch; }
+    .manual-cta__actions .btn { justify-content: center; }
+    .manual-anchors__link {
+      flex: 1 1 calc(50% - .3rem); justify-content: center;
+      text-align: center; min-height: 36px;
+    }
+  }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════
+       HEADER — idêntico ao index.html (navbar canônica)
+       ═══════════════════════════════════════════════════════ -->
+  <header id="header" class="header">
+    <div class="container header__inner">
+
+      <div class="sidemenu-wrap" id="sidemenuWrap">
+        <button class="sidemenu-tab" id="sidemenuTab"
+          aria-haspopup="true" aria-expanded="false"
+          aria-controls="sidemenuPanel" aria-label="Abrir menu de navegação">
+          <span class="sidemenu-tab__icon" aria-hidden="true">
+            <span class="sidemenu-tab__bar"></span>
+            <span class="sidemenu-tab__bar"></span>
+            <span class="sidemenu-tab__bar"></span>
+          </span>
+          <span class="sidemenu-tab__label">Menu</span>
+        </button>
+
+        <div class="sidemenu-panel" id="sidemenuPanel" role="navigation" aria-label="Menu lateral">
+          <ul class="sidemenu-list">
+            <li class="sidemenu-list__item">
+              <a href="sobre.html" class="sidemenu-list__link">
+                Sobre o DAGV
+                <i class="fa-solid fa-building-columns sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="index.html#historico" class="sidemenu-list__link sidemenu-list__link--historico">
+                Resgate Histórico
+                <i class="fa-solid fa-scroll sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="coordenacao.html" class="sidemenu-list__link">
+                Coordenação
+                <i class="fa-solid fa-users sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__sep" role="separator"></li>
+            <li class="sidemenu-list__item">
+              <button class="sidemenu-list__btn" data-dropdown="informacoes"
+                aria-haspopup="true" aria-expanded="false">
+                Informações DAGV
+                <i class="fa-solid fa-chevron-down sidemenu-list__arrow" aria-hidden="true"></i>
+              </button>
+              <ul class="sidemenu-dropdown" id="dropInformacoes">
+                <li><a href="https://dagvmeduftm.wordpress.com/estatuto-dagv/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">Estatuto</a></li>
+                <li><a href="https://dagvmeduftm.wordpress.com/galeria-de-fotos/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">Galeria de Fotos</a></li>
+              </ul>
+            </li>
+            <li class="sidemenu-list__sep" role="separator"></li>
+            <li class="sidemenu-list__item">
+              <a href="https://dagvmeduftm.wordpress.com/pet-medicina-1/" target="_blank" rel="noopener" class="sidemenu-list__link">
+                PET Medicina
+                <i class="fa-solid fa-flask sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="ligas.html" class="sidemenu-list__link">
+                Ligas Acadêmicas
+                <i class="fa-solid fa-graduation-cap sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <!-- Item ativo: Manual do Estudante -->
+            <li class="sidemenu-list__item">
+              <a href="manual.html" class="sidemenu-list__link sidemenu-list__link--active">
+                Manual do Estudante
+                <i class="fa-solid fa-book-open-reader sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="https://dagvmeduftm.wordpress.com/cursinho-carolina/" target="_blank" rel="noopener" class="sidemenu-list__link">
+                Cursinho Carolina
+                <i class="fa-solid fa-book-open sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__sep" role="separator"></li>
+            <li class="sidemenu-list__item">
+              <button class="sidemenu-list__btn" data-dropdown="instituicoes"
+                aria-haspopup="true" aria-expanded="false">
+                Instituições
+                <i class="fa-solid fa-chevron-down sidemenu-list__arrow" aria-hidden="true"></i>
+              </button>
+              <ul class="sidemenu-dropdown" id="dropInstituicoes">
+                <li><a href="https://dagvmeduftm.wordpress.com/denem/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">DENEM</a></li>
+                <li><a href="https://dagvmeduftm.wordpress.com/dce-uftm/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">DCE</a></li>
+                <li><a href="https://dagvmeduftm.wordpress.com/cvu-uberaba/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">CVU</a></li>
+                <li><a href="https://dagvmeduftm.wordpress.com/cepop-uftm/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">CEPOP</a></li>
+              </ul>
+            </li>
+            <li class="sidemenu-list__sep" role="separator"></li>
+            <li class="sidemenu-list__item">
+              <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7" target="_blank" rel="noopener" class="sidemenu-list__link">
+                Suporte
+                <i class="fa-solid fa-headset sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <a href="index.html" class="header__brand">
+        <div class="header__logo-wrap">
+          <img src="img/logo dourada-sem fundo.png" alt="Logo DAGV"
+            class="header__logo-svg logo--gold" width="80" height="68" loading="eager" />
+          <img src="img/Logo DAGV sem fundo verm.png" alt="Logo DAGV"
+            class="header__logo-svg logo--red" width="80" height="68" loading="eager" aria-hidden="true" />
+        </div>
+        <div class="header__title-wrap">
+          <span class="header__dagv"></span>
+          <span class="header__subtitle"></span>
+        </div>
+      </a>
+
+      <nav class="nav" aria-label="Navegação principal">
+        <ul class="nav__list">
+          <li><a href="sobre.html"         class="nav__link">Sobre</a></li>
+          <li><a href="coordenacao.html"   class="nav__link">Coordenações</a></li>
+          <li><a href="manual.html"        class="nav__link nav__link--active">Manual</a></li>
+          <li><a href="index.html#contact" class="nav__link nav__link--cta">Contato</a></li>
+        </ul>
+      </nav>
+
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <nav class="nav-mobile" id="navMobile" aria-hidden="true">
+      <ul class="nav-mobile__list">
+        <li><a href="index.html"         class="nav-mobile__link">Início</a></li>
+        <li><a href="sobre.html"         class="nav-mobile__link">Sobre o DAGV</a></li>
+        <li><a href="coordenacao.html"   class="nav-mobile__link">Coordenação</a></li>
+        <li><a href="ligas.html"         class="nav-mobile__link">Ligas Acadêmicas</a></li>
+        <li><a href="manual.html"        class="nav-mobile__link">Manual do Estudante</a></li>
+        <li><a href="index.html#contact" class="nav-mobile__link">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ═══════════════════════════════════════════════════════
+         HERO
+         ═══════════════════════════════════════════════════════ -->
+    <section class="manual-hero" aria-labelledby="manual-title">
+      <div class="manual-hero__orb manual-hero__orb--1" aria-hidden="true"></div>
+      <div class="manual-hero__orb manual-hero__orb--2" aria-hidden="true"></div>
+      <div class="manual-hero__stripe" aria-hidden="true"></div>
+
+      <div class="manual-hero__content">
+        <p class="manual-hero__eyebrow">
+          <i class="fa-solid fa-book-open-reader" aria-hidden="true"></i>
+          Medicina UFTM · Principais Dúvidas
+        </p>
+        <h1 class="manual-hero__title" id="manual-title">
+          Manual do<br /><em>Estudante</em>
+        </h1>
+        <p class="manual-hero__desc">
+          Tudo o que você precisa saber para se orientar na vida acadêmica da Medicina UFTM —
+          Guia de horas complementares, campi, restaurante universitário e muito mais.
+        </p>
+        <!-- <div class="manual-hero__nav">
+          <a href="#horas"  class="manual-hero__nav-btn"><i class="fa-solid fa-clock" aria-hidden="true"></i> Manual de Horas</a>
+          <a href="#campi"  class="manual-hero__nav-btn"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> Campi e Locais</a>
+          <a href="#ru"     class="manual-hero__nav-btn"><i class="fa-solid fa-utensils" aria-hidden="true"></i> Restaurante Universitário</a>
+        </div> -->
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         BARRA DE ÂNCORAS STICKY
+         ═══════════════════════════════════════════════════════ -->
+    <nav class="manual-anchors" aria-label="Navegação interna">
+      <ul class="manual-anchors__list">
+        <li><a href="#horas" class="manual-anchors__link"><i class="fa-solid fa-clock" aria-hidden="true"></i> Manual de Horas</a></li>
+        <li><a href="#campi" class="manual-anchors__link"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> Campi e Locais</a></li>
+        <li><a href="#ru"    class="manual-anchors__link"><i class="fa-solid fa-utensils" aria-hidden="true"></i> Restaurante Universitário</a></li>
+      </ul>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════════════════
+         1. MANUAL DE HORAS COMPLEMENTARES
+         ═══════════════════════════════════════════════════════ -->
+    <section id="horas" class="manual-section" aria-labelledby="horas-title">
+      <div class="container">
+
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Carga Horária</span>
+          <h2 class="section-title" id="horas-title">Manual de Horas</h2>
+          <p class="section-desc">
+            Entenda como funcionam as horas complementares, estágios e atividades de extensão
+            no curso de Medicina da UFTM, e saiba onde encontrar os regulamentos oficiais.
+          </p>
+        </div>
+
+        <div class="detail-grid">
+
+          <div class="detail-text" data-aos="fade-right">
+            <p>
+              O curso de Medicina da UFTM exige o cumprimento de <strong>horas complementares</strong>
+              ao longo da graduação, distribuídas em categorias como ensino, pesquisa, extensão
+              e atividades culturais. Essas horas enriquecem a formação e são obrigatórias para
+              a integralização curricular.
+            </p>
+            <p>
+              As <strong>Atividades Complementares de Graduação (ACG)</strong> devem ser
+              registradas no sistema acadêmico da UFTM e comprovadas mediante documentação
+              adequada (certificados, declarações, relatórios). Cada categoria tem critérios
+              específicos de validação.
+            </p>
+            <p>
+              Os <strong>estágios extracurriculares</strong> podem ser realizados em hospitais,
+              clínicas e instituições conveniadas, devendo seguir o regulamento próprio e
+              contar com supervisão de profissional habilitado. Verifique os convênios ativos
+              junto à Coordenação do Curso.
+            </p>
+            <p>
+              As atividades de <strong>extensão</strong> — como ligas acadêmicas, projetos
+              comunitários, campanhas de saúde e eventos científicos — são altamente incentivadas
+              e contam para a carga horária complementar, além de enriquecer o currículo
+              acadêmico e profissional.
+            </p>
+
+            <div style="margin-top: var(--space-md); display: flex; flex-wrap: wrap; gap: .75rem;">
+              <a href="https://www.uftm.edu.br/medicina" target="_blank" rel="noopener" class="btn btn--primary" style="font-size:.85rem;">
+                <i class="fa-solid fa-external-link-alt" aria-hidden="true"></i>
+                Regulamento Oficial (UFTM)
+              </a>
+              <a href="https://dagvmeduftm.wordpress.com/" target="_blank" rel="noopener" class="btn btn--outline" style="font-size:.85rem;">
+                <i class="fa-brands fa-wordpress" aria-hidden="true"></i>
+                Portal DAGV
+              </a>
+            </div>
+          </div>
+
+          <div class="detail-box" data-aos="fade-left" data-aos-delay="100">
+            <div class="detail-box__title">
+              <i class="fa-solid fa-list-check" aria-hidden="true"></i>
+              Categorias de Horas Complementares
+            </div>
+            <div class="detail-items">
+              <div class="detail-item">
+                <i class="fa-solid fa-book" aria-hidden="true"></i>
+                <span><strong>Ensino:</strong> Monitorias, tutoria de pares, participação em disciplinas optativas e cursos reconhecidos.</span>
+              </div>
+              <div class="detail-item">
+                <i class="fa-solid fa-microscope" aria-hidden="true"></i>
+                <span><strong>Pesquisa:</strong> Iniciação científica (PIBIC/PIVIC), publicações, apresentações em congressos e simpósios.</span>
+              </div>
+              <div class="detail-item">
+                <i class="fa-solid fa-hands-holding-circle" aria-hidden="true"></i>
+                <span><strong>Extensão:</strong> Ligas acadêmicas, projetos comunitários, campanhas de saúde e ações sociais.</span>
+              </div>
+              <div class="detail-item">
+                <i class="fa-solid fa-masks-theater" aria-hidden="true"></i>
+                <span><strong>Cultural/Esportivo:</strong> Participação em eventos culturais, representação estudantil e atividades esportivas institucionais.</span>
+              </div>
+              <div class="detail-item">
+                <i class="fa-solid fa-briefcase" aria-hidden="true"></i>
+                <span><strong>Estágio extracurricular:</strong> Atividades práticas em serviços de saúde conveniados, com supervisor habilitado.</span>
+              </div>
+              <div class="detail-item">
+                <i class="fa-solid fa-certificate" aria-hidden="true"></i>
+                <span><strong>Outros cursos:</strong> Línguas, informática, primeiros socorros e formações externas reconhecidas.</span>
+              </div>
+            </div>
+            <div class="detail-box__note">
+              ⚠️ Consulte o regulamento atualizado das ACG junto à Coordenação do Curso de Medicina da UFTM, pois as normas e cargas horárias mínimas podem ser revistas a cada semestre.
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Cards de orientações práticas -->
+        <div class="info-grid" style="margin-top: var(--space-2xl);">
+          <div class="info-card" data-aos="fade-up" data-aos-delay="0">
+            <div class="info-card__icon"><i class="fa-solid fa-file-circle-check" aria-hidden="true"></i></div>
+            <div class="info-card__title">Como registrar horas</div>
+            <p class="info-card__text">Acesse o portal acadêmico da UFTM (SGA ou sistema equivalente), localize a área de Atividades Complementares e faça o upload dos comprovantes em PDF. Aguarde validação da coordenação.</p>
+            <a href="https://www.uftm.edu.br" target="_blank" rel="noopener" class="info-card__link">
+              Portal Acadêmico UFTM <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </div>
+          <div class="info-card" data-aos="fade-up" data-aos-delay="80">
+            <div class="info-card__icon"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></div>
+            <div class="info-card__title">Ligas Acadêmicas</div>
+            <p class="info-card__text">Participar de uma liga é uma das formas mais ricas de cumprir horas de extensão. Veja todas as ligas vinculadas ao DAGV e saiba como ingressar em cada uma.</p>
+            <a href="ligas.html" class="info-card__link">
+              Ver ligas acadêmicas <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </div>
+          <div class="info-card" data-aos="fade-up" data-aos-delay="160">
+            <div class="info-card__icon"><i class="fa-solid fa-flask-vial" aria-hidden="true"></i></div>
+            <div class="info-card__title">Iniciação Científica</div>
+            <p class="info-card__text">O PIBIC e o PIVIC são programas de iniciação científica da UFTM. Contam para horas de pesquisa e são excelentes para o currículo. Os editais abrem geralmente em agosto.</p>
+            <a href="https://www.uftm.edu.br/pesquisa" target="_blank" rel="noopener" class="info-card__link">
+              Pesquisa na UFTM <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </div>
+          <div class="info-card" data-aos="fade-up" data-aos-delay="240">
+            <div class="info-card__icon"><i class="fa-solid fa-circle-question" aria-hidden="true"></i></div>
+            <div class="info-card__title">Dúvidas sobre horas?</div>
+            <p class="info-card__text">Entre em contato com a Coordenadoria de Ensino, Pesquisa e Extensão do DAGV ou envie sua dúvida pelo formulário de suporte. Estamos aqui para ajudar.</p>
+            <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7" target="_blank" rel="noopener" class="info-card__link">
+              Falar com o DAGV <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         2. CAMPI E LOCAIS DAS AULAS
+         ═══════════════════════════════════════════════════════ -->
+    <section id="campi" class="manual-section manual-section--alt" aria-labelledby="campi-title">
+      <div class="container">
+
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Localização</span>
+          <h2 class="section-title" id="campi-title">Campi e Locais das Aulas</h2>
+          <p class="section-desc">
+            O curso de Medicina da UFTM é distribuído entre diferentes unidades acadêmicas
+            em Uberaba. Saiba onde cada fase do curso acontece.
+          </p>
+        </div>
+
+        <div class="campus-grid">
+
+          <!-- Campus I -->
+          <div class="campus-card" data-aos="fade-up" data-aos-delay="0">
+            <div class="campus-card__header">
+              <div class="campus-card__icon"><i class="fa-solid fa-building-columns" aria-hidden="true"></i></div>
+              <div>
+                <span class="campus-card__tag">Campus Principal</span>
+                <div class="campus-card__name">Campus I — Sede Central</div>
+              </div>
+            </div>
+            <div class="campus-card__body">
+              <div class="campus-card__address">
+                <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                Praça Manoel Terra, 330 – Abadia, Uberaba – MG, 38025-180
+              </div>
+              <div class="campus-card__activities">
+                <div class="campus-card__activity">Aulas teóricas do ciclo básico (1º ao 4º período)</div>
+                <div class="campus-card__activity">Laboratórios de anatomia, fisiologia e bioquímica</div>
+                <div class="campus-card__activity">Biblioteca central e salas de estudos</div>
+                <div class="campus-card__activity">Reitoria, serviços acadêmicos e secretaria do curso</div>
+              </div>
+              <a href="https://maps.google.com/?q=Pra%C3%A7a+Manoel+Terra,+330,+Uberaba" target="_blank" rel="noopener" class="campus-card__link">
+                <i class="fa-solid fa-map" aria-hidden="true"></i> Ver no mapa
+              </a>
+            </div>
+          </div>
+
+          <!-- Hospital de Clínicas -->
+          <div class="campus-card" data-aos="fade-up" data-aos-delay="80">
+            <div class="campus-card__header">
+              <div class="campus-card__icon"><i class="fa-solid fa-hospital" aria-hidden="true"></i></div>
+              <div>
+                <span class="campus-card__tag">Hospital Universitário</span>
+                <div class="campus-card__name">Hospital de Clínicas da UFTM — HC-UFTM / EBSERH</div>
+              </div>
+            </div>
+            <div class="campus-card__body">
+              <div class="campus-card__address">
+                <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                Av. Getúlio Guaritá, 130 – Abadia, Uberaba – MG, 38025-440
+              </div>
+              <div class="campus-card__activities">
+                <div class="campus-card__activity">Internato clínico e cirúrgico (9º ao 12º período)</div>
+                <div class="campus-card__activity">Práticas supervisionadas em especialidades médicas</div>
+                <div class="campus-card__activity">Ambulatórios e enfermarias de ensino</div>
+                <div class="campus-card__activity">Rodízios de cirurgia, clínica médica, pediatria e ginecologia</div>
+              </div>
+              <a href="https://maps.google.com/?q=Av.+Get%C3%BAlio+Guairit%C3%A1,+130,+Uberaba" target="_blank" rel="noopener" class="campus-card__link">
+                <i class="fa-solid fa-map" aria-hidden="true"></i> Ver no mapa
+              </a>
+            </div>
+          </div>
+
+          <!-- Ciclo clínico -->
+          <div class="campus-card" data-aos="fade-up" data-aos-delay="160">
+            <div class="campus-card__header">
+              <div class="campus-card__icon"><i class="fa-solid fa-stethoscope" aria-hidden="true"></i></div>
+              <div>
+                <span class="campus-card__tag">Ciclo Clínico</span>
+                <div class="campus-card__name">Unidade de Ensino Clínico — Bloco Médico</div>
+              </div>
+            </div>
+            <div class="campus-card__body">
+              <div class="campus-card__address">
+                <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                Próximo ao HC-UFTM — Av. Getúlio Guaritá, Abadia, Uberaba – MG
+              </div>
+              <div class="campus-card__activities">
+                <div class="campus-card__activity">Aulas do ciclo clínico (5º ao 8º período)</div>
+                <div class="campus-card__activity">Habilidades clínicas, semiologia e propedêutica</div>
+                <div class="campus-card__activity">Laboratórios de habilidades e simulação médica</div>
+                <div class="campus-card__activity">Disciplinas de ética, saúde coletiva e medicina de família</div>
+              </div>
+              <a href="https://www.uftm.edu.br/medicina" target="_blank" rel="noopener" class="campus-card__link">
+                <i class="fa-solid fa-external-link-alt" aria-hidden="true"></i> Curso de Medicina UFTM
+              </a>
+            </div>
+          </div>
+
+          <!-- UBS / UPS — Atenção Primária -->
+          <div class="campus-card" data-aos="fade-up" data-aos-delay="240">
+            <div class="campus-card__header">
+              <div class="campus-card__icon"><i class="fa-solid fa-house-medical" aria-hidden="true"></i></div>
+              <div>
+                <span class="campus-card__tag">Atenção Primária</span>
+                <div class="campus-card__name">Unidades Básicas de Saúde (UBS) — Uberaba</div>
+              </div>
+            </div>
+            <div class="campus-card__body">
+              <div class="campus-card__address">
+                <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                Diversas unidades distribuídas nos bairros de Uberaba – MG
+              </div>
+              <div class="campus-card__activities">
+                <div class="campus-card__activity">Práticas de Medicina de Família e Comunidade</div>
+                <div class="campus-card__activity">Estágios em saúde coletiva e atenção básica</div>
+                <div class="campus-card__activity">Atividades de extensão e campanhas comunitárias</div>
+              </div>
+              <a href="https://www.uberaba.mg.gov.br/portal/conteudo,8" target="_blank" rel="noopener" class="campus-card__link">
+                <i class="fa-solid fa-map" aria-hidden="true"></i> Mapa das UBS de Uberaba
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Aviso geral -->
+        <div class="ru-notice" data-aos="fade-up" style="margin-top: var(--space-xl);">
+          <strong>📍 Dica importante:</strong> A distribuição das aulas entre as unidades pode variar conforme o semestre e a grade curricular vigente.
+          Sempre confirme o local das aulas pelo horário oficial divulgado pela Coordenação do Curso ou pelo sistema acadêmico da UFTM.
+          O DAGV pode intermediar informações com a coordenação — entre em <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7" target="_blank" rel="noopener" style="color: var(--clr-green); font-weight: 600;">contato conosco</a> se precisar.
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         3. RESTAURANTE UNIVERSITÁRIO (RU)
+         ═══════════════════════════════════════════════════════ -->
+    <section id="ru" class="manual-section" aria-labelledby="ru-title">
+      <div class="container">
+
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Alimentação</span>
+          <h2 class="section-title" id="ru-title">Restaurante Universitário</h2>
+          <p class="section-desc">
+            O RU da UFTM oferece refeições subsidiadas para toda a comunidade universitária.
+            Confira preços, horários e como utilizar o serviço.
+          </p>
+        </div>
+
+        <div class="ru-grid">
+
+          <!-- Preços -->
+          <div data-aos="fade-right">
+            <div class="ru-block__title">
+              <i class="fa-solid fa-coins" aria-hidden="true"></i>
+              Valores das Refeições
+            </div>
+            <table class="ru-table">
+              <thead>
+                <tr>
+                  <th>Público</th>
+                  <th>Almoço</th>
+                  <th>Jantar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Estudante de graduação</td>
+                  <td class="ru-price">R$ 1,00</td>
+                  <td class="ru-price">R$ 1,00</td>
+                </tr>
+                <tr>
+                  <td>Estudante de pós-graduação</td>
+                  <td class="ru-price">R$ 2,00</td>
+                  <td class="ru-price">R$ 2,00</td>
+                </tr>
+                <tr>
+                  <td>Servidor / Docente</td>
+                  <td class="ru-price">R$ 4,00</td>
+                  <td class="ru-price">R$ 4,00</td>
+                </tr>
+                <tr>
+                  <td>Visitante / Comunidade externa</td>
+                  <td class="ru-price">R$ 14,00</td>
+                  <td class="ru-price">R$ 14,00</td>
+                </tr>
+                <tr>
+                  <td>Estudante bolsista (assistência)</td>
+                  <td class="ru-free">Gratuito</td>
+                  <td class="ru-free">Gratuito</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="ru-notice" style="margin-top: var(--space-md);">
+              <strong>ℹ️ Como pagar:</strong> O RU funciona com sistema de cartão universitário.
+              Carregue créditos no cartão estudantil (totens disponíveis no campus) antes de ir ao restaurante.
+              Estudantes com cadastro no Programa de Assistência Estudantil (PAE) têm acesso gratuito mediante aprovação.
+            </div>
+
+            <div style="margin-top: var(--space-md);">
+              <a href="https://www.uftm.edu.br/ru" target="_blank" rel="noopener" class="btn btn--primary" style="font-size:.85rem;">
+                <i class="fa-solid fa-external-link-alt" aria-hidden="true"></i>
+                Página oficial do RU – UFTM
+              </a>
+            </div>
+          </div>
+
+          <!-- Horários -->
+          <div data-aos="fade-left" data-aos-delay="100">
+            <div class="ru-block__title">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              Horários de Funcionamento
+            </div>
+            <div class="ru-schedule">
+              <div class="ru-meal">
+                <div class="ru-meal__name">
+                  <i class="fa-solid fa-sun" aria-hidden="true"></i> Café da Manhã
+                </div>
+                <div class="ru-meal__hours">Segunda a Sexta: 07h00 – 08h30</div>
+              </div>
+              <div class="ru-meal">
+                <div class="ru-meal__name">
+                  <i class="fa-solid fa-cloud-sun" aria-hidden="true"></i> Almoço
+                </div>
+                <div class="ru-meal__hours">Segunda a Sexta: 11h30 – 13h30<br/>Sábados e feriados: 11h30 – 13h00</div>
+              </div>
+              <div class="ru-meal">
+                <div class="ru-meal__name">
+                  <i class="fa-solid fa-moon" aria-hidden="true"></i> Jantar
+                </div>
+                <div class="ru-meal__hours">Segunda a Sexta: 17h30 – 19h00<br/>Sábados: 17h30 – 18h30</div>
+              </div>
+            </div>
+
+            <div class="ru-notice" style="margin-top: var(--space-md);">
+              <strong>⚠️ Atenção:</strong> Os horários e valores do RU podem ser ajustados pela
+              UFTM sem aviso prévio. Consulte sempre a
+              <a href="https://www.uftm.edu.br/ru" target="_blank" rel="noopener"
+                style="color: var(--clr-green); font-weight: 600;">página oficial do RU</a>
+              ou as redes sociais da UFTM para informações atualizadas.
+              O DAGV repassa comunicados sobre alterações assim que são divulgados.
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Cards adicionais RU -->
+        <div class="info-grid" style="margin-top: var(--space-2xl);">
+          <div class="info-card" data-aos="fade-up" data-aos-delay="0">
+            <div class="info-card__icon"><i class="fa-solid fa-id-card" aria-hidden="true"></i></div>
+            <div class="info-card__title">Cartão Universitário</div>
+            <p class="info-card__text">Para utilizar o RU você precisa do cartão estudantil UFTM. Emita ou regularize o seu na Secretaria Acadêmica ou na Pró-Reitoria de Assuntos Estudantis (PROAE).</p>
+            <a href="https://www.uftm.edu.br/proae" target="_blank" rel="noopener" class="info-card__link">
+              PROAE – Assistência Estudantil <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </div>
+          <div class="info-card" data-aos="fade-up" data-aos-delay="80">
+            <div class="info-card__icon"><i class="fa-solid fa-hand-holding-heart" aria-hidden="true"></i></div>
+            <div class="info-card__title">Assistência Estudantil</div>
+            <p class="info-card__text">Estudantes em vulnerabilidade socioeconômica podem solicitar acesso gratuito ao RU e outras bolsas pelo Programa de Assistência Estudantil (PAE). Inscrições abertas semestralmente.</p>
+            <a href="https://www.uftm.edu.br/proae/pae" target="_blank" rel="noopener" class="info-card__link">
+              Saiba mais sobre o PAE <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </div>
+          <div class="info-card" data-aos="fade-up" data-aos-delay="160">
+            <div class="info-card__icon"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></div>
+            <div class="info-card__title">Localização do RU</div>
+            <p class="info-card__text">O Restaurante Universitário está localizado no Campus I da UFTM, próximo ao bloco principal. Há sinalização no campus indicando o acesso.</p>
+            <a href="https://maps.google.com/?q=Restaurante+Universit%C3%A1rio+UFTM+Uberaba" target="_blank" rel="noopener" class="info-card__link">
+              Ver no mapa <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         CTA FINAL
+         ═══════════════════════════════════════════════════════ -->
+    <section class="manual-cta" aria-labelledby="cta-manual-title">
+      <div class="container manual-cta__content" data-aos="fade-up">
+        <h2 id="cta-manual-title">Não encontrou o que precisava?</h2>
+        <p>
+          O DAGV está aqui para ajudar. Se tiver dúvidas sobre a vida acadêmica,
+          regulamentos, serviços da UFTM ou qualquer outro assunto, entre em contato conosco.
+        </p>
+        <div class="manual-cta__actions">
+          <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7" target="_blank" rel="noopener" class="btn btn--accent">
+            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+            Falar com o DAGV
+          </a>
+          <a href="https://www.instagram.com/dagvmeduftm/" target="_blank" rel="noopener" class="btn btn--ghost-white">
+            <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+            Instagram DAGV
+          </a>
+          <a href="index.html" class="btn btn--ghost-white">
+            <i class="fa-solid fa-house" aria-hidden="true"></i>
+            Voltar ao Início
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         VOLTAR
+         ═══════════════════════════════════════════════════════ -->
+    <section class="back-section">
+      <a href="index.html" class="back-link">
+        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+        Voltar ao site principal
+      </a>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════════════════
+       FOOTER — idêntico ao index.html
+       ═══════════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <img src="img/logo dourada-sem fundo.png" alt="Logo DAGV"
+          class="footer__logo" width="64" height="54" loading="lazy" />
+        <div>
+          <p class="footer__name">DAGV – Gaspar Vianna</p>
+          <p class="footer__sub">Medicina UFTM · Uberaba – MG</p>
+        </div>
+      </div>
+      <nav class="footer__links" aria-label="Links úteis">
+        <a href="https://dagvmeduftm.wordpress.com/estatuto-dagv/" target="_blank" rel="noopener">Estatuto</a>
+        <a href="ligas.html">Ligas</a>
+        <a href="manual.html">Manual do Estudante</a>
+        <a href="https://dagvmeduftm.wordpress.com/pet-medicina-1/" target="_blank" rel="noopener">PET Medicina</a>
+        <a href="https://dagvmeduftm.wordpress.com/dce-uftm/" target="_blank" rel="noopener">DCE UFTM</a>
+      </nav>
+      <div class="footer__social">
+        <a href="https://www.instagram.com/dagvmeduftm/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.facebook.com/profile.php?id=100009254539973" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+        <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7" target="_blank" rel="noopener" aria-label="Contato"><i class="fa-solid fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>&copy; <span id="year"></span> Diretório Acadêmico Gaspar Vianna – Medicina UFTM. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/sidemenu.js"></script>
+
+  <script>
+  /* ── Smooth scroll para âncoras internas ─────────────────── */
+  (function () {
+    'use strict';
+    var header = document.getElementById('header');
+
+    /* Âncora ativa no scroll */
+    var sections = ['horas','campi','ru'].map(function (id) {
+      return document.getElementById(id);
+    }).filter(Boolean);
+    var anchorLinks = document.querySelectorAll('.manual-anchors__link');
+
+    function onScroll() {
+      var scrollY = window.scrollY + (header ? header.offsetHeight : 72) + 52;
+      var current = sections[0];
+      sections.forEach(function (sec) {
+        if (sec.getBoundingClientRect().top + window.scrollY <= scrollY) current = sec;
+      });
+      anchorLinks.forEach(function (link) {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + current.id);
+      });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    /* Smooth scroll para links internos */
+    document.addEventListener('click', function (e) {
+      var link = e.target.closest('a[href^="#"]');
+      if (!link) return;
+      var target = document.querySelector(link.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      var offset = header ? header.offsetHeight : 0;
+      window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' });
+    });
+  }());
+  </script>
+
+</body>
+</html>

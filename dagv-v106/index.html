@@ -1,0 +1,2578 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Diretório Acadêmico Gaspar Vianna – Representação estudantil do curso de Medicina da UFTM. Conheça nossa equipe, eventos e projetos." />
+  <meta name="keywords" content="DAGV, Medicina, UFTM, Diretório Acadêmico, Gaspar Vianna, Uberaba" />
+  <meta name="author" content="DAGV – Medicina UFTM" />
+  <meta property="og:title" content="DAGV – Diretório Acadêmico Gaspar Vianna" />
+  <meta property="og:description" content="A voz dos estudantes de Medicina da UFTM." />
+  <meta property="og:type" content="website" />
+  <title>DAGV – Diretório Acadêmico Gaspar Vianna | Medicina UFTM</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- AOS – Animate On Scroll -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+
+  <!-- Folha de estilos principal -->
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- [ADIÇÃO] Estilos da aba de menu lateral – não altera styles.css -->
+  <link rel="stylesheet" href="css/sidemenu.css" />
+
+  <!-- [ADIÇÃO] Estilos da section Resgate Histórico e página interna -->
+  <link rel="stylesheet" href="css/historico.css" />
+
+  <!-- ── Estilos da seção Coordenações (navegação por coordenação) ── -->
+  <style>
+    /* ══════════════════════════════════════════════════════
+       NAVEGADOR DE COORDENAÇÕES – uma coordenação por vez
+       ══════════════════════════════════════════════════════ */
+
+    /* ── Container principal da seção ── */
+    .coord-navigator {
+      position: relative;
+    }
+
+    /* ── Barra de tabs das coordenações ── */
+    .coord-tabs {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: var(--space-lg);
+      padding: .5rem;
+      background: var(--clr-green-light);
+      border-radius: var(--radius-lg);
+    }
+
+    .coord-tab {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .45rem .9rem;
+      border: none;
+      border-radius: var(--radius-pill);
+      background: transparent;
+      color: var(--clr-gray-3);
+      font-family: var(--font-body);
+      font-size: .78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background var(--dur-fast) var(--ease),
+                  color var(--dur-fast) var(--ease),
+                  box-shadow var(--dur-fast) var(--ease);
+      white-space: nowrap;
+    }
+
+    .coord-tab i {
+      font-size: .8rem;
+    }
+
+    /* .coord-tab__label {
+      /* Visível por padrão; oculto via media query no mobile 
+    } */
+
+    .coord-tab:hover {
+      background: var(--clr-white);
+      color: var(--clr-green);
+    }
+
+    .coord-tab.is-active {
+      background: var(--clr-green);
+      color: var(--clr-white);
+      box-shadow: 0 4px 14px rgba(147,1,66,.25);
+    }
+
+    /* ── Animações de entrada da seção ────────────────────── */
+    @keyframes sectionReveal {
+      from { opacity: 0; transform: translateY(32px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes tagSlideIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes titleScaleIn {
+      from { opacity: 0; transform: scale(.93) translateY(16px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    @keyframes tabsDropIn {
+      from { opacity: 0; transform: translateY(-18px) scaleY(.85); }
+      to   { opacity: 1; transform: translateY(0) scaleY(1); }
+    }
+
+    @keyframes progressGrow {
+      from { width: 0 !important; opacity: 0; }
+    }
+
+    /* Classe aplicada via JS quando a seção entra no viewport */
+    .team.section--animate .section-header .section-tag {
+      animation: tagSlideIn 480ms var(--ease) 100ms both;
+    }
+    .team.section--animate .section-header .section-title {
+      animation: titleScaleIn 560ms var(--ease) 200ms both;
+    }
+    .team.section--animate .section-header .section-desc {
+      animation: sectionReveal 500ms var(--ease) 320ms both;
+    }
+    .team.section--animate .coord-tabs {
+      animation: tabsDropIn 520ms cubic-bezier(.34,1.56,.64,1) 420ms both;
+    }
+    .team.section--animate .coord-tab {
+      animation: sectionReveal 380ms var(--ease) both;
+    }
+    .team.section--animate .coord-tab:nth-child(1)  { animation-delay: 480ms; }
+    .team.section--animate .coord-tab:nth-child(2)  { animation-delay: 530ms; }
+    .team.section--animate .coord-tab:nth-child(3)  { animation-delay: 580ms; }
+    .team.section--animate .coord-tab:nth-child(4)  { animation-delay: 630ms; }
+    .team.section--animate .coord-tab:nth-child(5)  { animation-delay: 680ms; }
+    .team.section--animate .coord-tab:nth-child(6)  { animation-delay: 730ms; }
+    .team.section--animate .coord-tab:nth-child(7)  { animation-delay: 780ms; }
+    .team.section--animate .coord-tab:nth-child(8)  { animation-delay: 830ms; }
+    .team.section--animate .coord-tab:nth-child(9)  { animation-delay: 880ms; }
+    .team.section--animate .coord-progress {
+      animation: sectionReveal 400ms var(--ease) 860ms both;
+    }
+    .team.section--animate .coord-nav__counter {
+      animation: sectionReveal 400ms var(--ease) 950ms both;
+    }
+
+    /* ── Painel de coordenação ── */
+    .coord-panel {
+      display: none;
+    }
+
+    .coord-panel.is-active {
+      display: block;
+    }
+
+    /* ── Animação de entrada dos cards (apenas cards, nunca botões/ícones) ── */
+    @keyframes cardEntrance {
+      from { opacity: 0; transform: translateY(18px) scale(.97); }
+      to   { opacity: 1; transform: translateY(0)    scale(1);   }
+    }
+
+    .coord-panel.is-active .team__card {
+      animation: cardEntrance 380ms cubic-bezier(.4,0,.2,1) both;
+    }
+    .coord-panel.is-active .carousel__slide:nth-child(1) .team__card { animation-delay:  40ms; }
+    .coord-panel.is-active .carousel__slide:nth-child(2) .team__card { animation-delay:  90ms; }
+    .coord-panel.is-active .carousel__slide:nth-child(3) .team__card { animation-delay: 140ms; }
+    .coord-panel.is-active .carousel__slide:nth-child(4) .team__card { animation-delay: 190ms; }
+
+    /* Garante que botões NUNCA herdem animação dos cards */
+    .coord-carousel-row .coord-nav__btn,
+    .coord-carousel-row .coord-nav__btn:disabled {
+      animation: none !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      transform: none;
+    }
+    .coord-carousel-row .coord-nav__btn:disabled {
+      opacity: .35 !important;
+    }
+
+    /* ── Cabeçalho do painel ── */
+    .coord-block__header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-md);
+      padding-bottom: var(--space-sm);
+      border-bottom: 2px solid var(--clr-green-light);
+    }
+
+    .coord-block__icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--clr-green-dark), var(--clr-green));
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      color: var(--clr-accent);
+      flex-shrink: 0;
+    }
+
+    .coord-block__title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--clr-dark);
+      margin: 0 0 .1rem;
+      line-height: 1.2;
+    }
+
+    .coord-block__label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--clr-gray-2);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+
+    /* ── Navegação inferior (setas + counter) ── */
+    /* ── Linha do carousel com setas laterais ── */
+    .coord-carousel-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .coord-carousel-row .carousel {
+      flex: 1;
+    }
+
+    /* Avatar do coordenador restaurado ao tamanho original */
+    .coord-carousel-row .team__avatar {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .coord-carousel-row .team__avatar-placeholder {
+      font-size: 2.2rem;
+    }
+
+    /* ── Tamanho aumentado dos cards e fotos na página inicial ── */
+    /* Escopo: apenas dentro de #team para não afetar outras páginas */
+    #team .team__avatar {
+      width: 130px;
+      height: 130px;
+    }
+
+    #team .team__avatar-placeholder {
+      font-size: 3rem;
+    }
+
+    #team .team__card {
+      padding: var(--space-lg) var(--space-md);
+    }
+
+    #team .team__name {
+      font-family: 'Quicksand', var(--font-display);
+      font-size: 1.05rem;
+      margin-top: var(--space-xs);
+    }
+
+    #team .team__nickname {
+      font-family: 'Quicksand', var(--font-display);
+      font-size: .85rem;
+      font-weight: 600;
+      color: var(--clr-accent);
+      margin-top: -2px;
+      display: block;
+    }
+
+    #team .team__role {
+      font-size: .83rem;
+    }
+
+    #team .carousel .team__card {
+      max-width: 260px;
+    }
+
+    .coord-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      margin-top: var(--space-sm);
+      padding-top: var(--space-sm);
+      border-top: 1px solid var(--clr-green-light);
+    }
+
+    .coord-nav__btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border: 2px solid var(--clr-gray-1);
+      border-radius: 50%;
+      background: var(--clr-white);
+      color: var(--clr-green);
+      font-size: .9rem;
+      flex-shrink: 0;
+      cursor: pointer;
+      transition: background var(--dur-fast) var(--ease),
+                  border-color var(--dur-fast) var(--ease),
+                  color var(--dur-fast) var(--ease),
+                  transform var(--dur-fast) var(--ease);
+    }
+
+    .coord-nav__btn:hover:not(:disabled) {
+      background: var(--clr-green);
+      border-color: var(--clr-green);
+      color: var(--clr-white);
+      transform: scale(1.08);
+    }
+
+    .coord-nav__btn:disabled {
+      opacity: .35;
+      cursor: not-allowed;
+    }
+
+    .coord-nav__counter {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .25rem;
+    }
+
+    .coord-nav__counter-text {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--clr-dark);
+    }
+
+    .coord-nav__counter-label {
+      font-size: .7rem;
+      font-weight: 600;
+      color: var(--clr-gray-2);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    /* ── Progress bar ── */
+    .coord-progress {
+      height: 3px;
+      background: var(--clr-green-light);
+      border-radius: var(--radius-pill);
+      margin-top: calc(-1 * var(--space-lg) + .5rem); /* pull up under tabs */
+      margin-bottom: var(--space-md);
+      overflow: hidden;
+    }
+
+    .coord-progress__fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--clr-green-dark), var(--clr-green));
+      border-radius: var(--radius-pill);
+      transition: width 380ms var(--ease);
+    }
+
+    /* ── Carrossel interno (membros da coordenação) ── */
+    .carousel {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-xs);
+    }
+
+    .carousel__track-wrap {
+      flex: 1;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+    }
+
+    .carousel__track {
+      display: flex;
+      justify-content: flex-start;
+      gap: var(--space-sm);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      transition: transform 420ms cubic-bezier(.4,0,.2,1);
+      will-change: transform;
+    }
+
+    .carousel__slide {
+      flex: 0 0 calc(25% - (var(--space-sm) * 3 / 4));
+      min-width: 0;
+    }
+
+    .carousel .team__card {
+      margin: 0 auto;   /* center when slide is constrained */
+      height: 100%;
+      max-width: 220px; /* same ceiling as single-slide width */
+    }
+
+    /* ── Botão "Saiba mais" ── */
+    .coord-saibamais {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      margin-top: var(--space-md);
+      padding: .65rem 1.5rem;
+      background: linear-gradient(135deg, var(--clr-green-dark), var(--clr-green));
+      color: var(--clr-white);
+      font-family: var(--font-body);
+      font-size: .88rem;
+      font-weight: 600;
+      border-radius: var(--radius-pill);
+      text-decoration: none;
+      box-shadow: 0 4px 18px rgba(147,1,66,.28);
+      transition: transform var(--dur-fast) var(--ease),
+                  box-shadow var(--dur-fast) var(--ease),
+                  filter var(--dur-fast) var(--ease);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .coord-saibamais::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,.18) 50%, transparent 70%);
+      transform: translateX(-100%);
+      transition: transform 600ms var(--ease);
+    }
+
+    .coord-saibamais:hover::before { transform: translateX(100%); }
+
+    .coord-saibamais:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(147,1,66,.38);
+      filter: brightness(1.06);
+    }
+
+    .coord-saibamais:active { transform: translateY(0); }
+
+    .carousel__btn {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--clr-white);
+      border: 2px solid var(--clr-gray-1);
+      color: var(--clr-green);
+      font-size: .85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background var(--dur-fast) var(--ease),
+                  border-color var(--dur-fast) var(--ease),
+                  color var(--dur-fast) var(--ease),
+                  transform var(--dur-fast) var(--ease);
+      z-index: 2;
+    }
+
+    .carousel__btn:hover {
+      background: var(--clr-green);
+      border-color: var(--clr-green);
+      color: var(--clr-white);
+      transform: scale(1.08);
+    }
+
+    .carousel__btn:disabled {
+      opacity: .35;
+      cursor: not-allowed;
+      transform: none;
+      pointer-events: none;
+    }
+
+    /* ── Dots do carrossel interno ── */
+    .carousel__dots {
+      display: flex;
+      justify-content: center;
+      gap: .4rem;
+      margin-top: .75rem;
+      min-height: 12px;
+    }
+
+    .carousel__dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--clr-gray-1);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: background var(--dur-fast) var(--ease),
+                  transform var(--dur-fast) var(--ease);
+    }
+
+    .carousel__dot.is-active {
+      background: var(--clr-green);
+      transform: scale(1.3);
+    }
+
+    /* ── Responsividade da seção de coordenações ─────────── */
+
+    /* Dots: ocultos por padrão no desktop, visíveis apenas no mobile */
+    .carousel__dots {
+      display: none;
+    }
+
+    /* Tablet (≤ 1024px) */
+    @media (max-width: 1024px) {
+      .carousel__slide {
+        flex: 0 0 calc(33.333% - (var(--space-sm) * 2 / 3));
+      }
+    }
+
+    /* Tablet menor / mobile landscape (≤ 900px) */
+    @media (max-width: 900px) {
+      .coord-tabs      { gap: .3rem; }
+      .coord-tab       { font-size: .70rem; padding: .38rem .55rem; gap: .3rem; }
+      .coord-tab i     { font-size: .72rem; flex-shrink: 0; }
+
+      .carousel__slide {
+        flex: 0 0 calc(50% - var(--space-sm) / 2);
+      }
+      .carousel[data-total="1"] .carousel__slide {
+        flex: 0 0 calc(50% - var(--space-sm) / 2);
+        max-width: 220px;
+      }
+
+      .coord-nav__btn  { width: 36px; height: 36px; font-size: .8rem; }
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       CORREÇÕES MOBILE — aplicadas via media queries mobile-first
+       Afeta apenas viewports ≤ 768px; desktop inalterado.
+       ══════════════════════════════════════════════════════════ */
+
+    /* Mobile padrão (≤ 768px) */
+    @media (max-width: 768px) {
+
+      /* ── 1. Tabs de Coordenações ───────────────────────────
+         Garante alinhamento uniforme: todos os itens com mesma
+         altura, ícone+texto centralizados, sem variação visual.
+      ─────────────────────────────────────────────────────── */
+      .coord-tabs {
+        gap: .2rem;
+        padding: .35rem;
+        flex-wrap: wrap;
+        align-items: stretch;   /* mesma altura para todos os itens */
+      }
+
+      .coord-tab {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: .35rem;
+        font-size: .68rem;
+        padding: .4rem .55rem;
+        min-height: 32px;       /* altura mínima uniforme */
+        height: auto;
+        line-height: 1;
+        white-space: nowrap;
+        box-sizing: border-box;
+      }
+
+      .coord-tab i {
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        font-size: .78rem;
+        flex-shrink: 0;
+        line-height: 1;
+      }
+
+      /* ── 2. Cards de Coordenadores – Slider 1 por vez ──────
+         Cada slide ocupa 100% da largura visível.
+         Sem overflow horizontal indesejado.
+      ─────────────────────────────────────────────────────── */
+      .coord-carousel-row {
+        display: flex;
+        align-items: center;
+        gap: var(--space-xs);
+        width: 100%;
+        box-sizing: border-box;
+        overflow: hidden;        /* previne overflow lateral */
+      }
+
+      .coord-carousel-row .carousel {
+        flex: 1;
+        min-width: 0;            /* evita que o flex item estoure */
+        overflow: visible;
+      }
+
+      .carousel__track-wrap {
+        overflow: hidden;
+        width: 100%;
+      }
+
+      .carousel__track {
+        display: flex;
+        gap: 0 !important;       /* sem gap no mobile: 1 card = 100% */
+      }
+
+      .carousel__slide {
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;   /* centraliza o card dentro do slide */
+      }
+
+      /* Card ocupa toda a largura do slide */
+      .carousel .team__card {
+        max-width: 100%;
+        width: 100%;
+        margin: 0;
+      }
+
+      /* Card de membro mais compacto */
+      .team__avatar { width: 72px; height: 72px; }
+      .team__avatar-placeholder { font-size: 1.8rem; }
+      .team__name   { font-size: .92rem; }
+      .team__role   { font-size: .75rem; }
+
+      /* Mantém foto maior em #team mesmo no mobile */
+      #team .team__avatar { width: 100px; height: 100px; }
+      #team .team__avatar-placeholder { font-size: 2.4rem; }
+
+      /* ── 3. Botões de Navegação – sempre visíveis ──────────
+         Sem hover para desaparecer, sem animações nos controles.
+      ─────────────────────────────────────────────────────── */
+      .coord-nav__btn {
+        width: 44px !important;
+        height: 44px !important;
+        font-size: .85rem;
+        flex-shrink: 0;
+        opacity: 1 !important;
+        visibility: visible !important;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        animation: none !important;
+        transition: background var(--dur-fast) var(--ease),
+                    border-color var(--dur-fast) var(--ease),
+                    color var(--dur-fast) var(--ease) !important;
+        transform: none !important;
+      }
+
+      .coord-nav__btn:disabled {
+        opacity: .35 !important;
+        visibility: visible !important;
+      }
+
+      /* ── 4. Dots – visíveis apenas no mobile ───────────────
+         Movidos via JS para fora do coord-carousel-row.
+         width: 100% garante centralização correta.
+      ─────────────────────────────────────────────────────── */
+      .carousel__dots {
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        gap: .45rem;
+        margin-top: .85rem;
+        min-height: 14px;
+        padding: 0;
+        width: 100%;
+      }
+
+      .carousel__dot {
+        display: block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--clr-gray-1);
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        flex-shrink: 0;
+        transition: background var(--dur-fast) var(--ease),
+                    transform var(--dur-fast) var(--ease);
+      }
+
+      .carousel__dot.is-active {
+        background: var(--clr-green);
+        transform: scale(1.35);
+      }
+
+      /* Cabeçalho do painel mais compacto */
+      .coord-block__title { font-size: 1.05rem; }
+      .coord-block__label { font-size: .68rem; }
+
+      /* ── Cards de painéis com 1 membro — mesmo tamanho dos demais ── */
+      .carousel[data-total="1"] .carousel__slide {
+        flex: 0 0 100% !important;
+        display: flex;
+        justify-content: center;
+        padding: 0;
+      }
+      .carousel[data-total="1"] .team__card {
+        width: 100%;
+        max-width: 260px;
+        margin: 0 auto;
+      }
+    }
+
+    /* Mobile pequeno (≤ 480px) — apenas ícones, layout 5+4 sem scroll horizontal */
+    @media (max-width: 480px) {
+
+      /* ── 1. Tabs: 5 por linha, somente ícones visíveis ──────────────────────
+         flex: 0 0 20% → exatamente 5 itens por linha (2 linhas: 5+4).
+         Texto ocultado com clip+height 0 (sem display:none, sem font-size:0).
+         Ícone permanece visível e centralizado. Área de toque adequada.
+      ─────────────────────────────────────────────────────────────────────────── */
+      .coord-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: .2rem;
+        padding: .3rem .25rem;
+        overflow: visible;
+        align-items: stretch;
+      }
+
+      .coord-tab {
+        flex: 0 0 calc(20% - .2rem);   /* 5 tabs por linha */
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        padding: .5rem .15rem;
+        min-height: 44px;               /* área de toque adequada */
+        height: auto;
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+
+      /* Label oculta no mobile — apenas ícone visível */
+      .coord-tab__label {
+        display: none;
+      }
+
+      .coord-tab i {
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        font-size: .95rem;
+        line-height: 1;
+        flex-shrink: 0;
+        margin: 0;
+      }
+
+      /* ── 2. Cards de painéis com 1 membro — mesmo tamanho dos demais ─────────
+         No mobile o JS centraliza o track mas o slide pode ficar estreito.
+         Forçamos largura total do track-wrap para o card preencher corretamente.
+      ─────────────────────────────────────────────────────────────────────────── */
+      .carousel[data-total="1"] .carousel__track {
+        justify-content: center;
+        width: 100%;
+      }
+
+      .carousel[data-total="1"] .carousel__slide {
+        flex: 0 0 100% !important;
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+      }
+
+      .carousel[data-total="1"] .team__card {
+        width: 100%;
+        max-width: 260px;
+        margin: 0 auto;
+      }
+
+      /* ── 3. Botões ligeiramente menores em telas muito pequenas */
+      .coord-nav__btn {
+        width: 40px !important;
+        height: 40px !important;
+      }
+
+      /* Espaçamento do cabeçalho do painel */
+      .coord-block__header { gap: .5rem; margin-bottom: var(--space-sm); }
+      .coord-block__icon   { width: 36px; height: 36px; font-size: 1rem; }
+    }
+
+    /* Mobile muito pequeno (≤ 360px) — ícone ligeiramente menor, mantém layout 5+4 */
+    @media (max-width: 360px) {
+      .coord-tab {
+        padding: .45rem .1rem;
+        min-height: 42px;
+      }
+      .coord-tab i {
+        font-size: .85rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== HEADER ===================== -->
+  <header id="header" class="header">
+    <div class="container header__inner">
+
+      <!-- =====================================================
+           [ADIÇÃO] Aba de menu – inserida antes do brand.
+           Posicionada à esquerda do logotipo graças ao flex
+           do .header__inner existente.
+           Nenhuma classe/id existente foi alterada.
+           ===================================================== -->
+      <div class="sidemenu-wrap" id="sidemenuWrap">
+
+        <!-- Aba toggle -->
+        <button
+          class="sidemenu-tab"
+          id="sidemenuTab"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="sidemenuPanel"
+          aria-label="Abrir menu de navegação"
+        >
+          <span class="sidemenu-tab__icon" aria-hidden="true">
+            <span class="sidemenu-tab__bar"></span>
+            <span class="sidemenu-tab__bar"></span>
+            <span class="sidemenu-tab__bar"></span>
+          </span>
+          <span class="sidemenu-tab__label">Menu</span>
+        </button>
+
+        <!-- Painel principal -->
+        <div class="sidemenu-panel" id="sidemenuPanel" role="navigation" aria-label="Menu lateral">
+          <ul class="sidemenu-list">
+
+            <!-- ── Links diretos principais ── -->
+            <li class="sidemenu-list__item">
+              <a href="sobre.html" class="sidemenu-list__link">
+                Sobre o DAGV
+                <i class="fa-solid fa-building-columns sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="#historico" class="sidemenu-list__link sidemenu-list__link--historico">
+                Resgate Histórico
+                <i class="fa-solid fa-scroll sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="coordenacao.html" class="sidemenu-list__link">
+                Coordenação
+                <i class="fa-solid fa-users sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Dropdown: Informações DAGV ── -->
+            <li class="sidemenu-list__item">
+              <button
+                class="sidemenu-list__btn"
+                data-dropdown="informacoes"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Informações DAGV
+                <i class="fa-solid fa-chevron-down sidemenu-list__arrow" aria-hidden="true"></i>
+              </button>
+              <ul class="sidemenu-dropdown" id="dropInformacoes">
+                <li><a href="https://dagvmeduftm.wordpress.com/estatuto-dagv/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">Estatuto</a></li>
+                <li><a href="https://dagvmeduftm.wordpress.com/galeria-de-fotos/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">Galeria de Fotos</a></li>
+              </ul>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Links institucionais ── -->
+            <li class="sidemenu-list__item">
+              <a href="https://dagvmeduftm.wordpress.com/pet-medicina-1/" target="_blank" rel="noopener" class="sidemenu-list__link">
+                PET Medicina
+                <i class="fa-solid fa-flask sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="ligas.html" class="sidemenu-list__link">
+                Ligas Acadêmicas
+                <i class="fa-solid fa-graduation-cap sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="manual.html" class="sidemenu-list__link">
+                Manual do Estudante
+                <i class="fa-solid fa-book-open-reader sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="https://dagvmeduftm.wordpress.com/cursinho-carolina/" target="_blank" rel="noopener" class="sidemenu-list__link">
+                Cursinho Carolina
+                <i class="fa-solid fa-book-open sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Dropdown: Instituições ── -->
+            <li class="sidemenu-list__item">
+              <button
+                class="sidemenu-list__btn"
+                data-dropdown="instituicoes"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Instituições
+                <i class="fa-solid fa-chevron-down sidemenu-list__arrow" aria-hidden="true"></i>
+              </button>
+              <ul class="sidemenu-dropdown" id="dropInstituicoes">
+                <li><a href="https://dagvmeduftm.wordpress.com/denem/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">DENEM</a></li>
+                <li><a href="https://dagvmeduftm.wordpress.com/dce-uftm/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">DCE</a></li>
+                <li><a href="https://dagvmeduftm.wordpress.com/cvu-uberaba/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">CVU</a></li>
+                <li><a href="https://dagvmeduftm.wordpress.com/cepop-uftm/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">CEPOP</a></li>
+              </ul>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Final ── -->
+            <li class="sidemenu-list__item">
+              <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7" target="_blank" rel="noopener" class="sidemenu-list__link">
+                Suporte
+                <i class="fa-solid fa-headset sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+
+          </ul>
+        </div><!-- /sidemenu-panel -->
+
+      </div><!-- /sidemenu-wrap -->
+      <!-- ===================================================== -->
+
+      <!-- Logo + Nome -->
+      <a href="#hero" class="header__brand">
+        <div class="header__logo-wrap">
+          <!--
+            [ALTERAÇÃO] Logo DAGV – componente Logo dinâmico.
+            - Fundo vermelho/transparente → logo dourada (img.logo--gold)
+            - Fundo branco (scrolled)     → logo vermelha (img.logo--red)
+            A troca é feita via CSS: visibilidade controlada por .header.scrolled
+          -->
+          <img
+            src="img/logo dourada-sem fundo.png"
+            alt="Logo DAGV – Diretório Acadêmico Gaspar Vianna"
+            class="header__logo-svg logo--gold"
+            width="80" height="68"
+            loading="eager"
+          />
+          <img
+            src="img/Logo DAGV sem fundo verm.png"
+            alt="Logo DAGV – Diretório Acadêmico Gaspar Vianna"
+            class="header__logo-svg logo--red"
+            width="80" height="68"
+            loading="eager"
+            aria-hidden="true"
+          />
+        </div>
+        <div class="header__title-wrap">
+          <span class="header__dagv"></span>
+          <span class="header__subtitle"></span>
+        </div>
+      </a>
+
+      <!-- Nav desktop -->
+      <nav class="nav" aria-label="Navegação principal">
+        <ul class="nav__list">
+          <li><a href="#about"              class="nav__link">Sobre</a></li>
+          <li><a href="#team"               class="nav__link js-smooth-scroll">Coordenações</a></li>
+          <li><a href="#eventos-academicos" class="nav__link">Eventos</a></li>
+          <li><a href="#events"             class="nav__link">Instituições UFTM</a></li>
+          <li><a href="#contact"            class="nav__link nav__link--cta">Contato</a></li>
+        </ul>
+      </nav>
+
+      <!-- Hamburguer -->
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Nav mobile (drawer) -->
+    <nav class="nav-mobile" id="navMobile" aria-hidden="true">
+      <ul class="nav-mobile__list">
+        <li><a href="#about"              class="nav-mobile__link">Sobre</a></li>
+        <li><a href="#team"               class="nav-mobile__link js-smooth-scroll">Coordenações</a></li>
+        <li><a href="#eventos-academicos" class="nav-mobile__link">Eventos</a></li>
+        <li><a href="#events"             class="nav-mobile__link">Instituições UFTM</a></li>
+        <li><a href="#contact"            class="nav-mobile__link">Contato</a></li>
+        <li><a href="#historico"          class="nav-mobile__link">Resgate Histórico</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===================== HERO ===================== -->
+    <section id="hero" class="hero">
+      <div class="hero__bg-shapes" aria-hidden="true">
+        <div class="shape shape--1"></div>
+        <div class="shape shape--2"></div>
+        <div class="shape shape--3"></div>
+      </div>
+
+      <!-- Logo decorativa – posicionada à direita, fora do fluxo do conteúdo -->
+       <div class="hero__logo-deco" aria-hidden="true">
+        <img
+          src="img/logonova4.png"
+          alt=""
+          class="hero__logo-deco-img"
+          loading="eager"
+          draggable="false"
+        />
+      </div>
+
+      <div class="container hero__content">
+        <p class="hero__eyebrow">Medicina UFTM · Uberaba</p>
+        <h1 class="hero__title">
+          Diretório Acadêmico<br />
+          <em>Gaspar Vianna</em>
+        </h1>
+        <p class="hero__description">
+          A representação estudantil que une, amplia e transforma a experiência
+          acadêmica dos futuros médicos da UFTM.
+        </p>
+        <div class="hero__actions">
+          <a href="sobre.html" class="btn btn--primary">Conheça o DAGV</a>
+          <!-- [AJUSTE 3] Botão Resgate Histórico → smooth scroll para #historico -->
+          <a href="#historico" class="btn btn--outline">Resgate Histórico</a>
+        </div>
+      </div>
+      <a href="#about" class="hero__scroll-hint" aria-label="Ir para seção Sobre">
+        <i class="fa-solid fa-chevron-down"></i>
+      </a>
+    </section>
+
+    <!-- ===================== SOBRE ===================== -->
+    <section id="about" class="about section">
+      <div class="container">
+
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Quem somos</span>
+          <h2 class="section-title">Sobre o DAGV</h2>
+          <p class="section-desc">
+            O Diretório Acadêmico Gaspar Vianna é o órgão representativo dos
+            estudantes de Medicina da Universidade Federal do Triângulo Mineiro (UFTM),
+            em Uberaba – MG. Fundado para dar voz aos acadêmicos, o DAGV articula
+            demandas, promove cultura e apoia o desenvolvimento científico e social
+            na Universidade.
+          </p>
+        </div>
+
+        <!-- Quote da gestão -->
+        <blockquote class="about__quote" data-aos="fade-up">
+          <p>"Mestre não é quem sempre ensina, mas quem de repente aprende."</p>
+          <cite>— Guimarães Rosa · Gestão 2026</cite>
+        </blockquote>
+
+      </div>
+    </section>
+
+    <!-- ===================== EQUIPE ===================== -->
+    <!-- ===================== COORDENAÇÕES (uma por vez) ===================== -->
+    <section id="team" class="team section section--alt">
+      <div class="container">
+
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Gestão Guimarães Rosa 2026</span>
+          <h2 class="section-title">Nossa Diretoria</h2>
+          <p class="section-desc">Conheça as pessoas que dedicam seu tempo para tornar a sua jornada acadêmica melhor.</p>
+        </div>
+
+        <!-- ── Navegador de coordenações ── -->
+        <div class="coord-navigator" data-aos="fade-up" data-aos-delay="80">
+
+          <!-- Tabs de seleção rápida -->
+          <div class="coord-tabs" role="tablist" aria-label="Coordenações">
+            <button class="coord-tab is-active" role="tab" aria-selected="true"  data-panel="0"><i class="fa-solid fa-star"></i><span class="coord-tab__label"> Geral</span></button>
+            <button class="coord-tab"            role="tab" aria-selected="false" data-panel="1"><i class="fa-solid fa-file-pen"></i><span class="coord-tab__label"> Secretaria</span></button>
+            <button class="coord-tab"            role="tab" aria-selected="false" data-panel="2"><i class="fa-solid fa-coins"></i><span class="coord-tab__label"> Finanças</span></button>
+            <button class="coord-tab"            role="tab" aria-selected="false" data-panel="3"><i class="fa-solid fa-bullhorn"></i><span class="coord-tab__label"> Comunicação</span></button>
+            <button class="coord-tab"            role="tab" aria-selected="false" data-panel="4"><i class="fa-solid fa-microscope"></i><span class="coord-tab__label"> Ensino</span></button>
+            <button class="coord-tab"            role="tab" aria-selected="false" data-panel="5"><i class="fa-solid fa-masks-theater"></i><span class="coord-tab__label"> Sociocultural</span></button>
+            <button class="coord-tab"            role="tab" aria-selected="false" data-panel="6"><i class="fa-solid fa-handshake-angle"></i><span class="coord-tab__label"> Representação</span></button>
+            <button class="coord-tab"            role="tab" aria-selected="false" data-panel="7"><i class="fa-solid fa-laptop-code"></i><span class="coord-tab__label"> Tecnologia</span></button>
+            <button class="coord-tab"            role="tab" aria-selected="false" data-panel="8"><i class="fa-solid fa-hospital"></i><span class="coord-tab__label"> Internato</span></button>
+          </div>
+
+          <!-- Barra de progresso -->
+          <div class="coord-progress" aria-hidden="true">
+            <div class="coord-progress__fill" id="coordProgressFill"></div>
+          </div>
+
+          <!-- ── Painel 0 – Coordenação Geral ── -->
+          <div class="coord-panel is-active" data-panel="0" role="tabpanel">
+            <div class="coord-block__header">
+              <span class="coord-block__icon"><i class="fa-solid fa-star"></i></span>
+              <div>
+                <h3 class="coord-block__title">Coordenação Geral</h3>
+                <span class="coord-block__label">Presidência</span>
+              </div>
+            </div>
+            <div class="coord-carousel-row">
+              <button class="coord-nav__btn" id="coordPrev" aria-label="Coordenação anterior"><i class="fa-solid fa-chevron-left"></i></button>
+              <div class="carousel" data-carousel>
+                <div class="carousel__track-wrap">
+                  <ul class="carousel__track">
+                    <li class="carousel__slide">
+                      <div class="team__card">
+                        <div class="team__avatar"><img src="img/presidente.jpeg" alt="Nome do Presidente" /></div>
+                        <h4 class="team__name">Bruno Henrique<span class="team__nickname">(Window-98)</span></h4>
+                        <p class="team__role">Presidente</p>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="carousel__dots"></div>
+              </div>
+              <button class="coord-nav__btn" id="coordNext" aria-label="Próxima coordenação"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+          </div>
+
+          <!-- ── Painel 1 – Secretaria Geral ── -->
+          <div class="coord-panel" data-panel="1" role="tabpanel">
+            <div class="coord-block__header">
+              <span class="coord-block__icon"><i class="fa-solid fa-file-pen"></i></span>
+              <div>
+                <h3 class="coord-block__title">Secretaria Geral</h3>
+                <span class="coord-block__label">Secretaria</span>
+              </div>
+            </div>
+            <div class="coord-carousel-row">
+              <button class="coord-nav__btn" id="coordPrev" aria-label="Coordenação anterior"><i class="fa-solid fa-chevron-left"></i></button>
+              <div class="carousel" data-carousel>
+              <div class="carousel__track-wrap">
+                <ul class="carousel__track">
+                  <li class="carousel__slide">
+                    <div class="team__card">
+                      <div class="team__avatar"><img src="img/Secretario.jpeg" alt="Nome do Presidente" /></div>
+                      <h4 class="team__name">José Myguell<span class="team__nickname">(Prosa-98)</span></h4>
+                      <p class="team__role">Secretário(a)</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+                <div class="carousel__dots"></div>
+              </div>
+              <button class="coord-nav__btn" id="coordNext" aria-label="Próxima coordenação"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+          </div>
+
+          <!-- ── Painel 2 – Finanças e Patrimônio ── -->
+          <div class="coord-panel" data-panel="2" role="tabpanel">
+            <div class="coord-block__header">
+              <span class="coord-block__icon"><i class="fa-solid fa-coins"></i></span>
+              <div>
+                <h3 class="coord-block__title">Finanças e Patrimônio</h3>
+                <span class="coord-block__label">Tesouraria</span>
+              </div>
+            </div>
+            <div class="coord-carousel-row">
+              <button class="coord-nav__btn" id="coordPrev" aria-label="Coordenação anterior"><i class="fa-solid fa-chevron-left"></i></button>
+              <div class="carousel" data-carousel>
+              <div class="carousel__track-wrap">
+                <ul class="carousel__track">
+                  <li class="carousel__slide">
+                    <div class="team__card">
+                      <div class="team__avatar"><img src="img/tesoureiro1.jpeg" alt="Nome do Presidente" /></div>
+                      <h4 class="team__name">Anna Laura<span class="team__nickname">(Nobel-98)</span></h4>
+                      <p class="team__role">Tesoureiro(a)</p>
+                    </div>
+                  </li>
+                  <li class="carousel__slide">
+                    <div class="team__card">
+                      <div class="team__avatar"><img src="img/tesoureiro2.jpeg" alt="Nome do Presidente" /></div>
+                      <h4 class="team__name">Dylmadson<span class="team__nickname">(Diu-98)</span></h4>
+                      <p class="team__role">Tesoureiro(a)</p>
+                    </div>
+                  </li>
+                  <li class="carousel__slide">
+                    <div class="team__card">
+                      <div class="team__avatar"><img src="img/tesoureiro3.jpeg" alt="Nome do Presidente" /></div>
+                      <h4 class="team__name">Ianca Brenda<span class="team__nickname">(Tia-98)</span></h4>
+                      <p class="team__role">Tesoureiro(a)</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+                <div class="carousel__dots"></div>
+              </div>
+              <button class="coord-nav__btn" id="coordNext" aria-label="Próxima coordenação"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+          </div>
+
+          <!-- ── Painel 3 – Comunicação ── -->
+          <div class="coord-panel" data-panel="3" role="tabpanel">
+            <div class="coord-block__header">
+              <span class="coord-block__icon"><i class="fa-solid fa-bullhorn"></i></span>
+              <div>
+                <h3 class="coord-block__title">Comunicação</h3>
+                <span class="coord-block__label">Comunicação & Marketing</span>
+              </div>
+            </div>
+            <div class="coord-carousel-row">
+              <button class="coord-nav__btn" id="coordPrev" aria-label="Coordenação anterior"><i class="fa-solid fa-chevron-left"></i></button>
+              <div class="carousel" data-carousel>
+              <div class="carousel__track-wrap">
+                <ul class="carousel__track">
+                  <li class="carousel__slide">
+                    <div class="team__card">
+                      <div class="team__avatar"><img src="img/comunicacao1.jpeg" alt="Nome do Presidente" /></div>
+                      <h4 class="team__name">Maria Eliza<span class="team__nickname">(Corona-98)</span></h4>
+                      <p class="team__role">Comunicação</p>
+                    </div>
+                  </li>
+                  <li class="carousel__slide">
+                    <div class="team__card">
+                      <div class="team__avatar"><div class="team__avatar-placeholder"><i class="fa-solid fa-user-doctor"></i></div></div>
+                      <h4 class="team__name">Sabryna Cardoso<span class="team__nickname">(Spam-100)</span></h4>
+                      <p class="team__role">Comunicação</p>
+                    </div>
+                  </li>
+                  <li class="carousel__slide">
+                    <div class="team__card">
+                      <div class="team__avatar"><img src="img/comunicacao3.jpeg" alt="Nome do Presidente" /></div>
+                      <h4 class="team__name">Cássia Thaís<span class="team__nickname">(KCL-101)</span></h4>
+                      <p class="team__role">Comunicação</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+                <div class="carousel__dots"></div>
+              </div>
+              <button class="coord-nav__btn" id="coordNext" aria-label="Próxima coordenação"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+          </div>
+
+          <!-- ── Painel 4 – Ensino, Pesquisa e Extensão ── -->
+          <div class="coord-panel" data-panel="4" role="tabpanel">
+            <div class="coord-block__header">
+              <span class="coord-block__icon"><i class="fa-solid fa-microscope"></i></span>
+              <div>
+                <h3 class="coord-block__title">Ensino, Pesquisa e Extensão</h3>
+                <span class="coord-block__label">EPE</span>
+              </div>
+            </div>
+            <div class="coord-carousel-row">
+              <button class="coord-nav__btn" id="coordPrev" aria-label="Coordenação anterior"><i class="fa-solid fa-chevron-left"></i></button>
+              <div class="carousel" data-carousel>
+              <div class="carousel__track-wrap">
+                <ul class="carousel__track">
+                  <li class="carousel__slide">
+                    <div class="team__card">
+                      <div class="team__avatar"><img src="img/epe1.jpeg" alt="Nome do Presidente" /></div>
+                      <h4 class="team__name">Alyson Bastos<span class="team__nickname">(Zika-96)</span></h4>
+                      <p class="team__role">Ensino, Pesquisa e Extensão</p>
+                    </div>
+                  </li>
+                  <li class="carousel__slide">
+                    <div class="team__card">
+                      <div class="team__avatar"><img src="img/epe2.jpeg" alt="Nome do Presidente" /></div>
+                      <h4 class="team__name">Vitor Adib<span class="team__nickname">(Lionel-96)</span></h4>
+                      <p class="team__role">Ensino, Pesquisa e Extensão</p>
+                    </div>
+                  </li>
+                  <li class="carousel__slide">
+                    <div class="team__card">
+                      <div class="team__avatar"><img src="img/epe3.jpeg" alt="Nome do Presidente" /></div>
+                      <h4 class="team__name">Victor Fujie<span class="team__nickname">(Nokia-97)</span></h4>
+                      <p class="team__role">Ensino, Pesquisa e Extensão</p>
+                    </div>
+                  </li>
+                  <li class="carousel__slide">
+                    <div class="team__card">
+                      <div class="team__avatar"><img src="img/epe4.jpeg" alt="Nome do Presidente" /></div>
+                      <h4 class="team__name">Sarah Êmily<span class="team__nickname">(Paris-99)</span></h4>
+                      <p class="team__role">Ensino, Pesquisa e Extensão</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+                <div class="carousel__dots"></div>
+              </div>
+              <button class="coord-nav__btn" id="coordNext" aria-label="Próxima coordenação"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+          </div>
+
+          <!-- ── Painel 5 – Sociocultural ── -->
+          <div class="coord-panel" data-panel="5" role="tabpanel">
+            <div class="coord-block__header">
+              <span class="coord-block__icon"><i class="fa-solid fa-masks-theater"></i></span>
+              <div>
+                <h3 class="coord-block__title">Sociocultural</h3>
+                <span class="coord-block__label">Cultura & Bem-estar</span>
+              </div>
+            </div>
+            <div class="coord-carousel-row">
+              <button class="coord-nav__btn" id="coordPrev" aria-label="Coordenação anterior"><i class="fa-solid fa-chevron-left"></i></button>
+              <div class="carousel" data-carousel>
+              <div class="carousel__track-wrap">
+                <ul class="carousel__track">
+                  <li class="carousel__slide">
+                    <div class="team__card">
+                      <div class="team__avatar"><img src="img/sociocultural1.jpeg" alt="Nome do Presidente" /></div>
+                      <h4 class="team__name">Maria Joana<span class="team__nickname">(Erva-95)</span></h4>
+                      <p class="team__role">Sociocultural</p>
+                    </div>
+                  </li>
+                  <li class="carousel__slide">
+                    <div class="team__card">
+                      <div class="team__avatar"><img src="img/sociocultural2.jpeg" alt="Nome do Presidente" /></div>
+                      <h4 class="team__name">Otávio Ausgusto<span class="team__nickname">(Fofô-95)</span></h4>
+                      <p class="team__role">Sociocultural</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+                <div class="carousel__dots"></div>
+              </div>
+              <button class="coord-nav__btn" id="coordNext" aria-label="Próxima coordenação"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+          </div>
+
+          <!-- ── Painel 6 – Representação Estudantil ── -->
+          <div class="coord-panel" data-panel="6" role="tabpanel">
+            <div class="coord-block__header">
+              <span class="coord-block__icon"><i class="fa-solid fa-handshake-angle"></i></span>
+              <div>
+                <h3 class="coord-block__title">Representação Estudantil</h3>
+                <span class="coord-block__label">Representação</span>
+              </div>
+            </div>
+            <div class="coord-carousel-row">
+              <button class="coord-nav__btn" id="coordPrev" aria-label="Coordenação anterior"><i class="fa-solid fa-chevron-left"></i></button>
+              <div class="carousel" data-carousel>
+              <div class="carousel__track-wrap">
+                <ul class="carousel__track">
+                  <li class="carousel__slide">
+                    <div class="team__card">
+                      <div class="team__avatar"><img src="img/RE1.jpeg" alt="Nome do Presidente" /></div>
+                      <h4 class="team__name">Matheus Felipe<span class="team__nickname">(Mushú-94)</span></h4>
+                      <p class="team__role">Representação</p>
+                    </div>
+                  </li>
+                  <li class="carousel__slide">
+                    <div class="team__card">
+                      <div class="team__avatar"><img src="img/RE2.jpeg" alt="Nome do Presidente" /></div>
+                      <h4 class="team__name">Marília<span class="team__nickname">(Hippie-97)</span></h4>
+                      <p class="team__role">Representação</p>
+                    </div>
+                  </li>
+                  <li class="carousel__slide">
+                    <div class="team__card">
+                      <div class="team__avatar"><img src="img/RE3.jpeg" alt="Nome do Presidente" /></div>
+                      <h4 class="team__name">Pedro Jorge<span class="team__nickname">(Gabiru-98)</span></h4>
+                      <p class="team__role">Representação</p>
+                    </div>
+                  </li>
+                  <li class="carousel__slide">
+                    <div class="team__card">
+                      <div class="team__avatar"><img src="img/RE4.jpeg" alt="Nome do Presidente" /></div>
+                      <h4 class="team__name">Jeberson Moreira<span class="team__nickname">(Adão-99)</span></h4>
+                      <p class="team__role">Representação</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+                <div class="carousel__dots"></div>
+              </div>
+              <button class="coord-nav__btn" id="coordNext" aria-label="Próxima coordenação"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+          </div>
+
+          <!-- ── Painel 7 – Desenvolvimento Tecnológico ── -->
+          <div class="coord-panel" data-panel="7" role="tabpanel">
+            <div class="coord-block__header">
+              <span class="coord-block__icon"><i class="fa-solid fa-laptop-code"></i></span>
+              <div>
+                <h3 class="coord-block__title">Desenvolvimento Tecnológico</h3>
+                <span class="coord-block__label">Tecnologia</span>
+              </div>
+            </div>
+            <div class="coord-carousel-row">
+              <button class="coord-nav__btn" id="coordPrev" aria-label="Coordenação anterior"><i class="fa-solid fa-chevron-left"></i></button>
+              <div class="carousel" data-carousel>
+              <div class="carousel__track-wrap">
+                <ul class="carousel__track">
+                  <li class="carousel__slide">
+                    <div class="team__card">
+                      <div class="team__avatar"><img src="img/DT1.jpeg" alt="Nome do Presidente" /></div>
+                      <h4 class="team__name">Sérgio Lemuel<span class="team__nickname">(Bença-98)</span></h4>
+                      <p class="team__role">Tecnologia</p>
+                    </div>
+                  </li>
+                  <li class="carousel__slide">
+                    <div class="team__card">
+                      <div class="team__avatar"><img src="img/DT2.jpeg" alt="Nome do Presidente" /></div>
+                      <h4 class="team__name">Chistian Oliveira<span class="team__nickname">(Caps-98)</span></h4>
+                      <p class="team__role">Tecnologia</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+                <div class="carousel__dots"></div>
+              </div>
+              <button class="coord-nav__btn" id="coordNext" aria-label="Próxima coordenação"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+          </div>
+
+          <!-- ── Painel 8 – Internato ── -->
+          <div class="coord-panel" data-panel="8" role="tabpanel">
+            <div class="coord-block__header">
+              <span class="coord-block__icon"><i class="fa-solid fa-hospital"></i></span>
+              <div>
+                <h3 class="coord-block__title">Internato</h3>
+                <span class="coord-block__label">Internato</span>
+              </div>
+            </div>
+            <div class="coord-carousel-row">
+              <button class="coord-nav__btn" id="coordPrev" aria-label="Coordenação anterior"><i class="fa-solid fa-chevron-left"></i></button>
+              <div class="carousel" data-carousel>
+              <div class="carousel__track-wrap">
+                <ul class="carousel__track">
+                  <li class="carousel__slide">
+                    <div class="team__card">
+                      <div class="team__avatar"><div class="team__avatar-placeholder"><i class="fa-solid fa-user-doctor"></i></div></div>
+                      <h4 class="team__name">A definir</h4>
+                      <p class="team__role">Coordenador(a) de Internato</p>
+                    </div>
+                  </li>
+                  <li class="carousel__slide">
+                    <div class="team__card">
+                      <div class="team__avatar"><div class="team__avatar-placeholder"><i class="fa-solid fa-user-doctor"></i></div></div>
+                      <h4 class="team__name">A definir</h4>
+                      <p class="team__role">Coordenador(a) de Internato</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+                <div class="carousel__dots"></div>
+              </div>
+              <button class="coord-nav__btn" id="coordNext" aria-label="Próxima coordenação"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+          </div>
+
+          <!-- ── Contador de coordenações ── -->
+          <div class="coord-nav" aria-label="Navegação entre coordenações">
+            <div class="coord-nav__counter">
+              <span class="coord-nav__counter-text" id="coordCounter">1 / 9</span>
+              <span class="coord-nav__counter-label">Coordenação</span>
+            </div>
+          </div>
+
+        </div><!-- /.coord-navigator -->
+
+        <!-- ── Botão Saiba mais ── -->
+        <div style="text-align:center; margin-top: var(--space-lg);" data-aos="fade-up">
+          <a href="coordenacao.html" class="coord-saibamais">
+            Saiba mais <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <p class="team__note" data-aos="fade-up" style="margin-top: var(--space-xl);">
+          <i class="fa-solid fa-circle-info"></i>
+          Clique no botão "Saiba mais" para conhecer todos os membros e suas atribuições de forma detalhada.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- ===================== EVENTOS ===================== -->
+    <section id="events" class="events section">
+      <div class="container">
+
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Agenda</span>
+          <h2 class="section-title">Instituições Acadêmicas</h2>
+          <p class="section-desc">Fique por dentro das iniciativas, projetos e eventos promovidos pelo DAGV.</p>
+        </div>
+
+        <div class="events__grid">
+
+          <article class="event-card" data-aos="fade-up" data-aos-delay="0">
+            <div class="event-card__badge event-card__badge--ongoing">Em andamento</div>
+            <div class="event-card__icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            <div class="event-card__content">
+              <span class="event-card__date"><i class="fa-regular fa-calendar"></i> 2026</span>
+              <h3 class="event-card__title">Cursinho Carolina</h3>
+              <p class="event-card__desc">Curso pré-vestibular social e gratuito voltado a estudantes de baixa renda, mantido pelo DAGV como projeto de extensão.</p>
+              <a href="https://dagvmeduftm.wordpress.com/cursinho-carolina/" target="_blank" rel="noopener" class="event-card__link">
+                Saiba mais <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+          </article>
+
+          <article class="event-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="event-card__badge event-card__badge--upcoming">Em breve</div>
+            <div class="event-card__icon"><i class="fa-solid fa-users"></i></div>
+            <div class="event-card__content">
+              <span class="event-card__date"><i class="fa-regular fa-calendar"></i> 2026</span>
+              <h3 class="event-card__title">Recepção dos Calouros</h3>
+              <p class="event-card__desc">Recepção oficial dos novos estudantes de Medicina da UFTM, com apresentação do curso, do DAGV e atividades de integração.</p>
+              <a href="#contact" class="event-card__link">
+                Saiba mais <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+          </article>
+
+          <article class="event-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="event-card__badge event-card__badge--ongoing">Ativo</div>
+            <div class="event-card__icon"><i class="fa-solid fa-flask"></i></div>
+            <div class="event-card__content">
+              <span class="event-card__date"><i class="fa-regular fa-calendar"></i> 2026</span>
+              <h3 class="event-card__title">Ligas Acadêmicas</h3>
+              <p class="event-card__desc">Grupos de estudo extracurriculares em diversas especialidades médicas, apoiados e incentivados pelo DAGV.</p>
+              <a href="https://dagvmeduftm.wordpress.com/ligas-academicas/" target="_blank" rel="noopener" class="event-card__link">
+                Ver ligas <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+          </article>
+
+          <article class="event-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="event-card__badge event-card__badge--past">Realizado</div>
+            <div class="event-card__icon"><i class="fa-solid fa-music"></i></div>
+            <div class="event-card__content">
+              <span class="event-card__date"><i class="fa-regular fa-calendar"></i> 2025</span>
+              <h3 class="event-card__title">Arraiá Carolina</h3>
+              <p class="event-card__desc">Festa junina solidária organizada pelo DAGV para arrecadação de fundos para o Cursinho Carolina.</p>
+              <a href="#contact" class="event-card__link">
+                Ver galeria <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+          </article>
+
+          <article class="event-card" data-aos="fade-up" data-aos-delay="400">
+            <div class="event-card__badge event-card__badge--past">Realizado</div>
+            <div class="event-card__icon"><i class="fa-solid fa-award"></i></div>
+            <div class="event-card__content">
+              <span class="event-card__date"><i class="fa-regular fa-calendar"></i> 2025</span>
+              <h3 class="event-card__title">Semana Acadêmica</h3>
+              <p class="event-card__desc">Evento com palestras, workshops e mesas redondas com profissionais e pesquisadores de diversas áreas da Medicina.</p>
+              <a href="#contact" class="event-card__link">
+                Saiba mais <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+          </article>
+
+          <article class="event-card" data-aos="fade-up" data-aos-delay="500">
+            <div class="event-card__badge event-card__badge--ongoing">Ativo</div>
+            <div class="event-card__icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
+            <div class="event-card__content">
+              <span class="event-card__date"><i class="fa-regular fa-calendar"></i> 2026</span>
+              <h3 class="event-card__title">PET Medicina</h3>
+              <p class="event-card__desc">Programa de Educação Tutorial com atividades de pesquisa, extensão e integração acadêmica em parceria com o DAGV.</p>
+              <a href="https://dagvmeduftm.wordpress.com/pet-medicina-1/" target="_blank" rel="noopener" class="event-card__link">
+                Conhecer <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================== EVENTOS ACADÊMICOS – v76 ========================
+         Ajustes: botões sempre visíveis (wrap), autoplay suave, dados em array.
+         CSS inline | JS IIFE isolado | sem dependências externas.
+         Para adicionar fotos: inserir objeto {src, caption} em EVENTS[n].slides.
+         ======================================================================= -->
+    <style>
+    /* ── Seção wrapper ───────────────────────────────────────── */
+    #eventos-academicos {
+      padding-block: var(--space-2xl);
+      background: var(--clr-white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #eventos-academicos::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(
+        -55deg, transparent, transparent 60px,
+        rgba(147,1,66,.018) 60px, rgba(147,1,66,.018) 61px
+      );
+      pointer-events: none;
+    }
+
+    /* ── Tabs de eventos ─────────────────────────────────────── */
+    /*
+      SEMPRE flex-wrap: wrap – botões nunca somem nem rolam lateralmente.
+      justify-content: center alinha ao centro em qualquer largura.
+    */
+    .ev-tabs {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;          /* quebra linha antes de cortar */
+      gap: .6rem;
+      margin-bottom: var(--space-lg);
+      padding-inline: 0;        /* sem padding extra que crie overflow */
+    }
+
+    .ev-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: .5em;
+      font-family: var(--font-body);
+      font-size: .82rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      /* Padding simétrico; cresce conforme conteúdo */
+      padding: .6em 1.35em;
+      border-radius: var(--radius-pill);
+      border: 1.5px solid var(--clr-gray-1);
+      background: transparent;
+      color: var(--clr-gray-3);
+      cursor: pointer;
+      white-space: nowrap;      /* texto interno nunca quebra */
+      min-height: 44px;         /* touch-friendly */
+      transition:
+        background   280ms var(--ease),
+        color        280ms var(--ease),
+        border-color 280ms var(--ease),
+        box-shadow   280ms var(--ease),
+        transform    180ms var(--ease);
+    }
+
+    .ev-tab i { font-size: .9em; opacity: .7; flex-shrink: 0; }
+
+    .ev-tab.is-active {
+      background: var(--clr-green);
+      color: var(--clr-white);
+      border-color: var(--clr-green);
+      box-shadow: 0 4px 14px rgba(147,1,66,.28);
+    }
+    .ev-tab.is-active i { opacity: 1; }
+
+    .ev-tab:not(.is-active):hover {
+      background: var(--clr-green-light);
+      border-color: var(--clr-green);
+      color: var(--clr-green-dark);
+      transform: translateY(-1px);
+    }
+
+    .ev-tab:focus-visible {
+      outline: 3px solid var(--clr-accent);
+      outline-offset: 3px;
+    }
+
+    /* ── Stage (janela do carrossel) ─────────────────────────── */
+    .ev-stage {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      aspect-ratio: 16 / 7;
+      background: var(--clr-dark);
+      box-shadow: 0 12px 40px rgba(26,0,16,.18);
+      user-select: none;
+      isolation: isolate;
+    }
+
+    /* ── Reel: conjunto de slides por evento ─────────────────── */
+    .ev-reel {
+      position: absolute; inset: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 500ms var(--ease);
+      z-index: 0;
+    }
+    .ev-reel.is-active { opacity: 1; pointer-events: auto; z-index: 1; }
+
+    /* ── Slide individual (fade cruzado) ─────────────────────── */
+    .ev-slide {
+      position: absolute; inset: 0;
+      opacity: 0;
+      /* Transição mais lenta = autoplay suave e elegante */
+      transition: opacity 800ms var(--ease);
+      z-index: 0;
+    }
+    .ev-slide.is-active { opacity: 1; z-index: 1; }
+
+    .ev-slide figure { margin: 0; width: 100%; height: 100%; position: relative; }
+
+    /* Imagem real */
+    .ev-slide__img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      display: block;
+    }
+
+    /* Placeholder (enquanto não há foto) */
+    .ev-slide__placeholder {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 1rem;
+      background: linear-gradient(145deg, var(--clr-green-dark) 0%, var(--clr-green) 60%, #3d0018 100%);
+      color: rgba(255,255,255,.55);
+    }
+    .ev-slide__placeholder i    { font-size: 4rem; }
+    .ev-slide__placeholder span {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 3vw, 1.6rem);
+      font-style: italic; color: rgba(255,255,255,.8); letter-spacing: .03em;
+    }
+    .ev-slide__placeholder small {
+      font-size: .78rem; color: rgba(255,255,255,.38);
+      letter-spacing: .1em; text-transform: uppercase;
+    }
+
+    /* Gradiente de legenda */
+    .ev-slide__overlay {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      padding: 1.2rem var(--space-md) 1rem;
+      background: linear-gradient(to top, rgba(26,0,16,.72) 0%, rgba(26,0,16,.3) 55%, transparent 100%);
+      display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem;
+    }
+    .ev-slide__caption {
+      font-size: .82rem; color: rgba(255,255,255,.85);
+      font-style: italic; line-height: 1.4; text-shadow: 0 1px 4px rgba(0,0,0,.5);
+    }
+    .ev-slide__count {
+      font-size: .75rem; font-weight: 600;
+      color: rgba(255,255,255,.6); white-space: nowrap;
+      letter-spacing: .04em; flex-shrink: 0;
+    }
+
+    /* ── Botões de navegação manual ──────────────────────────── */
+    .ev-btn {
+      position: absolute; top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,.35);
+      background: rgba(26,0,16,.45);
+      color: rgba(255,255,255,.9);
+      font-size: .95rem;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      transition:
+        background 200ms var(--ease), border-color 200ms var(--ease),
+        transform  200ms var(--ease), opacity 200ms var(--ease);
+    }
+    .ev-btn--prev { left:  .75rem; }
+    .ev-btn--next { right: .75rem; }
+    .ev-btn:hover {
+      background: var(--clr-green); border-color: var(--clr-green);
+      transform: translateY(-50%) scale(1.08);
+    }
+    .ev-btn:focus-visible { outline: 3px solid var(--clr-accent); outline-offset: 3px; }
+    .ev-btn:disabled { opacity: .28; cursor: not-allowed; }
+
+    /* ── Dots ────────────────────────────────────────────────── */
+    .ev-dots {
+      display: flex; justify-content: center; align-items: center;
+      gap: .45rem; margin-top: 1.2rem;
+    }
+    .ev-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      border: none; padding: 0; background: var(--clr-gray-1);
+      cursor: pointer;
+      transition: background 200ms var(--ease), width 200ms var(--ease);
+    }
+    .ev-dot.is-active {
+      background: var(--clr-green); width: 22px; border-radius: 4px;
+    }
+
+    /* ── Rodapé ──────────────────────────────────────────────── */
+    .ev-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; margin-top: var(--space-md);
+      padding-top: var(--space-sm); border-top: 1px solid var(--clr-gray-1);
+    }
+    .ev-footer__title {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      font-weight: 700; color: var(--clr-dark); line-height: 1.2;
+    }
+    .ev-footer__title em { font-style: italic; color: var(--clr-green); }
+    .ev-footer__desc {
+      font-size: .88rem; color: var(--clr-gray-3);
+      max-width: 480px; line-height: 1.6; text-align: right;
+    }
+
+    /* ── Responsividade ──────────────────────────────────────── */
+    @media (max-width: 768px) {
+      #eventos-academicos { padding-block: var(--space-xl); }
+
+      /* Botões: empilham em coluna se necessário, nunca cortados */
+      .ev-tabs { gap: .5rem; }
+      .ev-tab  { font-size: .78rem; padding: .55em 1.1em; }
+
+      .ev-stage { aspect-ratio: 4 / 3; }
+      .ev-btn   { width: 36px; height: 36px; font-size: .85rem; }
+
+      .ev-footer { flex-direction: column; align-items: flex-start; gap: .4rem; }
+      .ev-footer__desc { text-align: left; max-width: 100%; }
+    }
+
+    @media (max-width: 480px) {
+      /* Tela muito pequena: botões menores mas sempre legíveis */
+      .ev-tab  { font-size: .72rem; padding: .5em .9em; min-height: 40px; }
+      .ev-tabs { gap: .4rem; }
+      .ev-stage { aspect-ratio: 1 / 1; }
+    }
+    </style>
+
+    <section id="eventos-academicos" aria-labelledby="ev-section-title">
+      <div class="container" style="position:relative;z-index:1;">
+
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Vivência Acadêmica</span>
+          <h2 class="section-title" id="ev-section-title">Eventos do DAGV</h2>
+          <p class="section-desc">
+            Momentos que marcam a trajetória dos estudantes de Medicina da UFTM —
+            celebrações, aprendizados e conexões que ficam para sempre.
+          </p>
+        </div>
+
+        <!-- Tabs de eventos: flex-wrap, nunca scroll horizontal -->
+        <nav class="ev-tabs" role="tablist" aria-label="Eventos académicos"
+             data-aos="fade-up" data-aos-delay="80" id="evTabs"></nav>
+
+        <!-- Stage gerado pelo JS -->
+        <div class="ev-stage"
+             id="evStage" tabindex="0" aria-live="polite" aria-atomic="false">
+          <button class="ev-btn ev-btn--prev" id="evBtnPrev" aria-label="Slide anterior">
+            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+          </button>
+          <button class="ev-btn ev-btn--next" id="evBtnNext" aria-label="Próximo slide">
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <div class="ev-dots" id="evDots" role="group" aria-label="Slides"></div>
+
+        <div class="ev-footer" data-aos="fade-up" data-aos-delay="60">
+          <div  class="ev-footer__title" id="evFooterTitle"></div>
+          <p    class="ev-footer__desc"  id="evFooterDesc"></p>
+        </div>
+
+      </div>
+    </section>
+
+    <!--
+      ╔══════════════════════════════════════════════════════════════════╗
+      ║  JS DA SEÇÃO DE EVENTOS – IIFE isolado, zero dependências        ║
+      ╠══════════════════════════════════════════════════════════════════╣
+      ║  Para adicionar fotos a um evento:                               ║
+      ║    1. Localize o evento em EVENTS[] pelo nome                    ║
+      ║    2. Adicione um objeto em slides[]:                            ║
+      ║       { src: 'img/nome.jpg', caption: 'Legenda da foto' }        ║
+      ║       (src: null = mostra placeholder com ícone)                 ║
+      ║  Para adicionar um novo evento:                                  ║
+      ║    Adicione um objeto ao array EVENTS. O JS gera tudo sozinho.   ║
+      ╚══════════════════════════════════════════════════════════════════╝
+    -->
+    <script>
+    (function () {
+      'use strict';
+
+      /* ══════════════════════════════════════════════════════════
+         DADOS DOS EVENTOS
+         Edite apenas este array para:
+           - Adicionar / remover eventos
+           - Adicionar / remover fotos de cada evento
+         Cada slide: { src: 'caminho/foto.jpg', caption: 'legenda' }
+                 ou: { src: null, icon: 'fa-solid fa-...',
+                       label: 'Texto', caption: 'legenda' }
+         ══════════════════════════════════════════════════════════ */
+      var EVENTS = [
+        {
+          id:    0,
+          label: 'Cerimônia do Jaleco',
+          icon:  'fa-solid fa-coat-medical',
+          desc:  'Celebração solene que marca o início da jornada médica dos calouros, com a entrega do jaleco branco como símbolo de compromisso com a profissão.',
+          slides: [
+            { src: 'img/cdj/C.JALECO 102 (1047).jpg', caption: 'Momento solene da entrega do jaleco aos calouros de Medicina' },
+            { src: 'img/cdj/C.JALECO 102 (1058).jpg', caption: 'Calouros recebem seus jalecos em cerimônia emocionante' },
+            { src: 'img/cdj/C.JALECO 102 (1071).jpg', caption: 'Celebração do início da jornada médica na UFTM' },
+            { src: 'img/cdj/C.JALECO 102 (1078).jpg', caption: 'Celebração do início da jornada médica na UFTM' },
+            { src: 'img/cdj/C.JALECO 102 (1095).jpg', caption: 'Celebração do início da jornada médica na UFTM' },
+            { src: 'img/cdj/C.JALECO 102 (1119).jpg', caption: 'Celebração do início da jornada médica na UFTM' },
+            { src: 'img/cdj/C.JALECO 102 (1123).jpg', caption: 'Celebração do início da jornada médica na UFTM' },
+            { src: 'img/cdj/C.JALECO 102 (1125).jpg', caption: 'Celebração do início da jornada médica na UFTM' },
+            { src: 'img/cdj/C.JALECO 102 (1137).jpg', caption: 'Celebração do início da jornada médica na UFTM' },
+            { src: 'img/cdj/C.JALECO 102 (1142).jpg', caption: 'Celebração do início da jornada médica na UFTM' },
+            { src: 'img/cdj/C.JALECO 102 (1149).jpg', caption: 'Celebração do início da jornada médica na UFTM' },
+            { src: 'img/cdj/C.JALECO 102 (1157).jpg', caption: 'Celebração do início da jornada médica na UFTM' },
+            { src: 'img/cdj/C.JALECO 102 (1840).jpg', caption: 'Celebração do início da jornada médica na UFTM' },
+            { src: 'img/cdj/C.JALECO 102 (1844).jpg', caption: 'Celebração do início da jornada médica na UFTM' },
+            { src: 'img/cdj/C.JALECO 102 (1891).jpg', caption: 'Celebração do início da jornada médica na UFTM' },
+            { src: 'img/cdj/C.JALECO 102 (1897).jpg', caption: 'Celebração do início da jornada médica na UFTM' },
+            { src: 'img/cdj/C.JALECO 102 (1899).jpg', caption: 'Celebração do início da jornada médica na UFTM' }
+            
+            
+            
+          ]
+        },
+        {
+          id:    1,
+          label: 'Feira de Profissões',
+          icon:  'fa-solid fa-briefcase-medical',
+          desc:  'Espaço multidisciplinar onde estudantes exploram especialidades, conversam com profissionais e planejam seus caminhos na medicina.',
+          slides: [
+            { src: null, icon: 'fa-solid fa-briefcase-medical', label: 'Feira de Profissões', caption: 'Estudantes conhecem especialidades e caminhos da medicina' },
+            { src: null, icon: 'fa-solid fa-building-columns',  label: 'Feira de Profissões', caption: 'Stands com informações sobre residências e especializações' },
+            { src: null, icon: 'fa-solid fa-users',             label: 'Feira de Profissões', caption: 'Palestrantes e profissionais de diversas áreas médicas' }
+          ]
+        },
+        {
+          id:    2,
+          label: 'Workshop de Medicina',
+          icon:  'fa-solid fa-stethoscope',
+          desc:  'Oficinas práticas de habilidades clínicas, procedimentos e raciocínio diagnóstico que complementam a formação teórica do curso.',
+          slides: [
+            { src: null, icon: 'fa-solid fa-stethoscope', label: 'Workshop de Medicina', caption: 'Treinamento de habilidades clínicas em ambiente simulado' },
+            { src: null, icon: 'fa-solid fa-microscope',  label: 'Workshop de Medicina', caption: 'Atividades práticas e demonstrações de procedimentos' },
+            { src: null, icon: 'fa-solid fa-flask-vial',  label: 'Workshop de Medicina', caption: 'Integração entre teoria e prática nas oficinas temáticas' }
+          ]
+        }
+        /* Para adicionar um 4º evento, copie o bloco acima e cole aqui */
+      ];
+
+      /* ══════════════════════════════════════════════════════════
+         GERAÇÃO DO DOM (tabs + reels + slides)
+         ══════════════════════════════════════════════════════════ */
+      var tabsWrap  = document.getElementById('evTabs');
+      var stage     = document.getElementById('evStage');
+      var dotsWrap  = document.getElementById('evDots');
+      var btnPrev   = document.getElementById('evBtnPrev');
+      var btnNext   = document.getElementById('evBtnNext');
+      var footTitle = document.getElementById('evFooterTitle');
+      var footDesc  = document.getElementById('evFooterDesc');
+
+      if (!tabsWrap || !stage) return;
+
+      var reels = [];  /* referências aos elementos .ev-reel */
+
+      /* Gera tabs e reels a partir de EVENTS[] */
+      EVENTS.forEach(function (ev) {
+
+        /* -- Tab -- */
+        var tab = document.createElement('button');
+        tab.className        = 'ev-tab' + (ev.id === 0 ? ' is-active' : '');
+        tab.setAttribute('role',          'tab');
+        tab.setAttribute('aria-selected', ev.id === 0 ? 'true' : 'false');
+        tab.setAttribute('aria-controls', 'ev-reel-' + ev.id);
+        tab.setAttribute('id',            'ev-tab-' + ev.id);
+        tab.dataset.ev = ev.id;
+        tab.innerHTML = '<i class="' + ev.icon + '" aria-hidden="true"></i> ' + ev.label;
+        tabsWrap.appendChild(tab);
+
+        /* -- Reel -- */
+        var reel = document.createElement('div');
+        reel.className        = 'ev-reel' + (ev.id === 0 ? ' is-active' : '');
+        reel.id               = 'ev-reel-' + ev.id;
+        reel.setAttribute('role',            'tabpanel');
+        reel.setAttribute('aria-labelledby', 'ev-tab-' + ev.id);
+
+        /* -- Slides -- */
+        var total = ev.slides.length;
+        ev.slides.forEach(function (sl, i) {
+          var slide = document.createElement('div');
+          slide.className = 'ev-slide' + (i === 0 ? ' is-active' : '');
+
+          var inner = '';
+          if (sl.src) {
+            /* Foto real */
+            inner =
+              '<figure>' +
+                '<img class="ev-slide__img" src="' + sl.src + '" alt="' + (sl.caption || '') + '" loading="lazy">' +
+                '<div class="ev-slide__overlay">' +
+                  '<p class="ev-slide__caption">' + (sl.caption || '') + '</p>' +
+                  '<span class="ev-slide__count">' + (i+1) + ' / ' + total + '</span>' +
+                '</div>' +
+              '</figure>';
+          } else {
+            /* Placeholder */
+            inner =
+              '<figure>' +
+                '<div class="ev-slide__placeholder">' +
+                  '<i class="' + (sl.icon || 'fa-solid fa-image') + '" aria-hidden="true"></i>' +
+                  '<span>' + (sl.label || ev.label) + '</span>' +
+                  '<small>Foto em breve</small>' +
+                '</div>' +
+                '<div class="ev-slide__overlay">' +
+                  '<p class="ev-slide__caption">' + (sl.caption || '') + '</p>' +
+                  '<span class="ev-slide__count">' + (i+1) + ' / ' + total + '</span>' +
+                '</div>' +
+              '</figure>';
+          }
+
+          slide.innerHTML = inner;
+          reel.appendChild(slide);
+        });
+
+        /* Insere o reel no stage (antes dos botões) */
+        stage.insertBefore(reel, btnPrev);
+        reels.push(reel);
+      });
+
+      /* ══════════════════════════════════════════════════════════
+         LÓGICA DE CONTROLE — autoplay ininterrupto
+         Loop infinito: nunca para por hover, clique ou foco.
+         Timer de 5000ms roda sempre. Botões manuais trocam o
+         slide imediatamente mas NÃO interrompem o timer.
+         ══════════════════════════════════════════════════════════ */
+      var tabs      = Array.from(tabsWrap.querySelectorAll('.ev-tab'));
+      var activeEv  = 0;
+      var activeSl  = 0;
+      var AUTO_MS   = 5000;   /* 5 s entre slides — conforme solicitado */
+      var autoTimer = null;
+
+      function getSlides(evIdx) {
+        return Array.from(reels[evIdx].querySelectorAll('.ev-slide'));
+      }
+
+      /* ── Dots ─────────────────────────────────────────────── */
+      function buildDots(evIdx) {
+        dotsWrap.innerHTML = '';
+        var total = getSlides(evIdx).length;
+        for (var i = 0; i < total; i++) {
+          (function (idx) {
+            var dot = document.createElement('button');
+            dot.className = 'ev-dot' + (idx === 0 ? ' is-active' : '');
+            dot.setAttribute('aria-label', 'Slide ' + (idx+1) + ' de ' + total);
+            dot.addEventListener('click', function () { goSlide(activeEv, idx); });
+            dotsWrap.appendChild(dot);
+          }(i));
+        }
+      }
+
+      /* ── Slide — troca imediata, loop infinito via módulo ─── */
+      function goSlide(evIdx, idx) {
+        var slides = getSlides(evIdx);
+        var total  = slides.length;
+        idx = ((idx % total) + total) % total;
+        slides.forEach(function (s, i) { s.classList.toggle('is-active', i === idx); });
+        Array.from(dotsWrap.querySelectorAll('.ev-dot'))
+          .forEach(function (d, i) { d.classList.toggle('is-active', i === idx); });
+        activeSl = idx;
+      }
+
+      /* ── Evento — troca de aba reinicia no slide 0 ────────── */
+      function goEvent(evIdx) {
+        tabs.forEach(function (t, i) {
+          var sel = i === evIdx;
+          t.classList.toggle('is-active', sel);
+          t.setAttribute('aria-selected', sel ? 'true' : 'false');
+        });
+        reels.forEach(function (r, i) { r.classList.toggle('is-active', i === evIdx); });
+        activeEv = evIdx; activeSl = 0;
+        getSlides(evIdx).forEach(function (s, i) { s.classList.toggle('is-active', i === 0); });
+        buildDots(evIdx);
+        footTitle.innerHTML  = '<em>' + EVENTS[evIdx].label + '</em>';
+        footDesc.textContent = EVENTS[evIdx].desc;
+      }
+
+      /* ── Autoplay ininterrupto ────────────────────────────── */
+      function startAuto() {
+        clearInterval(autoTimer);   /* evita duplo-timer se chamado mais de uma vez */
+        var total = getSlides(activeEv).length;
+        if (total < 2) return;
+        autoTimer = setInterval(function () {
+          /* avança 1 slide; goSlide envolve o índice via módulo */
+          goSlide(activeEv, activeSl + 1);
+        }, AUTO_MS);
+      }
+
+      /* ── Botões manuais — trocam slide SEM parar o timer ──── */
+      btnPrev.addEventListener('click', function () { goSlide(activeEv, activeSl - 1); });
+      btnNext.addEventListener('click', function () { goSlide(activeEv, activeSl + 1); });
+
+      /* ── Teclado ──────────────────────────────────────────── */
+      stage.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft')  goSlide(activeEv, activeSl - 1);
+        if (e.key === 'ArrowRight') goSlide(activeEv, activeSl + 1);
+      });
+
+      /* ── Tabs ─────────────────────────────────────────────── */
+      tabs.forEach(function (tab, i) {
+        tab.addEventListener('click', function () { goEvent(i); });
+        tab.addEventListener('keydown', function (e) {
+          var n = i;
+          if (e.key === 'ArrowRight') n = (i + 1) % tabs.length;
+          if (e.key === 'ArrowLeft')  n = (i - 1 + tabs.length) % tabs.length;
+          if (n !== i) { tabs[n].focus(); goEvent(n); }
+        });
+      });
+
+      /* ── Swipe touch ──────────────────────────────────────── */
+      var tx = 0, ty = 0;
+      stage.addEventListener('touchstart', function (e) {
+        tx = e.changedTouches[0].screenX; ty = e.changedTouches[0].screenY;
+      }, { passive: true });
+      stage.addEventListener('touchend', function (e) {
+        var dx = e.changedTouches[0].screenX - tx;
+        var dy = e.changedTouches[0].screenY - ty;
+        if (Math.abs(dx) > 35 && Math.abs(dx) > Math.abs(dy)) {
+          dx < 0 ? goSlide(activeEv, activeSl + 1) : goSlide(activeEv, activeSl - 1);
+        }
+      }, { passive: true });
+
+      /* ── Inicialização ────────────────────────────────────── */
+      function init() {
+        goEvent(0);
+        startAuto();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+
+    }());
+    </script>
+
+    <!-- =========================================================
+    <!-- =====================================================================
+         [ADIÇÃO] Section: Resgate Histórico
+         Inserida entre #events e #contact.
+         Estilos próprios em css/historico.css.
+         Redirecionamento para historico2.html via botão CTA.
+         ===================================================== -->
+    <section id="historico" class="historico">
+      <div class="container historico__inner">
+
+        <!-- Coluna de texto -->
+        <div class="historico__text" data-aos="fade-right">
+
+          <p class="historico__eyebrow">
+            <i class="fa-solid fa-landmark" aria-hidden="true"></i>
+            Memória Acadêmica
+          </p>
+
+          <h2 class="historico__title">
+            <span>Resgate</span><br />Histórico
+          </h2>
+
+          <p class="historico__desc">
+            A Universidade Federal do Triângulo Mineiro nasceu da luta e da dedicação
+            de gerações de estudantes e professores em Uberaba. Fundada em 1953 como
+            Faculdade de Medicina do Triângulo Mineiro — federalizada em 2005 —, a
+            instituição carrega décadas de memória científica, social e cultural.
+            O DAGV preserva e divulga esse patrimônio por meio de documentos,
+            registros fotográficos e depoimentos que contam a trajetória de quem
+            construiu a medicina no Triângulo Mineiro.
+          </p>
+
+          <!--
+            Botão CTA "Veja +"
+            – Animação shimmer branco → dourado da esquerda para direita (CSS puro)
+            – Fonte ligeiramente maior que o padrão do site (.92rem → 1.05rem)
+            – Redireciona para historico2.html
+          -->
+          <a href="historico2.html" class="btn-historico" aria-label="Ver página completa do Resgate Histórico">
+            Confira
+            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          </a>
+
+        </div>
+
+        <!-- Coluna visual: cards de documentos históricos (decorativos) -->
+        <div class="historico__visual" data-aos="fade-left" data-aos-delay="100">
+
+          <div class="historico__doc-card historico__doc-card--wide">
+            <div class="historico__doc-icon">
+              <i class="fa-solid fa-university" aria-hidden="true"></i>
+            </div>
+            <span class="historico__doc-year">1953</span>
+            <p class="historico__doc-title">Fundação da FMTM</p>
+            <p class="historico__doc-desc">
+              Criação da Faculdade de Medicina do Triângulo Mineiro, marco inaugural
+              do ensino médico em Uberaba.
+            </p>
+          </div>
+
+          <div class="historico__doc-card">
+            <div class="historico__doc-icon">
+              <i class="fa-solid fa-file-lines" aria-hidden="true"></i>
+            </div>
+            <span class="historico__doc-year">1970</span>
+            <p class="historico__doc-title">Primeiro Estatuto do DA</p>
+            <p class="historico__doc-desc">Registro oficial do Diretório Acadêmico.</p>
+          </div>
+
+          <div class="historico__doc-card">
+            <div class="historico__doc-icon">
+              <i class="fa-solid fa-award" aria-hidden="true"></i>
+            </div>
+            <span class="historico__doc-year">2005</span>
+            <p class="historico__doc-title">Federalização UFTM</p>
+            <p class="historico__doc-desc">Transformação em universidade federal.</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- ===================================================== -->
+
+    <!-- ===================== CONTATO ===================== -->
+    <section id="contact" class="contact section section--alt">
+      <div class="container">
+
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Fale conosco</span>
+          <h2 class="section-title">Contato</h2>
+          <p class="section-desc">Dúvidas, sugestões ou críticas? A gente quer ouvir você!</p>
+        </div>
+
+        <div class="contact__wrapper">
+
+          <!-- Info -->
+          <div class="contact__info" data-aos="fade-right">
+            <div class="contact__info-item">
+              <i class="fa-brands fa-instagram"></i>
+              <div>
+                <strong>Instagram</strong>
+                <a href="https://www.instagram.com/dagvmeduftm/" target="_blank" rel="noopener">@dagvmeduftm</a>
+              </div>
+            </div>
+            <div class="contact__info-item">
+              <i class="fa-brands fa-facebook"></i>
+              <div>
+                <strong>Facebook</strong>
+                <a href="https://www.facebook.com/profile.php?id=100009254539973" target="_blank" rel="noopener">DAGV Medicina UFTM</a>
+              </div>
+            </div>
+            <div class="contact__info-item">
+              <i class="fa-solid fa-location-dot"></i>
+              <div>
+                <strong>Localização</strong>
+                <span>UFTM – Uberaba, Minas Gerais</span>
+              </div>
+            </div>
+            <div class="contact__info-item">
+              <i class="fa-solid fa-clock"></i>
+              <div>
+                <strong>Atendimento</strong>
+                <span>Seg – Sex, 8h às 18h</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Formulário -->
+          <form class="contact__form" id="contactForm" novalidate data-aos="fade-left">
+
+            <div class="form-group">
+              <label for="name">Nome completo</label>
+              <input type="text" id="name" name="name" placeholder="Seu nome" autocomplete="name" required />
+              <span class="form-error" id="name-error">Por favor, informe seu nome.</span>
+            </div>
+
+            <div class="form-group">
+              <label for="email">E-mail</label>
+              <input type="email" id="email" name="email" placeholder="seu@email.com" autocomplete="email" required />
+              <span class="form-error" id="email-error">Por favor, informe um e-mail válido.</span>
+            </div>
+
+            <div class="form-group">
+              <label for="subject">Assunto</label>
+              <select id="subject" name="subject" required>
+                <option value="">Selecione um assunto…</option>
+                <option value="duvida">Dúvida</option>
+                <option value="sugestao">Sugestão</option>
+                <option value="critica">Crítica</option>
+                <option value="eventos">Eventos</option>
+                <option value="outro">Outro</option>
+              </select>
+              <span class="form-error" id="subject-error">Por favor, selecione um assunto.</span>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Mensagem</label>
+              <textarea id="message" name="message" rows="5" placeholder="Escreva sua mensagem…" required></textarea>
+              <span class="form-error" id="message-error">Por favor, escreva sua mensagem.</span>
+            </div>
+
+            <button type="submit" class="btn btn--primary btn--full">
+              <i class="fa-solid fa-paper-plane"></i> Enviar mensagem
+            </button>
+
+            <div class="form-success" id="formSuccess" aria-live="polite">
+              <i class="fa-solid fa-circle-check"></i>
+              Mensagem enviada! Retornaremos em breve.
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+
+      <div class="footer__brand">
+        <!-- [ALTERAÇÃO] Footer logo – sempre dourada sobre fundo escuro -->
+        <img
+          src="img/logo dourada-sem fundo.png"
+          alt="Logo DAGV"
+          class="footer__logo"
+          width="64" height="54"
+          loading="lazy"
+        />
+        <div>
+          <p class="footer__name">DAGV – Gaspar Vianna</p>
+          <p class="footer__sub">Medicina UFTM · Uberaba – MG</p>
+        </div>
+      </div>
+
+      <nav class="footer__links" aria-label="Links úteis">
+        <a href="https://dagvmeduftm.wordpress.com/estatuto-dagv/" target="_blank" rel="noopener">Estatuto</a>
+        <a href="https://dagvmeduftm.wordpress.com/ligas-academicas/" target="_blank" rel="noopener">Ligas</a>
+        <a href="https://dagvmeduftm.wordpress.com/cursinho-carolina/" target="_blank" rel="noopener">Cursinho Carolina</a>
+        <a href="https://dagvmeduftm.wordpress.com/pet-medicina-1/" target="_blank" rel="noopener">PET Medicina</a>
+        <a href="https://dagvmeduftm.wordpress.com/dce-uftm/" target="_blank" rel="noopener">DCE UFTM</a>
+      </nav>
+
+      <div class="footer__social">
+        <a href="https://www.instagram.com/dagvmeduftm/" target="_blank" rel="noopener" aria-label="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=100009254539973" target="_blank" rel="noopener" aria-label="Facebook">
+          <i class="fa-brands fa-facebook"></i>
+        </a>
+        <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7" target="_blank" rel="noopener" aria-label="Formulário de contato">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+      </div>
+
+    </div>
+    <div class="footer__bottom">
+      <p>&copy; <span id="year"></span> Diretório Acadêmico Gaspar Vianna – Medicina UFTM. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- AOS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <!-- Script principal (ORIGINAL – inalterado) -->
+  <script src="js/script.js"></script>
+  <!-- [ADIÇÃO] Script da aba de menu lateral – não altera script.js -->
+  <script src="js/sidemenu.js"></script>
+  <!-- ── Script: navegador de coordenações + carrosséis internos ── -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* ══════════════════════════════════════
+         0. ANIMAÇÃO DE ENTRADA DA SEÇÃO
+         ══════════════════════════════════════ */
+      const teamSection = document.getElementById('team');
+      if (teamSection && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              teamSection.classList.add('section--animate');
+              observer.unobserve(teamSection);
+            }
+          });
+        }, { threshold: 0.12 });
+        observer.observe(teamSection);
+      } else if (teamSection) {
+        teamSection.classList.add('section--animate');
+      }
+
+      /* ══════════════════════════════════════
+         1. NAVEGADOR DE COORDENAÇÕES
+         ══════════════════════════════════════ */
+      const panels   = Array.from(document.querySelectorAll('.coord-panel'));
+      const tabs     = Array.from(document.querySelectorAll('.coord-tab'));
+      const btnsAllPrev = Array.from(document.querySelectorAll('[id="coordPrev"]'));
+      const btnsAllNext = Array.from(document.querySelectorAll('[id="coordNext"]'));
+      const counter  = document.getElementById('coordCounter');
+      const progress = document.getElementById('coordProgressFill');
+      const total    = panels.length;
+      let   current  = 0;
+
+      /* ══════════════════════════════════════
+         1b. FUNÇÕES AUXILIARES
+         ══════════════════════════════════════ */
+      function goToPanel(idx) {
+        panels[current].classList.remove('is-active');
+        tabs[current].classList.remove('is-active');
+        tabs[current].setAttribute('aria-selected', 'false');
+
+        current = Math.max(0, Math.min(idx, total - 1));
+
+        panels[current].classList.add('is-active');
+        tabs[current].classList.add('is-active');
+        tabs[current].setAttribute('aria-selected', 'true');
+
+        if (counter) counter.textContent = (current + 1) + ' / ' + total;
+        if (progress) progress.style.width = ((current + 1) / total * 100) + '%';
+
+        // Botões de painel: sempre atualiza disabled
+        btnsAllPrev.forEach(b => b.disabled = current === 0);
+        btnsAllNext.forEach(b => b.disabled = current === total - 1);
+
+        // Re-inicializa carrossel interno no slide 0 e reinicia autoplay
+        const innerCarousel = panels[current].querySelector('[data-carousel]');
+        if (innerCarousel && innerCarousel._carouselGoTo) {
+          innerCarousel._carouselGoTo(0);
+          if (innerCarousel._carouselResetAuto) innerCarousel._carouselResetAuto();
+        }
+      }
+
+      // Tabs
+      tabs.forEach((tab, i) => tab.addEventListener('click', () => goToPanel(i)));
+
+      // Botões laterais: SEMPRE navegam entre painéis (mobile e desktop)
+      btnsAllPrev.forEach(b => b.addEventListener('click', () => goToPanel(current - 1)));
+      btnsAllNext.forEach(b => b.addEventListener('click', () => goToPanel(current + 1)));
+
+      goToPanel(0);
+
+      /* ══════════════════════════════════════
+         2. CARROSSÉIS INTERNOS (membros)
+         ══════════════════════════════════════ */
+      function visibleCount() {
+        if (window.innerWidth <= 768) return 1;
+        if (window.innerWidth <= 900) return 2;
+        return 4;
+      }
+
+      function initCarousel(carousel) {
+        const track    = carousel.querySelector('.carousel__track');
+        const slides   = Array.from(carousel.querySelectorAll('.carousel__slide'));
+        const dotsWrap = carousel.querySelector('.carousel__dots');
+        const total    = slides.length;
+
+        carousel.setAttribute('data-total', total);
+
+        // Define a largura de cada slide com base no número de colunas visíveis,
+        // ignorando data-total. Assim todos os painéis têm espaçamento idêntico.
+        // Quando total < visibleCount, centraliza o track; caso contrário flex-start.
+        const GAP_REM = 1; // --space-sm = 1rem
+        function setSlideSizes() {
+          const vis  = visibleCount();
+          const gaps = vis - 1;
+          const w    = `calc(${100 / vis}% - ${(GAP_REM * gaps / vis).toFixed(4)}rem)`;
+          slides.forEach(s => { s.style.flex = `0 0 ${w}`; });
+          // Centraliza o track quando há menos slides que colunas visíveis,
+          // OU quando só há 1 coluna visível (mobile) para centralizar o único card.
+          track.style.justifyContent = (total <= vis) ? 'center' : 'flex-start';
+        }
+        setSlideSizes();
+        window.addEventListener('resize', setSlideSizes);
+
+        // Move os dots para fora do coord-carousel-row, centralizando-os
+        // abaixo dos cards em vez de dentro do flexbox lateral.
+        if (dotsWrap) {
+          const row = carousel.closest('.coord-carousel-row');
+          if (row && row.parentNode) {
+            row.parentNode.insertBefore(dotsWrap, row.nextSibling);
+          }
+        }
+
+        let pos       = 0;
+        let autoTimer = null;
+        let dots      = [];
+
+        function pageCount() { return Math.max(1, total - visibleCount() + 1); }
+
+        function buildDots() {
+          if (!dotsWrap) return;
+          dotsWrap.innerHTML = '';
+          dots = [];
+          const pages = pageCount();
+          if (pages <= 1) return;
+          for (let i = 0; i < pages; i++) {
+            const btn = document.createElement('button');
+            btn.className = 'carousel__dot' + (i === 0 ? ' is-active' : '');
+            btn.setAttribute('aria-label', 'Ir para página ' + (i + 1));
+            btn.addEventListener('click', () => { goTo(i); resetAuto(); });
+            dotsWrap.appendChild(btn);
+            dots.push(btn);
+          }
+        }
+
+        buildDots();
+        window.addEventListener('resize', buildDots);
+
+        function goTo(idx) {
+          const pages   = Math.max(1, total - visibleCount() + 1);
+          pos = Math.max(0, Math.min(idx, pages - 1));
+
+          const slideWidth = slides[0].offsetWidth;
+          const gap        = parseFloat(getComputedStyle(track).gap) || 0;
+          track.style.transform = `translateX(-${pos * (slideWidth + gap)}px)`;
+
+          dots.forEach((d, i) => d.classList.toggle('is-active', i === pos));
+        }
+
+        function startAuto() {
+          if (total <= visibleCount()) return;
+          autoTimer = setInterval(() => {
+            const pages = Math.max(1, total - visibleCount() + 1);
+            goTo(pos >= pages - 1 ? 0 : pos + 1);
+          }, 4000);
+        }
+
+        function resetAuto() { clearInterval(autoTimer); startAuto(); }
+
+        // Swipe touch
+        let touchStartX = 0;
+        carousel.addEventListener('touchstart', (e) => {
+          touchStartX = e.changedTouches[0].clientX;
+        }, { passive: true });
+        carousel.addEventListener('touchend', (e) => {
+          const diff = touchStartX - e.changedTouches[0].clientX;
+          if (Math.abs(diff) > 40) { goTo(diff > 0 ? pos + 1 : pos - 1); resetAuto(); }
+        }, { passive: true });
+
+        window.addEventListener('resize', () => { clearInterval(autoTimer); goTo(0); startAuto(); });
+        /* Pausa ao hover e retoma ao sair — sem matar o timer permanentemente */
+        carousel.addEventListener('mouseenter', () => clearInterval(autoTimer));
+        carousel.addEventListener('mouseleave', () => { clearInterval(autoTimer); startAuto(); });
+
+        carousel._carouselGoTo       = goTo;
+        carousel._carouselResetAuto  = resetAuto;
+        goTo(0);
+        startAuto();
+      }
+
+      document.querySelectorAll('[data-carousel]').forEach(initCarousel);
+    })();
+  </script>
+
+  <!-- ── Smooth scroll para links internos com .js-smooth-scroll ── -->
+  <script>
+  (function () {
+    'use strict';
+    document.addEventListener('click', function (e) {
+      var link = e.target.closest('a.js-smooth-scroll');
+      if (!link) return;
+      var href = link.getAttribute('href');
+      /* Só age quando é âncora interna (começa com #) */
+      if (!href || href.charAt(0) !== '#') return;
+      var target = document.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+      /* Fecha nav mobile se estiver aberta */
+      var navMobile = document.getElementById('navMobile');
+      var hamburger = document.getElementById('hamburger');
+      if (navMobile && navMobile.classList.contains('open')) {
+        navMobile.classList.remove('open');
+        navMobile.setAttribute('aria-hidden', 'true');
+        if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
+      }
+      /* Calcula offset do header fixo */
+      var header = document.getElementById('header');
+      var offset = header ? header.offsetHeight : 0;
+      var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    });
+  }());
+  </script>
+</body>
+</html>

@@ -1,0 +1,329 @@
+/* ============================================================
+   DAGV – Side Menu Tab (adição ao navbar existente)
+   sidemenu.css  |  NÃO altera nenhuma regra existente
+   ============================================================ */
+
+/* ── Variáveis locais (complementam o :root do styles.css) ── */
+:root {
+  --sm-burgundy:    #6b0030;   /* vinho/bordô levemente escuro – fundo da aba */
+  --sm-burgundy-hv: #e8a020;   /* dourado – hover da aba                      */
+  --sm-white:       #ffffff;
+  --sm-red:         #c0152a;   /* vermelho – hover dos itens do dropdown       */
+  --sm-radius:      10px;
+  --sm-shadow:      0 8px 28px rgba(0,0,0,.18);
+  --sm-dur:         220ms;
+  --sm-ease:        cubic-bezier(.4,0,.2,1);
+}
+
+/* ── 1. Wrapper da aba – posicionado ANTES do brand no flex ── */
+/*
+   O .header__inner já é display:flex + justify-content:space-between.
+   Inserimos .sidemenu-wrap como primeiro filho; ele fica naturalmente
+   à esquerda do logo sem alterar a estrutura flex existente.
+*/
+.sidemenu-wrap {
+  position: relative;   /* âncora para o painel dropdown */
+  display: flex;
+  align-items: center;
+  height: 100%;
+  flex-shrink: 0;
+  /* Pequeno espaço entre a aba e o logo */
+  margin-right: 1rem;
+}
+
+/* ── 2. Aba do menu (botão toggle) ──────────────────────────── */
+/*
+  [AJUSTE 1] Cor de fundo integrada à navbar:
+  - Header transparente (topo) → botão também transparente
+  - Header scrolled (branco) → botão também sem fundo visível
+  Tipografia, tamanho, animações e hover inalterados.
+*/
+.sidemenu-tab {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  padding: .45em 1.2em;
+  border-radius: var(--radius-pill);
+  /* Fundo transparente = integra-se à navbar */
+  background: transparent;
+  border: 1.5px solid rgba(255,255,255,.45);
+  cursor: pointer;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--sm-white);
+  transition: background var(--sm-dur) var(--sm-ease),
+              color     var(--sm-dur) var(--sm-ease),
+              border-color var(--sm-dur) var(--sm-ease),
+              transform var(--sm-dur) var(--sm-ease);
+  white-space: nowrap;
+  position: relative;
+  z-index: 2;
+  height: auto;
+  align-self: center;
+}
+
+/* Hover: fundo dourado mantido */
+.sidemenu-tab:hover {
+  background: var(--sm-burgundy-hv);
+  color: #1a0010;
+  border-color: var(--sm-burgundy-hv);
+  transform: translateY(-1px);
+}
+
+/* Estado scrolled: adapta borda e texto à navbar branca */
+.header.scrolled .sidemenu-tab {
+  background: transparent;
+  border-color: rgba(147,1,66,.35);
+  color: var(--clr-green-dark);
+}
+
+.header.scrolled .sidemenu-tab:hover {
+  background: var(--clr-green-light);
+  border-color: var(--clr-green);
+  color: var(--clr-green-dark);
+}
+
+/* Ícone de hamburguer simples dentro da aba */
+.sidemenu-tab__icon {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.sidemenu-tab__bar {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+  transition: transform var(--sm-dur) var(--sm-ease),
+              opacity   150ms var(--sm-ease);
+}
+
+/* Animação X quando o painel está aberto */
+.sidemenu-wrap.open .sidemenu-tab__bar:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+.sidemenu-wrap.open .sidemenu-tab__bar:nth-child(2) {
+  opacity: 0;
+}
+.sidemenu-wrap.open .sidemenu-tab__bar:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* ── 3. Painel principal ────────────────────────────────────── */
+.sidemenu-panel {
+  position: absolute;
+  top: 100%;          /* logo abaixo da aba */
+  left: 0;
+  min-width: 220px;
+  background: var(--sm-burgundy);
+  border-radius: 0 0 var(--sm-radius) var(--sm-radius);
+  box-shadow: var(--sm-shadow);
+  z-index: 1050;      /* acima do header (z-index 1000) */
+  overflow: hidden;
+
+  /* Animação de abertura/fechamento */
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: max-height .38s var(--sm-ease),
+              opacity    .25s var(--sm-ease);
+}
+
+/* Estado aberto (classe toggled via JS) */
+.sidemenu-wrap.open .sidemenu-panel {
+  max-height: 700px;  /* [AJUSTE 2] aumentado para acomodar mais itens */
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ── 4. Lista de itens do painel ────────────────────────────── */
+.sidemenu-list {
+  list-style: none;
+  margin: 0;
+  padding: .4rem 0;
+}
+
+/* Item genérico */
+.sidemenu-list__item {
+  position: relative;
+}
+
+/* Link / botão base */
+.sidemenu-list__link,
+.sidemenu-list__btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: .72rem 1.2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: .88rem;
+  font-weight: 500;
+  color: var(--sm-white);
+  text-align: left;
+  text-decoration: none;
+  transition: color var(--sm-dur) var(--sm-ease),
+              background var(--sm-dur) var(--sm-ease);
+  white-space: nowrap;
+}
+
+.sidemenu-list__link:hover,
+.sidemenu-list__btn:hover {
+  color: var(--sm-burgundy-hv);
+  background: rgba(255,255,255,.06);
+}
+
+/* Ícone seta do dropdown */
+.sidemenu-list__arrow {
+  font-size: .65rem;
+  transition: transform var(--sm-dur) var(--sm-ease);
+  margin-left: .5rem;
+  flex-shrink: 0;
+}
+
+.sidemenu-list__item.open > .sidemenu-list__btn .sidemenu-list__arrow {
+  transform: rotate(180deg);
+}
+
+/* Separador visual entre grupos */
+.sidemenu-list__sep {
+  height: 1px;
+  background: rgba(255,255,255,.12);
+  margin: .3rem 1rem;
+}
+
+/* ── 5. Sub-painel (dropdown) ───────────────────────────────── */
+.sidemenu-dropdown {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: var(--sm-white);
+  border-radius: var(--sm-radius);
+  margin: .3rem .7rem .5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0,0,0,.1);
+
+  /* Animação suave */
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: max-height .3s var(--sm-ease),
+              opacity    .2s var(--sm-ease);
+}
+
+/* Dropdown aberto */
+.sidemenu-list__item.open > .sidemenu-dropdown {
+  max-height: 300px;
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Links dentro do dropdown */
+.sidemenu-dropdown__link {
+  display: block;
+  padding: .65rem 1rem;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: .84rem;
+  font-weight: 400;
+  color: #1a0010;          /* texto escuro sobre fundo branco */
+  text-decoration: none;
+  transition: color var(--sm-dur) var(--sm-ease),
+              background var(--sm-dur) var(--sm-ease);
+}
+
+.sidemenu-dropdown__link:hover {
+  color: var(--sm-red);    /* vermelho ao hover, conforme especificado */
+  background: #fff5f7;
+}
+
+/* ── Ícone nos links do sidemenu – à direita do texto ──────── */
+/*
+   Os links já usam display:flex + justify-content:space-between,
+   então basta mover o ícone para DEPOIS do texto no DOM e
+   ajustar a margem para a esquerda.
+   A classe permanece a mesma; mudamos apenas o posicionamento.
+*/
+.sidemenu-list__icon {
+  margin-right: 0;
+  margin-left: auto;   /* empurra o ícone para a direita no flex row */
+  padding-left: .55rem;
+  font-size: .82rem;
+  opacity: .85;
+  flex-shrink: 0;
+}
+
+/* Item Resgate Histórico – sem dourado global;
+   o dourado só aparece quando a página está ativa (--active via JS) */
+.sidemenu-list__link--historico {
+  color: var(--sm-white);     /* igual aos demais itens do menu */
+  font-weight: 500;
+}
+
+.sidemenu-list__link--historico:hover {
+  color: var(--sm-burgundy-hv);
+  background: rgba(255,255,255,.06);
+}
+
+/* ── 6. Responsividade ──────────────────────────────────────── */
+
+/* Mobile padrão (≤ 768px) */
+@media (max-width: 768px) {
+  /* Aba fica à esquerda do hambúrguer; reduz label para caber */
+  .sidemenu-tab {
+    padding: .4em .8em;
+    font-size: .78rem;
+  }
+  /* Painel cobre a largura da tela */
+  .sidemenu-panel {
+    min-width: min(260px, 80vw);
+    left: 0;
+  }
+}
+
+/* Mobile pequeno (≤ 480px) */
+@media (max-width: 480px) {
+  .sidemenu-tab {
+    padding: .38em .65em;
+    font-size: .72rem;
+    gap: .35rem;
+  }
+  /* Oculta o texto da aba, mantém só o ícone de hambúrguer */
+  .sidemenu-tab__label { display: none; }
+
+  .sidemenu-panel {
+    min-width: min(220px, 90vw);
+    border-radius: 0 0 var(--sm-radius) var(--sm-radius);
+  }
+
+  /* Itens do dropdown com área de toque de 44px */
+  .sidemenu-list__link,
+  .sidemenu-list__btn    { padding: .85rem 1.1rem; min-height: 44px; }
+  .sidemenu-dropdown__link { padding: .75rem 1rem;  min-height: 44px; }
+}
+
+/* ── Link ativo (página atual) ──────────────────────────────── */
+/*
+  Aplicado via JS: script detecta pathname e adiciona
+  sidemenu-list__link--active ao item correspondente.
+  Apenas UM item ativo por vez.
+*/
+.sidemenu-list__link--active {
+  color: var(--sm-burgundy-hv);       /* dourado institucional     */
+  font-weight: 700;
+  background: rgba(232,160,32,.08);
+  /* Marcador lateral: perceptível mesmo sem cor (acessibilidade) */
+  border-left: 3px solid var(--sm-burgundy-hv);
+  padding-left: calc(1.2rem - 3px);  /* compensa a borda sem deslocar */
+}
+
+.sidemenu-list__link--active:hover {
+  color: var(--sm-burgundy-hv);
+  background: rgba(232,160,32,.14);
+}

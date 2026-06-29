@@ -1,0 +1,2021 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Ligas Acadêmicas do curso de Medicina da UFTM – conheça as ligas vinculadas ao DAGV Gaspar Vianna, suas missões, atividades e como participar." />
+  <meta name="keywords" content="Ligas Acadêmicas, Medicina, UFTM, DAGV, LaCardio, LUAO, Sarakura, LHA, LASMP, LEC, LAN, LAGO, LANC, LiAPSIH, LiNce, LUAMA" />
+  <title>Ligas Acadêmicas – DAGV | Medicina UFTM</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/sidemenu.css" />
+
+  <style>
+  /* ============================================================
+     ligas.html – estilos exclusivos desta página
+     Identidade DAGV preservada (bordô + dourado + tipografia).
+     Diferenciação sutil via ornamentos, texturas e padrão de cards.
+     ============================================================ */
+
+  /* ── Hero ───────────────────────────────────────────────────── */
+  .ligas-hero {
+    position: relative;
+    min-height: 58vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse 70% 90% at 100% 30%,
+        rgba(232,160,32,.10) 0%,
+        transparent 60%),
+      linear-gradient(150deg,
+        #1a0010         0%,
+        var(--clr-green-dark) 35%,
+        var(--clr-green) 70%,
+        #3d0018         100%);
+    padding-top:    calc(var(--header-h) + 5rem);
+    padding-bottom: 5rem;
+  }
+
+  /* Grade diagonal — distingue do sobre.html (grade ortogonal) */
+  .ligas-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        -55deg,
+        rgba(255,255,255,.025) 0px,
+        rgba(255,255,255,.025) 1px,
+        transparent 1px,
+        transparent 36px
+      );
+    pointer-events: none;
+  }
+
+  /* Ornamento 1 – anel grande dourado, topo esquerdo */
+  .ligas-hero__orb--1 {
+    position: absolute;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    border: 60px solid rgba(232,160,32,.09);
+    top: -160px; left: -140px;
+    pointer-events: none;
+  }
+
+  /* Ornamento 2 – anel pequeno branco, canto direito-baixo */
+  .ligas-hero__orb--2 {
+    position: absolute;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    border: 34px solid rgba(255,255,255,.05);
+    bottom: -70px; right: 8%;
+    pointer-events: none;
+  }
+
+  /* Ornamento 3 – ponto preenchido suave */
+  .ligas-hero__orb--3 {
+    position: absolute;
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.025);
+    top: 52%; left: 62%;
+    pointer-events: none;
+  }
+
+  /* Faixa dourada direita — variante da esquerda usada em sobre.html */
+  .ligas-hero__stripe {
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 5px;
+    background: linear-gradient(to bottom,
+      transparent 0%,
+      var(--clr-accent) 25%,
+      rgba(255,255,255,.55) 50%,
+      var(--clr-accent) 75%,
+      transparent 100%);
+    opacity: .45;
+    pointer-events: none;
+  }
+
+  .ligas-hero__content {
+    position: relative; z-index: 2;
+    max-width: 840px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-inline: var(--space-md);
+  }
+
+  .ligas-hero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: .55em;
+    font-size: .73rem;
+    font-weight: 700;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--clr-accent);
+    background: rgba(232,160,32,.1);
+    border: 1px solid rgba(232,160,32,.28);
+    border-radius: var(--radius-pill);
+    padding: .32em 1.1em;
+    margin-bottom: var(--space-md);
+    animation: slideUp .7s var(--ease) both;
+  }
+
+  .ligas-hero__title {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 6vw, 4.2rem);
+    font-weight: 700;
+    color: var(--clr-white);
+    line-height: 1.1;
+    margin-bottom: .75rem;
+    animation: slideUp .85s var(--ease) .08s both;
+  }
+
+  .ligas-hero__title em {
+    font-style: italic;
+    color: var(--clr-accent);
+    text-decoration: underline;
+    text-decoration-color: rgba(232,160,32,.3);
+    text-underline-offset: 7px;
+    text-decoration-thickness: 2px;
+  }
+
+  .ligas-hero__subtitle {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: rgba(255,255,255,.88);
+    margin-bottom: var(--space-sm);
+    animation: slideUp .92s var(--ease) .13s both;
+  }
+
+  .ligas-hero__desc {
+    font-size: 1.02rem;
+    color: rgba(255,255,255,.68);
+    max-width: 620px;
+    line-height: 1.78;
+    margin-bottom: var(--space-lg);
+    animation: slideUp 1s var(--ease) .18s both;
+    border-bottom: 2px solid rgba(232,160,32,.22);
+    padding-bottom: var(--space-md);
+  }
+
+  .ligas-hero__actions {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: slideUp 1s var(--ease) .25s both;
+  }
+
+  .hero-anchor {
+    display: inline-flex;
+    align-items: center;
+    gap: .4em;
+    font-size: .85rem;
+    font-weight: 600;
+    color: rgba(255,255,255,.72);
+    border-bottom: 1px solid rgba(255,255,255,.25);
+    padding-bottom: .1em;
+    transition: color var(--dur-fast), border-color var(--dur-fast);
+    text-decoration: none;
+  }
+  .hero-anchor:hover { color: var(--clr-white); border-color: var(--clr-white); }
+
+  /* ── Barra de âncoras sticky ────────────────────────────────── */
+  .ligas-anchors {
+    background: #fdf4f7;
+    border-bottom: 2px solid var(--clr-gray-1);
+    border-top: 1px solid var(--clr-gray-1);
+    position: sticky;
+    top: var(--header-h);
+    z-index: 100;
+    padding-block: .65rem;
+  }
+  .ligas-anchors__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .25rem;
+    justify-content: center;
+    padding-inline: var(--space-md);
+  }
+  .ligas-anchors__link {
+    display: flex;
+    align-items: center;
+    gap: .4em;
+    font-size: .8rem;
+    font-weight: 600;
+    color: var(--clr-gray-3);
+    padding: .4em 1em;
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+    transition: background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast);
+    text-decoration: none;
+    border: 1px solid transparent;
+  }
+  .ligas-anchors__link:hover,
+  .ligas-anchors__link.active {
+    background: var(--clr-green-light);
+    color: var(--clr-green);
+    border-color: rgba(147,1,66,.15);
+  }
+
+  /* ── Seção padrão ───────────────────────────────────────────── */
+  .ligas-section { padding-block: var(--space-2xl); }
+  .ligas-section--alt {
+    background: #fdf4f7;
+    border-top: 1px solid var(--clr-gray-1);
+    border-bottom: 1px solid var(--clr-gray-1);
+  }
+
+  /* ── Bloco "O que são" — grid texto + visual ────────────────── */
+  .oque-grid {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: var(--space-xl);
+    align-items: start;
+    margin-top: var(--space-xl);
+  }
+
+  .oque-text p {
+    font-size: 1rem;
+    color: var(--clr-gray-3);
+    line-height: 1.84;
+    margin-bottom: 1.3rem;
+  }
+  .oque-text p:last-child { margin-bottom: 0; }
+  .oque-text strong { color: var(--clr-dark); }
+
+  /* Visual decorativo tripé */
+  .tripe-visual {
+    background: linear-gradient(155deg, #3d0018 0%, var(--clr-green-dark) 55%, #5e0029 100%);
+    border-radius: var(--radius-lg);
+    padding: 2.4rem 2rem;
+    box-shadow: 0 20px 56px rgba(26,0,16,.22);
+    border: 1px solid rgba(232,160,32,.15);
+    position: relative;
+    overflow: hidden;
+  }
+  .tripe-visual::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(255,255,255,.06) 1.5px, transparent 1.5px);
+    background-size: 20px 20px;
+  }
+  .tripe-visual::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 8%; right: 8%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--clr-accent), transparent);
+    border-radius: 2px;
+  }
+
+  .tripe-visual__title {
+    position: relative; z-index: 1;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: rgba(255,255,255,.55);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    margin-bottom: 1.6rem;
+    text-align: center;
+  }
+
+  .tripe-items { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 1rem; }
+
+  .tripe-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.2rem;
+    transition: background var(--dur-fast), border-color var(--dur-fast);
+  }
+  .tripe-item:hover {
+    background: rgba(255,255,255,.12);
+    border-color: rgba(232,160,32,.3);
+  }
+
+  .tripe-item__icon {
+    width: 44px; height: 44px;
+    border-radius: var(--radius-sm);
+    background: rgba(232,160,32,.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; color: var(--clr-accent);
+    flex-shrink: 0;
+    transition: background var(--dur-fast);
+  }
+  .tripe-item:hover .tripe-item__icon { background: rgba(232,160,32,.25); }
+
+  .tripe-item__name {
+    font-weight: 700;
+    font-size: .92rem;
+    color: var(--clr-white);
+    margin-bottom: .2rem;
+  }
+  .tripe-item__desc {
+    font-size: .8rem;
+    color: rgba(255,255,255,.55);
+    line-height: 1.5;
+  }
+
+  /* ── Cards de objetivos ─────────────────────────────────────── */
+  .obj-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+  }
+
+  .obj-card {
+    background: var(--clr-white);
+    border-left: 4px solid var(--clr-green);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    border-top: 1px solid var(--clr-gray-1);
+    border-right: 1px solid var(--clr-gray-1);
+    border-bottom: 1px solid var(--clr-gray-1);
+    padding: var(--space-lg) var(--space-md);
+    transition: transform var(--dur-med) var(--ease), box-shadow var(--dur-med) var(--ease), border-left-color var(--dur-fast);
+  }
+  .obj-card:hover {
+    transform: translateX(4px);
+    box-shadow: var(--shadow-md);
+    border-left-color: var(--clr-accent);
+  }
+  .obj-card__icon {
+    width: 48px; height: 48px;
+    border-radius: var(--radius-md);
+    background: var(--clr-green-light);
+    color: var(--clr-green);
+    font-size: 1.3rem;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: var(--space-sm);
+    transition: background var(--dur-fast), color var(--dur-fast);
+  }
+  .obj-card:hover .obj-card__icon { background: var(--clr-accent); color: var(--clr-dark); }
+  .obj-card__title {
+    font-family: var(--font-display);
+    font-size: 1.08rem; font-weight: 700;
+    color: var(--clr-dark); margin-bottom: .55rem;
+  }
+  .obj-card p { font-size: .91rem; color: var(--clr-gray-3); line-height: 1.7; }
+
+  /* ── Seção Como Participar ──────────────────────────────────── */
+  .participar-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    align-items: start;
+    margin-top: var(--space-xl);
+  }
+
+  .participar-steps { display: flex; flex-direction: column; gap: 1.4rem; }
+
+  .step {
+    display: flex;
+    gap: 1.1rem;
+    align-items: flex-start;
+  }
+  .step__num {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--clr-green);
+    color: var(--clr-white);
+    font-family: var(--font-display);
+    font-size: .95rem;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: .1rem;
+    box-shadow: 0 4px 14px rgba(147,1,66,.28);
+  }
+  /* .step__body {} */
+  .step__title {
+    font-family: var(--font-display);
+    font-size: 1rem; font-weight: 700;
+    color: var(--clr-dark); margin-bottom: .35rem;
+  }
+  .step__desc { font-size: .91rem; color: var(--clr-gray-3); line-height: 1.68; }
+
+  /* Info box lateral */
+  .participar-info {
+    background: linear-gradient(155deg, #3d0018 0%, var(--clr-green-dark) 60%, #5e0029 100%);
+    border-radius: var(--radius-lg);
+    padding: 2.2rem 2rem;
+    box-shadow: 0 16px 48px rgba(26,0,16,.22);
+    border: 1px solid rgba(232,160,32,.15);
+    position: relative; overflow: hidden;
+  }
+  .participar-info::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(255,255,255,.055) 1.5px, transparent 1.5px);
+    background-size: 20px 20px;
+  }
+  .participar-info__title {
+    position: relative; z-index: 1;
+    font-family: var(--font-display);
+    font-size: 1.1rem; font-weight: 700;
+    color: var(--clr-white); margin-bottom: 1.2rem;
+    padding-bottom: .85rem;
+    border-bottom: 1px solid rgba(232,160,32,.25);
+  }
+  .participar-info__title i { color: var(--clr-accent); margin-right: .45rem; }
+
+  .info-items { position: relative; z-index: 1; display: flex; flex-direction: column; gap: .9rem; }
+
+  .info-item {
+    display: flex; align-items: flex-start; gap: .7rem;
+    font-size: .88rem; color: rgba(255,255,255,.72); line-height: 1.55;
+  }
+  .info-item i { color: var(--clr-accent); font-size: .85rem; flex-shrink: 0; margin-top: .18rem; }
+  .info-item strong { color: rgba(255,255,255,.92); }
+
+  .participar-info__cta {
+    position: relative; z-index: 1;
+    margin-top: 1.4rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid rgba(255,255,255,.1);
+    font-size: .82rem;
+    color: rgba(255,255,255,.5);
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  /* ── Filtro de categorias ───────────────────────────────────── */
+  .ligas-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    justify-content: center;
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-lg);
+  }
+
+  .filter-btn {
+    display: inline-flex; align-items: center; gap: .4em;
+    font-size: .8rem; font-weight: 600;
+    color: var(--clr-gray-3);
+    background: var(--clr-white);
+    border: 1.5px solid var(--clr-gray-1);
+    border-radius: var(--radius-pill);
+    padding: .42em 1.1em;
+    cursor: pointer;
+    transition: background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast), box-shadow var(--dur-fast);
+  }
+  .filter-btn:hover {
+    border-color: var(--clr-green);
+    color: var(--clr-green);
+    box-shadow: 0 2px 8px rgba(147,1,66,.12);
+  }
+  .filter-btn.active {
+    background: var(--clr-green);
+    color: var(--clr-white);
+    border-color: var(--clr-green);
+    box-shadow: 0 4px 14px rgba(147,1,66,.3);
+  }
+
+  /* ── Cards das ligas ────────────────────────────────────────── */
+  /* ══════════════════════════════════════════════════════════
+     CARROSSEL DE LIGAS — opacity/visibility switch por índice
+     Único card visível, troca direta e limpa sem translateX
+     ══════════════════════════════════════════════════════════ */
+
+  .ligas-slider-wrap {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: 920px;
+    margin-inline: auto;
+  }
+
+  .ligas-slider {
+    flex: 1;
+    position: relative;
+    min-height: 500px;   /* [AJUSTE 2] era 360px — cards maiores precisam de mais altura */
+    height: 500px;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 12px 48px rgba(0,0,0,.12);
+  }
+
+  .ligas-slider__track {
+    position: absolute;
+    inset: 0;
+  }
+
+  .liga-card {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    background: var(--clr-white);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--clr-gray-1);
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 360ms ease-in-out, visibility 360ms ease-in-out;
+    pointer-events: none;
+    overflow-y: auto;
+  }
+
+  .liga-card.is-active {
+    position: absolute;
+    inset: 0;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    overflow-y: auto;
+  }
+
+  .liga-card[aria-hidden="true"] { display: none; }
+
+  /* [AJUSTE 2] Header maior: ícone em destaque, mais padding */
+  .liga-card__header {
+    padding: 2.8rem 3rem 2.2rem;
+    gap: 1.6rem;
+    align-items: center;
+  }
+  /* [AJUSTE 2] Ícone muito maior: 96px com glow */
+  .liga-card__icon-wrap {
+    width: 96px !important;
+    height: 96px !important;
+    font-size: 2.6rem !important;
+    border-radius: var(--radius-md) !important;
+    flex-shrink: 0;
+    overflow: visible;
+  }
+  /* [AJUSTE 2] Sigla e nome maiores */
+  .liga-card__sigla { font-size: .82rem; letter-spacing: .16em; }
+  .liga-card__name  { font-size: 1.55rem !important; line-height: 1.22; font-weight: 700; }
+
+  /* [AJUSTE 2] Corpo: mais padding, fonte maior */
+  .liga-card__body  { padding: 2.4rem 3rem 3rem; gap: 1.5rem; }
+  .liga-card__desc  { font-size: 1.05rem !important; line-height: 1.88; }
+  .liga-card__tags  { padding-top: 1.3rem; }
+  .liga-tag         { font-size: .82rem; padding: .35em 1.1em; }
+
+  .slider-side-btn {
+    flex-shrink: 0;
+    width: 54px; height: 54px;
+    border-radius: 50%;
+    border: 2px solid var(--clr-green);
+    background: var(--clr-white);
+    color: var(--clr-green);
+    font-size: 1.1rem;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; padding: 0;
+    box-shadow: 0 4px 18px rgba(0,0,0,.10);
+    transition: background var(--dur-fast), color var(--dur-fast),
+                transform var(--dur-fast), box-shadow var(--dur-fast);
+  }
+  .slider-side-btn:hover {
+    background: var(--clr-green); color: var(--clr-white);
+    transform: scale(1.08);
+    box-shadow: 0 8px 26px rgba(147,1,66,.32);
+  }
+  .slider-side-btn:active { transform: scale(.94); }
+  .slider-side-btn:disabled {
+    opacity: .22; cursor: default; transform: none; box-shadow: none;
+  }
+
+  .slider-controls {
+    display: flex; flex-direction: column;
+    align-items: center; gap: .6rem; margin-top: 1.2rem;
+  }
+  .slider-counter {
+    font-size: .83rem; font-weight: 600;
+    color: var(--clr-gray-2); font-variant-numeric: tabular-nums;
+  }
+  .slider-dots {
+    display: flex; gap: .38rem; justify-content: center;
+    flex-wrap: wrap; max-width: 360px;
+  }
+  .slider-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--clr-gray-1); border: none; padding: 0; cursor: pointer;
+    transition: background var(--dur-fast), width var(--dur-fast);
+  }
+  .slider-dot.active { background: var(--clr-green); width: 22px; border-radius: 4px; }
+
+  @media (max-width: 640px) {
+    .ligas-slider-wrap { gap: .4rem; }
+    .slider-side-btn   { width: 40px; height: 40px; font-size: .9rem; }
+    /* [AJUSTE 2] Mobile: altura maior, card continua legível */
+    .ligas-slider      { min-height: 420px; height: 420px; }
+    .liga-card__header { padding: 2rem 1.8rem 1.6rem; gap: 1.1rem; min-height: 110px; overflow: visible; align-items: center; }
+    .liga-card__icon-wrap { width: 72px !important; height: 72px !important; font-size: 2rem !important; overflow: visible; }
+    .liga-card__name   { font-size: 0.8rem !important; }
+    .liga-card__body   { padding: 1.8rem 1.8rem 2.2rem; gap: 1.1rem; }
+    .liga-card__desc   { font-size: .96rem !important; line-height: 1.78; }
+  }
+
+  .liga-card__header {
+    background: linear-gradient(135deg, var(--clr-green-dark) 0%, var(--clr-green) 100%);
+    padding: 1.35rem 1.4rem 1.1rem;
+    display: flex; align-items: flex-start; gap: .9rem;
+    position: relative; overflow: hidden;
+  }
+  .liga-card__header::after {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.04);
+    pointer-events: none;
+  }
+
+  .liga-card__icon-wrap {
+    width: 44px; height: 44px;
+    border-radius: var(--radius-sm);
+    background: rgba(255,255,255,.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.25rem; color: var(--clr-accent);
+    flex-shrink: 0;
+    overflow: visible;
+  }
+  .liga-card__heading { flex: 1; min-width: 0; }
+  .liga-card__sigla {
+    font-size: .68rem; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--clr-accent);
+    margin-bottom: .2rem; display: block;
+  }
+  .liga-card__name {
+    font-family: var(--font-display);
+    font-size: .95rem; font-weight: 700;
+    color: var(--clr-white);
+    line-height: 1.3;
+  }
+
+  .liga-card__body {
+    padding: 1.3rem 1.4rem;
+    display: flex; flex-direction: column; gap: .8rem;
+    flex: 1;
+  }
+  .liga-card__desc {
+    font-size: .88rem; color: var(--clr-gray-3); line-height: 1.72;
+  }
+
+  .liga-card__tags {
+    display: flex; flex-wrap: wrap; gap: .35rem;
+    margin-top: auto; padding-top: .6rem;
+    border-top: 1px solid var(--clr-gray-1);
+  }
+  .liga-tag {
+    display: inline-flex; align-items: center; gap: .3em;
+    font-size: .7rem; font-weight: 600;
+    color: var(--clr-green-dark);
+    background: var(--clr-green-light);
+    border-radius: var(--radius-sm);
+    padding: .22em .7em;
+  }
+
+  /* ── Outras ligas – lista compacta ──────────────────────────── */
+  .outras-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: var(--space-sm);
+    margin-top: var(--space-lg);
+  }
+
+  .outra-liga {
+    display: flex; align-items: center; gap: .85rem;
+    background: var(--clr-white);
+    border: 1px solid var(--clr-gray-1);
+    border-left: 3px solid var(--clr-green);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: .85rem 1rem;
+    transition: border-left-color var(--dur-fast), box-shadow var(--dur-fast), transform var(--dur-fast);
+  }
+  .outra-liga:hover {
+    border-left-color: var(--clr-accent);
+    box-shadow: var(--shadow-sm);
+    transform: translateX(3px);
+  }
+  .outra-liga__icon {
+    width: 34px; height: 34px;
+    border-radius: var(--radius-sm);
+    background: var(--clr-green-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: .9rem; color: var(--clr-green);
+    flex-shrink: 0;
+  }
+  .outra-liga__name {
+    font-size: .88rem; font-weight: 600;
+    color: var(--clr-dark); line-height: 1.35;
+    margin-bottom: .15rem;
+  }
+  .outra-liga__cat {
+    font-size: .72rem; color: var(--clr-gray-2);
+    font-weight: 500;
+  }
+
+  /* ── CTA final ──────────────────────────────────────────────── */
+  .ligas-cta {
+    background:
+      radial-gradient(ellipse 60% 80% at 50% 50%, var(--clr-green-dark) 0%, transparent 70%),
+      linear-gradient(220deg, #1a0010 0%, var(--clr-green) 55%, var(--clr-green-dark) 100%);
+    padding-block: var(--space-2xl);
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .ligas-cta::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        -45deg,
+        rgba(255,255,255,.022) 0px,
+        rgba(255,255,255,.022) 1px,
+        transparent 1px,
+        transparent 28px
+      );
+  }
+  .ligas-cta::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 15%; right: 15%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--clr-accent), transparent);
+    border-radius: 1px;
+  }
+  .ligas-cta__content { position: relative; z-index: 1; }
+  .ligas-cta h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700; color: var(--clr-white);
+    margin-bottom: var(--space-sm);
+  }
+  .ligas-cta p {
+    font-size: 1.05rem; color: rgba(255,255,255,.72);
+    max-width: 580px; margin-inline: auto;
+    line-height: 1.78; margin-bottom: var(--space-lg);
+  }
+  .ligas-cta__actions { display: flex; gap: var(--space-sm); justify-content: center; flex-wrap: wrap; }
+  .btn--accent {
+    background: var(--clr-accent); color: var(--clr-dark);
+    font-weight: 700; box-shadow: 0 4px 16px rgba(232,160,32,.35);
+  }
+  .btn--accent:hover {
+    background: #f5b230; transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(232,160,32,.45);
+  }
+  .btn--ghost-white {
+    background: transparent; color: var(--clr-white);
+    border: 2px solid rgba(255,255,255,.42); font-weight: 600;
+  }
+  .btn--ghost-white:hover {
+    background: rgba(255,255,255,.1);
+    border-color: rgba(255,255,255,.72);
+    transform: translateY(-2px);
+  }
+
+  /* ── Responsividade ─────────────────────────────────────────── */
+  @media (max-width: 1024px) {
+    .oque-grid         { grid-template-columns: 1fr; }
+    .tripe-visual      { max-width: 520px; margin-inline: auto; }
+    .obj-grid          { grid-template-columns: 1fr 1fr; }
+    .participar-grid   { grid-template-columns: 1fr; }
+    .participar-info   { max-width: 480px; }
+  }
+
+  @media (max-width: 768px) {
+    .obj-grid          { grid-template-columns: 1fr; }
+    .ligas-hero__orb--1 { width: 300px; height: 300px; }
+    .ligas-hero__actions { flex-direction: column; align-items: stretch; }
+    .ligas-hero__actions .btn,
+    .ligas-hero__actions .hero-anchor { width: 100%; justify-content: center; text-align: center; }
+    .ligas-anchors__link {
+      flex: 1 1 calc(50% - .3rem);
+      justify-content: center; text-align: center;
+      min-height: 36px; font-size: .75rem;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .outras-grid           { grid-template-columns: 1fr; }
+    .ligas-cta__actions    { flex-direction: column; align-items: stretch; }
+    .ligas-cta__actions .btn { width: 100%; justify-content: center; }
+    .ligas-anchors__link   { flex: 1 1 100%; min-height: 40px; font-size: .73rem; }
+  }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════════════════
+       HEADER — idêntico ao sobre.html
+       ══════════════════════════════════════════════════════════ -->
+  <header id="header" class="header">
+    <div class="container header__inner">
+
+      <!-- =====================================================
+           [ADIÇÃO] Aba de menu – inserida antes do brand.
+           Posicionada à esquerda do logotipo graças ao flex
+           do .header__inner existente.
+           Nenhuma classe/id existente foi alterada.
+           ===================================================== -->
+      <div class="sidemenu-wrap" id="sidemenuWrap">
+
+        <!-- Aba toggle -->
+        <button
+          class="sidemenu-tab"
+          id="sidemenuTab"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="sidemenuPanel"
+          aria-label="Abrir menu de navegação"
+        >
+          <span class="sidemenu-tab__icon" aria-hidden="true">
+            <span class="sidemenu-tab__bar"></span>
+            <span class="sidemenu-tab__bar"></span>
+            <span class="sidemenu-tab__bar"></span>
+          </span>
+          <span class="sidemenu-tab__label">Menu</span>
+        </button>
+
+        <!-- Painel principal -->
+        <div class="sidemenu-panel" id="sidemenuPanel" role="navigation" aria-label="Menu lateral">
+          <ul class="sidemenu-list">
+
+            <!-- ── Links diretos principais ── -->
+            <li class="sidemenu-list__item">
+              <a href="sobre.html" class="sidemenu-list__link">
+                Sobre o DAGV
+                <i class="fa-solid fa-building-columns sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="historico2.html" class="sidemenu-list__link sidemenu-list__link--historico">
+                Resgate Histórico
+                <i class="fa-solid fa-scroll sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="coordenacao.html" class="sidemenu-list__link">
+                Coordenação
+                <i class="fa-solid fa-users sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Dropdown: Informações DAGV ── -->
+            <li class="sidemenu-list__item">
+              <button
+                class="sidemenu-list__btn"
+                data-dropdown="informacoes"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Informações DAGV
+                <i class="fa-solid fa-chevron-down sidemenu-list__arrow" aria-hidden="true"></i>
+              </button>
+              <ul class="sidemenu-dropdown" id="dropInformacoes">
+                <li><a href="https://dagvmeduftm.wordpress.com/estatuto-dagv/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">Estatuto</a></li>
+                <li><a href="https://dagvmeduftm.wordpress.com/galeria-de-fotos/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">Galeria de Fotos</a></li>
+              </ul>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Links institucionais ── -->
+            <li class="sidemenu-list__item">
+              <a href="https://dagvmeduftm.wordpress.com/pet-medicina-1/" target="_blank" rel="noopener" class="sidemenu-list__link">
+                PET Medicina
+                <i class="fa-solid fa-flask sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="ligas.html" class="sidemenu-list__link">
+                Ligas Acadêmicas
+                <i class="fa-solid fa-graduation-cap sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="manual.html" class="sidemenu-list__link">
+                Manual do Estudante
+                <i class="fa-solid fa-book-open-reader sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="https://dagvmeduftm.wordpress.com/cursinho-carolina/" target="_blank" rel="noopener" class="sidemenu-list__link">
+                Cursinho Carolina
+                <i class="fa-solid fa-book-open sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Dropdown: Instituições ── -->
+            <li class="sidemenu-list__item">
+              <button
+                class="sidemenu-list__btn"
+                data-dropdown="instituicoes"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Instituições
+                <i class="fa-solid fa-chevron-down sidemenu-list__arrow" aria-hidden="true"></i>
+              </button>
+              <ul class="sidemenu-dropdown" id="dropInstituicoes">
+                <li><a href="https://dagvmeduftm.wordpress.com/denem/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">DENEM</a></li>
+                <li><a href="https://dagvmeduftm.wordpress.com/dce-uftm/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">DCE</a></li>
+                <li><a href="https://dagvmeduftm.wordpress.com/cvu-uberaba/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">CVU</a></li>
+                <li><a href="https://dagvmeduftm.wordpress.com/cepop-uftm/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">CEPOP</a></li>
+              </ul>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Final ── -->
+            <li class="sidemenu-list__item">
+              <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7" target="_blank" rel="noopener" class="sidemenu-list__link">
+                Suporte
+                <i class="fa-solid fa-headset sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+
+          </ul>
+        </div><!-- /sidemenu-panel -->
+
+      </div><!-- /sidemenu-wrap -->
+      <!-- ===================================================== -->
+
+      <!-- Logo + Nome -->
+      <a href="index.html" class="header__brand">
+        <div class="header__logo-wrap">
+          <!--
+            [ALTERAÇÃO] Logo DAGV – componente Logo dinâmico.
+            - Fundo vermelho/transparente → logo dourada (img.logo--gold)
+            - Fundo branco (scrolled)     → logo vermelha (img.logo--red)
+            A troca é feita via CSS: visibilidade controlada por .header.scrolled
+          -->
+          <img
+            src="img/logo dourada-sem fundo.png"
+            alt="Logo DAGV – Diretório Acadêmico Gaspar Vianna"
+            class="header__logo-svg logo--gold"
+            width="80" height="68"
+            loading="eager"
+          />
+          <img
+            src="img/Logo DAGV sem fundo verm.png"
+            alt="Logo DAGV – Diretório Acadêmico Gaspar Vianna"
+            class="header__logo-svg logo--red"
+            width="80" height="68"
+            loading="eager"
+            aria-hidden="true"
+          />
+        </div>
+        <div class="header__title-wrap">
+          <span class="header__dagv"></span>
+          <span class="header__subtitle"></span>
+        </div>
+      </a>
+
+      <!-- Nav desktop -->
+      <nav class="nav" aria-label="Navegação principal">
+        <ul class="nav__list">
+          <li><a href="sobre.html"                    class="nav__link">Sobre</a></li>
+          <li><a href="coordenacao.html"              class="nav__link">Coordenações</a></li>
+          <li><a href="index.html#eventos-academicos" class="nav__link">Eventos</a></li>
+          <li><a href="index.html#events"             class="nav__link">Instituições UFTM</a></li>
+          <li><a href="index.html#contact"            class="nav__link nav__link--cta">Contato</a></li>
+        </ul>
+      </nav>
+
+      <!-- Hamburguer -->
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Nav mobile (drawer) -->
+    <nav class="nav-mobile" id="navMobile" aria-hidden="true">
+      <ul class="nav-mobile__list">
+        <li><a href="index.html"                    class="nav-mobile__link">Início</a></li>
+        <li><a href="sobre.html"                    class="nav-mobile__link">Sobre</a></li>
+        <li><a href="coordenacao.html"              class="nav-mobile__link">Coordenações</a></li>
+        <li><a href="index.html#eventos-academicos" class="nav-mobile__link">Eventos</a></li>
+        <li><a href="index.html#events"             class="nav-mobile__link">Instituições UFTM</a></li>
+        <li><a href="index.html#contact"            class="nav-mobile__link">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ══════════════════════════════════════════════════════════
+         1. HERO
+         ══════════════════════════════════════════════════════════ -->
+    <section class="ligas-hero" aria-labelledby="ligas-hero-title">
+      <div class="ligas-hero__orb--1" aria-hidden="true"></div>
+      <div class="ligas-hero__orb--2" aria-hidden="true"></div>
+      <div class="ligas-hero__orb--3" aria-hidden="true"></div>
+      <div class="ligas-hero__stripe" aria-hidden="true"></div>
+
+      <div class="container ligas-hero__content">
+        <p class="ligas-hero__eyebrow">
+          <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+          Medicina UFTM · Extensão Acadêmica
+        </p>
+
+        <h1 class="ligas-hero__title" id="ligas-hero-title">
+          Ligas<br /><em>Acadêmicas</em>
+        </h1>
+
+        <p class="ligas-hero__subtitle">
+          Ensino, pesquisa e extensão em um só lugar!
+        </p>
+
+        <p class="ligas-hero__desc">
+          Conheça as ligas vinculadas ao curso de Medicina da UFTM — entidades criadas por
+          estudantes apaixonados por suas áreas, que unem formação prática, pesquisa científica
+          e impacto social em atividades que vão além da sala de aula.
+        </p>
+
+        <div class="ligas-hero__actions">
+          <!-- <a href="#o-que-sao" class="btn btn--primary">
+            <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+            Conhecer as Ligas
+          </a>
+          <a href="#lista-ligas" class="hero-anchor">
+            <i class="fa-solid fa-list" aria-hidden="true"></i>
+            Ver todas as ligas
+          </a>
+          <a href="index.html" class="hero-anchor">
+            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+            Voltar ao início
+          </a> -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════
+         BARRA DE ÂNCORAS STICKY
+         ══════════════════════════════════════════════════════════ -->
+    <nav class="ligas-anchors" aria-label="Navegação interna da página">
+      <ul class="ligas-anchors__list">
+        <li>
+          <a href="#o-que-sao" class="ligas-anchors__link">
+            <i class="fa-solid fa-info-circle" aria-hidden="true"></i> O que são
+          </a>
+        </li>
+        <li>
+          <a href="#objetivos" class="ligas-anchors__link">
+            <i class="fa-solid fa-bullseye" aria-hidden="true"></i> Objetivos
+          </a>
+        </li>
+        <li>
+          <a href="#como-participar" class="ligas-anchors__link">
+            <i class="fa-solid fa-door-open" aria-hidden="true"></i> Como Participar
+          </a>
+        </li>
+        <li>
+          <a href="#lista-ligas" class="ligas-anchors__link">
+            <i class="fa-solid fa-list" aria-hidden="true"></i> Lista de Ligas
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- ══════════════════════════════════════════════════════════
+         2. O QUE SÃO LIGAS ACADÊMICAS
+         ══════════════════════════════════════════════════════════ -->
+    <section id="o-que-sao" class="ligas-section" aria-labelledby="oque-title">
+      <div class="container">
+
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Conceito</span>
+          <h2 class="section-title" id="oque-title">O que são Ligas Acadêmicas?</h2>
+          <p class="section-desc">
+            Muito além da sala de aula — uma forma de construir conhecimento de forma ativa,
+            colaborativa e com impacto real na sociedade.
+          </p>
+        </div>
+
+        <div class="oque-grid">
+          <div class="oque-text" data-aos="fade-right">
+            <p>
+              As <strong>ligas acadêmicas</strong> são entidades criadas por alunos, professores
+              e profissionais com interesses acadêmicos comuns, especialmente na área da saúde,
+              com o objetivo de complementar a formação acadêmica por meio de atividades que
+              atendam ao <strong>tripé universitário de ensino, pesquisa e extensão</strong>.
+            </p>
+            <p>
+              No contexto da Medicina, as ligas surgem como espaços de aprofundamento em
+              especialidades e temas específicos, permitindo que os estudantes entrem em
+              contato com a prática clínica, a pesquisa científica e o serviço comunitário
+              <strong>muito antes do internato</strong>, enriquecendo a formação de forma
+              complementar ao currículo formal.
+            </p>
+            <p>
+              Cada liga é <strong>autônoma e autogerida</strong> pelos seus membros,
+              com estatuto próprio, coordenação interna e programação de atividades
+              elaborada coletivamente. Elas funcionam de forma vinculada à
+              Universidade Federal do Triângulo Mineiro e sob orientação de docentes
+              ou profissionais da área.
+            </p>
+            <p>
+              As ligas da UFTM atuam em diversas especialidades médicas — da cardiologia
+              à neonatologia, da oncologia à saúde mental — e representam um importante
+              espaço de protagonismo estudantil, construção de identidade profissional
+              e desenvolvimento de habilidades técnicas e humanísticas.
+            </p>
+          </div>
+
+          <!-- Visual: tripé universitário -->
+          <div class="tripe-visual" data-aos="fade-left" data-aos-delay="100">
+            <div class="tripe-visual__title">Tripé Universitário</div>
+            <div class="tripe-items">
+              <div class="tripe-item">
+                <div class="tripe-item__icon"><i class="fa-solid fa-book-open-reader" aria-hidden="true"></i></div>
+                <div>
+                  <div class="tripe-item__name">Ensino</div>
+                  <div class="tripe-item__desc">Aulas teóricas, seminários e discussões de casos clínicos com especialistas</div>
+                </div>
+              </div>
+              <div class="tripe-item">
+                <div class="tripe-item__icon"><i class="fa-solid fa-microscope" aria-hidden="true"></i></div>
+                <div>
+                  <div class="tripe-item__name">Pesquisa</div>
+                  <div class="tripe-item__desc">Projetos científicos, artigos, iniciação científica e participação em congressos</div>
+                </div>
+              </div>
+              <div class="tripe-item">
+                <div class="tripe-item__icon"><i class="fa-solid fa-hands-holding-circle" aria-hidden="true"></i></div>
+                <div>
+                  <div class="tripe-item__name">Extensão</div>
+                  <div class="tripe-item__desc">Ações comunitárias, campanhas de saúde e atendimento à população</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════
+         3. OBJETIVOS E ATIVIDADES
+         ══════════════════════════════════════════════════════════ -->
+    <section id="objetivos" class="ligas-section ligas-section--alt" aria-labelledby="obj-title">
+      <div class="container">
+
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Propósito</span>
+          <h2 class="section-title" id="obj-title">Objetivos e Atividades</h2>
+          <p class="section-desc">
+            As ligas acadêmicas da UFTM atuam em três frentes complementares,
+            formando médicos mais preparados, críticos e comprometidos com a sociedade.
+          </p>
+        </div>
+
+        <div class="obj-grid">
+          <div class="obj-card" data-aos="fade-up" data-aos-delay="0">
+            <div class="obj-card__icon"><i class="fa-solid fa-stethoscope" aria-hidden="true"></i></div>
+            <div class="obj-card__title">Complementar a Formação</div>
+            <p>
+              Proporcionar contato prático com especialidades médicas desde os primeiros
+              anos do curso, por meio de aulas, simulações, visitas hospitalares e
+              discussões de casos clínicos com profissionais da área.
+            </p>
+          </div>
+
+          <div class="obj-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="obj-card__icon"><i class="fa-solid fa-flask-vial" aria-hidden="true"></i></div>
+            <div class="obj-card__title">Promover Pesquisa Científica</div>
+            <p>
+              Estimular o desenvolvimento de projetos de pesquisa, iniciação científica,
+              publicações e participação em congressos e simpósios médicos, cultivando
+              o pensamento crítico e o rigor científico nos estudantes.
+            </p>
+          </div>
+
+          <div class="obj-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="obj-card__icon"><i class="fa-solid fa-heart-circle-plus" aria-hidden="true"></i></div>
+            <div class="obj-card__title">Extensão e Impacto Social</div>
+            <p>
+              Realizar ações comunitárias, campanhas de prevenção, atendimentos
+              à população e projetos de educação em saúde, conectando o conhecimento
+              acadêmico às necessidades reais da comunidade uberabense e regional.
+            </p>
+          </div>
+
+          <div class="obj-card" data-aos="fade-up" data-aos-delay="0">
+            <div class="obj-card__icon"><i class="fa-solid fa-users-gear" aria-hidden="true"></i></div>
+            <div class="obj-card__title">Protagonismo Estudantil</div>
+            <p>
+              Desenvolver liderança, trabalho em equipe e autonomia, formando
+              estudantes ativos na construção do próprio conhecimento e capazes
+              de organizar e conduzir iniciativas coletivas com responsabilidade.
+            </p>
+          </div>
+
+          <div class="obj-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="obj-card__icon"><i class="fa-solid fa-hospital-user" aria-hidden="true"></i></div>
+            <div class="obj-card__title">Cultura Acadêmica</div>
+            <p>
+              Fomentar a cultura científica e a troca de conhecimentos entre estudantes,
+              professores e profissionais, por meio de eventos, simpósios, semanas temáticas
+              e publicações que enriquecem o ambiente intelectual da UFTM.
+            </p>
+          </div>
+
+          <div class="obj-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="obj-card__icon"><i class="fa-solid fa-person-chalkboard" aria-hidden="true"></i></div>
+            <div class="obj-card__title">Formação Humanista</div>
+            <p>
+              Valorizar as dimensões humanas e éticas da medicina, integrando
+              temas como saúde mental, humanização hospitalar, comunicação médico-paciente
+              e medicina centrada na pessoa como eixos transversais às atividades das ligas.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════
+         4. COMO PARTICIPAR
+         ══════════════════════════════════════════════════════════ -->
+    <section id="como-participar" class="ligas-section" aria-labelledby="participar-title">
+      <div class="container">
+
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Ingresso</span>
+          <h2 class="section-title" id="participar-title">Como Participar</h2>
+          <p class="section-desc">
+            Cada liga tem seu próprio processo seletivo, mas algumas regras gerais
+            se aplicam à maioria das entidades vinculadas à UFTM.
+          </p>
+        </div>
+
+        <div class="participar-grid">
+
+          <!-- Passo a passo -->
+          <div class="participar-steps" data-aos="fade-right">
+            <div class="step">
+              <div class="step__num">1</div>
+              <div class="step__body">
+                <div class="step__title">Escolha a liga de interesse</div>
+                <div class="step__desc">
+                  Pesquise as ligas ativas na UFTM e identifique a especialidade
+                  ou tema que mais se alinha com seus objetivos acadêmicos e profissionais.
+                  Cada liga tem foco, dinâmica e perfil de atuação próprios.
+                </div>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step__num">2</div>
+              <div class="step__body">
+                <div class="step__title">Acompanhe os editais de seleção</div>
+                <div class="step__desc">
+                  As ligas geralmente abrem processo seletivo no início de cada semestre.
+                  Fique atento às divulgações nas redes sociais do DAGV, dos grupos de
+                  turma e dos perfis de cada liga no Instagram.
+                </div>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step__num">3</div>
+              <div class="step__body">
+                <div class="step__title">Cumpra os requisitos de inscrição</div>
+                <div class="step__desc">
+                  Em geral, é necessário ser aluno regularmente matriculado no curso de
+                  Medicina da UFTM. Algumas ligas exigem que o candidato tenha cursado
+                  determinadas disciplinas ou esteja a partir de um período específico.
+                </div>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step__num">4</div>
+              <div class="step__body">
+                <div class="step__title">Participe do processo seletivo</div>
+                <div class="step__desc">
+                  O processo pode incluir prova escrita de conhecimentos básicos,
+                  entrevista, análise de currículo e/ou redação motivacional.
+                  Os critérios variam conforme a liga — consulte sempre o edital oficial.
+                </div>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step__num">5</div>
+              <div class="step__body">
+                <div class="step__title">Comprometa-se com as atividades</div>
+                <div class="step__desc">
+                  Após o ingresso, o membro deve participar ativamente das atividades
+                  programadas, cumprir frequência mínima e contribuir com o desenvolvimento
+                  da liga. O engajamento é fundamental para a permanência.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card informativo lateral -->
+          <div class="participar-info" data-aos="fade-left" data-aos-delay="100">
+            <div class="participar-info__title">
+              <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+              Informações Gerais
+            </div>
+            <div class="info-items">
+              <div class="info-item">
+                <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
+                <span><strong>Período de seleção:</strong> Geralmente no início de cada semestre letivo (fevereiro/março e agosto/setembro)</span>
+              </div>
+              <div class="info-item">
+                <i class="fa-solid fa-user-check" aria-hidden="true"></i>
+                <span><strong>Requisito base:</strong> Matrícula ativa no curso de Medicina da UFTM</span>
+              </div>
+              <div class="info-item">
+                <i class="fa-solid fa-file-alt" aria-hidden="true"></i>
+                <span><strong>Prova escrita:</strong> Conteúdo de Biologia, Fisiologia ou conhecimentos específicos da especialidade da liga</span>
+              </div>
+              <div class="info-item">
+                <i class="fa-solid fa-clock" aria-hidden="true"></i>
+                <span><strong>Carga de atividades:</strong> Varia por liga — em média, reuniões semanais ou quinzenais e atividades mensais</span>
+              </div>
+              <div class="info-item">
+                <i class="fa-solid fa-award" aria-hidden="true"></i>
+                <span><strong>Certificação:</strong> Participação em ligas pode gerar horas complementares e certificados reconhecidos</span>
+              </div>
+              <div class="info-item">
+                <i class="fa-solid fa-bullhorn" aria-hidden="true"></i>
+                <span><strong>Como saber dos editais:</strong> Siga o DAGV e as ligas de interesse no Instagram e fique atento aos grupos de turma</span>
+              </div>
+            </div>
+            <div class="participar-info__cta">
+              Dúvidas sobre uma liga específica? Entre em contato diretamente com a coordenação da liga ou acesse a página oficial da UFTM.
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════
+         5. LISTA DE LIGAS ACADÊMICAS
+         ══════════════════════════════════════════════════════════ -->
+    <section id="lista-ligas" class="ligas-section ligas-section--alt" aria-labelledby="lista-title">
+      <div class="container">
+
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Diretório de Ligas</span>
+          <h2 class="section-title" id="lista-title">Ligas Acadêmicas da UFTM</h2>
+          <p class="section-desc">
+            Conheça as ligas vinculadas ao curso de Medicina da UFTM — cada uma
+            com sua missão, especialidade e modo de atuação.
+          </p>
+        </div>
+
+        <!-- Filtros por categoria -->
+        <div class="ligas-filter" role="group" aria-label="Filtrar ligas por categoria">
+          <button class="filter-btn active" data-cat="all">
+            <i class="fa-solid fa-th-large" aria-hidden="true"></i> Todas
+          </button>
+          <button class="filter-btn" data-cat="clinica">
+            <i class="fa-solid fa-stethoscope" aria-hidden="true"></i> Clínica
+          </button>
+          <button class="filter-btn" data-cat="cirurgia">
+            <i class="fa-solid fa-scalpel" aria-hidden="true"></i> Cirurgia
+          </button>
+          <button class="filter-btn" data-cat="saude-mental">
+            <i class="fa-solid fa-brain" aria-hidden="true"></i> Saúde Mental
+          </button>
+          <button class="filter-btn" data-cat="materno-infantil">
+            <i class="fa-solid fa-baby" aria-hidden="true"></i> Materno-infantil
+          </button>
+          <button class="filter-btn" data-cat="humanizacao">
+            <i class="fa-solid fa-hands-holding-heart" aria-hidden="true"></i> Humanização
+          </button>
+          <button class="filter-btn" data-cat="neurociencias">
+            <i class="fa-solid fa-brain" aria-hidden="true"></i> Neurociências
+          </button>
+        </div>
+
+        <!-- Carrossel: um card por vez -->
+        <div class="ligas-slider-wrap">
+          <button class="slider-side-btn" id="ligasPrev" aria-label="Liga anterior">
+            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+          </button>
+          <div class="ligas-slider" id="ligasSlider" aria-label="Carrossel de ligas" role="region">
+            <div class="ligas-slider__track" id="ligasTrack">
+
+          <!-- LaCardio -->
+          <article class="liga-card" data-cat="clinica" data-aos="fade-up" data-aos-delay="0">
+            <div class="liga-card__header">
+              <div class="liga-card__icon-wrap"><i class="fa-solid fa-heart-pulse" aria-hidden="true"></i></div>
+              <div class="liga-card__heading">
+                <span class="liga-card__sigla">LaCardio</span>
+                <div class="liga-card__name">Liga Acadêmica de Cardiologia</div>
+              </div>
+            </div>
+            <div class="liga-card__body">
+              <p class="liga-card__desc">
+                Fundada com o objetivo de aprofundar o conhecimento dos estudantes
+                em cardiologia clínica e intervencionista, a LaCardio promove aulas
+                com especialistas, discussões de casos clínicos, visitas a laboratórios
+                de hemodinâmica e atividades de extensão voltadas à prevenção de
+                doenças cardiovasculares na comunidade.
+              </p>
+              <div class="liga-card__tags">
+                <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Clínica</span>
+                <span class="liga-tag"><i class="fa-solid fa-heartbeat" aria-hidden="true"></i> Cardiologia</span>
+                <span class="liga-tag"><i class="fa-solid fa-hands-holding-circle" aria-hidden="true"></i> Extensão</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- LUAO -->
+          <article class="liga-card" data-cat="clinica" data-aos="fade-up" data-aos-delay="60">
+            <div class="liga-card__header">
+              <div class="liga-card__icon-wrap"><i class="fa-solid fa-ribbon" aria-hidden="true"></i></div>
+              <div class="liga-card__heading">
+                <span class="liga-card__sigla">LUAO</span>
+                <div class="liga-card__name">Liga Uberabense de Oncologia</div>
+              </div>
+            </div>
+            <div class="liga-card__body">
+              <p class="liga-card__desc">
+                A LUAO promove o ensino e a pesquisa em oncologia, preparando os
+                acadêmicos para compreender os mecanismos das neoplasias, os protocolos
+                de diagnóstico e tratamento e os cuidados paliativos. Desenvolve
+                campanhas de prevenção ao câncer e atividades de apoio a pacientes
+                oncológicos, reforçando a dimensão humana do cuidado médico.
+              </p>
+              <div class="liga-card__tags">
+                <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Clínica</span>
+                <span class="liga-tag"><i class="fa-solid fa-ribbon" aria-hidden="true"></i> Oncologia</span>
+                <span class="liga-tag"><i class="fa-solid fa-microscope" aria-hidden="true"></i> Pesquisa</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- SARAKURA -->
+          <article class="liga-card" data-cat="humanizacao" data-aos="fade-up" data-aos-delay="120">
+            <div class="liga-card__header">
+              <div class="liga-card__icon-wrap"><i class="fa-solid fa-hands-holding-heart" aria-hidden="true"></i></div>
+              <div class="liga-card__heading">
+                <span class="liga-card__sigla">SARAKURA</span>
+                <div class="liga-card__name">Liga de Humanização Sarakura</div>
+              </div>
+            </div>
+            <div class="liga-card__body">
+              <p class="liga-card__desc">
+                Inspirada no conceito japonês de cura e cuidado (<em>Sara</em> = cura;
+                <em>Kura</em> = armazenar), a Sarakura atua na humanização da assistência
+                hospitalar e ambulatorial. Desenvolve projetos junto a pacientes internados,
+                familiares e profissionais de saúde, promovendo atividades lúdicas,
+                escuta ativa e cuidado integral nos ambientes hospitalares e sociais da região.
+              </p>
+              <div class="liga-card__tags">
+                <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Humanização</span>
+                <span class="liga-tag"><i class="fa-solid fa-hospital" aria-hidden="true"></i> Hospital</span>
+                <span class="liga-tag"><i class="fa-solid fa-heart" aria-hidden="true"></i> Cuidado Integral</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- LHA -->
+          <article class="liga-card" data-cat="clinica" data-aos="fade-up" data-aos-delay="0">
+            <div class="liga-card__header">
+              <div class="liga-card__icon-wrap"><i class="fa-solid fa-droplet" aria-hidden="true"></i></div>
+              <div class="liga-card__heading">
+                <span class="liga-card__sigla">LHA</span>
+                <div class="liga-card__name">Liga de Hipertensão Arterial</div>
+              </div>
+            </div>
+            <div class="liga-card__body">
+              <p class="liga-card__desc">
+                A LHA nasceu da necessidade de aprofundar os conhecimentos sobre
+                hipertensão arterial sistêmica — uma das condições crônicas mais
+                prevalentes no Brasil. Desenvolve atividades de ensino teórico,
+                pesquisa epidemiológica e ações de rastreamento e prevenção
+                junto à comunidade, com aferição de pressão em eventos públicos
+                e orientações de saúde cardiovascular.
+              </p>
+              <div class="liga-card__tags">
+                <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Clínica</span>
+                <span class="liga-tag"><i class="fa-solid fa-droplet" aria-hidden="true"></i> Cardiologia</span>
+                <span class="liga-tag"><i class="fa-solid fa-users" aria-hidden="true"></i> Comunidade</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- LASMP -->
+          <article class="liga-card" data-cat="saude-mental" data-aos="fade-up" data-aos-delay="60">
+            <div class="liga-card__header">
+              <div class="liga-card__icon-wrap"><i class="fa-solid fa-brain" aria-hidden="true"></i></div>
+              <div class="liga-card__heading">
+                <span class="liga-card__sigla">LASMP</span>
+                <div class="liga-card__name">Liga Acadêmica de Saúde Mental e Psiquiatria</div>
+              </div>
+            </div>
+            <div class="liga-card__body">
+              <p class="liga-card__desc">
+                A LASMP tem como propósito aproximar os estudantes da psiquiatria e da saúde
+                mental, desmistificando o tema e formando médicos mais empáticos e preparados
+                para o cuidado integral da saúde psíquica. Atua junto a serviços de saúde
+                mental públicos, CAPS e hospitais, além de realizar eventos de conscientização
+                dentro e fora da UFTM.
+              </p>
+              <div class="liga-card__tags">
+                <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Saúde Mental</span>
+                <span class="liga-tag"><i class="fa-solid fa-brain" aria-hidden="true"></i> Psiquiatria</span>
+                <span class="liga-tag"><i class="fa-solid fa-heart" aria-hidden="true"></i> Humanização</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- LEC -->
+          <article class="liga-card" data-cat="clinica" data-aos="fade-up" data-aos-delay="120">
+            <div class="liga-card__header">
+              <div class="liga-card__icon-wrap"><i class="fa-solid fa-truck-medical" aria-hidden="true"></i></div>
+              <div class="liga-card__heading">
+                <span class="liga-card__sigla">LEC</span>
+                <div class="liga-card__name">Liga de Emergências Clínicas</div>
+              </div>
+            </div>
+            <div class="liga-card__body">
+              <p class="liga-card__desc">
+                A LEC prepara os estudantes para atuar com competência nas situações
+                de urgência e emergência médica. Realiza treinamentos práticos de
+                suporte básico e avançado de vida, simulações de atendimento,
+                atividades de extensão em primeiros socorros para a comunidade
+                e visitas supervisionadas a prontos-socorros e UPAs.
+              </p>
+              <div class="liga-card__tags">
+                <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Clínica</span>
+                <span class="liga-tag"><i class="fa-solid fa-ambulance" aria-hidden="true"></i> Emergência</span>
+                <span class="liga-tag"><i class="fa-solid fa-person-running" aria-hidden="true"></i> Prática</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- LAN -->
+          <article class="liga-card" data-cat="materno-infantil" data-aos="fade-up" data-aos-delay="0">
+            <div class="liga-card__header">
+              <div class="liga-card__icon-wrap"><i class="fa-solid fa-baby" aria-hidden="true"></i></div>
+              <div class="liga-card__heading">
+                <span class="liga-card__sigla">LAN</span>
+                <div class="liga-card__name">Liga Acadêmica de Neonatologia</div>
+              </div>
+            </div>
+            <div class="liga-card__body">
+              <p class="liga-card__desc">
+                A LAN tem como missão aprofundar o conhecimento dos acadêmicos
+                sobre os cuidados com o recém-nascido — desde a reanimação neonatal
+                até as condições mais complexas da UTI neonatal. Realiza atividades
+                junto às maternidades de Uberaba e projetos de educação em saúde
+                voltados a gestantes e famílias de bebês prematuros ou com condições especiais.
+              </p>
+              <div class="liga-card__tags">
+                <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Materno-infantil</span>
+                <span class="liga-tag"><i class="fa-solid fa-baby" aria-hidden="true"></i> Neonatologia</span>
+                <span class="liga-tag"><i class="fa-solid fa-hospital" aria-hidden="true"></i> UTI Neonatal</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- LAGO -->
+          <article class="liga-card" data-cat="materno-infantil" data-aos="fade-up" data-aos-delay="60">
+            <div class="liga-card__header">
+              <div class="liga-card__icon-wrap"><i class="fa-solid fa-venus" aria-hidden="true"></i></div>
+              <div class="liga-card__heading">
+                <span class="liga-card__sigla">LAGO</span>
+                <div class="liga-card__name">Liga Acadêmica de Ginecologia e Obstetrícia</div>
+              </div>
+            </div>
+            <div class="liga-card__body">
+              <p class="liga-card__desc">
+                A LAGO integra ginecologia e obstetrícia para oferecer uma formação
+                abrangente sobre saúde da mulher. Atua em atividades de pré-natal,
+                saúde reprodutiva, prevenção do câncer ginecológico e assistência
+                ao parto humanizado. Realiza extensão junto a centros de saúde e
+                promove eventos científicos e de conscientização voltados à saúde feminina.
+              </p>
+              <div class="liga-card__tags">
+                <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Materno-infantil</span>
+                <span class="liga-tag"><i class="fa-solid fa-venus" aria-hidden="true"></i> Ginecologia</span>
+                <span class="liga-tag"><i class="fa-solid fa-baby-carriage" aria-hidden="true"></i> Obstetrícia</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- LANC -->
+          <article class="liga-card" data-cat="cirurgia" data-aos="fade-up" data-aos-delay="120">
+            <div class="liga-card__header">
+              <div class="liga-card__icon-wrap"><i class="fa-solid fa-head-side-virus" aria-hidden="true"></i></div>
+              <div class="liga-card__heading">
+                <span class="liga-card__sigla">LANC</span>
+                <div class="liga-card__name">Liga Acadêmica de Neurocirurgia</div>
+              </div>
+            </div>
+            <div class="liga-card__body">
+              <p class="liga-card__desc">
+                A LANC proporciona contato precoce com a neurocirurgia — especialidade
+                de alta complexidade e grande fascínio acadêmico. Realiza aulas
+                com neurocirurgiões, observação de procedimentos, discussão de casos
+                neurocirúrgicos complexos, eventos científicos e visita a centros de
+                referência em neurologia e neurocirurgia da região.
+              </p>
+              <div class="liga-card__tags">
+                <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Cirurgia</span>
+                <span class="liga-tag"><i class="fa-solid fa-scalpel" aria-hidden="true"></i> Neurocirurgia</span>
+                <span class="liga-tag"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> Eventos</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- LiAPSIH -->
+          <article class="liga-card" data-cat="saude-mental" data-aos="fade-up" data-aos-delay="0">
+            <div class="liga-card__header">
+              <div class="liga-card__icon-wrap"><i class="fa-solid fa-comments" aria-hidden="true"></i></div>
+              <div class="liga-card__heading">
+                <span class="liga-card__sigla">LiAPSIH</span>
+                <div class="liga-card__name">Liga Acadêmica de Psicologia Hospitalar</div>
+              </div>
+            </div>
+            <div class="liga-card__body">
+              <p class="liga-card__desc">
+                A LiAPSIH foca na intersecção entre medicina e psicologia hospitalar,
+                preparando os estudantes para compreender e integrar os aspectos
+                emocionais e psicossociais do cuidado ao paciente internado.
+                Desenvolve atividades educativas, científicas e de extensão junto
+                a enfermarias, UTIs e ambulatórios, com enfoque na comunicação
+                médico-paciente e no suporte emocional.
+              </p>
+              <div class="liga-card__tags">
+                <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Saúde Mental</span>
+                <span class="liga-tag"><i class="fa-solid fa-comments" aria-hidden="true"></i> Psicologia</span>
+                <span class="liga-tag"><i class="fa-solid fa-hospital" aria-hidden="true"></i> Hospital</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- LiNce -->
+          <article class="liga-card" data-cat="neurociencias" data-aos="fade-up" data-aos-delay="60">
+            <div class="liga-card__header">
+              <div class="liga-card__icon-wrap"><i class="fa-solid fa-atom" aria-hidden="true"></i></div>
+              <div class="liga-card__heading">
+                <span class="liga-card__sigla">LiNce</span>
+                <div class="liga-card__name">Liga Acadêmica de Neurociências</div>
+              </div>
+            </div>
+            <div class="liga-card__body">
+              <p class="liga-card__desc">
+                A LiNce explora as neurociências em sua amplitude — da neurobiologia
+                molecular às aplicações clínicas em neurologia. Fomenta o desenvolvimento
+                científico por meio de projetos de pesquisa, aulas com pesquisadores,
+                participação em congressos e atividades de extensão que aproximam
+                o conhecimento neurocientífico da população e dos pacientes.
+              </p>
+              <div class="liga-card__tags">
+                <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Neurociências</span>
+                <span class="liga-tag"><i class="fa-solid fa-microscope" aria-hidden="true"></i> Pesquisa</span>
+                <span class="liga-tag"><i class="fa-solid fa-flask" aria-hidden="true"></i> Ciência</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- LUAMA -->
+          <article class="liga-card" data-cat="materno-infantil" data-aos="fade-up" data-aos-delay="120">
+            <div class="liga-card__header">
+              <div class="liga-card__icon-wrap"><i class="fa-solid fa-person-breastfeeding" aria-hidden="true"></i></div>
+              <div class="liga-card__heading">
+                <span class="liga-card__sigla">LUAMA</span>
+                <div class="liga-card__name">Liga Universitária da Amamentação</div>
+              </div>
+            </div>
+            <div class="liga-card__body">
+              <p class="liga-card__desc">
+                A LUAMA dedica-se ao tema da amamentação e saúde materno-infantil,
+                área fundamental na atenção primária e na saúde coletiva. Promove
+                ações educativas para gestantes e puérperas, capacitação de
+                profissionais de saúde sobre aleitamento materno, e pesquisas
+                sobre os benefícios e desafios da amamentação no Brasil,
+                com impacto direto nas taxas de aleitamento da região.
+              </p>
+              <div class="liga-card__tags">
+                <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Materno-infantil</span>
+                <span class="liga-tag"><i class="fa-solid fa-person-breastfeeding" aria-hidden="true"></i> Amamentação</span>
+                <span class="liga-tag"><i class="fa-solid fa-users" aria-hidden="true"></i> Extensão</span>
+              </div>
+            </div>
+          </article>
+
+            </div><!-- /ligas-slider__track -->
+          </div><!-- /ligas-slider -->
+          <button class="slider-side-btn" id="ligasNext" aria-label="Próxima liga">
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div><!-- /ligas-slider-wrap -->
+        <div class="slider-controls">
+          <span class="slider-counter" id="ligasCounter" aria-live="polite">1 / 12</span>
+          <div class="slider-dots" id="ligasDots" aria-hidden="true"></div>
+        </div>
+
+        <!-- ── Outras ligas em lista compacta ─────────────────── -->
+        <div style="margin-top: var(--space-2xl);" data-aos="fade-up">
+          <div class="section-header">
+            <span class="section-tag">Mais Ligas</span>
+            <h3 class="section-title" style="font-size: clamp(1.4rem, 3vw, 2rem);">Outras Ligas Vinculadas</h3>
+            <p class="section-desc">
+              Além das ligas detalhadas acima, o curso de Medicina da UFTM conta
+              com outras entidades acadêmicas ativas e em desenvolvimento.
+            </p>
+          </div>
+
+          <div class="outras-grid">
+            <div class="outra-liga">
+              <div class="outra-liga__icon"><i class="fa-solid fa-bone" aria-hidden="true"></i></div>
+              <div>
+                <div class="outra-liga__name">Liga Acadêmica de Ortopedia e Traumatologia</div>
+                <div class="outra-liga__cat">Cirurgia · Ortopedia</div>
+              </div>
+            </div>
+            <div class="outra-liga">
+              <div class="outra-liga__icon"><i class="fa-solid fa-eye" aria-hidden="true"></i></div>
+              <div>
+                <div class="outra-liga__name">Liga Acadêmica de Oftalmologia</div>
+                <div class="outra-liga__cat">Clínica · Oftalmologia</div>
+              </div>
+            </div>
+            <div class="outra-liga">
+              <div class="outra-liga__icon"><i class="fa-solid fa-lungs" aria-hidden="true"></i></div>
+              <div>
+                <div class="outra-liga__name">Liga Acadêmica de Pneumologia</div>
+                <div class="outra-liga__cat">Clínica · Pneumologia</div>
+              </div>
+            </div>
+            <div class="outra-liga">
+              <div class="outra-liga__icon"><i class="fa-solid fa-shield-virus" aria-hidden="true"></i></div>
+              <div>
+                <div class="outra-liga__name">Liga Acadêmica de Infectologia</div>
+                <div class="outra-liga__cat">Clínica · Infectologia</div>
+              </div>
+            </div>
+            <div class="outra-liga">
+              <div class="outra-liga__icon"><i class="fa-solid fa-child" aria-hidden="true"></i></div>
+              <div>
+                <div class="outra-liga__name">Liga Acadêmica de Pediatria</div>
+                <div class="outra-liga__cat">Materno-infantil · Pediatria</div>
+              </div>
+            </div>
+            <div class="outra-liga">
+              <div class="outra-liga__icon"><i class="fa-solid fa-dna" aria-hidden="true"></i></div>
+              <div>
+                <div class="outra-liga__name">Liga Acadêmica de Genética Médica</div>
+                <div class="outra-liga__cat">Pesquisa · Genética</div>
+              </div>
+            </div>
+            <div class="outra-liga">
+              <div class="outra-liga__icon"><i class="fa-solid fa-pills" aria-hidden="true"></i></div>
+              <div>
+                <div class="outra-liga__name">Liga Acadêmica de Medicina de Família e Comunidade</div>
+                <div class="outra-liga__cat">Atenção Primária · Extensão</div>
+              </div>
+            </div>
+            <div class="outra-liga">
+              <div class="outra-liga__icon"><i class="fa-solid fa-hand-holding-medical" aria-hidden="true"></i></div>
+              <div>
+                <div class="outra-liga__name">Liga Acadêmica de Cuidados Paliativos</div>
+                <div class="outra-liga__cat">Humanização · Cuidados Paliativos</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════
+         CTA FINAL
+         ══════════════════════════════════════════════════════════ -->
+    <section class="ligas-cta" aria-labelledby="cta-ligas-title">
+      <div class="container ligas-cta__content" data-aos="fade-up">
+        <h2 id="cta-ligas-title">Pronto para fazer parte?</h2>
+        <p>
+          As ligas acadêmicas são construídas por estudantes apaixonados pela medicina.
+          Encontre a sua área, ingresse, aprenda e contribua com um legado
+          de conhecimento e serviço à saúde.
+        </p>
+        <div class="ligas-cta__actions">
+          <a href="https://dagvmeduftm.wordpress.com/ligas-academicas/" target="_blank" rel="noopener" class="btn btn--accent">
+            <i class="fa-solid fa-external-link-alt" aria-hidden="true"></i>
+            Site Oficial das Ligas
+          </a>
+          <a href="sobre.html" class="btn btn--ghost-white">
+            <i class="fa-solid fa-building-columns" aria-hidden="true"></i>
+            Conhecer o DAGV
+          </a>
+          <a href="index.html" class="btn btn--ghost-white">
+            <i class="fa-solid fa-house" aria-hidden="true"></i>
+            Voltar ao Início
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══════════════════════════════════════════════════════════
+       FOOTER — idêntico ao sobre.html
+       ══════════════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <img src="img/logo dourada-sem fundo.png" alt="Logo DAGV" class="footer__logo" width="64" height="54" loading="lazy" />
+        <div>
+          <p class="footer__name">DAGV – Gaspar Vianna</p>
+          <p class="footer__sub">Medicina UFTM · Uberaba – MG</p>
+        </div>
+      </div>
+      <nav class="footer__links" aria-label="Links úteis">
+        <a href="https://dagvmeduftm.wordpress.com/estatuto-dagv/" target="_blank" rel="noopener">Estatuto</a>
+        <a href="ligas.html">Ligas</a>
+        <a href="https://dagvmeduftm.wordpress.com/cursinho-carolina/" target="_blank" rel="noopener">Cursinho Carolina</a>
+        <a href="https://dagvmeduftm.wordpress.com/pet-medicina-1/" target="_blank" rel="noopener">PET Medicina</a>
+        <a href="https://dagvmeduftm.wordpress.com/dce-uftm/" target="_blank" rel="noopener">DCE UFTM</a>
+      </nav>
+      <div class="footer__social">
+        <a href="https://www.instagram.com/dagvmeduftm/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.facebook.com/profile.php?id=100009254539973" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+        <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7" target="_blank" rel="noopener" aria-label="Contato"><i class="fa-solid fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>&copy; <span id="year"></span> Diretório Acadêmico Gaspar Vianna – Medicina UFTM. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/sidemenu.js"></script>
+
+  <script>
+  (function () {
+    'use strict';
+
+    /* ── Highlight da âncora ativa ao scroll ─────────────────── */
+    var sections = ['o-que-sao','objetivos','como-participar','lista-ligas']
+      .map(function (id) { return document.getElementById(id); })
+      .filter(Boolean);
+    var anchorLinks = document.querySelectorAll('.ligas-anchors__link');
+    var header = document.getElementById('header');
+
+    function onScroll() {
+      var scrollY = window.scrollY + (header ? header.offsetHeight : 72) + 48;
+      var current = sections[0];
+      sections.forEach(function (sec) {
+        if (sec.getBoundingClientRect().top + window.scrollY <= scrollY) current = sec;
+      });
+      anchorLinks.forEach(function (link) {
+        var href = link.getAttribute('href').replace('#', '');
+        link.classList.toggle('active', href === current.id);
+      });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    /* ════════════════════════════════════════════════════════
+       CARROSSEL DE LIGAS — opacity/visibility switch por índice
+       ════════════════════════════════════════════════════════ */
+    (function () {
+      'use strict';
+
+      var slider   = document.getElementById('ligasSlider');
+      var track    = document.getElementById('ligasTrack');
+      var prevBtn  = document.getElementById('ligasPrev');
+      var nextBtn  = document.getElementById('ligasNext');
+      var counter  = document.getElementById('ligasCounter');
+      var dotsWrap = document.getElementById('ligasDots');
+
+      if (!slider || !track) return;
+
+      var allCards     = Array.from(track.querySelectorAll('.liga-card'));
+      var visibleCards = allCards.slice();
+      var currentIdx   = 0;
+
+      function showCard(idx) {
+        visibleCards.forEach(function (card, i) {
+          card.classList.toggle('is-active', i === idx);
+        });
+      }
+
+      function render() {
+        var n = visibleCards.length;
+        showCard(currentIdx);
+        if (counter) counter.textContent = n === 0 ? '–' : (currentIdx + 1) + ' / ' + n;
+        if (dotsWrap) {
+          Array.from(dotsWrap.querySelectorAll('.slider-dot')).forEach(function (d, i) {
+            d.classList.toggle('active', i === currentIdx);
+          });
+        }
+        if (prevBtn) prevBtn.disabled = currentIdx === 0;
+        if (nextBtn) nextBtn.disabled = currentIdx >= n - 1;
+      }
+
+      function goTo(idx) {
+        var n = visibleCards.length;
+        if (n === 0) return;
+        currentIdx = Math.max(0, Math.min(n - 1, idx));
+        render();
+      }
+
+      function buildDots() {
+        if (!dotsWrap) return;
+        dotsWrap.innerHTML = '';
+        visibleCards.forEach(function (_, i) {
+          var d = document.createElement('button');
+          d.className = 'slider-dot' + (i === 0 ? ' active' : '');
+          d.setAttribute('aria-label', 'Liga ' + (i + 1));
+          d.addEventListener('click', function () { goTo(i); });
+          dotsWrap.appendChild(d);
+        });
+      }
+
+      function applyFilter(cat) {
+        allCards.forEach(function (card) {
+          var match = cat === 'all' || card.getAttribute('data-cat') === cat;
+          card.setAttribute('aria-hidden', match ? 'false' : 'true');
+          card.classList.remove('is-active');
+        });
+        visibleCards = allCards.filter(function (c) {
+          return c.getAttribute('aria-hidden') !== 'true';
+        });
+        currentIdx = 0;
+        buildDots();
+        render();
+      }
+
+      if (prevBtn) prevBtn.addEventListener('click', function () { goTo(currentIdx - 1); });
+      if (nextBtn) nextBtn.addEventListener('click', function () { goTo(currentIdx + 1); });
+
+      slider.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft')  { e.preventDefault(); goTo(currentIdx - 1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); goTo(currentIdx + 1); }
+      });
+
+      var tx = 0, ty = 0;
+      slider.addEventListener('touchstart', function (e) {
+        tx = e.changedTouches[0].clientX;
+        ty = e.changedTouches[0].clientY;
+      }, { passive: true });
+      slider.addEventListener('touchend', function (e) {
+        var dx = e.changedTouches[0].clientX - tx;
+        var dy = e.changedTouches[0].clientY - ty;
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 48) {
+          dx < 0 ? goTo(currentIdx + 1) : goTo(currentIdx - 1);
+        }
+      }, { passive: true });
+
+      var filterBtns = document.querySelectorAll('.filter-btn');
+      filterBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          filterBtns.forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          applyFilter(btn.getAttribute('data-cat'));
+        });
+      });
+
+      buildDots();
+      render();
+    }());
+
+    /* ── Smooth scroll para âncoras internas ─────────────────── */
+    document.addEventListener('click', function (e) {
+      var link = e.target.closest('a[href^="#"]');
+      if (!link) return;
+      var target = document.querySelector(link.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      var offset = header ? header.offsetHeight : 0;
+      var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    });
+
+  }());
+  </script>
+
+</body>
+</html>

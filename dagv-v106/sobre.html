@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Conheça o Diretório Acadêmico Gaspar Vianna (DAGV) – história, fundação em 1954, missão e quem foi Gaspar Vianna, o cientista que dá nome ao diretório do curso de Medicina da UFTM." />
+  <meta name="keywords" content="DAGV, Gaspar Vianna, Medicina UFTM, história, fundação, 1954" />
+  <title>Conheça o DAGV – Diretório Acadêmico Gaspar Vianna | Medicina UFTM</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/sidemenu.css" />
+
+  <style>
+  /* ============================================================
+     sobre.html – estilos exclusivos desta página
+     Identidade DAGV preservada (bordô + dourado + tipografia).
+     Diferenciação via: ângulo de gradiente, ornamentos, texturas,
+     padrões de card e tratamentos de cor sutilmente distintos.
+     ============================================================ */
+
+  /* ── Hero ──────────────────────────────────────────────────── */
+  .sobre-hero {
+    position: relative;
+    min-height: 62vh;
+    display: flex;
+    align-items: center;        /* centraliza verticalmente */
+    justify-content: center;    /* centraliza horizontalmente */
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse 80% 100% at 0% 60%,
+        #3d0018 0%,
+        var(--clr-green-dark) 38%,
+        transparent 72%),
+      linear-gradient(160deg,
+        var(--clr-green-dark) 0%,
+        var(--clr-green)      50%,
+        #1a0010               100%);
+    padding-top:    calc(var(--header-h) + 5rem);
+    padding-bottom: 5rem;
+  }
+
+  /* Grade mais densa que o index (40px vs 60px) */
+  .sobre-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  /* Ornamento circular decorativo */
+  .sobre-hero__orb {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  /* Orb 1 — anel duplo com borda dourada mais pronunciada */
+  .sobre-hero__orb--1 {
+    width: 480px; height: 480px;
+    border: 56px solid rgba(232,160,32,.12);
+    top: -140px; right: -80px;
+    /* Segundo anel interno via outline */
+    outline: 22px solid rgba(232,160,32,.05);
+    outline-offset: 28px;
+  }
+
+  /* Orb 2 — menor, posicionado abaixo ao centro */
+  .sobre-hero__orb--2 {
+    width: 220px; height: 220px;
+    border: 28px solid rgba(255,255,255,.06);
+    bottom: -60px; left: 38%;
+    background: transparent;
+  }
+
+  /* Faixa dourada — mais espessa que o index (6px vs 4px) com gradiente bidirecional */
+  .sobre-hero__stripe {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 5px;
+    background: linear-gradient(to bottom,
+      transparent 0%,
+      var(--clr-accent) 20%,
+      rgba(255,255,255,.6) 50%,
+      var(--clr-accent) 80%,
+      transparent 100%);
+    opacity: .55;
+    pointer-events: none;
+  }
+
+  .sobre-hero__content {
+    position: relative;
+    z-index: 2;
+    max-width: 820px;
+    /* Centralização horizontal do conteúdo interno */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Eyebrow: fundo pill semitransparente (distinto do index que usa só texto) */
+  .sobre-hero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: .55em;
+    font-size: .73rem;
+    font-weight: 700;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--clr-accent);
+    background: rgba(232,160,32,.1);
+    border: 1px solid rgba(232,160,32,.25);
+    border-radius: var(--radius-pill);
+    padding: .32em 1em;
+    margin-bottom: var(--space-md);
+    animation: slideUp .7s var(--ease) both;
+  }
+
+  .sobre-hero__title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5.8vw, 4rem);
+    font-weight: 700;
+    color: var(--clr-white);
+    line-height: 1.13;
+    margin-bottom: var(--space-md);
+    animation: slideUp .85s var(--ease) .08s both;
+  }
+
+  .sobre-hero__title em {
+    font-style: italic;
+    color: var(--clr-accent);
+    /* Sublinhado decorativo no em — diferenciador sutil */
+    text-decoration: underline;
+    text-decoration-color: rgba(232,160,32,.35);
+    text-underline-offset: 6px;
+    text-decoration-thickness: 2px;
+  }
+
+  .sobre-hero__desc {
+    font-size: 1.08rem;
+    color: rgba(255,255,255,.75);
+    max-width: 600px;
+    line-height: 1.78;
+    margin-bottom: var(--space-lg);
+    animation: slideUp 1s var(--ease) .16s both;
+    /* Centralizado: borda inferior em vez de esquerda */
+    border-bottom: 2px solid rgba(232,160,32,.25);
+    padding-bottom: var(--space-md);
+  }
+
+  .sobre-hero__actions {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    animation: slideUp 1s var(--ease) .24s both;
+  }
+
+  .hero-anchor {
+    display: inline-flex;
+    align-items: center;
+    gap: .4em;
+    font-size: .85rem;
+    font-weight: 600;
+    color: rgba(255,255,255,.72);
+    border-bottom: 1px solid rgba(255,255,255,.25);
+    padding-bottom: .1em;
+    transition: color var(--dur-fast), border-color var(--dur-fast);
+    text-decoration: none;
+  }
+  .hero-anchor:hover { color: var(--clr-white); border-color: var(--clr-white); }
+
+  /* ── Estatísticas ───────────────────────────────────────────── */
+  /*
+    Diferenciação: fundo com gradiente escuro + linha dourada superior
+    Em vez do bloco sólido `--clr-dark` do index
+  */
+  .sobre-stats {
+    background: linear-gradient(180deg, #0e0008 0%, #1a0010 100%);
+    border-top: 3px solid var(--clr-accent);
+    padding-block: 3rem;
+  }
+
+  .sobre-stats__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1.5rem 0;
+  }
+
+  .sobre-stat {
+    text-align: center;
+    padding: .75rem 1.5rem;
+    position: relative;
+  }
+
+  /* Separador vertical com gradiente dourado */
+  .sobre-stat::after {
+    content: '';
+    position: absolute;
+    right: 0; top: 20%; bottom: 20%;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, rgba(232,160,32,.3), transparent);
+  }
+  .sobre-stat:last-child::after { display: none; }
+
+  .sobre-stat__num {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    color: var(--clr-accent);
+    line-height: 1;
+    margin-bottom: .4rem;
+  }
+
+  .sobre-stat__label {
+    font-size: .78rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: rgba(255,255,255,.45);
+  }
+
+  /* ── Seção padrão interna ───────────────────────────────────── */
+  .sobre-section {
+    padding-block: var(--space-2xl);
+  }
+
+  /* Fundo alternado com leve tint rosado — distinto do --clr-off puro */
+  .sobre-section--alt {
+    background: #fdf4f7;
+    border-top: 1px solid var(--clr-gray-1);
+    border-bottom: 1px solid var(--clr-gray-1);
+  }
+
+  /* ── Bloco de introdução com ícone ─────────────────────────── */
+  .intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    align-items: center;
+    margin-top: var(--space-xl);
+  }
+
+  /*
+    Visual diferenciado: proporção retangular, fundo mais escuro com textura
+    de pontos em vez do grid de linhas do index/historico
+  */
+  .intro-visual {
+    background: linear-gradient(160deg, #3d0018 0%, var(--clr-green-dark) 60%, #5e0029 100%);
+    border-radius: var(--radius-lg);
+    aspect-ratio: 4 / 3;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(26,0,16,.25);
+  }
+
+  /* Padrão de pontos em vez de grade de linhas */
+  .intro-visual::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(255,255,255,.07) 1.5px, transparent 1.5px);
+    background-size: 22px 22px;
+  }
+
+  /* Barra dourada horizontal na base */
+  .intro-visual::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 10%; right: 10%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--clr-accent), transparent);
+    border-radius: 2px;
+  }
+
+  .intro-visual__icon {
+    font-size: 4rem;
+    color: var(--clr-accent);
+    position: relative;
+    z-index: 1;
+    /* Glow dourado sutil */
+    filter: drop-shadow(0 0 18px rgba(232,160,32,.4));
+  }
+
+  .intro-visual__year {
+    font-family: var(--font-display);
+    font-size: 4.5rem;
+    font-weight: 700;
+    color: rgba(255,255,255,.08);
+    position: absolute;
+    bottom: .75rem; right: 1.25rem;
+    line-height: 1;
+    pointer-events: none;
+    letter-spacing: -.04em;
+  }
+
+  .intro-visual__tag {
+    position: relative;
+    z-index: 1;
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.55);
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: var(--radius-pill);
+    padding: .25em .9em;
+  }
+
+  .intro-text__tag {
+    display: inline-block;
+    font-size: .73rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    /* Cor invertida: texto branco + fundo bordô — distinto do pill vermelho-claro do index */
+    color: var(--clr-white);
+    background: var(--clr-green);
+    border-radius: var(--radius-pill);
+    padding: .28em 1em;
+    margin-bottom: var(--space-sm);
+  }
+
+  .intro-text__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.7rem, 3.5vw, 2.6rem);
+    font-weight: 700;
+    color: var(--clr-dark);
+    line-height: 1.2;
+    margin-bottom: var(--space-sm);
+  }
+
+  .intro-text p {
+    color: var(--clr-gray-3);
+    font-size: 1rem;
+    line-height: 1.82;
+    margin-bottom: 1.2rem;
+  }
+  .intro-text p:last-child { margin-bottom: 0; }
+
+  /* ── Cards MVV — borda esquerda em vez de topo ──────────────── */
+  .mvv-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+  }
+
+  .mvv-card {
+    background: var(--clr-white);
+    /* Borda esquerda (distinto: index usa topo) */
+    border-left: 4px solid var(--clr-green);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    /* Borda nos outros lados mais suave */
+    border-top: 1px solid var(--clr-gray-1);
+    border-right: 1px solid var(--clr-gray-1);
+    border-bottom: 1px solid var(--clr-gray-1);
+    padding: var(--space-lg) var(--space-md);
+    position: relative;
+    overflow: hidden;
+    transition: transform var(--dur-med) var(--ease),
+                box-shadow var(--dur-med) var(--ease),
+                border-left-color var(--dur-fast);
+  }
+
+  .mvv-card:hover {
+    transform: translateX(4px);     /* desliza à direita — diferente do translateY do index */
+    box-shadow: var(--shadow-md);
+    border-left-color: var(--clr-accent);
+  }
+
+  /* Ícone quadrado com bordas arredondadas maiores */
+  .mvv-card__icon {
+    width: 48px; height: 48px;
+    border-radius: var(--radius-md);
+    background: var(--clr-green-light);
+    color: var(--clr-green);
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-sm);
+    transition: background var(--dur-fast), color var(--dur-fast);
+  }
+
+  .mvv-card:hover .mvv-card__icon {
+    background: var(--clr-accent);
+    color: var(--clr-dark);
+  }
+
+  .mvv-card__title {
+    font-family: var(--font-display);
+    font-size: 1.12rem;
+    font-weight: 700;
+    color: var(--clr-dark);
+    margin-bottom: .6rem;
+  }
+
+  .mvv-card p {
+    font-size: .92rem;
+    color: var(--clr-gray-3);
+    line-height: 1.68;
+  }
+
+  /* ── Timeline — estilo "trilho" com números em vez de pontos ─── */
+  .timeline {
+    position: relative;
+    margin-top: var(--space-xl);
+    padding-left: 3.5rem;
+  }
+
+  /* Trilho vertical — tracejado em vez de contínuo */
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 1.1rem;
+    top: .5rem;
+    bottom: .5rem;
+    width: 2px;
+    background: repeating-linear-gradient(
+      to bottom,
+      var(--clr-green)      0px,
+      var(--clr-green)      8px,
+      transparent           8px,
+      transparent           16px
+    );
+    opacity: .5;
+  }
+
+  .tl-item {
+    position: relative;
+    margin-bottom: 2.8rem;
+    padding-left: .75rem;
+  }
+  .tl-item:last-child { margin-bottom: 0; }
+
+  /* Marcador: quadrado girado (losango) em vez de círculo */
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -2.4rem;
+    top: .4rem;
+    width: 13px; height: 13px;
+    transform: rotate(45deg);
+    background: var(--clr-white);
+    border: 3px solid var(--clr-green);
+    box-shadow: 0 0 0 3px var(--clr-green-light);
+    transition: background var(--dur-fast), border-color var(--dur-fast);
+  }
+
+  .tl-item:hover::before {
+    background: var(--clr-green);
+  }
+
+  .tl-item--accent::before {
+    background: var(--clr-accent);
+    border-color: var(--clr-accent);
+    box-shadow: 0 0 0 3px rgba(232,160,32,.2);
+  }
+
+  /* Ano: tag com bordas quadradas (vs pill arredondado do index) */
+  .tl-year {
+    display: inline-block;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--clr-white);
+    background: var(--clr-green);
+    border-radius: var(--radius-sm);
+    padding: .2em .7em;
+    margin-bottom: .5rem;
+  }
+
+  .tl-item--accent .tl-year {
+    background: var(--clr-accent);
+    color: var(--clr-dark);
+  }
+
+  .tl-title {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--clr-dark);
+    margin-bottom: .4rem;
+    line-height: 1.3;
+  }
+
+  .tl-body {
+    font-size: .93rem;
+    color: var(--clr-gray-3);
+    line-height: 1.72;
+  }
+
+  .tl-quote {
+    margin-top: .75rem;
+    background: rgba(232,160,32,.06);
+    border-left: 3px solid var(--clr-accent);
+    padding: .75rem 1rem;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-style: italic;
+    font-size: .9rem;
+    color: var(--clr-gray-3);
+    line-height: 1.65;
+  }
+
+  /* ── Seção Gaspar Vianna ───────────────────────────────────── */
+  .gaspar-split {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: var(--space-xl);
+    align-items: start;
+    margin-top: var(--space-xl);
+  }
+
+  /* Card retrato — fundo com textura diferente */
+  .gaspar-portrait {
+    background:
+      radial-gradient(ellipse at top, #5e0029 0%, #1a0010 100%);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 24px 64px rgba(26,0,16,.3);
+    /* Borda dourada sutil */
+    border: 1px solid rgba(232,160,32,.2);
+    position: relative;
+  }
+
+  .gaspar-portrait__top {
+    padding: 2.2rem 1.5rem 1.5rem;
+    text-align: center;
+  }
+
+  .gaspar-portrait__avatar {
+    width: 110px; height: 110px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.08);
+    border: 2px solid rgba(232,160,32,.4);
+    /* Anel duplo via box-shadow */
+    box-shadow: 0 0 0 6px rgba(232,160,32,.08),
+                0 0 0 12px rgba(232,160,32,.04);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: rgba(255,255,255,.5);
+    margin: 0 auto 1rem;
+    overflow: hidden;
+  }
+
+  .gaspar-portrait__avatar img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .gaspar-portrait__name {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--clr-white);
+    margin-bottom: .3rem;
+  }
+
+  .gaspar-portrait__dates {
+    font-size: .82rem;
+    color: var(--clr-accent);
+    font-weight: 600;
+    letter-spacing: .06em;
+    /* Separador decorativo abaixo das datas */
+    display: block;
+    padding-bottom: .8rem;
+    border-bottom: 1px dashed rgba(232,160,32,.25);
+    margin-bottom: 0;
+  }
+
+  .gaspar-portrait__facts {
+    border-top: none;
+    padding: 1.4rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+  }
+
+  .gaspar-fact {
+    display: flex;
+    align-items: flex-start;
+    gap: .65rem;
+    font-size: .82rem;
+    color: rgba(255,255,255,.65);
+    line-height: 1.5;
+  }
+
+  .gaspar-fact i {
+    color: var(--clr-accent);
+    font-size: .85rem;
+    flex-shrink: 0;
+    margin-top: .15rem;
+  }
+
+  .gaspar-bio { display: flex; flex-direction: column; gap: 1.4rem; }
+
+  /* Tag de bio: estilo distinto — borda em vez de fill */
+  .gaspar-bio__tag {
+    display: inline-block;
+    font-size: .73rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--clr-green);
+    background: transparent;
+    border: 1.5px solid var(--clr-green);
+    border-radius: var(--radius-sm);
+    padding: .24em .85em;
+    margin-bottom: .25rem;
+  }
+
+  .gaspar-bio__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 700;
+    color: var(--clr-dark);
+    line-height: 1.2;
+  }
+
+  .gaspar-bio p {
+    font-size: 1rem;
+    color: var(--clr-gray-3);
+    line-height: 1.82;
+  }
+
+  /* Chips: borda sólida mais pronunciada — distinto do fill leve do index */
+  .gaspar-chips { display: flex; flex-wrap: wrap; gap: .5rem; padding-top: .5rem; }
+
+  .gaspar-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: .4em;
+    font-size: .78rem;
+    font-weight: 600;
+    color: var(--clr-green-dark);
+    background: transparent;
+    border: 1.5px solid var(--clr-green);
+    border-radius: var(--radius-sm);
+    padding: .3em .85em;
+    transition: background var(--dur-fast), color var(--dur-fast);
+  }
+
+  .gaspar-chip:hover {
+    background: var(--clr-green);
+    color: var(--clr-white);
+  }
+
+  /* ── CTA final — gradiente com direção e ângulo distintos ─── */
+  .sobre-cta {
+    /* Diagonal 225deg (vs 145deg do index) com cor mais escura no centro */
+    background:
+      radial-gradient(ellipse 60% 80% at 50% 50%,
+        var(--clr-green-dark) 0%,
+        transparent 70%),
+      linear-gradient(225deg,
+        #1a0010 0%,
+        var(--clr-green) 50%,
+        var(--clr-green-dark) 100%);
+    padding-block: var(--space-2xl);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Pattern de diagonal em vez de grade ortogonal */
+  .sobre-cta::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        -45deg,
+        rgba(255,255,255,.025) 0px,
+        rgba(255,255,255,.025) 1px,
+        transparent 1px,
+        transparent 28px
+      );
+  }
+
+  /* Linha dourada no topo do CTA */
+  .sobre-cta::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 15%; right: 15%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--clr-accent), transparent);
+    border-radius: 1px;
+  }
+
+  .sobre-cta__content { position: relative; z-index: 1; }
+
+  .sobre-cta__mark {
+    font-family: var(--font-display);
+    font-size: 6rem;
+    line-height: .5;
+    color: var(--clr-accent);
+    opacity: .4;
+    display: block;
+    margin-bottom: var(--space-sm);
+  }
+
+  .sobre-cta__quote {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 2.8vw, 1.7rem);
+    font-style: italic;
+    color: var(--clr-white);
+    line-height: 1.62;
+    max-width: 720px;
+    margin-inline: auto;
+    margin-bottom: var(--space-sm);
+  }
+
+  .sobre-cta__author {
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--clr-accent);
+    margin-bottom: var(--space-lg);
+    display: block;
+  }
+
+  .sobre-cta__actions { display: flex; gap: var(--space-sm); justify-content: center; flex-wrap: wrap; }
+
+  .btn--accent {
+    background: var(--clr-accent);
+    color: var(--clr-dark);
+    font-weight: 700;
+    box-shadow: 0 4px 16px rgba(232,160,32,.35);
+  }
+  .btn--accent:hover {
+    background: #f5b230;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(232,160,32,.45);
+  }
+
+  .btn--ghost-white {
+    background: transparent;
+    color: var(--clr-white);
+    border: 2px solid rgba(255,255,255,.45);
+    font-weight: 600;
+  }
+  .btn--ghost-white:hover {
+    background: rgba(255,255,255,.1);
+    border-color: rgba(255,255,255,.75);
+    transform: translateY(-2px);
+  }
+
+  /* ── Anchors — fundo levemente tingido + linha dourada ──────── */
+  .sobre-anchors {
+    background: #fdf4f7;
+    border-bottom: 2px solid var(--clr-gray-1);
+    border-top: 1px solid var(--clr-gray-1);
+    position: sticky;
+    top: var(--header-h);
+    z-index: 100;
+    padding-block: .65rem;
+  }
+
+  .sobre-anchors__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .25rem;
+    justify-content: center;
+    padding-inline: var(--space-md);
+  }
+
+  .sobre-anchors__link {
+    display: flex;
+    align-items: center;
+    gap: .4em;
+    font-size: .8rem;
+    font-weight: 600;
+    color: var(--clr-gray-3);
+    padding: .4em 1em;
+    border-radius: var(--radius-sm);   /* quadrado, não pill */
+    white-space: nowrap;
+    transition: background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast);
+    text-decoration: none;
+    border: 1px solid transparent;
+  }
+
+  .sobre-anchors__link:hover,
+  .sobre-anchors__link.active {
+    background: var(--clr-green-light);
+    color: var(--clr-green);
+    border-color: rgba(147,1,66,.15);
+  }
+
+  /* ── Responsividade ─────────────────────────────────────────── */
+  @media (max-width: 900px) {
+    .gaspar-split { grid-template-columns: 1fr; }
+    .gaspar-portrait { max-width: 340px; margin-inline: auto; }
+    .gaspar-portrait__facts { display: grid; grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    .intro-grid  { grid-template-columns: 1fr; }
+    .intro-visual { max-width: 100%; aspect-ratio: 16/9; }
+    .mvv-grid { grid-template-columns: 1fr; }
+    .sobre-hero__orb--1 { width: 280px; height: 280px; }
+    .sobre-stat::after { display: none; }
+    .sobre-stat { border-bottom: 1px solid rgba(255,255,255,.07); padding-block: 1rem; }
+    .sobre-stat:last-child { border-bottom: none; }
+
+    .sobre-hero__actions {
+      flex-direction: column;
+      align-items: stretch;
+      gap: .75rem;
+      width: 100%;
+    }
+    .sobre-hero__actions .btn,
+    .sobre-hero__actions .hero-anchor {
+      width: 100%;
+      justify-content: center;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    /* Botões âncora: 2 por linha em tablet */
+    .sobre-anchors__list {
+      gap: .3rem;
+      padding-inline: var(--space-sm);
+    }
+    .sobre-anchors__link {
+      flex: 1 1 calc(50% - .3rem);
+      justify-content: center;
+      text-align: center;
+      min-height: 36px;
+      font-size: .75rem;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .sobre-hero__actions {
+      flex-direction: column;
+      align-items: stretch;
+      gap: .6rem;
+      width: 100%;
+    }
+    .sobre-hero__actions .btn,
+    .sobre-hero__actions .hero-anchor {
+      width: 100%;
+      justify-content: center;
+      text-align: center;
+      box-sizing: border-box;
+      min-height: 44px;   /* área de toque adequada */
+    }
+    .sobre-cta__actions { flex-direction: column; align-items: stretch; }
+    .sobre-cta__actions .btn { width: 100%; justify-content: center; }
+    .gaspar-portrait__facts { grid-template-columns: 1fr; }
+    .timeline { padding-left: 2.5rem; }
+    .sobre-stats__grid { grid-template-columns: 1fr 1fr; }
+    .mvv-card { border-radius: var(--radius-sm); }
+
+    /* Botões âncora: empilhados 1 por linha em mobile pequeno */
+    .sobre-anchors__link {
+      flex: 1 1 100%;
+      min-height: 40px;
+      font-size: .73rem;
+    }
+  }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER (idêntico ao index.html) ===== -->
+  <header id="header" class="header">
+    <div class="container header__inner">
+
+      <!-- =====================================================
+           [ADIÇÃO] Aba de menu – inserida antes do brand.
+           Posicionada à esquerda do logotipo graças ao flex
+           do .header__inner existente.
+           Nenhuma classe/id existente foi alterada.
+           ===================================================== -->
+      <div class="sidemenu-wrap" id="sidemenuWrap">
+
+        <!-- Aba toggle -->
+        <button
+          class="sidemenu-tab"
+          id="sidemenuTab"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="sidemenuPanel"
+          aria-label="Abrir menu de navegação"
+        >
+          <span class="sidemenu-tab__icon" aria-hidden="true">
+            <span class="sidemenu-tab__bar"></span>
+            <span class="sidemenu-tab__bar"></span>
+            <span class="sidemenu-tab__bar"></span>
+          </span>
+          <span class="sidemenu-tab__label">Menu</span>
+        </button>
+
+        <!-- Painel principal -->
+        <div class="sidemenu-panel" id="sidemenuPanel" role="navigation" aria-label="Menu lateral">
+          <ul class="sidemenu-list">
+
+            <!-- ── Links diretos principais ── -->
+            <li class="sidemenu-list__item">
+              <a href="sobre.html" class="sidemenu-list__link">
+                Sobre o DAGV
+                <i class="fa-solid fa-building-columns sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="historico2.html" class="sidemenu-list__link sidemenu-list__link--historico">
+                Resgate Histórico
+                <i class="fa-solid fa-scroll sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="coordenacao.html" class="sidemenu-list__link">
+                Coordenação
+                <i class="fa-solid fa-users sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Dropdown: Informações DAGV ── -->
+            <li class="sidemenu-list__item">
+              <button
+                class="sidemenu-list__btn"
+                data-dropdown="informacoes"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Informações DAGV
+                <i class="fa-solid fa-chevron-down sidemenu-list__arrow" aria-hidden="true"></i>
+              </button>
+              <ul class="sidemenu-dropdown" id="dropInformacoes">
+                <li><a href="https://dagvmeduftm.wordpress.com/estatuto-dagv/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">Estatuto</a></li>
+                <li><a href="https://dagvmeduftm.wordpress.com/galeria-de-fotos/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">Galeria de Fotos</a></li>
+              </ul>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Links institucionais ── -->
+            <li class="sidemenu-list__item">
+              <a href="https://dagvmeduftm.wordpress.com/pet-medicina-1/" target="_blank" rel="noopener" class="sidemenu-list__link">
+                PET Medicina
+                <i class="fa-solid fa-flask sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="ligas.html" class="sidemenu-list__link">
+                Ligas Acadêmicas
+                <i class="fa-solid fa-graduation-cap sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="manual.html" class="sidemenu-list__link">
+                Manual do Estudante
+                <i class="fa-solid fa-book-open-reader sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="https://dagvmeduftm.wordpress.com/cursinho-carolina/" target="_blank" rel="noopener" class="sidemenu-list__link">
+                Cursinho Carolina
+                <i class="fa-solid fa-book-open sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Dropdown: Instituições ── -->
+            <li class="sidemenu-list__item">
+              <button
+                class="sidemenu-list__btn"
+                data-dropdown="instituicoes"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Instituições
+                <i class="fa-solid fa-chevron-down sidemenu-list__arrow" aria-hidden="true"></i>
+              </button>
+              <ul class="sidemenu-dropdown" id="dropInstituicoes">
+                <li><a href="https://dagvmeduftm.wordpress.com/denem/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">DENEM</a></li>
+                <li><a href="https://dagvmeduftm.wordpress.com/dce-uftm/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">DCE</a></li>
+                <li><a href="https://dagvmeduftm.wordpress.com/cvu-uberaba/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">CVU</a></li>
+                <li><a href="https://dagvmeduftm.wordpress.com/cepop-uftm/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">CEPOP</a></li>
+              </ul>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Final ── -->
+            <li class="sidemenu-list__item">
+              <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7" target="_blank" rel="noopener" class="sidemenu-list__link">
+                Suporte
+                <i class="fa-solid fa-headset sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+
+          </ul>
+        </div><!-- /sidemenu-panel -->
+
+      </div><!-- /sidemenu-wrap -->
+      <!-- ===================================================== -->
+
+      <!-- Logo + Nome -->
+      <a href="index.html" class="header__brand">
+        <div class="header__logo-wrap">
+          <!--
+            [ALTERAÇÃO] Logo DAGV – componente Logo dinâmico.
+            - Fundo vermelho/transparente → logo dourada (img.logo--gold)
+            - Fundo branco (scrolled)     → logo vermelha (img.logo--red)
+            A troca é feita via CSS: visibilidade controlada por .header.scrolled
+          -->
+          <img
+            src="img/logo dourada-sem fundo.png"
+            alt="Logo DAGV – Diretório Acadêmico Gaspar Vianna"
+            class="header__logo-svg logo--gold"
+            width="80" height="68"
+            loading="eager"
+          />
+          <img
+            src="img/Logo DAGV sem fundo verm.png"
+            alt="Logo DAGV – Diretório Acadêmico Gaspar Vianna"
+            class="header__logo-svg logo--red"
+            width="80" height="68"
+            loading="eager"
+            aria-hidden="true"
+          />
+        </div>
+        <div class="header__title-wrap">
+          <span class="header__dagv"></span>
+          <span class="header__subtitle"></span>
+        </div>
+      </a>
+
+      <!-- Nav desktop -->
+      <nav class="nav" aria-label="Navegação principal">
+        <ul class="nav__list">
+          <li><a href="sobre.html"                    class="nav__link nav__link--active">Sobre</a></li>
+          <li><a href="coordenacao.html"              class="nav__link">Coordenações</a></li>
+          <li><a href="index.html#eventos-academicos" class="nav__link">Eventos</a></li>
+          <li><a href="index.html#events"             class="nav__link">Instituições UFTM</a></li>
+          <li><a href="index.html#contact"            class="nav__link nav__link--cta">Contato</a></li>
+        </ul>
+      </nav>
+
+      <!-- Hamburguer -->
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Nav mobile (drawer) -->
+    <nav class="nav-mobile" id="navMobile" aria-hidden="true">
+      <ul class="nav-mobile__list">
+        <li><a href="index.html"                    class="nav-mobile__link">Início</a></li>
+        <li><a href="sobre.html"                    class="nav-mobile__link">Sobre</a></li>
+        <li><a href="coordenacao.html"              class="nav-mobile__link">Coordenações</a></li>
+        <li><a href="index.html#eventos-academicos" class="nav-mobile__link">Eventos</a></li>
+        <li><a href="index.html#events"             class="nav-mobile__link">Instituições UFTM</a></li>
+        <li><a href="index.html#contact"            class="nav-mobile__link">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ══════════════════════════════════════════════════════════
+         HERO
+         ══════════════════════════════════════════════════════════ -->
+    <section class="sobre-hero" aria-labelledby="sobre-hero-title">
+      <div class="sobre-hero__orb sobre-hero__orb--1" aria-hidden="true"></div>
+      <div class="sobre-hero__orb sobre-hero__orb--2" aria-hidden="true"></div>
+      <div class="sobre-hero__stripe"                 aria-hidden="true"></div>
+
+      <div class="container sobre-hero__content">
+        <p class="sobre-hero__eyebrow">
+          <i class="fa-solid fa-building-columns" aria-hidden="true"></i>
+          Medicina UFTM · Desde 1954
+        </p>
+
+        <h1 class="sobre-hero__title" id="sobre-hero-title">
+          Conheça o<br /><em>Diretório Acadêmico</em><br />Gaspar Vianna
+        </h1>
+
+        <p class="sobre-hero__desc">
+          Uma entidade fundada por estudantes, para estudantes.
+          Mais de 70 anos representando a voz da Medicina na UFTM —
+          com história, legado e um nome que carrega ciência e coragem.
+        </p>
+
+        <div class="sobre-hero__actions">
+          <!-- <a href="#o-que-e" class="btn btn--primary">
+            <i class="" aria-hidden="true"></i>
+            Explorar a história
+          </a> -->
+          <!-- <a href="#gaspar" class="hero-anchor">
+            <i class="fa-solid fa-user-doctor" aria-hidden="true"></i>
+            Quem foi Gaspar Vianna?
+          </a> -->
+          <!-- <a href="index.html" class="hero-anchor">
+            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+            Voltar ao início
+          </a> -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════
+         ESTATÍSTICAS
+         ══════════════════════════════════════════════════════════ -->
+    <section class="sobre-stats" aria-label="Números do DAGV">
+      <div class="container">
+        <div class="sobre-stats__grid">
+          <div class="sobre-stat" data-aos="fade-up" data-aos-delay="0">
+            <div class="sobre-stat__num">1954</div>
+            <div class="sobre-stat__label">Ano de fundação</div>
+          </div>
+          <div class="sobre-stat" data-aos="fade-up" data-aos-delay="80">
+            <div class="sobre-stat__num">70+</div>
+            <div class="sobre-stat__label">Anos de história</div>
+          </div>
+          <!-- <div class="sobre-stat" data-aos="fade-up" data-aos-delay="160">
+            <div class="sobre-stat__num">8</div>
+            <div class="sobre-stat__label">Coordenadorias</div>
+          </div> -->
+          <div class="sobre-stat" data-aos="fade-up" data-aos-delay="240">
+            <div class="sobre-stat__num">600+</div>
+            <div class="sobre-stat__label">Estudantes representados</div>
+          </div>
+          <!-- <div class="sobre-stat" data-aos="fade-up" data-aos-delay="320">
+            <div class="sobre-stat__num">29</div>
+            <div class="sobre-stat__label">Anos vividos por Gaspar</div> -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════
+         BARRA DE ÂNCORAS INTERNA
+         ══════════════════════════════════════════════════════════ -->
+    <nav class="sobre-anchors" aria-label="Navegação interna da página">
+      <ul class="sobre-anchors__list">
+        <li>
+          <a href="#o-que-e" class="sobre-anchors__link">
+            <i class="fa-solid fa-info-circle" aria-hidden="true"></i> O que é o DAGV
+          </a>
+        </li>
+
+        <li>
+          <a href="#historia" class="sobre-anchors__link">
+            <i class="fa-solid fa-scroll" aria-hidden="true"></i> História e Fundação
+          </a>
+        </li>
+        <li>
+          <a href="#gaspar" class="sobre-anchors__link">
+            <i class="fa-solid fa-user-doctor" aria-hidden="true"></i> Quem foi Gaspar Vianna
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- ══════════════════════════════════════════════════════════
+         2.1 — O QUE É O DAGV
+         ══════════════════════════════════════════════════════════ -->
+    <section id="o-que-e" class="sobre-section" aria-labelledby="oque-title">
+      <div class="container">
+
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">O Diretório</span>
+          <h2 class="section-title" id="oque-title">O que é o DAGV?</h2>
+          <p class="section-desc">
+            Entidade representativa dos estudantes de Medicina da UFTM,
+            presente na vida acadêmica desde os primeiros anos do curso.
+          </p>
+        </div>
+
+        <div class="intro-grid">
+          <div class="intro-visual" data-aos="fade-right">
+            <i class="intro-visual__icon fa-solid fa-building-columns" aria-hidden="true"></i>
+            <span class="intro-visual__tag">Representação estudantil</span>
+            <span class="intro-visual__year" aria-hidden="true">DAGV</span>
+          </div>
+
+          <div class="intro-text" data-aos="fade-left" data-aos-delay="100">
+            <span class="intro-text__tag">Identidade</span>
+            <h3 class="intro-text__title">A voz dos estudantes de Medicina da UFTM</h3>
+
+            <p>
+              O <strong>Diretório Acadêmico Gaspar Vianna (DAGV)</strong> é a entidade
+              representativa oficial dos estudantes do curso de Medicina da
+              Universidade Federal do Triângulo Mineiro (UFTM), em Uberaba — MG.
+              Fundado originalmente como <em>Centro Acadêmico Gaspar Vianna</em> em 1954,
+              ele é um dos diretórios acadêmicos mais antigos e atuantes do interior de Minas Gerais.
+            </p>
+
+            <p>
+              Sua função é representar, defender e articular os interesses dos
+              acadêmicos de Medicina diante da instituição, de órgãos estudantis nacionais
+              e da sociedade. O DAGV organiza assembleias, projetos sociais, eventos
+              culturais e científicos, e mantém canais permanentes de escuta com os alunos.
+            </p>
+
+            <p>
+              Organizado em oito coordenadorias temáticas — Comunicação, Finanças,
+              Ensino e Pesquisa, Sociocultural, Representação Estudantil, Tecnologia,
+              Secretaria e Coordenação Geral — o DAGV garante que cada dimensão da
+              vida acadêmica seja representada de forma especializada e democrática.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════
+         2.2 — HISTÓRIA E FUNDAÇÃO
+         ══════════════════════════════════════════════════════════ -->
+    <section id="historia" class="sobre-section" aria-labelledby="historia-title">
+      <div class="container">
+
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Linha do Tempo</span>
+          <h2 class="section-title" id="historia-title">História e Fundação</h2>
+          <p class="section-desc">
+            De Centro Acadêmico a Diretório — mais de sete décadas de representação
+            estudantil no coração da Medicina em Uberaba.
+          </p>
+        </div>
+
+        <div class="timeline">
+
+          <div class="tl-item tl-item--accent" data-aos="fade-up" data-aos-delay="0">
+            <span class="tl-year">1953</span>
+            <h3 class="tl-title">A criação da FMTM</h3>
+            <p class="tl-body">
+              A Faculdade de Medicina do Triângulo Mineiro (FMTM) é criada em Uberaba,
+              dando início ao curso de Medicina que formaria gerações de médicos para
+              o Triângulo Mineiro e o Brasil. Já em seu primeiro ano, os alunos
+              demonstraram interesse em organizar uma representação estudantil formal.
+            </p>
+          </div>
+
+          <div class="tl-item" data-aos="fade-up" data-aos-delay="80">
+            <span class="tl-year">1954</span>
+            <h3 class="tl-title">Fundação do Centro Acadêmico Gaspar Vianna</h3>
+            <p class="tl-body">
+              Em 1º de maio de 1954, acontece a primeira reunião do
+              <strong>Centro Acadêmico Gaspar Vianna (CAGV)</strong>, com a presença
+              do diretor da FMTM, Mozart Furtado Nunes. Os alunos elegeram Wander Magalhães
+              Moreira como primeiro presidente. Uma comissão foi formada para elaborar
+              o estatuto da entidade recém-criada.
+            </p>
+            <blockquote class="tl-quote">
+              "Num ambiente de cordialidade, proporcionado pelo nosso diretor, foi encerrada a primeira reunião,
+              que causou a todos nós muita alegria e contentamento."
+              <br /><strong>— Ata do CAGV, 1954</strong>
+            </blockquote>
+          </div>
+
+          <div class="tl-item" data-aos="fade-up" data-aos-delay="120">
+            <span class="tl-year">1954</span>
+            <h3 class="tl-title">Jornal Epíplon</h3>
+            <p class="tl-body">
+              O CAGV inaugura a publicação do jornal acadêmico <em>Epíplon</em>,
+              com proposta de ser o companheiro de todas as turmas — do calouro ao formando.
+              Era o início da comunicação estudantil organizada na FMTM.
+            </p>
+          </div>
+
+          <div class="tl-item tl-item--accent" data-aos="fade-up" data-aos-delay="160">
+            <span class="tl-year">1956</span>
+            <h3 class="tl-title">Inauguração pelo Presidente Juscelino Kubitschek</h3>
+            <p class="tl-body">
+              Em 3 de maio de 1956, o Presidente da República
+              <strong>Juscelino Kubitschek</strong> visita Uberaba e inaugura oficialmente
+              o CAGV. Sensibilizado com o empenho dos acadêmicos, JK promete defender
+              a federalização da FMTM — promessa que se cumpriria anos depois com a
+              criação da UFTM.
+            </p>
+          </div>
+
+          <div class="tl-item" data-aos="fade-up" data-aos-delay="200">
+            <span class="tl-year">1960</span>
+            <h3 class="tl-title">Sede definitiva no Edifício Vitória Varotto</h3>
+            <p class="tl-body">
+              O Centro Acadêmico Gaspar Vianna passa a ocupar sua sede definitiva
+              no 3º andar do edifício Vitória Varotto, consolidando-se como espaço
+              físico de organização e convivência dos estudantes de Medicina.
+            </p>
+          </div>
+
+          <div class="tl-item" data-aos="fade-up" data-aos-delay="240">
+            <span class="tl-year">Posterior</span>
+            <h3 class="tl-title">De Centro Acadêmico a Diretório Acadêmico</h3>
+            <p class="tl-body">
+              O CAGV passou a se denominar <strong>Diretório Acadêmico Gaspar Vianna (DAGV)</strong>,
+              nome que conserva até os dias atuais. A mudança de Centro para Diretório
+              reflete a evolução da estrutura representativa e o crescimento da entidade
+              ao longo das décadas.
+            </p>
+          </div>
+
+          <div class="tl-item tl-item--accent" data-aos="fade-up" data-aos-delay="280">
+            <span class="tl-year">Hoje</span>
+            <h3 class="tl-title">Gestão Guimarães Rosa · 2026</h3>
+            <p class="tl-body">
+              Com mais de 70 anos de história, o DAGV segue como a principal
+              voz dos estudantes de Medicina da UFTM. A gestão atual mantém vivo
+              o legado da entidade com projetos sociais, representação estudantil
+              ativa e uma cultura de participação democrática e transparente.
+            </p>
+          </div>
+
+        </div><!-- /timeline -->
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════
+         2.3 — QUEM FOI GASPAR VIANNA
+         ══════════════════════════════════════════════════════════ -->
+    <section id="gaspar" class="sobre-section sobre-section--alt" aria-labelledby="gaspar-title">
+      <div class="container">
+
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">O Homenageado</span>
+          <h2 class="section-title" id="gaspar-title">Quem foi Gaspar Vianna?</h2>
+          <p class="section-desc">
+            O cientista que dá nome ao nosso diretório — uma vida breve e um legado eterno para a medicina brasileira.
+          </p>
+        </div>
+
+        <div class="gaspar-split">
+
+          <!-- Retrato / card lateral -->
+          <div class="gaspar-portrait" data-aos="fade-right">
+            <div class="gaspar-portrait__top">
+              <div class="gaspar-portrait__avatar" aria-hidden="true">
+                <i class="fa-solid fa-user-doctor"></i>
+              </div>
+              <div class="gaspar-portrait__name">Gaspar de Oliveira Vianna</div>
+              <div class="gaspar-portrait__dates">1885 — 1914</div>
+            </div>
+            <div class="gaspar-portrait__facts">
+              <div class="gaspar-fact">
+                <i class="fa-solid fa-map-marker-alt" aria-hidden="true"></i>
+                <span>Nascido em Belém do Pará</span>
+              </div>
+              <div class="gaspar-fact">
+                <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+                <span>Faculdade de Medicina do Rio de Janeiro</span>
+              </div>
+              <div class="gaspar-fact">
+                <i class="fa-solid fa-flask" aria-hidden="true"></i>
+                <span>Instituto Oswaldo Cruz</span>
+              </div>
+              <div class="gaspar-fact">
+                <i class="fa-solid fa-microscope" aria-hidden="true"></i>
+                <span>Parasitologia · Histopatologia · Medicina Tropical</span>
+              </div>
+              <div class="gaspar-fact">
+                <i class="fa-solid fa-star" aria-hidden="true"></i>
+                <span>Pioneiro no tratamento da Leishmaniose</span>
+              </div>
+              <div class="gaspar-fact">
+                <i class="fa-solid fa-heart-crack" aria-hidden="true"></i>
+                <span>Faleceu aos 29 anos, vítima de tuberculose</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Conteúdo biográfico -->
+          <div class="gaspar-bio" data-aos="fade-left" data-aos-delay="100">
+
+            <div>
+              <span class="gaspar-bio__tag">Biografia</span>
+              <h3 class="gaspar-bio__title">Um gênio precoce da ciência brasileira</h3>
+            </div>
+
+            <p>
+              <strong>Gaspar de Oliveira Vianna</strong> (1885–1914) foi um médico e
+              cientista brasileiro cuja atuação precoce deixou um legado duradouro para
+              a medicina e a pesquisa científica no país. Nascido em Belém do Pará,
+              mudou-se para o Rio de Janeiro para ingressar na Faculdade de Medicina,
+              onde se destacou como aluno aplicado e apaixonado pela pesquisa científica.
+            </p>
+
+            <p>
+              Durante a graduação, iniciou colaboração com o
+              <strong>Instituto Oswaldo Cruz</strong> — então o principal centro de
+              pesquisa biomédica do Brasil — com especial interesse em
+              <strong>parasitologia, histopatologia e medicina tropical</strong>.
+              Seu talento era evidente já nos primeiros anos de formação.
+            </p>
+
+            <p>
+              Sua maior contribuição se deu ao lado de <strong>Carlos Chagas</strong>,
+              aprofundando o estudo das doenças parasitárias e propondo o
+              <strong>uso do tártaro emético</strong> (antimonial trivalente) como
+              tratamento para a leishmaniose tegumentar americana — uma descoberta
+              pioneira que abriu caminho para terapias contra doenças parasitárias
+              em todo o mundo.
+            </p>
+
+            <p>
+              Apesar da carreira brilhante, Gaspar Vianna faleceu em 1914, aos
+              apenas <strong>29 anos</strong>, vítima de tuberculose. Em poucos anos
+              de trabalho, deixou um legado científico que o consagra como um dos
+              grandes nomes da medicina experimental brasileira do início do século XX.
+            </p>
+
+            <!-- Chips de área de atuação -->
+            <div class="gaspar-chips">
+              <span class="gaspar-chip"><i class="fa-solid fa-virus" aria-hidden="true"></i> Parasitologia</span>
+              <span class="gaspar-chip"><i class="fa-solid fa-microscope" aria-hidden="true"></i> Histopatologia</span>
+              <span class="gaspar-chip"><i class="fa-solid fa-globe-americas" aria-hidden="true"></i> Medicina Tropical</span>
+              <span class="gaspar-chip"><i class="fa-solid fa-flask" aria-hidden="true"></i> Instituto Oswaldo Cruz</span>
+              <span class="gaspar-chip"><i class="fa-solid fa-pills" aria-hidden="true"></i> Tártaro Emético</span>
+            </div>
+
+          </div>
+        </div><!-- /gaspar-split -->
+
+        <!-- Conexão com o DAGV -->
+        <div class="section-header" style="margin-top: var(--space-2xl);" data-aos="fade-up">
+          <span class="section-tag">Conexão Simbólica</span>
+          <h3 class="section-title" style="font-size: clamp(1.4rem, 3vw, 2rem);">Por que o nome Gaspar Vianna?</h3>
+        </div>
+
+        <div data-aos="fade-up" style="max-width: 760px; margin-inline: auto; text-align: center;">
+          <p style="color: var(--clr-gray-3); font-size: 1.05rem; line-height: 1.82; margin-bottom: 1.5rem;">
+            Ao batizar o diretório com o nome de Gaspar Vianna, os estudantes de Medicina
+            da FMTM prestaram homenagem a um cientista que, assim como eles, escolheu a
+            medicina como vocação de vida. Gaspar morreu jovem, como jovens são os
+            acadêmicos que compõem o DAGV a cada geração.
+          </p>
+          <p style="color: var(--clr-gray-3); font-size: 1.05rem; line-height: 1.82;">
+            Seu espírito de curiosidade, rigor científico e compromisso com a saúde
+            pública inspira até hoje a missão do diretório: formar médicos melhores,
+            cidadãos mais conscientes e profissionais mais humanos.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════
+         CTA FINAL
+         ══════════════════════════════════════════════════════════ -->
+    <section class="sobre-cta" aria-labelledby="cta-title">
+      <div class="container sobre-cta__content" data-aos="fade-up">
+        <span class="sobre-cta__mark" aria-hidden="true">"</span>
+        <blockquote class="sobre-cta__quote">
+          Representar não é apenas ocupar um cargo — é ouvir, agir e transformar
+          a experiência acadêmica de cada estudante de Medicina da UFTM.
+        </blockquote>
+        <span class="sobre-cta__author" id="cta-title">Gestão Guimarães Rosa · DAGV 2026</span>
+        <div class="sobre-cta__actions">
+          <a href="coordenacao.html" class="btn btn--accent">
+            <i class="fa-solid fa-users" aria-hidden="true"></i>
+            Conheça a Coordenação
+          </a>
+          <a href="index.html#contact" class="btn btn--ghost-white">
+            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+            Entre em Contato
+          </a>
+          <a href="index.html" class="btn btn--ghost-white">
+            <i class="fa-solid fa-house" aria-hidden="true"></i>
+            Voltar ao Início
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER (idêntico ao index.html) ===== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <img src="img/logo dourada-sem fundo.png" alt="Logo DAGV" class="footer__logo" width="64" height="54" loading="lazy" />
+        <div>
+          <p class="footer__name">DAGV – Gaspar Vianna</p>
+          <p class="footer__sub">Medicina UFTM · Uberaba – MG</p>
+        </div>
+      </div>
+      <nav class="footer__links" aria-label="Links úteis">
+        <a href="https://dagvmeduftm.wordpress.com/estatuto-dagv/" target="_blank" rel="noopener">Estatuto</a>
+        <a href="https://dagvmeduftm.wordpress.com/ligas-academicas/" target="_blank" rel="noopener">Ligas</a>
+        <a href="https://dagvmeduftm.wordpress.com/cursinho-carolina/" target="_blank" rel="noopener">Cursinho Carolina</a>
+        <a href="https://dagvmeduftm.wordpress.com/pet-medicina-1/" target="_blank" rel="noopener">PET Medicina</a>
+        <a href="https://dagvmeduftm.wordpress.com/dce-uftm/" target="_blank" rel="noopener">DCE UFTM</a>
+      </nav>
+      <div class="footer__social">
+        <a href="https://www.instagram.com/dagvmeduftm/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.facebook.com/profile.php?id=100009254539973" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+        <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7" target="_blank" rel="noopener" aria-label="Contato"><i class="fa-solid fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>&copy; <span id="year"></span> Diretório Acadêmico Gaspar Vianna – Medicina UFTM. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/sidemenu.js"></script>
+
+  <script>
+  /* ── Highlight da âncora ativa ao scroll ─────────────────── */
+  (function () {
+    'use strict';
+    var sections = ['o-que-e','historia','gaspar'].map(function(id) {
+      return document.getElementById(id);
+    }).filter(Boolean);
+    var links = document.querySelectorAll('.sobre-anchors__link');
+    var header = document.getElementById('header');
+
+    function onScroll() {
+      var scrollY = window.scrollY + (header ? header.offsetHeight : 72) + 40;
+      var current = sections[0];
+      sections.forEach(function(sec) {
+        if (sec.getBoundingClientRect().top + window.scrollY <= scrollY) current = sec;
+      });
+      links.forEach(function(link) {
+        var href = link.getAttribute('href').replace('#','');
+        link.classList.toggle('active', href === current.id);
+      });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }());
+  </script>
+
+</body>
+</html>

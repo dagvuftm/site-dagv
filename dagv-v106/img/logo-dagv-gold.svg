@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 300" role="img" aria-label="DAGV – Diretório Acadêmico Gaspar Vianna">
+  <title>DAGV – Diretório Acadêmico Gaspar Vianna</title>
+  <style>
+    .logo-body { fill: #c8960c; }
+    .logo-ribbon { fill: #c8960c; }
+    .logo-ribbon-fold { fill: #8a6400; }
+    .logo-text { fill: #ffffff; font-family:'Palatino Linotype','Book Antiqua',Palatino,Georgia,serif; font-size:13px; font-weight:700; letter-spacing:2px; }
+    .logo-divider { stroke: rgba(255,255,255,0.5); stroke-width:1.5; }
+  </style>
+
+  <!-- ═══ LETTER D ═══ -->
+  <g class="logo-body">
+    <!-- Outer D shape -->
+    <path d="M 16,6 L 16,196 L 62,196 Q 94,196 110,178 Q 130,156 130,101 Q 130,46 110,24 Q 94,6 62,6 Z
+             M 38,30 L 60,30 Q 78,30 88,46 Q 100,64 100,101 Q 100,138 88,156 Q 78,172 60,172 L 38,172 Z"/>
+    <!-- D cross-strokes (gothic detail) -->
+    <rect x="8" y="90" width="32" height="8" rx="2"/>
+    <rect x="8" y="108" width="32" height="8" rx="2"/>
+  </g>
+
+  <!-- ═══ LETTER A ═══ -->
+  <g class="logo-body">
+    <path d="M 148,196 L 196,6 L 222,6 L 270,196 L 246,196 L 234,152 L 184,152 L 172,196 Z
+             M 190,130 L 228,130 L 209,52 Z"/>
+    <!-- A cross bar -->
+    <rect x="188" y="108" width="44" height="8" rx="2"/>
+  </g>
+
+  <!-- ═══ LETTER G ═══ -->
+  <g class="logo-body">
+    <path d="M 288,101 Q 288,6 338,6 Q 368,6 383,30 L 362,40 Q 353,20 338,20 Q 312,20 312,101 Q 312,182 338,182 Q 352,182 360,164 L 360,128 L 334,128 L 334,106 L 384,106 L 384,196 L 364,196 L 364,180 Q 352,198 336,198 Q 288,198 288,101 Z"/>
+    <!-- G inner horizontal -->
+    <rect x="334" y="106" width="50" height="8" rx="2"/>
+  </g>
+
+  <!-- ═══ LETTER V ═══ -->
+  <g class="logo-body">
+    <path d="M 402,6 L 358,196 L 384,196 L 412,52 L 440,196 L 466,196 L 422,6 Z"/>
+    <!-- V cross accents (gothic) -->
+    <rect x="416" y="62" width="24" height="8" rx="2"/>
+    <rect x="412" y="80" width="26" height="7" rx="2"/>
+  </g>
+
+  <!-- ═══ RIBBON BANNER ═══ -->
+  <!-- Main ribbon body -->
+  <path class="logo-ribbon" d="M 14,216 Q 20,208 36,206 L 484,206 Q 500,208 506,216 L 506,252 Q 500,260 484,258 L 36,258 Q 20,260 14,252 Z"/>
+  <!-- Left fold/tail -->
+  <path class="logo-ribbon-fold" d="M 14,216 L -4,234 L 14,252 L 36,252 Q 24,244 24,234 Q 24,224 36,216 Z"/>
+  <!-- Right fold/tail -->
+  <path class="logo-ribbon-fold" d="M 506,216 L 524,234 L 506,252 L 484,252 Q 496,244 496,234 Q 496,224 484,216 Z"/>
+  <!-- Ribbon centre divider -->
+  <line class="logo-divider" x1="260" y1="208" x2="260" y2="256"/>
+  <!-- Ribbon text left -->
+  <text class="logo-text" x="130" y="237" text-anchor="middle" dominant-baseline="middle">DIRETÓRIO ACADÊMICO</text>
+  <!-- Ribbon text right -->
+  <text class="logo-text" x="390" y="237" text-anchor="middle" dominant-baseline="middle">GASPAR VIANNA</text>
+</svg>

@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Coordenação e Gestão – Conheça as coordenadorias do DAGV Gaspar Vianna, suas atribuições e os responsáveis pela gestão estudantil na Medicina UFTM." />
+  <meta name="keywords" content="DAGV, Medicina, UFTM, Coordenação, Gestão, Diretoria, Gaspar Vianna" />
+  <meta name="author" content="DAGV – Medicina UFTM" />
+  <title>Coordenação e Gestão – DAGV | Medicina UFTM</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/sidemenu.css" />
+
+  <style>
+    /* ──────────────── HERO ──────────────── */
+    .coord-hero {
+      position: relative;
+      min-height: 56vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 80% 100% at 0% 60%,
+          #3d0018 0%,
+          var(--clr-green-dark) 38%,
+          transparent 72%),
+        linear-gradient(160deg,
+          var(--clr-green-dark) 0%,
+          var(--clr-green)      50%,
+          #1a0010               100%);
+      padding-top: calc(var(--header-h) + var(--space-2xl));
+      padding-bottom: var(--space-2xl);
+    }
+    .coord-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(90deg,transparent,transparent 58px,rgba(255,255,255,.04) 58px,rgba(255,255,255,.04) 60px),
+        repeating-linear-gradient(0deg,transparent,transparent 58px,rgba(255,255,255,.04) 58px,rgba(255,255,255,.04) 60px);
+    }
+    .coord-hero::after {
+      content: '';
+      position: absolute;
+      width: 480px; height: 480px;
+      border-radius: 50%;
+      border: 70px solid rgba(232,160,32,.09);
+      bottom: -180px; left: -120px;
+      pointer-events: none;
+    }
+    .coord-hero__content {
+      position: relative; z-index: 1;
+      text-align: center; color: var(--clr-white);
+      max-width: 760px; padding-inline: var(--space-md);
+    }
+    .coord-hero__eyebrow {
+      font-size: .78rem; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--clr-accent); font-weight: 600; margin-bottom: var(--space-sm); display: block;
+    }
+    .coord-hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      font-weight: 700; line-height: 1.15; margin-bottom: var(--space-md);
+    }
+    .coord-hero__title em { color: var(--clr-accent); font-style: italic; }
+    .coord-hero__desc {
+      font-size: 1.05rem; line-height: 1.75;
+      color: rgba(255,255,255,.82); max-width: 580px; margin-inline: auto;
+    }
+
+    /* Missão/Visão/Valores usa .about__card do styles.css global */
+    /* ──────────────── GUIMARÃES ROSA ──────────────── */
+    .rosa-section { padding-block: var(--space-2xl); }
+    .rosa-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl); align-items: start; margin-top: var(--space-xl);
+    }
+    .rosa-text p {
+      font-size: .98rem; color: var(--clr-gray-3); line-height: 1.86; margin-bottom: 1.1rem;
+    }
+    .rosa-text p:last-child { margin-bottom: 0; }
+    .rosa-text strong { color: var(--clr-dark); }
+    .rosa-quote-card {
+      background: linear-gradient(155deg, var(--clr-green-dark) 0%, var(--clr-green) 60%, #5e0029 100%);
+      border-radius: var(--radius-lg); padding: 2.2rem 2rem;
+      box-shadow: 0 20px 56px rgba(26,0,16,.22);
+      border: 1px solid rgba(232,160,32,.15); position: relative; overflow: hidden;
+    }
+    .rosa-quote-card::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,.055) 1.5px, transparent 1.5px);
+      background-size: 20px 20px; pointer-events: none;
+    }
+    .rosa-quote-card::after {
+      content: ''; position: absolute; bottom: 0; left: 8%; right: 8%;
+      height: 3px; background: linear-gradient(90deg, transparent, var(--clr-accent), transparent);
+      border-radius: 2px;
+    }
+    .rosa-quote-mark {
+      position: relative; z-index: 1;
+      font-family: var(--font-display); font-size: 4.5rem; line-height: .55;
+      color: var(--clr-accent); opacity: .55; display: block; margin-bottom: var(--space-sm);
+    }
+    .rosa-quote-text {
+      position: relative; z-index: 1;
+      font-family: var(--font-display); font-size: clamp(1rem, 2vw, 1.22rem);
+      font-style: italic; font-weight: 400;
+      color: var(--clr-white); line-height: 1.68; margin-bottom: var(--space-sm);
+    }
+    .rosa-quote-author {
+      position: relative; z-index: 1;
+      font-size: .75rem; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase; color: var(--clr-accent);
+    }
+    .rosa-facts {
+      position: relative; z-index: 1;
+      margin-top: 1.5rem; padding-top: 1.2rem;
+      border-top: 1px solid rgba(232,160,32,.22);
+      display: flex; flex-direction: column; gap: .7rem;
+    }
+    .rosa-fact {
+      display: flex; align-items: flex-start; gap: .65rem;
+      font-size: .84rem; color: rgba(255,255,255,.72); line-height: 1.5;
+    }
+    .rosa-fact i { color: var(--clr-accent); font-size: .8rem; flex-shrink: 0; margin-top: .15rem; }
+    .rosa-fact strong { color: rgba(255,255,255,.92); }
+    @media (max-width: 768px) {
+      .rosa-grid { grid-template-columns: 1fr; }
+      .rosa-quote-card { max-width: 520px; margin-inline: auto; }
+    }
+
+    /* ──────────────── QUOTE ──────────────── */
+    .coord-quote {
+      background: linear-gradient(135deg, var(--clr-green-dark), var(--clr-green));
+      padding-block: var(--space-xl);
+    }
+    .coord-quote__inner { max-width: 780px; margin-inline: auto; text-align: center; padding-inline: var(--space-md); }
+    .coord-quote__mark {
+      font-family: var(--font-display); font-size: 5rem; line-height: .5;
+      color: var(--clr-accent); opacity: .6; display: block; margin-bottom: var(--space-sm);
+    }
+    .coord-quote__text {
+      font-family: var(--font-display);
+      font-size: clamp(1.15rem, 2.5vw, 1.6rem);
+      font-style: italic; color: var(--clr-white); line-height: 1.65; margin-bottom: var(--space-sm);
+    }
+    .coord-quote__author {
+      font-size: .88rem; font-weight: 600; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--clr-accent);
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       CARROSSEL 3D – wrapper, track, posições
+       ══════════════════════════════════════════════════════════ */
+    .coordenadorias { padding-block: var(--space-2xl); background: var(--clr-off); }
+
+    .carousel-wrap {
+      position: relative; margin-top: var(--space-xl);
+      perspective: 1400px; perspective-origin: 50% 50%; user-select: none;
+    }
+
+    .carousel-track {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 480px; position: relative;
+      transition: min-height 450ms ease-in-out;
+    }
+
+    /* ── Card base ─────────────────────────────────────────── */
+    .crd-card {
+      position: absolute;
+      width: 300px;
+      background: var(--clr-white);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--clr-gray-1);
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 0 1.4rem;
+      overflow: hidden;
+      transform-origin: center center;
+      transition:
+        transform  500ms cubic-bezier(.34,1.06,.64,1),
+        width      420ms ease-in-out,
+        filter     400ms var(--ease),
+        opacity    400ms var(--ease),
+        box-shadow 400ms var(--ease);
+      will-change: transform, filter, opacity, width;
+      pointer-events: none;
+    }
+
+    /* Posições 3D */
+    .crd-card[data-pos="0"] {
+      transform: translateX(0) translateZ(0) scale(1);
+      filter: none; opacity: 1;
+      box-shadow: 0 20px 60px rgba(0,0,0,.18), 0 0 0 2px rgba(30,120,50,.12);
+      z-index: 10; pointer-events: auto;
+    }
+    .crd-card[data-pos="-1"] {
+      transform: translateX(-330px) translateZ(-120px) scale(.84);
+      filter: blur(2px); opacity: .5; z-index: 5;
+    }
+    .crd-card[data-pos="1"] {
+      transform: translateX(330px) translateZ(-120px) scale(.84);
+      filter: blur(2px); opacity: .5; z-index: 5;
+    }
+    .crd-card[data-pos="-2"] {
+      transform: translateX(-590px) translateZ(-240px) scale(.68);
+      filter: blur(4px); opacity: .2; z-index: 1;
+    }
+    .crd-card[data-pos="2"] {
+      transform: translateX(590px) translateZ(-240px) scale(.68);
+      filter: blur(4px); opacity: .2; z-index: 1;
+    }
+    .crd-card[data-pos="-3"], .crd-card[data-pos="3"] {
+      opacity: 0; pointer-events: none; z-index: 0;
+    }
+
+    /* ── Cabeçalho da coordenação ──────────────────────────── */
+    .crd-card__top-header {
+      width: 100%;
+      background: linear-gradient(135deg, var(--clr-green-dark) 0%, var(--clr-green) 100%);
+      padding: 1.15rem 1.4rem .95rem;
+      display: flex; align-items: center; gap: .7rem; flex-shrink: 0;
+    }
+    .crd-card__coord-icon {
+      width: 40px; height: 40px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.15rem; color: var(--clr-accent); flex-shrink: 0;
+    }
+    .crd-card__coord-info { text-align: left; flex: 1; min-width: 0; }
+    .crd-card__coord-name {
+      font-family: var(--font-display); font-size: .92rem; font-weight: 700;
+      color: var(--clr-white); line-height: 1.2;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .crd-card__coord-badge {
+      font-size: .62rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--clr-accent); margin-top: .18rem; display: block;
+    }
+
+    /* ── Subcarrossel de membros ───────────────────────────── */
+    .member-carousel {
+      width: 100%; padding: 1.3rem 1.4rem .6rem;
+      display: flex; flex-direction: column; align-items: center; gap: 0;
+      flex-shrink: 0;
+    }
+
+    .member-carousel__viewport {
+      width: 100%; position: relative; overflow: hidden;
+      min-height: 148px;
+      cursor: grab;
+      /* Evita seleção de texto durante arrastar */
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .member-carousel__viewport.is-dragging {
+      cursor: grabbing;
+    }
+
+    /* Slides */
+    .member-slide {
+      display: flex; flex-direction: column; align-items: center; gap: .45rem;
+      text-align: center;
+      position: absolute; top: 0; left: 0; width: 100%;
+      opacity: 0; transform: translateX(28px);
+      transition: opacity 600ms ease, transform 600ms cubic-bezier(.25,.46,.45,.94);
+      pointer-events: none;
+    }
+    .member-slide.is-active {
+      opacity: 1; transform: translateX(0);
+      position: relative; pointer-events: auto;
+    }
+    .member-slide.is-leaving {
+      opacity: 0; transform: translateX(-28px); position: absolute;
+    }
+
+    /* Foto avatar */
+    .member-slide__photo {
+      width: 84px; height: 84px; border-radius: 50%;
+      border: 3px solid var(--clr-green-light);
+      box-shadow: 0 4px 18px rgba(0,0,0,.11);
+      object-fit: cover;
+      background: var(--clr-green-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.2rem; color: var(--clr-green); overflow: hidden; flex-shrink: 0;
+    }
+    .member-slide__photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .member-slide__name {
+      font-family: 'Quicksand', var(--font-display); font-size: .97rem; font-weight: 700;
+      color: var(--clr-dark); line-height: 1.3; margin-top: .25rem;
+    }
+    .member-slide__nickname {
+      font-family: 'Quicksand', var(--font-display); font-size: .8rem; font-weight: 600;
+      color: var(--clr-accent); line-height: 1.2; margin-top: -.05rem;
+    }
+    .member-slide__role {
+      font-size: .75rem; font-weight: 500; color: var(--clr-gray-2); line-height: 1.4;
+    }
+
+    /* Controles do subcarrossel */
+    .member-carousel__controls {
+      display: flex; align-items: center; justify-content: center; margin-top: .8rem;
+    }
+
+    .member-nav-btn {
+      width: 26px; height: 26px; border-radius: 50%;
+      border: 1.5px solid var(--clr-gray-1);
+      background: transparent; color: var(--clr-gray-2);
+      font-size: .6rem; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; padding: 0;
+      transition: border-color 200ms ease, background 200ms ease, color 200ms ease, transform 150ms ease;
+      flex-shrink: 0;
+    }
+    .member-nav-btn:hover {
+      border-color: var(--clr-green); background: var(--clr-green); color: var(--clr-white);
+      transform: scale(1.08);
+    }
+    .member-nav-btn:active { transform: scale(.94); }
+
+    /* Oculta controles quando há só 1 membro */
+    .member-carousel[data-count="1"] .member-nav-btn,
+    .member-carousel[data-count="1"] .member-dots { display: none; }
+
+    /* Dots do subcarrossel */
+    .member-dots { display: flex; gap: .28rem; align-items: center; }
+
+    .member-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--clr-gray-1); border: none; padding: 0; cursor: pointer;
+      transition: background 250ms ease, width 250ms ease;
+    }
+    .member-dot.active {
+      background: var(--clr-green); width: 13px; border-radius: 3px;
+    }
+
+    /* ── Separador ─────────────────────────────────────────── */
+    .crd-card__separator {
+      width: calc(100% - 2.8rem);
+      height: 1px; background: var(--clr-gray-1);
+      margin: 0 1.4rem; flex-shrink: 0;
+    }
+
+    /* ── Subtítulo gestão ──────────────────────────────────── */
+    .crd-card__gestao {
+      font-size: .7rem; color: var(--clr-gray-2);
+      letter-spacing: .06em; text-transform: uppercase; font-weight: 500;
+      padding: .55rem 1.4rem 0; text-align: center; flex-shrink: 0;
+    }
+
+    /* ── Botão expandir ────────────────────────────────────── */
+    /* ── Botão expandir: apenas seta, sem contorno visual ─── */
+    .crd-card__expand-btn {
+      /* Remove toda aparência de botão */
+      display: flex; align-items: center; justify-content: center;
+      width: auto; height: auto;
+      border: none; border-radius: 0;
+      background: transparent;
+      padding: .35rem;         /* área de clique confortável sem forma visível */
+      margin-top: .55rem;
+      cursor: pointer;
+      flex-shrink: 0;
+      /* Invisível nos cards laterais */
+      pointer-events: none; opacity: 0;
+      transition: opacity 250ms ease, color 250ms ease;
+      /* Cor da seta: cinza suave por padrão */
+      color: var(--clr-gray-2);
+      /* Tamanho da seta */
+      font-size: .85rem;
+    }
+
+    /* Ativa somente no card central */
+    .crd-card[data-pos="0"] .crd-card__expand-btn {
+      pointer-events: auto;
+      opacity: 1;
+      color: var(--clr-green);
+    }
+
+    /* Hover: seta ligeiramente mais escura, sem fundo */
+    .crd-card[data-pos="0"] .crd-card__expand-btn:hover {
+      color: var(--clr-green-dark);
+    }
+
+    /* Ícone da seta */
+    .expand-icon {
+      display: block; line-height: 1;
+      transition: transform 380ms cubic-bezier(.34, 1.06, .64, 1);
+    }
+
+    /* No estado expandido a seta aponta para cima */
+    .crd-card.is-expanded .crd-card__expand-btn .expand-icon {
+      transform: rotate(180deg);
+    }
+
+    /* Animação sobe-e-desce no estado compacto (card ativo) */
+    @keyframes arrow-bounce {
+      0%   { transform: translateY(0); }
+      45%  { transform: translateY(5px); }
+      100% { transform: translateY(0); }
+    }
+    .crd-card[data-pos="0"]:not(.is-expanded) .crd-card__expand-btn .expand-icon {
+      animation: arrow-bounce 1.6s cubic-bezier(.45, 0, .55, 1) infinite;
+    }
+
+    /* ── Painel expandido ──────────────────────────────────── */
+    .crd-card__expanded-panel {
+      width: 100%; max-height: 0; overflow: hidden; opacity: 0;
+      transition: max-height 430ms ease-in-out, opacity 320ms ease-in-out;
+    }
+    .crd-card.is-expanded .crd-card__expanded-panel { opacity: 1; }
+
+    .crd-card__expanded-inner {
+      padding: .9rem 1.4rem .4rem;
+      display: flex; flex-direction: column; gap: .45rem;
+      border-top: 1px solid var(--clr-gray-1); margin-top: .7rem;
+    }
+    .crd-card__exp-title {
+      font-family: var(--font-display); font-size: .93rem; font-weight: 700;
+      color: var(--clr-green-dark); letter-spacing: .02em; line-height: 1.3;
+    }
+    .crd-card__exp-text { font-size: .83rem; line-height: 1.78; color: var(--clr-gray-3); text-align: left; }
+    .crd-card__exp-text p + p { margin-top: .4rem; }
+
+    /* ── Botões de navegação principais ───────────────────── */
+    .carousel-btn {
+      position: absolute; top: 50%; transform: translateY(-50%); z-index: 20;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--clr-white); border: 2px solid var(--clr-green); color: var(--clr-green);
+      font-size: 1rem; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; box-shadow: var(--shadow-sm);
+      transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease),
+                  transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+    }
+    .carousel-btn:hover {
+      background: var(--clr-green); color: var(--clr-white);
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 6px 20px rgba(30,120,50,.35);
+    }
+    .carousel-btn:active { transform: translateY(-50%) scale(.96); }
+    .carousel-btn--prev { left: 0; }
+    .carousel-btn--next { right: 0; }
+
+    /* ── Dots principais ───────────────────────────────────── */
+    .carousel-dots {
+      display: flex; justify-content: center; gap: .5rem; margin-top: 2.5rem;
+    }
+    .carousel-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--clr-gray-1); border: none; cursor: pointer;
+      transition: background var(--dur-fast), width var(--dur-fast); padding: 0;
+    }
+    .carousel-dot.active { background: var(--clr-green); width: 24px; border-radius: 4px; }
+
+    /* ══════════════════════════════════════════════════════════
+       EXPANSÃO DO CARD
+       ══════════════════════════════════════════════════════════ */
+    @media (min-width: 601px) {
+      .crd-card.is-expanded[data-pos="0"] {
+        width: clamp(300px, 68vw, 600px);
+        box-shadow: 0 28px 72px rgba(0,0,0,.20), 0 0 0 2px rgba(30,120,50,.18);
+      }
+      .carousel-track.has-expanded { min-height: 610px; }
+      .crd-card__exp-text { font-size: .89rem; }
+      .crd-card__exp-title { font-size: 1rem; }
+    }
+    @media (min-width: 601px) and (max-width: 900px) {
+      .crd-card.is-expanded[data-pos="0"] { width: clamp(280px, 78vw, 500px); }
+      .carousel-track.has-expanded { min-height: 570px; }
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       RESPONSIVIDADE GERAL
+       ══════════════════════════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .crd-card[data-pos="-1"] { transform: translateX(-250px) translateZ(-80px) scale(.86); }
+      .crd-card[data-pos="1"]  { transform: translateX(250px)  translateZ(-80px) scale(.86); }
+      .crd-card[data-pos="-2"] { transform: translateX(-460px) translateZ(-160px) scale(.70); opacity: .15; }
+      .crd-card[data-pos="2"]  { transform: translateX(460px)  translateZ(-160px) scale(.70); opacity: .15; }
+      .carousel-btn--prev { left: -4px; }
+      .carousel-btn--next { right: -4px; }
+    }
+
+    @media (max-width: 600px) {
+      .carousel-track { min-height: 430px; }
+      .crd-card { width: 250px; }
+      .crd-card[data-pos="-1"] { transform: translateX(-200px) translateZ(0) scale(.82); filter: blur(1.5px); }
+      .crd-card[data-pos="1"]  { transform: translateX(200px)  translateZ(0) scale(.82); filter: blur(1.5px); }
+      .crd-card[data-pos="-2"], .crd-card[data-pos="2"] { opacity: 0; pointer-events: none; }
+      .carousel-wrap { perspective: none; }
+      .carousel-btn  { width: 40px; height: 40px; font-size: .9rem; }
+      .member-nav-btn { width: 32px; height: 32px; font-size: .68rem; }
+      .crd-card.is-expanded[data-pos="0"] { width: 250px; }
+      .carousel-track.has-expanded { min-height: 570px; }
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       ESTRUTURA ORGANIZACIONAL
+       ══════════════════════════════════════════════════════════ */
+    .estrutura { padding-block: var(--space-2xl); }
+    .estrutura__flow { margin-top: var(--space-xl); max-width: 900px; margin-inline: auto; }
+    .estrutura__level {
+      display: flex; justify-content: center; gap: var(--space-sm);
+      margin-bottom: var(--space-sm); flex-wrap: wrap;
+    }
+    .estrutura__node {
+      background: var(--clr-white); border: 2px solid var(--clr-gray-1);
+      border-radius: var(--radius-md); padding: .75rem 1.4rem; text-align: center;
+      box-shadow: var(--shadow-sm); min-width: 160px;
+      transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+    }
+    .estrutura__node:hover { border-color: var(--clr-green); box-shadow: var(--shadow-md); }
+    .estrutura__node--top {
+      background: linear-gradient(135deg, var(--clr-green-dark), var(--clr-green));
+      border-color: var(--clr-green);
+    }
+    .estrutura__node--top .estrutura__node-title { color: var(--clr-white); }
+    .estrutura__node--top .estrutura__node-role  { color: rgba(255,255,255,.75); }
+    .estrutura__node--mid { border-color: var(--clr-teal); }
+    .estrutura__connector { display: flex; justify-content: center; margin-bottom: var(--space-xs); }
+    .estrutura__connector::before { content: ''; width: 2px; height: 24px; background: var(--clr-gray-2); }
+    .estrutura__node-icon { font-size: 1.3rem; color: var(--clr-accent); margin-bottom: .3rem; }
+    .estrutura__node-title {
+      font-family: var(--font-display); font-size: .9rem; font-weight: 700; color: var(--clr-dark);
+    }
+    .estrutura__node-role { font-size: .75rem; color: var(--clr-gray-2); }
+
+    /* ══════════════════════════════════════════════════════════
+       VALORES
+       ══════════════════════════════════════════════════════════ */
+    .valores { padding-block: var(--space-2xl); background: var(--clr-off); }
+    .valores__grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--space-md); margin-top: var(--space-xl);
+    }
+    .valor-card {
+      background: var(--clr-white); border-radius: var(--radius-md);
+      padding: var(--space-md) var(--space-lg); text-align: center;
+      box-shadow: var(--shadow-sm); border: 1px solid var(--clr-gray-1);
+      transition: transform var(--dur-med) var(--ease), box-shadow var(--dur-med) var(--ease);
+    }
+    .valor-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .valor-card__icon {
+      width: 60px; height: 60px;
+      background: linear-gradient(135deg, var(--clr-green-dark), var(--clr-green));
+      border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; color: var(--clr-accent);
+      margin: 0 auto var(--space-sm); box-shadow: 0 4px 16px rgba(30,120,50,.25);
+    }
+    .valor-card h4 {
+      font-family: var(--font-display); font-size: 1.05rem; font-weight: 700;
+      color: var(--clr-dark); margin-bottom: .5rem;
+    }
+    .valor-card p { font-size: .9rem; color: var(--clr-gray-3); line-height: 1.65; }
+
+    /* ══════════════════════════════════════════════════════════
+       CTA / VOLTAR
+       ══════════════════════════════════════════════════════════ */
+    .coord-cta {
+      padding-block: var(--space-2xl);
+      background: linear-gradient(145deg, var(--clr-green-dark), var(--clr-green));
+      text-align: center;
+    }
+    .coord-cta h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 700; color: var(--clr-white); margin-bottom: var(--space-sm);
+    }
+    .coord-cta p {
+      color: rgba(255,255,255,.82); font-size: 1.05rem;
+      max-width: 560px; margin: 0 auto var(--space-lg); line-height: 1.7;
+    }
+    .coord-cta__buttons { display: flex; justify-content: center; gap: var(--space-sm); flex-wrap: wrap; }
+    .btn--accent { background: var(--clr-accent); color: var(--clr-dark); font-weight: 700; }
+    .btn--accent:hover {
+      background: #f5b230; box-shadow: 0 6px 20px rgba(232,160,32,.4); transform: translateY(-2px);
+    }
+    .btn--ghost-white {
+      background: transparent; color: var(--clr-white);
+      border: 2px solid rgba(255,255,255,.5); font-weight: 600;
+    }
+    .btn--ghost-white:hover { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.8); }
+    .back-link {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-size: .95rem; font-weight: 600; color: var(--clr-green);
+      padding: .6rem 1.2rem; border: 2px solid var(--clr-green);
+      border-radius: var(--radius-pill);
+      transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+      text-decoration: none;
+    }
+    .back-link:hover { background: var(--clr-green); color: var(--clr-white); }
+    .back-section { text-align: center; padding-block: var(--space-xl); }
+    @media (max-width: 780px) {
+      .estrutura__level { gap: var(--space-xs); }
+      .estrutura__node { min-width: 130px; padding: .65rem 1rem; }
+    }
+    @media (max-width: 500px) {
+      .estrutura__node { min-width: 100%; }
+      .coord-cta__buttons { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== HEADER ===================== -->
+  <header id="header" class="header">
+    <div class="container header__inner">
+
+      <!-- =====================================================
+           [ADIÇÃO] Aba de menu – inserida antes do brand.
+           Posicionada à esquerda do logotipo graças ao flex
+           do .header__inner existente.
+           Nenhuma classe/id existente foi alterada.
+           ===================================================== -->
+      <div class="sidemenu-wrap" id="sidemenuWrap">
+
+        <!-- Aba toggle -->
+        <button
+          class="sidemenu-tab"
+          id="sidemenuTab"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="sidemenuPanel"
+          aria-label="Abrir menu de navegação"
+        >
+          <span class="sidemenu-tab__icon" aria-hidden="true">
+            <span class="sidemenu-tab__bar"></span>
+            <span class="sidemenu-tab__bar"></span>
+            <span class="sidemenu-tab__bar"></span>
+          </span>
+          <span class="sidemenu-tab__label">Menu</span>
+        </button>
+
+        <!-- Painel principal -->
+        <div class="sidemenu-panel" id="sidemenuPanel" role="navigation" aria-label="Menu lateral">
+          <ul class="sidemenu-list">
+
+            <!-- ── Links diretos principais ── -->
+            <li class="sidemenu-list__item">
+              <a href="sobre.html" class="sidemenu-list__link">
+                Sobre o DAGV
+                <i class="fa-solid fa-building-columns sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="historico2.html" class="sidemenu-list__link sidemenu-list__link--historico">
+                Resgate Histórico
+                <i class="fa-solid fa-scroll sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="coordenacao.html" class="sidemenu-list__link">
+                Coordenação
+                <i class="fa-solid fa-users sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Dropdown: Informações DAGV ── -->
+            <li class="sidemenu-list__item">
+              <button
+                class="sidemenu-list__btn"
+                data-dropdown="informacoes"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Informações DAGV
+                <i class="fa-solid fa-chevron-down sidemenu-list__arrow" aria-hidden="true"></i>
+              </button>
+              <ul class="sidemenu-dropdown" id="dropInformacoes">
+                <li><a href="https://dagvmeduftm.wordpress.com/estatuto-dagv/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">Estatuto</a></li>
+                <li><a href="https://dagvmeduftm.wordpress.com/galeria-de-fotos/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">Galeria de Fotos</a></li>
+              </ul>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Links institucionais ── -->
+            <li class="sidemenu-list__item">
+              <a href="https://dagvmeduftm.wordpress.com/pet-medicina-1/" target="_blank" rel="noopener" class="sidemenu-list__link">
+                PET Medicina
+                <i class="fa-solid fa-flask sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="ligas.html" class="sidemenu-list__link">
+                Ligas Acadêmicas
+                <i class="fa-solid fa-graduation-cap sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="manual.html" class="sidemenu-list__link">
+                Manual do Estudante
+                <i class="fa-solid fa-book-open-reader sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="https://dagvmeduftm.wordpress.com/cursinho-carolina/" target="_blank" rel="noopener" class="sidemenu-list__link">
+                Cursinho Carolina
+                <i class="fa-solid fa-book-open sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Dropdown: Instituições ── -->
+            <li class="sidemenu-list__item">
+              <button
+                class="sidemenu-list__btn"
+                data-dropdown="instituicoes"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Instituições
+                <i class="fa-solid fa-chevron-down sidemenu-list__arrow" aria-hidden="true"></i>
+              </button>
+              <ul class="sidemenu-dropdown" id="dropInstituicoes">
+                <li><a href="https://dagvmeduftm.wordpress.com/denem/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">DENEM</a></li>
+                <li><a href="https://dagvmeduftm.wordpress.com/dce-uftm/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">DCE</a></li>
+                <li><a href="https://dagvmeduftm.wordpress.com/cvu-uberaba/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">CVU</a></li>
+                <li><a href="https://dagvmeduftm.wordpress.com/cepop-uftm/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">CEPOP</a></li>
+              </ul>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Final ── -->
+            <li class="sidemenu-list__item">
+              <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7" target="_blank" rel="noopener" class="sidemenu-list__link">
+                Suporte
+                <i class="fa-solid fa-headset sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+
+          </ul>
+        </div><!-- /sidemenu-panel -->
+
+      </div><!-- /sidemenu-wrap -->
+      <!-- ===================================================== -->
+
+      <!-- Logo + Nome -->
+      <a href="index.html" class="header__brand">
+        <div class="header__logo-wrap">
+          <!--
+            [ALTERAÇÃO] Logo DAGV – componente Logo dinâmico.
+            - Fundo vermelho/transparente → logo dourada (img.logo--gold)
+            - Fundo branco (scrolled)     → logo vermelha (img.logo--red)
+            A troca é feita via CSS: visibilidade controlada por .header.scrolled
+          -->
+          <img
+            src="img/logo dourada-sem fundo.png"
+            alt="Logo DAGV – Diretório Acadêmico Gaspar Vianna"
+            class="header__logo-svg logo--gold"
+            width="80" height="68"
+            loading="eager"
+          />
+          <img
+            src="img/Logo DAGV sem fundo verm.png"
+            alt="Logo DAGV – Diretório Acadêmico Gaspar Vianna"
+            class="header__logo-svg logo--red"
+            width="80" height="68"
+            loading="eager"
+            aria-hidden="true"
+          />
+        </div>
+        <div class="header__title-wrap">
+          <span class="header__dagv"></span>
+          <span class="header__subtitle"></span>
+        </div>
+      </a>
+
+      <!-- Nav desktop -->
+      <nav class="nav" aria-label="Navegação principal">
+        <ul class="nav__list">
+          <li><a href="sobre.html"                    class="nav__link">Sobre</a></li>
+          <li><a href="coordenacao.html"              class="nav__link nav__link--active">Coordenações</a></li>
+          <li><a href="index.html#eventos-academicos" class="nav__link">Eventos</a></li>
+          <li><a href="index.html#events"             class="nav__link">Instituições UFTM</a></li>
+          <li><a href="index.html#contact"            class="nav__link nav__link--cta">Contato</a></li>
+        </ul>
+      </nav>
+
+      <!-- Hamburguer -->
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Nav mobile (drawer) -->
+    <nav class="nav-mobile" id="navMobile" aria-hidden="true">
+      <ul class="nav-mobile__list">
+        <li><a href="index.html"                    class="nav-mobile__link">Início</a></li>
+        <li><a href="sobre.html"                    class="nav-mobile__link">Sobre</a></li>
+        <li><a href="coordenacao.html"              class="nav-mobile__link">Coordenações</a></li>
+        <li><a href="index.html#eventos-academicos" class="nav-mobile__link">Eventos</a></li>
+        <li><a href="index.html#events"             class="nav-mobile__link">Instituições UFTM</a></li>
+        <li><a href="index.html#contact"            class="nav-mobile__link">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===================== HERO ===================== -->
+    <section class="coord-hero">
+      <div class="coord-hero__content" data-aos="fade-up">
+        <span class="coord-hero__eyebrow">Gestão Guimarães Rosa · 2026</span>
+        <h1 class="coord-hero__title">Coordenação<br /><em>e Gestão</em></h1>
+        <p class="coord-hero__desc">
+          Conheça as coordenadorias do DAGV, suas atribuições e as pessoas comprometidas
+          com a representação e o bem-estar dos estudantes de Medicina da UFTM.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== INTRO / MISSÃO ===================== -->
+    <!-- ===================== GESTÃO GUIMARÃES ROSA ===================== -->
+
+    <!-- ===================== COORDENADORIAS – CARROSSEL 3D ===================== -->
+    <section class="coordenadorias section--alt section">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Estrutura da Diretoria</span>
+          <h2 class="section-title">Coordenadorias</h2>
+          <p class="section-desc">
+            Cada coordenadoria é responsável por uma área estratégica da vida acadêmica
+            e estudantil. Juntas, formam a gestão do DAGV.
+          </p>
+        </div>
+
+        <div class="carousel-wrap" aria-label="Carrossel de coordenadorias" role="region">
+          <button class="carousel-btn carousel-btn--prev" id="carouselPrev" aria-label="Coordenadoria anterior">
+            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+          </button>
+          <div class="carousel-track" id="carouselTrack"></div>
+          <button class="carousel-btn carousel-btn--next" id="carouselNext" aria-label="Próxima coordenadoria">
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+          </button>
+          <div class="carousel-dots" id="carouselDots" role="tablist" aria-label="Navegar por coordenadoria"></div>
+        </div>
+      </div>
+    </section>
+    <!-- ===================== CTA FINAL ===================== -->
+    <!-- ===================== QUOTE ===================== -->
+    <section class="coord-quote">
+      <div class="coord-quote__inner" data-aos="fade-up">
+        <span class="coord-quote__mark">"</span>
+        <p class="coord-quote__text">
+          Representar não é apenas ocupar um cargo — é ouvir, agir e transformar
+          a experiência acadêmica de cada estudante de Medicina da UFTM.
+        </p>
+        <p class="coord-quote__author">Gestão Guimarães Rosa · DAGV 2026</p>
+      </div>
+    </section>
+    <section class="rosa-section section--alt section" aria-labelledby="rosa-title">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">A Gestão 2025–2026</span>
+          <h2 class="section-title" id="rosa-title">Gestão Guimarães Rosa</h2>
+          <p class="section-desc">Conheça o escritor que inspirou o nome da presente gestão do DAGV e a identidade que nos guia neste ciclo de representação estudantil.</p>
+        </div>
+        <div class="rosa-grid">
+          <div class="rosa-text" data-aos="fade-right">
+            <p><strong>João Guimarães Rosa</strong> (1908–1967) nasceu em Cordisburgo, Minas Gerais, e é considerado um dos maiores escritores da literatura brasileira do século XX. Médico de formação, exerceu a medicina em pequenas cidades do interior de Minas antes de ingressar na carreira diplomática — carreira que o levaria a representar o Brasil na Europa durante a Segunda Guerra Mundial.</p>
+            <p>Sua obra mais célebre, <strong><em>Grande Sertão: Veredas</em></strong> (1956), é reconhecida mundialmente como um dos maiores romances já escritos em língua portuguesa, celebrando a profundidade humana e a riqueza do interior do Brasil com uma linguagem absolutamente original e inovadora.</p>
+            <p>Para a atual gestão do DAGV, Guimarães Rosa representa a <strong>síntese entre ciência e humanidade</strong>: um médico que não abriu mão de sua sensibilidade artística, nem de sua responsabilidade social. Seus valores — a escuta atenta, a valorização das pessoas simples, a busca permanente pela verdade — inspiram nossa forma de fazer representação estudantil na Medicina da UFTM.</p>
+            <p>Assim como Rosa navegou entre mundos — a medicina e a literatura, o sertão e a diplomacia —, esta gestão busca conectar ensino, pesquisa, extensão e bem-estar, colocando sempre o estudante no centro de cada decisão.</p>
+          </div>
+          <div class="rosa-quote-card" data-aos="fade-left" data-aos-delay="100">
+            <span class="rosa-quote-mark">"</span>
+            <p class="rosa-quote-text">O correr da vida embrulha tudo. A vida é assim: esquenta e esfria, aperta e daí afrouxa, sossega e depois desinquieta. O que ela quer da gente é coragem.</p>
+            <p class="rosa-quote-author">João Guimarães Rosa · Grande Sertão: Veredas</p>
+            <div class="rosa-facts">
+              <div class="rosa-fact"><i class="fa-solid fa-calendar" aria-hidden="true"></i><span><strong>1908–1967</strong> · Cordisburgo, Minas Gerais</span></div>
+              <div class="rosa-fact"><i class="fa-solid fa-stethoscope" aria-hidden="true"></i><span><strong>Médico e escritor</strong> · Formado pela Faculdade de Medicina da UFMG em 1930</span></div>
+              <div class="rosa-fact"><i class="fa-solid fa-book-open" aria-hidden="true"></i><span><strong>Grande Sertão: Veredas</strong> (1956) · Obra-prima da literatura brasileira</span></div>
+              <div class="rosa-fact"><i class="fa-solid fa-globe" aria-hidden="true"></i><span><strong>Diplomata</strong> · Representou o Brasil na Alemanha e na Colômbia</span></div>
+              <div class="rosa-fact"><i class="fa-solid fa-star" aria-hidden="true"></i><span><strong>Imortal</strong> · Membro da Academia Brasileira de Letras desde 1963</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- ===================== ESTRUTURA ORGANIZACIONAL ===================== -->
+    <section class="estrutura section">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Organograma</span>
+          <h2 class="section-title">Estrutura Organizacional</h2>
+          <p class="section-desc">Veja como a gestão do DAGV está hierarquicamente organizada para garantir eficiência, transparência e participação democrática.</p>
+        </div>
+        <div class="estrutura__flow" data-aos="fade-up" data-aos-delay="100">
+          <div class="estrutura__level">
+            <div class="estrutura__node" style="border-color:var(--clr-accent);min-width:220px;">
+              <div class="estrutura__node-icon"><i class="fa-solid fa-people-group"></i></div>
+              <div class="estrutura__node-title">Assembleia Geral</div>
+              <div class="estrutura__node-role">Instância máxima deliberativa</div>
+            </div>
+          </div>
+          <div class="estrutura__connector"><div></div></div>
+          <div class="estrutura__level">
+            <div class="estrutura__node estrutura__node--top" style="min-width:220px;">
+              <div class="estrutura__node-icon"><i class="fa-solid fa-star"></i></div>
+              <div class="estrutura__node-title">Coordenação Geral</div>
+              <div class="estrutura__node-role">Presidência do DAGV</div>
+            </div>
+          </div>
+          <div class="estrutura__connector"><div></div></div>
+          <div class="estrutura__level">
+            <div class="estrutura__node estrutura__node--mid">
+              <div class="estrutura__node-icon"><i class="fa-solid fa-file-pen"></i></div>
+              <div class="estrutura__node-title">Secretaria Geral</div>
+              <div class="estrutura__node-role">Secretaria</div>
+            </div>
+            <div class="estrutura__node estrutura__node--mid">
+              <div class="estrutura__node-icon"><i class="fa-solid fa-coins"></i></div>
+              <div class="estrutura__node-title">Coord. de Finanças</div>
+              <div class="estrutura__node-role">Tesouraria</div>
+            </div>
+          </div>
+          <div class="estrutura__connector"><div></div></div>
+          <div class="estrutura__level">
+            <div class="estrutura__node" style="min-width:120px;"><div class="estrutura__node-icon"><i class="fa-solid fa-bullhorn"></i></div><div class="estrutura__node-title">Comunicação</div></div>
+            <div class="estrutura__node" style="min-width:120px;"><div class="estrutura__node-icon"><i class="fa-solid fa-microscope"></i></div><div class="estrutura__node-title">Ensino</div></div>
+            <div class="estrutura__node" style="min-width:120px;"><div class="estrutura__node-icon"><i class="fa-solid fa-masks-theater"></i></div><div class="estrutura__node-title">Sociocultural</div></div>
+            <div class="estrutura__node" style="min-width:120px;"><div class="estrutura__node-icon"><i class="fa-solid fa-handshake-angle"></i></div><div class="estrutura__node-title">Representação</div></div>
+            <div class="estrutura__node" style="min-width:120px;"><div class="estrutura__node-icon"><i class="fa-solid fa-laptop-code"></i></div><div class="estrutura__node-title">Tecnologia</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== VALORES ===================== -->
+    <section class="valores section--alt section">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Nossos Princípios</span>
+          <h2 class="section-title">Pilares da Gestão</h2>
+          <p class="section-desc">A gestão Guimarães Rosa se orienta por princípios que colocam os estudantes no centro de cada decisão.</p>
+        </div>
+        <div class="valores__grid">
+          <div class="valor-card" data-aos="fade-up" data-aos-delay="0"><div class="valor-card__icon"><i class="fa-solid fa-scale-balanced"></i></div><h4>Transparência</h4><p>Prestação de contas acessível e comunicação aberta sobre todas as ações e decisões da diretoria.</p></div>
+          <div class="valor-card" data-aos="fade-up" data-aos-delay="100"><div class="valor-card__icon"><i class="fa-solid fa-hands-holding-circle"></i></div><h4>Solidariedade</h4><p>Apoio mútuo entre os estudantes, promovendo um ambiente acadêmico inclusivo e acolhedor.</p></div>
+          <div class="valor-card" data-aos="fade-up" data-aos-delay="200"><div class="valor-card__icon"><i class="fa-solid fa-lightbulb"></i></div><h4>Inovação</h4><p>Busca constante por novas formas de representar, engajar e gerar impacto positivo na formação médica.</p></div>
+          <div class="valor-card" data-aos="fade-up" data-aos-delay="300"><div class="valor-card__icon"><i class="fa-solid fa-handshake"></i></div><h4>Ética</h4><p>Atuação íntegra e responsável, respeitando os estudantes, a instituição e a sociedade.</p></div>
+          <div class="valor-card" data-aos="fade-up" data-aos-delay="400"><div class="valor-card__icon"><i class="fa-solid fa-comments"></i></div><h4>Participação</h4><p>Estímulo à escuta ativa, ao debate democrático e ao engajamento de todos os alunos nas decisões.</p></div>
+          
+        </div>
+      </div>
+    </section>
+
+
+    </section>
+
+    <section class="coord-cta" data-aos="fade-up">
+      <div class="container">
+        <h2>Quer fazer parte da mudança?</h2>
+        <p>O DAGV é feito por estudantes, para estudantes. Participe das assembleias, acompanhe nossas redes e entre em contato para contribuir com a gestão.</p>
+        <div class="coord-cta__buttons">
+          <a href="index.html#contact" class="btn btn--accent"><i class="fa-solid fa-envelope" style="margin-right:.45rem;"></i>Fale Conosco</a>
+          <a href="https://www.instagram.com/dagvmeduftm/" target="_blank" rel="noopener" class="btn btn--ghost-white"><i class="fa-brands fa-instagram" style="margin-right:.45rem;"></i>Instagram</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== VOLTAR ===================== -->
+    <section class="back-section">
+      <a href="index.html" class="back-link">
+        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+        Voltar ao site principal
+      </a>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <img src="img/logo-dagv-gold.png" alt="Logo DAGV" class="footer__logo" width="64" height="54" loading="lazy" />
+        <div>
+          <p class="footer__name">DAGV – Gaspar Vianna</p>
+          <p class="footer__sub">Medicina UFTM · Uberaba – MG</p>
+        </div>
+      </div>
+      <nav class="footer__links" aria-label="Links úteis">
+        <a href="https://dagvmeduftm.wordpress.com/estatuto-dagv/"     target="_blank" rel="noopener">Estatuto</a>
+        <a href="https://dagvmeduftm.wordpress.com/ligas-academicas/"  target="_blank" rel="noopener">Ligas</a>
+        <a href="https://dagvmeduftm.wordpress.com/cursinho-carolina/" target="_blank" rel="noopener">Cursinho Carolina</a>
+        <a href="https://dagvmeduftm.wordpress.com/pet-medicina-1/"    target="_blank" rel="noopener">PET Medicina</a>
+        <a href="https://dagvmeduftm.wordpress.com/dce-uftm/"         target="_blank" rel="noopener">DCE UFTM</a>
+      </nav>
+      <div class="footer__social">
+        <a href="https://www.instagram.com/dagvmeduftm/"                    target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.facebook.com/profile.php?id=100009254539973"   target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+        <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7"                       target="_blank" rel="noopener" aria-label="Contato"><i class="fa-solid fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>&copy; <span id="year"></span> Diretório Acadêmico Gaspar Vianna – Medicina UFTM. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/sidemenu.js"></script>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       CARROSSEL 3D + SUBCARROSSEL INTERNO POR COORDENAÇÃO
+       HTML, CSS e JavaScript puro – sem dependências externas.
+       Não modifica script.js nem sidemenu.js existentes.
+       ═══════════════════════════════════════════════════════════ -->
+  <script>
+  (function () {
+    'use strict';
+
+    /* ─────────────────────────────────────────────────────────
+       DADOS DAS COORDENAÇÕES
+       Para adicionar foto: photo: 'img/nome-do-arquivo.jpg'
+       Para usar avatar padrão: photo: null
+       ───────────────────────────────────────────────────────── */
+    var COORDENACOES = [
+      {
+        icon: 'fa-solid fa-star', badge: 'Presidência', name: 'Coordenação Geral',
+        expTitle: 'Coordenação Geral',
+        expText: [
+          'A Coordenação Geral é a presidência do DAGV e exerce o papel central de liderança, articulação e representação máxima da entidade.',
+          'É responsável por coordenar as demais áreas, presidir assembleias, representar os estudantes junto à instituição e garantir que a gestão cumpra seus compromissos com transparência e eficiência.'
+        ],
+        members: [
+          { name: 'Bruno Henrique da Silva Sousa (Window-98)', role: 'Coordenador(a) Geral', photo: "img/presidente.jpeg" }
+        ]
+      },
+      {
+        icon: 'fa-solid fa-file-pen', badge: 'Secretaria', name: 'Secretaria Geral',
+        expTitle: 'Secretaria Geral',
+        expText: [
+          'A Secretaria Geral organiza e documenta todas as atividades administrativas do DAGV, garantindo o registro formal das decisões coletivas.',
+          'Produz atas, ofícios e comunicações internas; gerencia o arquivo institucional e assegura o cumprimento dos prazos e fluxos burocráticos necessários ao funcionamento da entidade.'
+        ],
+        members: [
+          { name: 'José Myguell Mendonça dos Santos (Prosa-98)', role: 'Secretário(a) Geral', photo: "img/Secretario.jpeg" }
+        ]
+      },
+      {
+        icon: 'fa-solid fa-coins', badge: 'Tesouraria', name: 'Finanças e Patrimônio',
+        expTitle: 'Coordenadoria de Finanças e Patrimônio',
+        expText: [
+          'A Coordenadoria de Finanças gerencia os recursos financeiros do DAGV com responsabilidade e prestação de contas acessível a todos os estudantes.',
+          'Planeja o orçamento, acompanha receitas e despesas, viabiliza projetos e eventos, e garante que a entidade opere dentro de princípios éticos e sustentáveis.'
+        ],
+        members: [
+          { name: 'Anna Laura Costa Finardi (Nobel-98)', role: 'Coordenador(a) de Finanças',  photo: "img/tesoureiro1.jpeg" },
+          { name: 'Dylmadson Iago Brito de Queiroz (DIU-98)', role: 'Coordenador(a) de Finanças',      photo: "img/tesoureiro2.jpeg" },
+          { name: 'Ianca Brenda Pereira Nascimento (Tia-98)', role: 'Coordenador(a) de Finanças',     photo: "img/tesoureiro3.jpeg" }
+        ]
+      },
+      {
+        icon: 'fa-solid fa-bullhorn', badge: 'Comunicação', name: 'Comunicação',
+        expTitle: 'Coordenadoria de Comunicação',
+        expText: [
+          'A Coordenadoria de Comunicação é a voz do DAGV nas redes sociais e canais de divulgação, tornando a gestão visível e próxima dos estudantes.',
+          'Produz conteúdo informativo e engajador, mantém a identidade visual da entidade e fortalece a comunicação interna e externa da diretoria.'
+        ],
+        members: [
+          { name: 'Maria Eliza Munhoz (Corona-98)', role: 'Coordenador(a) de Comunicação',        photo: "img/comunicacao1.jpeg" },
+          { name: 'Sabryna Cardoso (Spam-100)', role: 'Coordenador(a) de Comunicação',        photo: null },
+          { name: 'Cássia Thaís Silva Rocha (KCL-98)', role: 'Coordenador(a) de Comunicação',        photo: "img/comunicacao3.jpeg" }
+        ]
+      },
+      {
+        icon: 'fa-solid fa-microscope', badge: 'Pesquisa & Extensão', name: 'Ensino, Pesquisa e Extensão',
+        expTitle: 'Coordenadoria de Ensino, Pesquisa e Extensão',
+        expText: [
+          'A Coordenadoria de Ensino articula iniciativas que qualificam a formação acadêmica e científica dos estudantes de Medicina da UFTM.',
+          'Apoia ligas acadêmicas, organiza eventos de pesquisa e extensão, monitora o currículo do curso e representa os alunos nos colegiados acadêmicos da instituição.'
+        ],
+        members: [
+          { name: 'Alyson Bastos (Zika-96)',              role: 'Coordenador(a) de EPE',  photo: "img/epe1.jpeg"},
+          { name: 'Vitor Zancanella Adib (Lionel-96)',    role: 'Coordenador(a) de EPE',  photo: "img/epe2.jpeg"},
+          { name: 'Victor Fujie (Nokia-97)',              role: 'Coordenador(a) de EPE',  photo: "img/epe3.jpeg" },
+          { name: 'Sarah Êmily Rocha Araújo (Paris-99)',  role: 'Coordenador(a) de EPE',  photo: "img/epe4.jpeg"  }
+        ]
+      },
+      {
+        icon: 'fa-solid fa-masks-theater', badge: 'Cultura & Bem-estar', name: 'Sociocultural',
+        expTitle: 'Coordenadoria Sociocultural',
+        expText: [
+          'A Coordenadoria Sociocultural cuida do bem-estar, da saúde mental e da integração dos estudantes, promovendo um ambiente acadêmico humanizado e acolhedor.',
+          'Organiza eventos culturais, ações de acolhimento, iniciativas de saúde mental e atividades que fortalecem os laços da turma ao longo da graduação.'
+        ],
+        members: [
+          { name: 'Maria Joana Figueiredo (Erva-95) ',  role: 'Coordenador(a) Sociocultural', photo: "img/sociocultural1.jpeg" },
+          { name: 'Otávio Augusto (Fofô-95)',           role: 'Coordenador(a) Sociocultural', photo: "img/sociocultural2.jpeg"  }
+        ]
+      },
+      {
+        icon: 'fa-solid fa-handshake-angle', badge: 'Representação', name: 'Representação Estudantil',
+        expTitle: 'Coordenadoria de Representação Estudantil',
+        expText: [
+          'A Coordenadoria de Representação articula a participação dos estudantes nos órgãos colegiados da UFTM e nas entidades estudantis externas.',
+          'Fortalece o diálogo com o DCE, DENEM, CVU e outras organizações, garantindo que a voz dos alunos de Medicina esteja presente nas decisões que moldam a vida universitária.'
+        ],
+        members: [
+          { name: 'Matheus Felipe (Mushú-94)', role: 'Coord. de Representação Estudantil', photo: "img/RE1.jpeg"},
+          { name: 'Marília (Hippie-97)', role: 'Coord. de Representação Estudantil', photo: "img/RE2.jpeg"},
+          { name: 'Pedro Jorge Tabaral (Gabiru-98)', role: 'Coord. de Representação Estudantil', photo: "img/RE3.jpeg" },
+          { name: 'Jeberson Moreira (Adão-99)', role: 'Coord. de Representação Estudantil', photo: "img/RE4.jpeg" }
+        ]
+      },
+      {
+        icon: 'fa-solid fa-laptop-code', badge: 'Tecnologia', name: 'Desenvolvimento Tecnológico',
+        expTitle: 'Coordenadoria de Desenvolvimento Tecnológico',
+        expText: [
+          'A Coordenadoria de Tecnologia desenvolve e mantém as ferramentas digitais do DAGV, tornando a entidade mais acessível e eficiente no mundo virtual.',
+          'Gerencia o site, sistemas internos e projetos de inovação digital que facilitam o acesso às informações e ampliam o alcance das ações da diretoria.'
+        ],
+        members: [
+          { name: 'Sérgio Lemuel Soares Santos (Bença-98)', role: 'Coordenador(a) de Tecnologia', photo: "img/DT1.jpeg" },
+          { name: 'Christian Oliveira Batista Araújo (CAPS-98)', role: 'Coordenador(a) de Tecnologia', photo: "img/DT2.jpeg" }
+        ]
+      },
+      {
+        icon: 'fa-solid fa-hospital', badge: 'Internato', name: 'Internato',
+        expTitle: 'Coordenadoria de Internato',
+        expText: [
+          'A Coordenadoria de Internato representa e apoia os estudantes durante o período de internato, fase essencial da formação médica em que o aluno atua em ambiente hospitalar.',
+          'Acompanha as demandas dos internos, articula com a coordenação do curso e garante que as condições de aprendizagem e bem-estar dos estudantes sejam preservadas nessa etapa prática da graduação.'
+        ],
+        members: [
+          { name: 'A definir', role: 'Coordenador(a) de Internato', photo: null },
+          { name: 'A definir', role: 'Coordenador(a) de Internato', photo: null }
+        ]
+      }
+    ];
+
+    /* ─────────────────────────────────────────────────────────
+       ESTADO DOS SUBCARROSSÉIS
+       ───────────────────────────────────────────────────────── */
+    var memberStates = [];   /* { current, total, timer, paused } */
+
+    var AUTO_MS_DESKTOP = 4200;
+    var AUTO_MS_MOBILE  = 5800;
+    var PAUSE_AFTER_MS  = 4000;
+
+    function isMobile() { return window.innerWidth <= 600; }
+    function autoMs()   { return isMobile() ? AUTO_MS_MOBILE : AUTO_MS_DESKTOP; }
+
+    /* Avança subcarrossel para targetIndex */
+    function goToMember(cardIdx, targetIdx) {
+      var st = memberStates[cardIdx];
+      if (!st || st.total <= 1 || targetIdx === st.current) return;
+
+      var card = document.querySelector('.crd-card[data-index="' + cardIdx + '"]');
+      if (!card) return;
+
+      var slides = card.querySelectorAll('.member-slide');
+      var dots   = card.querySelectorAll('.member-dot');
+      var oldIdx = st.current;
+
+      /* Determina direção */
+      var fwd = targetIdx > oldIdx || (targetIdx === 0 && oldIdx === st.total - 1);
+
+      var leaving = slides[oldIdx];
+      var entering = slides[targetIdx];
+
+      /* Remove classe ativa do atual → marca como saindo */
+      leaving.classList.remove('is-active');
+      leaving.classList.add('is-leaving');
+
+      /* Posiciona o próximo fora da tela (sem transição ainda) */
+      entering.style.transition = 'none';
+      entering.style.opacity    = '0';
+      entering.style.transform  = fwd ? 'translateX(28px)' : 'translateX(-28px)';
+      entering.style.position   = 'absolute';
+
+      /* Força reflow */
+      entering.getBoundingClientRect();
+
+      /* Ativa a transição */
+      entering.style.transition = '';
+      entering.classList.add('is-active');
+      entering.style.opacity    = '';
+      entering.style.transform  = '';
+      entering.style.position   = '';
+
+      /* Limpa a classe de saída após a transição */
+      setTimeout(function () {
+        leaving.classList.remove('is-leaving');
+        leaving.style.transform = '';
+        leaving.style.opacity   = '';
+      }, 660);
+
+      /* Atualiza dots */
+      dots.forEach(function (d, i) { d.classList.toggle('active', i === targetIdx); });
+
+      st.current = targetIdx;
+    }
+
+    function nextMember(cardIdx) {
+      var st = memberStates[cardIdx];
+      if (!st) return;
+      goToMember(cardIdx, (st.current + 1) % st.total);
+    }
+
+    function prevMember(cardIdx) {
+      var st = memberStates[cardIdx];
+      if (!st) return;
+      goToMember(cardIdx, (st.current - 1 + st.total) % st.total);
+    }
+
+    function startTimer(cardIdx) {
+      var st = memberStates[cardIdx];
+      if (!st || st.total <= 1) return;
+      if (st.timer) clearInterval(st.timer);
+      st.timer = setInterval(function () {
+        if (!st.paused) nextMember(cardIdx);
+      }, autoMs());
+    }
+
+    function stopTimer(cardIdx) {
+      var st = memberStates[cardIdx];
+      if (!st || !st.timer) return;
+      clearInterval(st.timer);
+      st.timer = null;
+    }
+
+    function pauseTimer(cardIdx) {
+      var st = memberStates[cardIdx];
+      if (!st) return;
+      st.paused = true;
+      setTimeout(function () { st.paused = false; }, PAUSE_AFTER_MS);
+    }
+
+    /* ─────────────────────────────────────────────────────────
+       CONSTRUÇÃO DO HTML DOS CARDS
+       ───────────────────────────────────────────────────────── */
+    function buildCard(coord, idx) {
+      var n = coord.members.length;
+
+      /* ── Slides de membros ─── */
+      var slidesHtml = coord.members.map(function (m, mi) {
+        var activeClass = mi === 0 ? ' is-active' : '';
+        var photoEl = m.photo
+          ? '<div class="member-slide__photo"><img src="' + m.photo + '" alt="' + m.name + '" loading="lazy" /></div>'
+          : '<div class="member-slide__photo"><i class="fa-solid fa-user-doctor" aria-hidden="true"></i></div>';
+        var nameMatch = m.name.match(/^(.*?)\s*(\([^)]*\))\s*$/);
+        var nameHtml = nameMatch
+          ? '<div class="member-slide__name">' + nameMatch[1] + '</div>' +
+            '<div class="member-slide__nickname">' + nameMatch[2] + '</div>'
+          : '<div class="member-slide__name">' + m.name + '</div>';
+        return '<div class="member-slide' + activeClass + '" data-mi="' + mi + '">' +
+                 photoEl +
+                 nameHtml +
+                 (m.role ? '<div class="member-slide__role">' + m.role + '</div>' : '') +
+               '</div>';
+      }).join('');
+
+      /* ── Dots do subcarrossel ─── */
+      var dotsHtml = n > 1 ? coord.members.map(function (_, mi) {
+        return '<button class="member-dot' + (mi === 0 ? ' active' : '') + '" data-mdot="' + mi + '" aria-label="Membro ' + (mi + 1) + '"></button>';
+      }).join('') : '';
+
+      /* ── Texto expandido ─── */
+      var expText = coord.expText.map(function (p) { return '<p>' + p + '</p>'; }).join('');
+
+      return '<article class="crd-card" data-index="' + idx + '">' +
+
+        /* Cabeçalho da coordenação */
+        '<div class="crd-card__top-header">' +
+          '<div class="crd-card__coord-icon"><i class="' + coord.icon + '" aria-hidden="true"></i></div>' +
+          '<div class="crd-card__coord-info">' +
+            '<div class="crd-card__coord-name">' + coord.name + '</div>' +
+            '<span class="crd-card__coord-badge">' + coord.badge + '</span>' +
+          '</div>' +
+        '</div>' +
+
+        /* Subcarrossel de membros */
+        '<div class="member-carousel" data-count="' + n + '">' +
+          '<div class="member-carousel__viewport">' + slidesHtml + '</div>' +
+          '<div class="member-carousel__controls">' +
+            '<div class="member-dots">' + dotsHtml + '</div>' +
+          '</div>' +
+        '</div>' +
+
+        /* Separador */
+        '<div class="crd-card__separator"></div>' +
+
+        /* Subtítulo gestão */
+        '<div class="crd-card__gestao">Gestão Guimarães Rosa · 2026</div>' +
+
+        /* Botão expandir */
+        '<button class="crd-card__expand-btn" aria-label="Ver descrição da coordenação" aria-expanded="false">' +
+          '<i class="fa-solid fa-chevron-down expand-icon" aria-hidden="true"></i>' +
+        '</button>' +
+
+        /* Painel expandido */
+        '<div class="crd-card__expanded-panel" aria-hidden="true">' +
+          '<div class="crd-card__expanded-inner">' +
+            '<div class="crd-card__exp-title">' + coord.expTitle + '</div>' +
+            '<div class="crd-card__exp-text">' + expText + '</div>' +
+          '</div>' +
+        '</div>' +
+
+      '</article>';
+    }
+
+    /* ─────────────────────────────────────────────────────────
+       CARROSSEL PRINCIPAL
+       ───────────────────────────────────────────────────────── */
+    document.addEventListener('DOMContentLoaded', function () {
+
+      var track    = document.getElementById('carouselTrack');
+      var prevBtn  = document.getElementById('carouselPrev');
+      var nextBtn  = document.getElementById('carouselNext');
+      var dotsWrap = document.getElementById('carouselDots');
+
+      if (!track) return;
+
+      /* Injeta HTML dos cards */
+      track.innerHTML = COORDENACOES.map(function (c, i) { return buildCard(c, i); }).join('');
+
+      var cards   = Array.from(track.querySelectorAll('.crd-card'));
+      var total   = cards.length;
+      var current  = 0;
+      var expanded = false;
+
+      /* Inicia subcarrosséis */
+      COORDENACOES.forEach(function (c, i) {
+        memberStates[i] = { current: 0, total: c.members.length, timer: null, paused: false };
+        startTimer(i);
+      });
+
+      /* Dots principais */
+      COORDENACOES.forEach(function (_, i) {
+        var d = document.createElement('button');
+        d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+        d.setAttribute('role', 'tab');
+        d.setAttribute('aria-label', 'Coordenadoria ' + (i + 1));
+        d.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+        d.addEventListener('click', function () { goTo(i); });
+        dotsWrap.appendChild(d);
+      });
+
+      var mainDots = Array.from(dotsWrap.querySelectorAll('.carousel-dot'));
+
+      /* ── Render 3D ─────────────────────────────────────────── */
+      function render() {
+        cards.forEach(function (card, i) {
+          var pos = i - current;
+          if (pos >  total / 2) pos -= total;
+          if (pos < -total / 2) pos += total;
+          card.setAttribute('data-pos', Math.max(-3, Math.min(3, pos)));
+        });
+        mainDots.forEach(function (d, i) {
+          var a = i === current;
+          d.classList.toggle('active', a);
+          d.setAttribute('aria-selected', a ? 'true' : 'false');
+        });
+      }
+
+      /* ── Colapsar painel ────────────────────────────────────── */
+      function collapseCard() {
+        if (!expanded) return;
+        var card  = cards[current];
+        var panel = card.querySelector('.crd-card__expanded-panel');
+        var btn   = card.querySelector('.crd-card__expand-btn');
+        card.classList.remove('is-expanded');
+        track.classList.remove('has-expanded');
+        if (panel) { panel.style.maxHeight = '0'; panel.setAttribute('aria-hidden', 'true'); }
+        if (btn)   btn.setAttribute('aria-expanded', 'false');
+        expanded = false;
+      }
+
+      /* ── Expandir painel ────────────────────────────────────── */
+      function expandCard() {
+        var card  = cards[current];
+        var panel = card.querySelector('.crd-card__expanded-panel');
+        var btn   = card.querySelector('.crd-card__expand-btn');
+        card.classList.add('is-expanded');
+        track.classList.add('has-expanded');
+        if (panel) {
+          panel.style.maxHeight = (panel.scrollHeight + 100) + 'px';
+          panel.setAttribute('aria-hidden', 'false');
+        }
+        if (btn) btn.setAttribute('aria-expanded', 'true');
+        expanded = true;
+      }
+
+      function toggleExpand() { expanded ? collapseCard() : expandCard(); }
+
+      /* ── Navegação principal ────────────────────────────────── */
+      function goTo(idx) {
+        collapseCard();
+        current = ((idx % total) + total) % total;
+        render();
+      }
+
+      /* ════════════════════════════════════════════════════════
+         DRAG / SWIPE nos subcarrosséis internos
+         – Mouse (desktop) e Touch (mobile)
+         – Threshold 40px; cancela click se arrastou
+         ════════════════════════════════════════════════════════ */
+      var DRAG_THRESHOLD = 40;   /* px mínimos para considerar arrasto */
+
+      /* Anexa drag a todos os viewports presentes no track */
+      function attachDragToViewports() {
+        track.querySelectorAll('.member-carousel__viewport').forEach(function (vp) {
+          if (vp._dragAttached) return;   /* evita duplo bind */
+          vp._dragAttached = true;
+
+          var startX   = 0;
+          var dragging = false;
+          var moved    = false;           /* se houve deslocamento real */
+
+          function getCardIdx(el) {
+            var card = el.closest('.crd-card');
+            return card ? parseInt(card.getAttribute('data-index'), 10) : -1;
+          }
+
+          /* ── MOUSE ───────────────────────────────────────── */
+          vp.addEventListener('mousedown', function (e) {
+            /* Ignora cliques em dots */
+            if (e.target.closest('[data-mdot]')) return;
+            startX   = e.clientX;
+            dragging = true;
+            moved    = false;
+            vp.classList.add('is-dragging');
+          });
+
+          document.addEventListener('mousemove', function (e) {
+            if (!dragging) return;
+            if (Math.abs(e.clientX - startX) > 6) moved = true;
+          });
+
+          document.addEventListener('mouseup', function (e) {
+            if (!dragging) return;
+            dragging = false;
+            vp.classList.remove('is-dragging');
+
+            var dx = e.clientX - startX;
+            if (Math.abs(dx) < DRAG_THRESHOLD) return;   /* arrasto curto = ignora */
+
+            var cidx = getCardIdx(vp);
+            if (cidx < 0) return;
+            dx < 0 ? nextMember(cidx) : prevMember(cidx);
+            pauseTimer(cidx);
+          });
+
+          /* ── TOUCH ───────────────────────────────────────── */
+          vp.addEventListener('touchstart', function (e) {
+            if (e.target.closest('[data-mdot]')) return;
+            startX   = e.changedTouches[0].clientX;
+            moved    = false;
+          }, { passive: true });
+
+          vp.addEventListener('touchmove', function () {
+            moved = true;
+          }, { passive: true });
+
+          vp.addEventListener('touchend', function (e) {
+            var dx = e.changedTouches[0].clientX - startX;
+            if (Math.abs(dx) < DRAG_THRESHOLD) return;
+
+            var cidx = getCardIdx(vp);
+            if (cidx < 0) return;
+            dx < 0 ? nextMember(cidx) : prevMember(cidx);
+            pauseTimer(cidx);
+          }, { passive: true });
+
+          /* Previne clique após arrastar */
+          vp.addEventListener('click', function (e) {
+            if (moved) { e.stopPropagation(); moved = false; }
+          }, true);
+        });
+      }
+
+      /* Chama uma vez após render inicial e observa novos cards (segurança) */
+      attachDragToViewports();
+
+      /* ── Delegação de eventos no track ──────────────────────── */
+      track.addEventListener('click', function (e) {
+
+        /* Botão expandir */
+        var expBtn = e.target.closest('.crd-card__expand-btn');
+        if (expBtn) {
+          if (expBtn.closest('.crd-card').getAttribute('data-pos') === '0') {
+            e.stopPropagation();
+            toggleExpand();
+          }
+          return;
+        }
+
+        /* Dot de membro */
+        var mdot = e.target.closest('[data-mdot]');
+        if (mdot) {
+          var mIdx = parseInt(mdot.getAttribute('data-mdot'), 10);
+          var pCard = mdot.closest('.crd-card');
+          var pcIdx = parseInt(pCard.getAttribute('data-index'), 10);
+          goToMember(pcIdx, mIdx);
+          pauseTimer(pcIdx);
+          return;
+        }
+      });
+
+      /* ── Botões ← → ─────────────────────────────────────────── */
+      if (prevBtn) prevBtn.addEventListener('click', function () { goTo(current - 1); });
+      if (nextBtn) nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+      /* ── Fechar ao clicar fora ──────────────────────────────── */
+      document.addEventListener('click', function (e) {
+        if (!expanded) return;
+        var ac = cards[current];
+        if (ac && !ac.contains(e.target) && e.target !== prevBtn && e.target !== nextBtn) {
+          collapseCard();
+        }
+      });
+
+      /* ── Teclado ────────────────────────────────────────────── */
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft')  { e.preventDefault(); goTo(current - 1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); goTo(current + 1); }
+        if (e.key === 'Escape')     { collapseCard(); }
+      });
+
+      /* ── Swipe touch no carrossel PRINCIPAL ─────────────────── */
+      /* Ignora se o toque começou dentro de um subcarrossel      */
+      var tx = 0, ty = 0, tInnerDrag = false;
+      track.addEventListener('touchstart', function (e) {
+        tInnerDrag = !!e.target.closest('.member-carousel__viewport');
+        tx = e.changedTouches[0].screenX;
+        ty = e.changedTouches[0].screenY;
+      }, { passive: true });
+
+      track.addEventListener('touchend', function (e) {
+        if (tInnerDrag) return;   /* subcarrossel tratou este toque */
+        var dx = e.changedTouches[0].screenX - tx;
+        var dy = e.changedTouches[0].screenY - ty;
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 45) {
+          dx < 0 ? goTo(current + 1) : goTo(current - 1);
+        }
+      }, { passive: true });
+
+      /* ── Init ───────────────────────────────────────────────── */
+      render();
+    });
+
+  }());
+  </script>
+
+</body>
+</html>
