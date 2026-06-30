@@ -39,12 +39,13 @@
     /* ── Tokens locais ─────────────────────────────────────────── */
     :root {
       /* Tons neutros quentes de apoio */
-      --hist-parchment:  #f8f4ef;   /* off-white pergaminho         */
-      --hist-cream:      #f2ebe0;   /* bege claro                   */
-      --hist-warm-gray:  #9e958a;   /* cinza-quente                 */
-      --hist-warm-dark:  #3a3028;   /* escuro quente (não preto puro) */
-      --hist-border:     #ddd4c8;   /* borda bege discreta          */
-      --hist-sepia:      rgba(94,58,20,.06);  /* textura sépia       */
+      --hist-parchment:  #f0e6d8;   /* pergaminho — mais bege e quente */
+      --hist-cream:      #e8d9c0;   /* bege mais intenso e saturado    */
+      --hist-warm-gray:  #9e958a;   /* cinza-quente                    */
+      --hist-warm-dark:  #3a3028;   /* escuro quente (não preto puro)  */
+      --hist-border:     #d4c4a8;   /* borda bege mais marcada         */
+      --hist-sepia:      rgba(94,58,20,.07);  /* textura sépia          */
+      --hist-notebook-line: rgba(94,58,20,.085); /* linhas de caderno   */
     }
 
     /* ── Textura de papel – aplicada via mixin pseudo-element ────
@@ -54,8 +55,16 @@
       content: '';
       position: absolute;
       inset: 0;
-      background-image: radial-gradient(var(--hist-sepia) 1px, transparent 1px);
-      background-size: 18px 18px;
+      background-image:
+        repeating-linear-gradient(
+          to bottom,
+          transparent 0px,
+          transparent 27px,
+          var(--hist-notebook-line) 27px,
+          var(--hist-notebook-line) 28px
+        ),
+        radial-gradient(var(--hist-sepia) 1px, transparent 1px);
+      background-size: 100% 28px, 18px 18px;
       pointer-events: none;
       z-index: 0;
     }
@@ -182,13 +191,23 @@
       background: var(--hist-parchment);
     }
 
-    /* Textura de papel no fundo da timeline */
+    /* Textura de papel + linhas de caderno no fundo da timeline */
     .timeline::before {
       content: '';
       position: absolute;
       inset: 0;
-      background-image: radial-gradient(var(--hist-sepia) 1px, transparent 1px);
-      background-size: 18px 18px;
+      background-image:
+        /* Linhas horizontais — efeito caderno pautado */
+        repeating-linear-gradient(
+          to bottom,
+          transparent 0px,
+          transparent 27px,
+          var(--hist-notebook-line) 27px,
+          var(--hist-notebook-line) 28px
+        ),
+        /* Textura sépia granulada (camada original) */
+        radial-gradient(var(--hist-sepia) 1px, transparent 1px);
+      background-size: 100% 28px, 18px 18px;
       pointer-events: none;
       z-index: 0;
     }
@@ -220,20 +239,83 @@
       margin-inline: auto;
     }
 
+    /* ── Linha do tempo envelhecida ────────────────────────────
+       Efeito de fio/cordão antigo: largura maior, textura granulada,
+       leve serrilhado nas bordas via gradiente irregular, e uma
+       segunda camada de "desgaste" com opacidade variável para
+       simular descoloração desigual ao longo do tempo.            */
+    .timeline__list {
+      position: relative;
+      max-width: 860px;
+      margin-inline: auto;
+    }
+
     .timeline__list::before {
       content: '';
       position: absolute;
       top: 0; bottom: 0;
       left: 50%;
-      width: 1px;                             /* mais fina = mais sutil */
+      width: 3px;
+      transform: translateX(-50%);
+      z-index: 0;
+
+      /* Camada base: tom sépia desbotado, mais espesso que antes,
+         com leve textura através de um gradiente repetitivo sutil
+         que quebra a uniformidade — como fibra de corda velha.    */
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          rgba(94,58,20,.32) 0px,
+          rgba(94,58,20,.32) 2px,
+          rgba(94,58,20,.18) 2px,
+          rgba(94,58,20,.18) 4px
+        );
+
+      /* Máscara: a linha "nasce" e "morre" gradualmente nas pontas,
+         e tem pequenas variações de opacidade no meio — como se
+         partes tivessem desbotado mais que outras com o tempo.    */
+      mask-image:
+        linear-gradient(180deg,
+          transparent 0%,
+          black 6%,
+          black 22%,  rgba(0,0,0,.55) 27%, black 33%,
+          black 47%,  rgba(0,0,0,.4)  52%, black 58%,
+          black 71%,  rgba(0,0,0,.6)  76%, black 82%,
+          black 94%, transparent 100%
+        );
+      -webkit-mask-image:
+        linear-gradient(180deg,
+          transparent 0%,
+          black 6%,
+          black 22%,  rgba(0,0,0,.55) 27%, black 33%,
+          black 47%,  rgba(0,0,0,.4)  52%, black 58%,
+          black 71%,  rgba(0,0,0,.6)  76%, black 82%,
+          black 94%, transparent 100%
+        );
+
+      box-shadow: 0 0 2px rgba(94,58,20,.15);
+    }
+
+    /* Camada de sombra sutil ao lado da linha — profundidade de
+       corda física, não de traço plano vetorial.                  */
+    .timeline__list::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 50%;
+      width: 7px;
+      transform: translateX(-50%);
+      z-index: -1;
+      pointer-events: none;
       background: linear-gradient(
-        180deg,
+        90deg,
         transparent,
-        rgba(147,1,66,.25) 8%,
-        rgba(147,1,66,.25) 92%,
+        rgba(94,58,20,.06) 40%,
+        rgba(94,58,20,.06) 60%,
         transparent
       );
-      transform: translateX(-50%);
+      mask-image: linear-gradient(180deg, transparent 0%, black 10%, black 90%, transparent 100%);
+      -webkit-mask-image: linear-gradient(180deg, transparent 0%, black 10%, black 90%, transparent 100%);
     }
 
     .timeline__item {
@@ -247,15 +329,17 @@
     /* Alternado */
     .timeline__item:nth-child(odd) { flex-direction: row-reverse; }
 
-    /* Bolinha: pequena, quadrada girada, bordô atenuado */
+    /* Marcador: selo redondo bordô institucional, acabamento chapado */
     .timeline__dot {
       flex-shrink: 0;
-      width: 12px; height: 12px;
-      border-radius: 2px;                     /* losango sutil */
-      transform: rotate(45deg) translateX(-50%);
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      transform: translateX(-50%);
       background: var(--clr-green-dark);
       border: 2px solid var(--hist-parchment);
-      box-shadow: 0 0 0 2px rgba(147,1,66,.25);
+      box-shadow:
+        0 0 0 2px rgba(147,1,66,.3),
+        0 1px 2px rgba(0,0,0,.2);
       position: absolute;
       left: 50%;
       top: 1.4rem;
@@ -340,8 +424,16 @@
       content: '';
       position: absolute;
       inset: 0;
-      background-image: radial-gradient(rgba(94,58,20,.05) 1px, transparent 1px);
-      background-size: 20px 20px;
+      background-image:
+        repeating-linear-gradient(
+          to bottom,
+          transparent 0px,
+          transparent 27px,
+          var(--hist-notebook-line) 27px,
+          var(--hist-notebook-line) 28px
+        ),
+        radial-gradient(rgba(94,58,20,.05) 1px, transparent 1px);
+      background-size: 100% 28px, 20px 20px;
       pointer-events: none;
       z-index: 0;
     }
@@ -365,69 +457,166 @@
       margin-top: var(--space-xl);
     }
 
-    /* Card de documento: branco puro com borda sépia */
+    /* Card de documento: ficha de arquivo antigo — papel pergaminho,
+       canto dobrado, leve rotação aleatória, header e corpo separados */
     .doc-card {
-      background: #ffffff;
-      border-radius: var(--radius-sm);
-      padding: var(--space-md) var(--space-lg);
+      background: var(--hist-cream);
+      border-radius: 3px;
       display: flex;
-      align-items: flex-start;
-      gap: var(--space-sm);
-      /* Sombra quente muito discreta */
-      box-shadow: 0 2px 8px rgba(94,58,20,.08),
-                  0 0 0 1px rgba(94,58,20,.06);
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      cursor: pointer;
+      /* Sombra quente como papel solto sobre uma mesa */
+      box-shadow: 0 3px 10px rgba(94,58,20,.12),
+                  0 0 0 1px var(--hist-border);
       border: none;
-      transition: transform  480ms var(--ease),
-                  box-shadow 480ms var(--ease);
+      /* Leve rotação para sugerir documentos dispostos à mão */
+      transform: rotate(var(--doc-tilt, 0deg)) translateY(0);
+      transition: transform  550ms cubic-bezier(.22,.9,.32,1) !important,
+                  box-shadow  550ms cubic-bezier(.22,.9,.32,1) !important;
+    }
+
+    .docs__grid .doc-card:nth-child(1) { --doc-tilt: -0.6deg; }
+    .docs__grid .doc-card:nth-child(2) { --doc-tilt:  0.5deg; }
+    .docs__grid .doc-card:nth-child(3) { --doc-tilt: -0.4deg; }
+    .docs__grid .doc-card:nth-child(4) { --doc-tilt:  0.7deg; }
+
+    /* Canto superior dobrado — como uma ficha de arquivo envelhecida */
+    .doc-card::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 0; height: 0;
+      border-style: solid;
+      border-width: 0 16px 16px 0;
+      border-color: transparent var(--hist-parchment) transparent transparent;
+      box-shadow: -1px 1px 3px rgba(94,58,20,.18);
+      border-radius: 0 3px 0 0;
+      z-index: 2;
     }
 
     .doc-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 24px rgba(94,58,20,.13),
-                  0 0 0 1px rgba(147,1,66,.12);
+      transform: rotate(0deg) translateY(-14px) scale(1.035) !important;
+      box-shadow: 0 26px 42px rgba(94,58,20,.28),
+                  0 8px 16px rgba(94,58,20,.16),
+                  0 0 0 1px rgba(147,1,66,.25) !important;
     }
 
-    /* Ícone: tom bordô escuro, fundo bege */
+    .doc-card:focus-visible {
+      outline: 2px solid var(--clr-green-dark);
+      outline-offset: 3px;
+    }
+
+    /* Cabeçalho: faixa com tonalidade própria, separada do corpo
+       por uma borda + linha de costura, como etiqueta de pasta */
+    .doc-card__header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: var(--space-md) var(--space-lg);
+      padding-top: calc(var(--space-md) + 4px);
+      background: linear-gradient(160deg, #f3e7d2 0%, var(--hist-cream) 100%);
+      border-bottom: 1px solid var(--hist-border);
+      position: relative;
+    }
+
+    /* Linha de costura/perfuração no topo do cabeçalho */
+    .doc-card__header::after {
+      content: '';
+      position: absolute;
+      top: 9px; left: var(--space-lg);
+      width: calc(100% - var(--space-lg) - 24px);
+      height: 1px;
+      background: repeating-linear-gradient(
+        90deg,
+        rgba(94,58,20,.25) 0,
+        rgba(94,58,20,.25) 3px,
+        transparent 3px,
+        transparent 7px
+      );
+    }
+
+    /* Corpo: fundo claro, contraste com o cabeçalho, botão sempre na base */
+    .doc-card__body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: var(--space-md) var(--space-lg);
+      background: #fbf6ec;
+    }
+
+    /* Ícone: selo circular bordô institucional, acabamento chapado */
     .doc-card__icon {
-      font-size: 1.5rem;
-      color: var(--clr-green-dark);
       flex-shrink: 0;
-      margin-top: .2rem;
-      opacity: .75;
+      width: 2.5rem;
+      height: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.05rem;
+      color: rgba(232,160,32,.9);
+      border-radius: 50%;
+      background: var(--clr-green-dark);
+      box-shadow:
+        0 0 0 2px var(--hist-cream),
+        0 0 0 3px rgba(147,1,66,.3);
+      position: relative;
+      z-index: 1;
     }
 
-    .doc-card__content h4 {
+    /* Título: mais destacado dentro do cabeçalho */
+    .doc-card__header h4 {
       font-family: var(--font-display);
-      font-size: .98rem;
+      font-size: 1.08rem;
       font-weight: 700;
       color: var(--hist-warm-dark);
-      margin-bottom: .35rem;
       letter-spacing: .005em;
+      line-height: 1.3;
+      position: relative;
+      z-index: 1;
     }
 
-    .doc-card__content p {
+    .doc-card__body p {
       font-size: .88rem;
       color: #6b5d52;
       line-height: 1.65;
+      flex: 1;
+      margin-bottom: var(--space-md);
     }
 
-    /* Link: discreto, sem seta chamativa */
+    /* Link como botão: contorno bordô institucional, preenche no hover,
+       sempre ancorado na base do card */
+    /* Indicativo discreto de que o card é clicável — sem aparência de botão */
     .doc-card__link {
       display: inline-flex;
       align-items: center;
-      gap: .35em;
-      font-size: .82rem;
+      gap: .4em;
+      font-size: .78rem;
       font-weight: 600;
       color: var(--clr-green-dark);
-      opacity: .7;
-      margin-top: .6rem;
-      transition: opacity 280ms, gap 280ms;
-      letter-spacing: .03em;
+      opacity: .65;
+      align-self: flex-start;
+      margin-top: auto;
+      letter-spacing: .04em;
+      text-decoration: none;
+      transition: opacity 280ms var(--ease),
+                  gap     280ms var(--ease);
     }
 
-    .doc-card__link:hover {
+    .doc-card__link i {
+      font-size: .72rem;
+      transition: transform 280ms var(--ease);
+    }
+
+    .doc-card:hover .doc-card__link {
       opacity: 1;
-      gap: .55em;
+      gap: .6em;
+    }
+
+    .doc-card:hover .doc-card__link i {
+      transform: translate(2px, -2px);
     }
 
     /* ══════════════════════════════════════════════════════════════
@@ -480,6 +669,17 @@
       transition-delay: inherit;
     }
 
+    /* Entrada dos cards de documentos: mais pronunciada — sobem de
+       mais longe, levemente menores, "pousando" no lugar.
+       Aplicada apenas antes da animação rodar; depois disso o card
+       volta a obedecer normalmente a .doc-card e .doc-card:hover. */
+    .docs__grid .doc-card[data-aos="fade-up"]:not(.aos-animate) {
+      transform: translate3d(0, 70px, 0) scale(.92) rotate(var(--doc-tilt, 0deg)) !important;
+      opacity: 0 !important;
+      transition-duration: 750ms !important;
+      transition-timing-function: cubic-bezier(.22,.9,.32,1) !important;
+    }
+
     /* ══════════════════════════════════════════════════════════════
        RESPONSIVIDADE
        ══════════════════════════════════════════════════════════ */
@@ -493,7 +693,7 @@
         padding-left: 40px;
       }
 
-      .timeline__dot { left: 16px; transform: rotate(45deg) translateX(-50%); }
+      .timeline__dot { left: 16px; transform: translateX(-50%); }
 
       .timeline__body,
       .timeline__item:nth-child(odd) .timeline__body {
@@ -840,71 +1040,49 @@
 
         <div class="docs__grid">
 
-          <div class="doc-card" data-aos="fade-up" data-aos-delay="0">
-            <i class="fa-solid fa-scroll doc-card__icon" aria-hidden="true"></i>
-            <div class="doc-card__content">
+          <a href="https://dagvmeduftm.wordpress.com/estatuto-dagv/" target="_blank" rel="noopener" class="doc-card" data-aos="fade-up" data-aos-delay="0">
+            <div class="doc-card__header">
+              <i class="fa-solid fa-scroll doc-card__icon" aria-hidden="true"></i>
               <h4>Estatuto do DAGV</h4>
+            </div>
+            <div class="doc-card__body">
               <p>Documento oficial que rege a organização, atribuições e princípios do Diretório Acadêmico Gaspar Vianna.</p>
-              <a href="https://dagvmeduftm.wordpress.com/estatuto-dagv/" target="_blank" rel="noopener" class="doc-card__link">
-                Acessar <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
-              </a>
+              <span class="doc-card__link"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></span>
             </div>
-          </div>
+          </a>
 
-          <div class="doc-card" data-aos="fade-up" data-aos-delay="100">
-            <i class="fa-solid fa-landmark doc-card__icon" aria-hidden="true"></i>
-            <div class="doc-card__content">
-              <h4>Histórico UFTM</h4>
-              <p>Registros institucionais, publicações e relatórios que documentam a trajetória da Universidade Federal do Triângulo Mineiro.</p>
-              <a href="https://www.uftm.edu.br" target="_blank" rel="noopener" class="doc-card__link">
-                Site UFTM <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
-              </a>
+          <a href="https://www.uftm.edu.br" target="_blank" rel="noopener" class="doc-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="doc-card__header">
+              <i class="fa-solid fa-landmark doc-card__icon" aria-hidden="true"></i>
+              <h4>Histórico FMTM</h4>
             </div>
-          </div>
+            <div class="doc-card__body">
+              <p>Registros institucionais, publicações e relatórios que documentam a trajetória da Faculdade de Medicina do Triângulo Mineiro.</p>
+              <span class="doc-card__link"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></span>
+            </div>
+          </a>
 
-          <div class="doc-card" data-aos="fade-up" data-aos-delay="200">
-            <i class="fa-solid fa-flask doc-card__icon" aria-hidden="true"></i>
-            <div class="doc-card__content">
-              <h4>Ligas Acadêmicas</h4>
-              <p>Catálogo das ligas científicas fundadas e apoiadas pelo DAGV ao longo dos anos, com suas respectivas missões.</p>
-              <a href="https://dagvmeduftm.wordpress.com/ligas-academicas/" target="_blank" rel="noopener" class="doc-card__link">
-                Ver ligas <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
-              </a>
+          <a href="https://dagvmeduftm.wordpress.com/galeria-de-fotos/" target="_blank" rel="noopener" class="doc-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="doc-card__header">
+              <i class="fa-solid fa-box-archive doc-card__icon" aria-hidden="true"></i>
+              <h4>Documentos Históricos DAGV</h4>
             </div>
-          </div>
+            <div class="doc-card__body">
+              <p>Acervo de atas, registros e documentos institucionais que compõem a memória histórica do Diretório Acadêmico Gaspar Vianna.</p>
+              <span class="doc-card__link"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></span>
+            </div>
+          </a>
 
-          <div class="doc-card" data-aos="fade-up" data-aos-delay="300">
-            <i class="fa-solid fa-graduation-cap doc-card__icon" aria-hidden="true"></i>
-            <div class="doc-card__content">
-              <h4>Cursinho Carolina</h4>
-              <p>Registros do projeto social de extensão do DAGV que oferece preparação pré-vestibular gratuita desde sua criação.</p>
-              <a href="https://dagvmeduftm.wordpress.com/cursinho-carolina/" target="_blank" rel="noopener" class="doc-card__link">
-                Conhecer <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
-              </a>
+          <a href="https://dagvmeduftm.wordpress.com/" target="_blank" rel="noopener" class="doc-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="doc-card__header">
+              <i class="fa-solid fa-book-open doc-card__icon" aria-hidden="true"></i>
+              <h4>O Epíplon</h4>
             </div>
-          </div>
-
-          <div class="doc-card" data-aos="fade-up" data-aos-delay="400">
-            <i class="fa-solid fa-hand-holding-heart doc-card__icon" aria-hidden="true"></i>
-            <div class="doc-card__content">
-              <h4>PET Medicina</h4>
-              <p>Documentação do Programa de Educação Tutorial em Medicina, parceiro histórico do DAGV na extensão e pesquisa.</p>
-              <a href="https://dagvmeduftm.wordpress.com/pet-medicina-1/" target="_blank" rel="noopener" class="doc-card__link">
-                Ver programa <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
-              </a>
+            <div class="doc-card__body">
+              <p>Publicação histórica vinculada à trajetória acadêmica do DAGV, registrando reflexões, produções e a memória estudantil.</p>
+              <span class="doc-card__link"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></span>
             </div>
-          </div>
-
-          <div class="doc-card" data-aos="fade-up" data-aos-delay="500">
-            <i class="fa-solid fa-users doc-card__icon" aria-hidden="true"></i>
-            <div class="doc-card__content">
-              <h4>DCE UFTM</h4>
-              <p>Diretório Central dos Estudantes da UFTM – parceiro institucional do DAGV na representação estudantil universitária.</p>
-              <a href="https://dagvmeduftm.wordpress.com/dce-uftm/" target="_blank" rel="noopener" class="doc-card__link">
-                Acessar DCE <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
-              </a>
-            </div>
-          </div>
+          </a>
 
         </div>
 
