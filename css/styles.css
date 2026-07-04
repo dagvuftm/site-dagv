@@ -1361,8 +1361,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   /* [AJUSTE 4] Hero: logo sempre visível no mobile – menor, reposicionada, nunca oculta */
   .hero__logo-deco {
     position: absolute;
-    right: -2.5%;
-    top: 42%;
+    right: -6%;
+    top: 62%;
     transform: translateY(-50%);
     z-index: 1;
     pointer-events: none;
@@ -1370,11 +1370,11 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   }
 
   .hero__logo-deco-img {
-    /* Escala proporcional via clamp – sem distorção */
-    width: clamp(80px, 28vw, 200px);
+    /* Escala proporcional via clamp – sem distorção; maior e mais baixa, como na referência */
+    width: clamp(220px, 58vw, 420px);
     height: auto;
     display: block;
-    opacity: .75;                       /* corrigido: era .0 (invisível) */
+    opacity: .45;                       /* reduzida para não competir com o texto */
     filter:
       drop-shadow(0 0 18px rgba(200,150,12,.10))
       drop-shadow(0 5px 14px rgba(0,0,0,.38));
@@ -1382,9 +1382,13 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   }
 
   .hero__content {
-    /* Limita largura para não sobrepor a logo */
-    max-width: 100%;
-    padding-inline: 0;
+    /* Limita largura para não sobrepor a logo: recua para a esquerda,
+       deixando a logo decorativa livre do lado direito (como na referência).
+       Sobrescreve o margin-inline:auto herdado de .container, que estava
+       centralizando o bloco e anulando o padding-inline-start. */
+    margin-inline: 0;
+    max-width: min(460px, 92%);
+    padding-inline: 4vw 0;
     padding-block: var(--space-xl);
   }
 
@@ -1399,8 +1403,18 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   }
 
   /* Tipografia hero mais compacta */
-  .hero__title       { font-size: clamp(2rem, 8vw, 3.2rem); }
-  .hero__description { font-size: 1rem; }
+  .hero__title {
+    font-size: clamp(2.5rem, 5vw, 3.9rem);
+    /* Libera a largura do próprio título (independente do .hero__content
+       mais estreito) para "Diretório Acadêmico" caber numa única linha */
+    max-width: 96vw;
+    white-space: normal;
+  }
+  .hero__description {
+    font-size: .88rem;
+    max-width: 100%;
+    margin-inline-end: auto;
+  }
 
   /* Seção de cabeçalho */
   .section-header { margin-bottom: var(--space-lg); }
@@ -1441,10 +1455,14 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   /* Botões hero empilhados */
   .hero__actions {
     flex-direction: column;
+    align-items: flex-start;
   }
   .hero__actions .btn {
-    width: 100%;
+    width: auto;
+    max-width: 90%;
     justify-content: center;
+    font-size: 1rem;
+    padding: .8em 7em;
   }
 }
 
@@ -1461,8 +1479,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   }
   .hero__logo-deco {
     position: absolute;
-    right: -1%;
-    top: 42%;
+    right: -8%;
+    top: 55%;
     transform: translateY(-50%);
     z-index: 1;
     pointer-events: none;
@@ -1470,11 +1488,11 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   }
 
   .hero__logo-deco-img {
-    /* Escala proporcional via clamp – sem distorção */
-    width: clamp(70px, 30vw, 200px);      /* reduz progressivamente em telas pequenas */
+    /* Escala proporcional via clamp – sem distorção; maior e mais baixa, como na referência */
+    width: clamp(190px, 60vw, 340px);      /* reduz progressivamente em telas pequenas */
     height: auto;
     display: block;
-    opacity: .85;
+    opacity: .40;                          /* reduzida para não competir com o texto */
     filter:
       drop-shadow(0 0 18px rgba(200,150,12,.10))
       drop-shadow(0 5px 14px rgba(0,0,0,.38));
@@ -1482,8 +1500,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   }
   
   .hero__content   {
-    max-width: 90%;
-    padding-inline: 0;
+    margin-inline: 0;
+    max-width: min(380px, 90%);
+    padding-inline: 4vw 0;
     padding-block: var(--space-xl);
   }
 
@@ -1500,8 +1519,17 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .container { width: 94vw; }
 
   /* Hero ainda mais compacto */
-  .hero__title       { font-size: clamp(1.6rem, 5vw, 2.6rem); line-height: 1.12; }
-  .hero__description { font-size: .93rem; margin-bottom: var(--space-md); }
+  .hero__title {
+    font-size: clamp(1rem, 8.5vw, 3.2rem);
+    line-height: 1.14;
+    max-width: 96vw;
+  }
+  .hero__description {
+    font-size: .82rem;
+    max-width: 68%;
+    margin-inline-end: auto;
+    margin-bottom: var(--space-md);
+  }
   .hero__eyebrow     { font-size: .75rem; }
 
   /* Equipe → coluna única */
@@ -1525,6 +1553,18 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   /* Botão mínimo de toque: 44px */
   .btn { min-height: 44px; padding: .7em 1.4em; }
   .nav-mobile__link { padding: .9rem 5vw; min-height: 44px; }
+
+  /* Botões da hero: menores e alinhados à esquerda, sem tampar a logo */
+  .hero__actions {
+    align-items: flex-start;
+  }
+  .hero__actions .btn {
+    width: auto;
+    max-width: 90%;
+    font-size: .93rem;
+    padding: .7em 3em;
+    min-height: 44px;
+  }
 }
 
 /* ── Telas ultrawide (≥ 1440px) ─────────────────────────── */
