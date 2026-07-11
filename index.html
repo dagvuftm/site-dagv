@@ -1486,395 +1486,311 @@
     </section>
 
     <!-- ===================== EVENTOS ===================== -->
-    <!-- ===================== INSTITUIÇÕES ACADÊMICAS ===================== -->
+    <!-- ═══════════════════════════════════════════════════════
+         INSTITUIÇÕES ACADÊMICAS — redesenhado (v106)
+         5 cards: Ligas · Cursinho Carolina · PET · Repr. · CEPOP
+         ═══════════════════════════════════════════════════════ -->
+
+    <!-- ── Estilos adicionais: card Representações Estudantis (design v2) ── -->
     <style>
-    /* ══════════════════════════════════════════════════════════
-       SEÇÃO INSTITUIÇÕES ACADÊMICAS – design renovado
-       Reutiliza tokens de styles.css. Zero override de globals.
-       ══════════════════════════════════════════════════════════ */
-
-    .inst-section {
-      padding-block: var(--space-2xl);
-      background: var(--clr-off);
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Grade diagonal de fundo – idêntica ao padrão do site */
-    .inst-section::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: repeating-linear-gradient(
-        -55deg, transparent, transparent 60px,
-        rgba(147,1,66,.025) 60px, rgba(147,1,66,.025) 61px
-      );
-      pointer-events: none;
-    }
-
-    /* ── Grid principal ─────────────────────────────────────── */
-    .inst-grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 1.25rem;
-      margin-top: var(--space-xl);
-      position: relative;
-      z-index: 1;
-    }
-
-    /* Layout:
-       Row 1: Ligas (5col) | Cursinho (4col) | PET (3col)
-       Row 2: Representações (7col) | CEPOP (5col)          */
-    .inst-card--ligas         { grid-column: span 5; }
-    .inst-card--cursinho      { grid-column: span 4; }
-    .inst-card--pet           { grid-column: span 3; }
-    .inst-card--representacoes{ grid-column: span 7; }
-    .inst-card--cepop         { grid-column: span 5; }
-
-    /* ── Card base ──────────────────────────────────────────── */
-    .inst-card {
-      background: var(--clr-white);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--clr-gray-1);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      transition:
-        transform   320ms cubic-bezier(.34,1.06,.64,1),
-        box-shadow  320ms ease;
-      text-decoration: none;
-      color: inherit;
-      min-height: 220px;
-    }
-
-    .inst-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 16px 48px rgba(147,1,66,.14);
-    }
-
-    /* Faixa de cor no topo de cada card */
-    .inst-card__stripe {
-      height: 4px;
-      background: linear-gradient(90deg, var(--clr-green-dark), var(--clr-green));
-      flex-shrink: 0;
-    }
-
-    /* Faixa dourada para o card de Representações */
-    .inst-card--representacoes .inst-card__stripe {
-      background: linear-gradient(90deg, #7a5900, var(--clr-accent));
-    }
-
-    /* ── Corpo do card ──────────────────────────────────────── */
-    .inst-card__body {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-      padding: 1.6rem 1.75rem 1.5rem;
-      gap: .65rem;
-    }
-
-    /* ── Logo área ──────────────────────────────────────────── */
-    .inst-card__logo-wrap {
-      height: 52px;
-      display: flex;
-      align-items: center;
-      margin-bottom: .25rem;
-    }
-
-    .inst-card__logo {
-      max-height: 52px;
-      max-width: 140px;
-      width: auto;
-      object-fit: contain;
-      display: block;
-    }
-
-    /* Placeholder de logo (quando não há imagem) */
-    .inst-card__logo-icon {
-      width: 52px; height: 52px;
-      border-radius: var(--radius-sm);
-      background: var(--clr-green-light);
-      color: var(--clr-green);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.55rem;
-      flex-shrink: 0;
-      transition: background 280ms, color 280ms;
-    }
-
-    .inst-card:hover .inst-card__logo-icon {
-      background: var(--clr-green);
-      color: var(--clr-white);
-    }
-
-    /* ── Título ─────────────────────────────────────────────── */
-    .inst-card__title {
-      font-family: var(--font-display);
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--clr-dark);
-      line-height: 1.25;
-    }
-
-    /* ── Descrição ──────────────────────────────────────────── */
-    .inst-card__desc {
-      font-size: .88rem;
-      color: var(--clr-gray-3);
-      line-height: 1.65;
-      flex: 1;
-    }
-
-    /* ── Link CTA ───────────────────────────────────────────── */
-    .inst-card__cta {
-      display: inline-flex;
-      align-items: center;
-      gap: .4em;
-      margin-top: auto;
-      font-size: .82rem;
-      font-weight: 700;
-      letter-spacing: .04em;
-      color: var(--clr-green);
-      text-transform: uppercase;
-      transition: gap 220ms, color 220ms;
-    }
-
-    .inst-card:hover .inst-card__cta { gap: .65em; color: var(--clr-green-dark); }
-
-    /* ── Card de Representações – layout horizontal com sub-cards */
-    .inst-card--representacoes .inst-card__body {
-      flex-direction: row;
-      align-items: flex-start;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .inst-card--representacoes .inst-card__info {
-      flex: 1;
-      min-width: 160px;
-      display: flex;
-      flex-direction: column;
-      gap: .65rem;
-    }
-
-    /* Mini-cards internos das entidades */
-    .inst-sub-list {
-      display: flex;
-      flex-direction: column;
-      gap: .5rem;
-      margin-top: .25rem;
-    }
-
-    .inst-sub-item {
-      display: flex;
-      align-items: center;
-      gap: .75rem;
-      padding: .6rem .9rem;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--clr-gray-1);
-      background: var(--clr-off);
-      text-decoration: none;
-      transition: background 220ms, border-color 220ms, transform 200ms;
-    }
-
-    .inst-sub-item:hover {
-      background: var(--clr-green-light);
-      border-color: var(--clr-green);
-      transform: translateX(3px);
-    }
-
-    .inst-sub-item__icon {
-      width: 30px; height: 30px;
-      border-radius: 6px;
-      background: var(--clr-green-light);
-      color: var(--clr-green);
-      display: flex; align-items: center; justify-content: center;
-      font-size: .85rem;
-      flex-shrink: 0;
-      transition: background 220ms, color 220ms;
-    }
-
-    .inst-sub-item:hover .inst-sub-item__icon {
-      background: var(--clr-green);
-      color: var(--clr-white);
-    }
-
-    .inst-sub-item__label {
-      font-size: .85rem;
-      font-weight: 700;
-      color: var(--clr-dark);
-      flex: 1;
-    }
-
-    .inst-sub-item__sub {
-      font-size: .75rem;
-      color: var(--clr-gray-2);
-      display: block;
-      font-weight: 400;
-    }
-
-    .inst-sub-item__arr {
-      font-size: .7rem;
-      color: var(--clr-gray-2);
-      transition: color 220ms, transform 220ms;
-    }
-
-    .inst-sub-item:hover .inst-sub-item__arr {
-      color: var(--clr-green);
-      transform: translateX(3px);
-    }
-
-    /* ── Badge de categoria ─────────────────────────────────── */
-    .inst-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: .3em;
-      font-size: .7rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      padding: .22em .75em;
-      border-radius: var(--radius-pill);
-      background: var(--clr-green-light);
-      color: var(--clr-green-dark);
-      align-self: flex-start;
-    }
-
-    .inst-card--representacoes .inst-badge {
-      background: rgba(232,160,32,.12);
-      color: #7a5900;
-    }
-
-    /* ── Responsividade ─────────────────────────────────────── */
-    @media (max-width: 900px) {
-      .inst-card--ligas,
-      .inst-card--cursinho,
-      .inst-card--pet          { grid-column: span 6; }
-      .inst-card--representacoes,
-      .inst-card--cepop        { grid-column: span 12; }
-      .inst-card--pet          { grid-column: span 12; }
-    }
-
-    @media (max-width: 600px) {
-      .inst-grid { gap: 1rem; }
-      .inst-card--ligas,
-      .inst-card--cursinho,
-      .inst-card--pet,
-      .inst-card--representacoes,
-      .inst-card--cepop        { grid-column: span 12; }
-      .inst-card { min-height: 180px; }
-      .inst-card--representacoes .inst-card__body {
-        flex-direction: column;
+      /* ── Fundo com degradê exato da referência ── */
+      #events.inst-section {
+        background: linear-gradient(
+          105deg,
+          #450020 0%,
+          #520025 30%,
+          #5d0029 60%,
+          #6b0130 100%
+        );
+        position: relative;
+        overflow: hidden;
       }
-    }
+
+      /* Textura de linhas diagonais finas sobre o fundo */
+      #events.inst-section::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+          repeating-linear-gradient(
+            -55deg,
+            transparent 0px, transparent 28px,
+            rgba(255,255,255,.022) 28px, rgba(255,255,255,.022) 29px
+          ),
+          repeating-linear-gradient(
+            35deg,
+            transparent 0px, transparent 48px,
+            rgba(255,255,255,.012) 48px, rgba(255,255,255,.012) 49px
+          );
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* Garante que o conteúdo fica acima da textura */
+      #events.inst-section .container { position: relative; z-index: 1; }
+
+      /* ── Badge "Ecossistema Acadêmico" em dourado ── */
+      #events .section-tag {
+        background: rgba(232,160,32,.15);
+        color: #e8a020;
+        border-color: rgba(232,160,32,.35);
+      }
+
+      /* ── Título com sublinhado dourado abaixo de todo o texto ── */
+      #events .section-title {
+        color: rgba(255,255,255,.95);
+        display: block;
+        padding-bottom: .6rem;
+        border-bottom: 3px solid;
+        border-image: linear-gradient(90deg, #c8830a, #e8a020, #f5c842) 1;
+      }
+
+      #events .section-desc {
+        color: rgba(255,255,255,.72);
+      }
+
+      /* Faixa dourada no topo do card de Representações */
+      .inst-card__stripe--repr {
+        height: 4px;
+        background: linear-gradient(90deg, #7a5900, var(--clr-accent));
+        flex-shrink: 0;
+      }
+
+      /* Remove o __top padrão e usa layout horizontal no body */
+      .inst-card__body--repr {
+        flex-direction: row !important;
+        align-items: flex-start;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        padding: 1.6rem 1.75rem 1.5rem;
+      }
+
+      /* Coluna de info lateral */
+      .inst-card__body--repr .inst-card__info {
+        flex: 1;
+        min-width: 160px;
+        display: flex;
+        flex-direction: column;
+        gap: .65rem;
+      }
+
+      /* Ícone dourado — removido; usa inst-card__icon-wrap padrão */
+
+      /* Badge dourado */
+      .inst-badge--repr {
+        display: inline-flex;
+        align-items: center;
+        gap: .3em;
+        font-size: .7rem;
+        font-weight: 700;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        padding: .22em .75em;
+        border-radius: var(--radius-pill);
+        background: rgba(232,160,32,.12);
+        color: #7a5900;
+        align-self: flex-start;
+      }
+
+      /* Lista de sub-itens */
+      .inst-sub-list {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+        margin-top: .25rem;
+        flex: 2;
+        min-width: 220px;
+      }
+
+      .inst-sub-item {
+        display: flex;
+        align-items: center;
+        gap: .75rem;
+        padding: .6rem .9rem;
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--clr-gray-1);
+        background: var(--clr-off);
+        text-decoration: none;
+        color: inherit;
+        transition: background 220ms, border-color 220ms, transform 200ms;
+      }
+
+      .inst-sub-item:hover {
+        background: var(--clr-green-light);
+        border-color: var(--clr-green);
+        transform: translateX(3px);
+      }
+
+      .inst-sub-item__icon {
+        width: 30px;
+        height: 30px;
+        border-radius: 6px;
+        background: var(--clr-green-light);
+        color: var(--clr-green);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: .85rem;
+        flex-shrink: 0;
+        transition: background 220ms, color 220ms;
+      }
+
+      .inst-sub-item:hover .inst-sub-item__icon {
+        background: var(--clr-green);
+        color: var(--clr-white);
+      }
+
+      /* Quando uma logo (<img>) for usada no lugar do ícone <i> */
+      .inst-sub-item__icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 6px;
+        display: block;
+      }
+
+      .inst-sub-item__label {
+        font-size: .85rem;
+        font-weight: 700;
+        color: var(--clr-dark);
+        flex: 1;
+      }
+
+      .inst-sub-item__sub {
+        font-size: .75rem;
+        color: var(--clr-gray-2);
+        display: block;
+        font-weight: 400;
+      }
+
+      .inst-sub-item__arr {
+        font-size: .7rem;
+        color: var(--clr-gray-2);
+        transition: color 220ms, transform 220ms;
+      }
+
+      .inst-sub-item:hover .inst-sub-item__arr {
+        color: var(--clr-green);
+        transform: translateX(3px);
+      }
+
+      /* Responsividade: mobile empilha */
+      @media (max-width: 600px) {
+        .inst-card__body--repr {
+          flex-direction: column !important;
+        }
+        .inst-sub-list {
+          min-width: 0;
+        }
+      }
     </style>
 
-    <section id="events" class="inst-section">
+    <section id="events" class="inst-section section" aria-labelledby="inst-title">
       <div class="container">
 
         <div class="section-header" data-aos="fade-up">
           <span class="section-tag">Ecossistema Acadêmico</span>
-          <h2 class="section-title">Instituições Acadêmicas</h2>
+          <h2 class="section-title" id="inst-title">Instituições Acadêmicas</h2>
           <p class="section-desc">
-            Conheça os projetos, programas e entidades que formam o ecossistema
-            estudantil do curso de Medicina da UFTM, apoiados e articulados pelo DAGV.
+            Conheça as iniciativas, programas e entidades que compõem o ecossistema
+            estudantil da Medicina UFTM e que contam com o apoio do DAGV.
           </p>
         </div>
 
         <div class="inst-grid">
 
-          <!-- ── 1. Ligas Acadêmicas ── -->
-          <a href="ligas.html"
-             class="inst-card inst-card--ligas"
-             data-aos="fade-up" data-aos-delay="0"
-             aria-label="Ligas Acadêmicas">
-            <div class="inst-card__stripe"></div>
-            <div class="inst-card__body">
-              <div class="inst-card__logo-wrap">
-                <div class="inst-card__logo-icon">
-                  <i class="fa-solid fa-stethoscope" aria-hidden="true"></i>
-                </div>
+          <!-- ① Ligas Acadêmicas ─────────────────────────── -->
+          <article class="inst-card inst-card--ligas" data-aos="fade-up" data-aos-delay="0">
+            <div class="inst-card__top">
+              <div class="inst-card__icon-wrap">
+                <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
               </div>
-              <span class="inst-badge"><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Ativo</span>
+              <div class="inst-card__label">Ativo · 12+ ligas</div>
+            </div>
+            <div class="inst-card__body">
               <h3 class="inst-card__title">Ligas Acadêmicas</h3>
               <p class="inst-card__desc">
-                Grupos extracurriculares de estudo e prática em especialidades médicas —
-                de cardiologia a psiquiatria — que aprofundam a formação dos estudantes
-                além da grade obrigatória.
+                Grupos de estudo extracurriculares em diversas especialidades médicas,
+                que promovem ensino, pesquisa e extensão além da grade curricular.
               </p>
-              <span class="inst-card__cta">
-                Ver todas as ligas <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-              </span>
             </div>
-          </a>
-
-          <!-- ── 2. Cursinho Carolina ── -->
-          <a href="https://dagvmeduftm.wordpress.com/cursinho-carolina/"
-             target="_blank" rel="noopener"
-             class="inst-card inst-card--cursinho"
-             data-aos="fade-up" data-aos-delay="80"
-             aria-label="Cursinho Carolina">
-            <div class="inst-card__stripe"></div>
-            <div class="inst-card__body">
-              <div class="inst-card__logo-wrap">
-                <!-- Espaço reservado para logo do Cursinho Carolina -->
-                <div class="inst-card__logo-icon">
-                  <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
-                </div>
+            <div class="inst-card__footer">
+              <div class="inst-card__tags">
+                <span class="inst-tag"><i class="fa-solid fa-book-open" aria-hidden="true"></i> Ensino</span>
+                <span class="inst-tag"><i class="fa-solid fa-microscope" aria-hidden="true"></i> Pesquisa</span>
+                <span class="inst-tag"><i class="fa-solid fa-hands-holding-circle" aria-hidden="true"></i> Extensão</span>
               </div>
-              <span class="inst-badge"><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Extensão Social</span>
+              <a href="ligas.html" class="inst-card__cta">
+                Conhecer ligas <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- ② Cursinho Carolina ──────────────────────────── -->
+          <article class="inst-card inst-card--carolina" data-aos="fade-up" data-aos-delay="80">
+            <div class="inst-card__top">
+              <div class="inst-card__icon-wrap">
+                <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+              </div>
+              <div class="inst-card__label">Projeto social · Gratuito</div>
+            </div>
+            <div class="inst-card__body">
               <h3 class="inst-card__title">Cursinho Carolina</h3>
               <p class="inst-card__desc">
-                Curso pré-vestibular gratuito mantido pelos estudantes da UFTM para
-                democratizar o acesso ao ensino superior. Homenagem a Carolina Maria de Jesus.
+                Curso pré-vestibular social e gratuito mantido pelo DAGV como projeto
+                de extensão, voltado a estudantes de baixa renda de Uberaba.
               </p>
-              <span class="inst-card__cta">
-                Conhecer o projeto <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-              </span>
             </div>
-          </a>
-
-          <!-- ── 3. PET Medicina ── -->
-          <a href="https://dagvmeduftm.wordpress.com/pet-medicina-1/"
-             target="_blank" rel="noopener"
-             class="inst-card inst-card--pet"
-             data-aos="fade-up" data-aos-delay="160"
-             aria-label="PET Medicina">
-            <div class="inst-card__stripe"></div>
-            <div class="inst-card__body">
-              <div class="inst-card__logo-wrap">
-                <!-- Espaço reservado para logo do PET Medicina -->
-                <div class="inst-card__logo-icon">
-                  <i class="fa-solid fa-flask-vial" aria-hidden="true"></i>
-                </div>
+            <div class="inst-card__footer">
+              <div class="inst-card__tags">
+                <span class="inst-tag"><i class="fa-solid fa-heart" aria-hidden="true"></i> Extensão social</span>
+                <span class="inst-tag"><i class="fa-solid fa-users" aria-hidden="true"></i> Comunidade</span>
               </div>
-              <span class="inst-badge"><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Federal</span>
+              <a href="https://dagvmeduftm.wordpress.com/cursinho-carolina/" target="_blank" rel="noopener" class="inst-card__cta">
+                Saiba mais <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- ③ PET Medicina ────────────────────────────────── -->
+          <article class="inst-card inst-card--pet" data-aos="fade-up" data-aos-delay="160">
+            <div class="inst-card__top">
+              <div class="inst-card__icon-wrap">
+                <i class="fa-solid fa-flask-vial" aria-hidden="true"></i>
+              </div>
+              <div class="inst-card__label">Programa federal · MEC</div>
+            </div>
+            <div class="inst-card__body">
               <h3 class="inst-card__title">PET Medicina</h3>
               <p class="inst-card__desc">
-                Programa de Educação Tutorial: ensino, pesquisa e extensão integrados,
-                com bolsas MEC.
+                Programa de Educação Tutorial com atividades de pesquisa, ensino e
+                extensão em parceria com o DAGV e a coordenação do curso.
               </p>
-              <span class="inst-card__cta">
-                Saiba mais <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-              </span>
             </div>
-          </a>
+            <div class="inst-card__footer">
+              <div class="inst-card__tags">
+                <span class="inst-tag"><i class="fa-solid fa-flask" aria-hidden="true"></i> Pesquisa</span>
+                <span class="inst-tag"><i class="fa-solid fa-chalkboard-teacher" aria-hidden="true"></i> Tutorial</span>
+              </div>
+              <a href="https://dagvmeduftm.wordpress.com/pet-medicina-1/" target="_blank" rel="noopener" class="inst-card__cta">
+                Conhecer <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
 
-          <!-- ── 4. Representações Estudantis (agrupado) ── -->
-          <div class="inst-card inst-card--representacoes"
-               data-aos="fade-up" data-aos-delay="80"
-               style="cursor:default;">
-            <div class="inst-card__stripe" style="background:linear-gradient(90deg,#7a5900,var(--clr-accent));"></div>
-            <div class="inst-card__body">
+          <!-- ④ Representações Estudantis (card agrupado) ──── -->
+          <article class="inst-card inst-card--repr" data-aos="fade-up" data-aos-delay="240" style="cursor:default;">
+            <div class="inst-card__stripe inst-card__stripe--repr"></div>
+            <div class="inst-card__body inst-card__body--repr">
 
               <!-- Info lateral -->
               <div class="inst-card__info">
                 <div class="inst-card__logo-wrap">
-                  <div class="inst-card__logo-icon" style="background:rgba(232,160,32,.12);color:#7a5900;">
+                  <div class="inst-card__icon-wrap">
                     <i class="fa-solid fa-landmark" aria-hidden="true"></i>
                   </div>
                 </div>
-                <span class="inst-badge">
+                <span class="inst-badge inst-badge--repr">
                   <i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Representação
                 </span>
                 <h3 class="inst-card__title">Representações<br/>Estudantis</h3>
@@ -1885,7 +1801,7 @@
               </div>
 
               <!-- Sub-cards das entidades -->
-              <div class="inst-sub-list" style="flex:2; min-width:220px;">
+              <div class="inst-sub-list">
                 <a href="https://dagvmeduftm.wordpress.com/denem/"
                    target="_blank" rel="noopener"
                    class="inst-sub-item"
@@ -1930,37 +1846,65 @@
               </div>
 
             </div>
-          </div>
+          </article>
 
-          <!-- ── 5. CEPOP UFTM ── -->
-          <a href="https://dagvmeduftm.wordpress.com/cepop-uftm/"
-             target="_blank" rel="noopener"
-             class="inst-card inst-card--cepop"
-             data-aos="fade-up" data-aos-delay="160"
-             aria-label="CEPOP UFTM">
-            <div class="inst-card__stripe"></div>
-            <div class="inst-card__body">
-              <div class="inst-card__logo-wrap">
-                <!-- Espaço reservado para logo do CEPOP -->
-                <div class="inst-card__logo-icon">
-                  <i class="fa-solid fa-microscope" aria-hidden="true"></i>
-                </div>
+          <!-- ⑤ Cachacina & AAADS ───────────────────────────────────── -->
+          <article class="inst-card inst-card--cachacina-aaads" data-aos="fade-up" data-aos-delay="320">
+            <div class="inst-card__top">
+              <div class="inst-card__icon-wrap">
+                <i class="fa-solid fa-people-group" aria-hidden="true"></i>
               </div>
-              <span class="inst-badge"><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Pesquisa</span>
-              <h3 class="inst-card__title">CEPOP UFTM</h3>
-              <p class="inst-card__desc">
-                Centro de Estudos e Pesquisas em Oncologia e Patologia da UFTM,
-                com projetos de iniciação científica e extensão em parceria com o curso
-                de Medicina.
-              </p>
-              <span class="inst-card__cta">
-                Conheça o CEPOP <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-              </span>
+              <div class="inst-card__label">Vida estudantil · UFTM</div>
             </div>
-          </a>
+            <div class="inst-card__body">
+              <h3 class="inst-card__title">Cachacina &amp; AAADS</h3>
+              <p class="inst-card__desc">
+                Bateria e Atlética da Medicina, responsáveis pela energia,
+                a tradição e o espírito esportivo dos estudantes.
+              </p>
+
+              <!-- Sub-cards das entidades -->
+              <div class="inst-sub-list">
+
+                <!-- CACHACINA — TODO: trocar o <i class="fa-solid fa-drum"> abaixo por
+                     <img src="img/instituicoes/cachacina-logo.png" alt="Logo Cachacina">
+                     e colocar o link do Instagram no href abaixo -->
+                <a href="#"
+                   target="_blank" rel="noopener"
+                   class="inst-sub-item"
+                   aria-label="Cachacina – Bateria da Medicina (Instagram)">
+                  <div class="inst-sub-item__icon">
+                    <i class="fa-solid fa-drum" aria-hidden="true"></i>
+                  </div>
+                  <div>
+                    <span class="inst-sub-item__label">Cachacina</span>
+                    <span class="inst-sub-item__sub">Bateria da Medicina</span>
+                  </div>
+                  <i class="fa-brands fa-instagram inst-sub-item__arr" aria-hidden="true"></i>
+                </a>
+
+                <!-- AAADS — TODO: trocar o <i class="fa-solid fa-shield-halved"> abaixo por
+                     <img src="img/instituicoes/aaads-logo.png" alt="Logo AAADS">
+                     e colocar o link do Instagram no href abaixo -->
+                <a href="#"
+                   target="_blank" rel="noopener"
+                   class="inst-sub-item"
+                   aria-label="AAADS – Atlética da Medicina (Instagram)">
+                  <div class="inst-sub-item__icon">
+                    <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                  </div>
+                  <div>
+                    <span class="inst-sub-item__label">AAADS</span>
+                    <span class="inst-sub-item__sub">Atlética da Medicina</span>
+                  </div>
+                  <i class="fa-brands fa-instagram inst-sub-item__arr" aria-hidden="true"></i>
+                </a>
+
+              </div>
+            </div>
+          </article>
 
         </div><!-- /inst-grid -->
-
       </div>
     </section>
 
