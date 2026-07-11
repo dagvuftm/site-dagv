@@ -275,10 +275,23 @@
 
 /* Mobile padrão (≤ 768px) */
 @media (max-width: 768px) {
-  /* Aba fica à esquerda do hambúrguer; reduz label para caber */
+  /* Sidemenu-tab idêntico ao .hamburger no mobile:
+     mesma caixa, mesmo fundo, mesma borda.            */
   .sidemenu-tab {
-    padding: .4em .8em;
-    font-size: .78rem;
+    padding: 8px 10px;
+    font-size: .82rem;
+    border-radius: var(--radius-sm);        /* quadrado como o hamburger */
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.25);
+    gap: 5px;
+  }
+  /* Oculta o texto "Menu" no mobile – só o ícone */
+  .sidemenu-tab__label { display: none; }
+
+  /* Barras do ícone com mesmo tamanho do hamburger */
+  .sidemenu-tab__bar {
+    width: 26px;
+    height: 2px;
   }
   /* Painel cobre a largura da tela */
   .sidemenu-panel {
@@ -290,11 +303,11 @@
 /* Mobile pequeno (≤ 480px) */
 @media (max-width: 480px) {
   .sidemenu-tab {
-    padding: .38em .65em;
-    font-size: .72rem;
-    gap: .35rem;
+    padding: 8px 10px;   /* mantém idêntico ao .hamburger */
+    font-size: .82rem;
+    gap: 5px;
   }
-  /* Oculta o texto da aba, mantém só o ícone de hambúrguer */
+  /* Texto da aba já oculto desde 768px */
   .sidemenu-tab__label { display: none; }
 
   .sidemenu-panel {
