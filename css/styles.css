@@ -166,6 +166,32 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 .btn--full { width: 100%; justify-content: center; }
 
+/* ── Botões da hero: ícone dourado, mais altos ──────────────
+   Aplicados via .hero-btn para não afetar outros botões do site.
+   Ícone sempre na cor dourada (--clr-accent), independente
+   do fundo do botão.
+─────────────────────────────────────────────────────────── */
+.hero-btn {
+  position: relative;
+  /* Altura maior: padding vertical generoso */
+  padding: 1.05em 2em;
+  /* Justifica o ícone à esquerda e o texto ao centro */
+  justify-content: center;
+  gap: .75em;
+}
+
+/* Ícone sempre dourado em todos os estados */
+.hero-btn .hero-btn__icon {
+  color: var(--clr-accent);
+  font-size: 1.05em;
+  flex-shrink: 0;
+  transition: transform var(--dur-fast) var(--ease);
+}
+
+.hero-btn:hover .hero-btn__icon {
+  transform: scale(1.15);
+}
+
 /* ── 6. Header ──────────────────────────────────────────── */
 .header {
   position: fixed;
@@ -1358,38 +1384,18 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     --space-lg:  1.75rem;
   }
 
-  /* [AJUSTE 4] Hero: logo sempre visível no mobile – menor, reposicionada, nunca oculta */
-  .hero__logo-deco {
-    position: absolute;
-    right: -6%;
-    top: 62%;
-    transform: translateY(-50%);
-    z-index: 1;
-    pointer-events: none;
-    animation: heroLogoIn .8s var(--ease) .2s both;
-  }
-
-  .hero__logo-deco-img {
-    /* Escala proporcional via clamp – sem distorção; maior e mais baixa, como na referência */
-    width: clamp(220px, 58vw, 420px);
-    height: auto;
-    display: block;
-    opacity: .45;                       /* reduzida para não competir com o texto */
-    filter:
-      drop-shadow(0 0 18px rgba(200,150,12,.10))
-      drop-shadow(0 5px 14px rgba(0,0,0,.38));
-    user-select: none;
-  }
+  /* Mobile: logo oculta, conteúdo centralizado */
+  .hero__logo-deco { display: none; }
 
   .hero__content {
-    /* Limita largura para não sobrepor a logo: recua para a esquerda,
-       deixando a logo decorativa livre do lado direito (como na referência).
-       Sobrescreve o margin-inline:auto herdado de .container, que estava
-       centralizando o bloco e anulando o padding-inline-start. */
-    margin-inline: 0;
-    max-width: min(460px, 92%);
-    padding-inline: 4vw 0;
+    margin-inline: auto;
+    max-width: 92%;
+    padding-inline: 4vw;
     padding-block: var(--space-xl);
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
   }
 
   /* Casarão: reduz tamanho e opacidade no mobile */
@@ -1402,18 +1408,18 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     filter:  brightness(1.2) contrast(.80) saturate(.5) blur(.5px);
   }
 
-  /* Tipografia hero mais compacta */
+  /* Tipografia hero centralizada */
   .hero__title {
-    font-size: clamp(2.5rem, 5vw, 3.9rem);
-    /* Libera a largura do próprio título (independente do .hero__content
-       mais estreito) para "Diretório Acadêmico" caber numa única linha */
-    max-width: 96vw;
+    font-size: clamp(2.2rem, 9vw, 3.2rem);
+    max-width: 100%;
     white-space: normal;
+    text-align: center;
   }
   .hero__description {
-    font-size: .88rem;
+    font-size: .95rem;
     max-width: 100%;
-    margin-inline-end: auto;
+    text-align: center;
+    margin-inline: auto;
   }
 
   /* Seção de cabeçalho */
@@ -1452,17 +1458,30 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .logo--red                       { width: 60px; }
   .header.scrolled .logo--gold     { width: 60px; }
 
-  /* Botões hero empilhados */
+  /* Botões hero: centralizados, full-width, quadrados */
   .hero__actions {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    width: 100%;
+    gap: .85rem;
   }
   .hero__actions .btn {
-    width: auto;
-    max-width: 90%;
+    width: 100%;
+    max-width: 380px;        /* mais curto que a tela toda */
     justify-content: center;
     font-size: 1rem;
-    padding: .8em 7em;
+    /* Mais alto: padding vertical generoso */
+    padding: 1.1em 1.8em;
+    border-radius: 14px;
+    min-height: 64px;        /* altura maior, como na imagem */
+    display: flex;
+    align-items: center;
+    gap: .7em;
+  }
+  /* Ícone dourado no mobile */
+  .hero__actions .hero-btn__icon {
+    color: var(--clr-accent);
+    font-size: 1.1em;
   }
 }
 
@@ -1500,10 +1519,12 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   }
   
   .hero__content   {
-    margin-inline: 0;
-    max-width: min(380px, 90%);
-    padding-inline: 4vw 0;
+    margin-inline: auto;
+    max-width: 90%;
+    padding-inline: 4vw;
     padding-block: var(--space-xl);
+    text-align: center;
+    align-items: center;
   }
 
   :root {
@@ -1525,9 +1546,10 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     max-width: 96vw;
   }
   .hero__description {
-    font-size: .82rem;
-    max-width: 68%;
-    margin-inline-end: auto;
+    font-size: .85rem;
+    max-width: 100%;
+    text-align: center;
+    margin-inline: auto;
     margin-bottom: var(--space-md);
   }
   .hero__eyebrow     { font-size: .75rem; }
@@ -1554,16 +1576,22 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .btn { min-height: 44px; padding: .7em 1.4em; }
   .nav-mobile__link { padding: .9rem 5vw; min-height: 44px; }
 
-  /* Botões da hero: menores e alinhados à esquerda, sem tampar a logo */
+  /* Botões da hero: centralizados, full-width, mais altos */
   .hero__actions {
-    align-items: flex-start;
+    align-items: center;
+    width: 100%;
   }
   .hero__actions .btn {
-    width: auto;
-    max-width: 90%;
-    font-size: .93rem;
-    padding: .7em 3em;
-    min-height: 44px;
+    width: 100%;
+    max-width: 360px;
+    font-size: .95rem;
+    padding: 1em 1.5em;
+    border-radius: 14px;
+    min-height: 62px;        /* alto como na imagem */
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    gap: .6em;
   }
 }
 
