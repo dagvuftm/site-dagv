@@ -1010,40 +1010,49 @@
         <div class="shape shape--3"></div>
       </div>
 
-      <!-- Logo decorativa – posicionada à direita, fora do fluxo do conteúdo -->
-       <div class="hero__logo-deco" aria-hidden="true">
-        <img
-          src="img/logonova4.png"
-          alt=""
-          class="hero__logo-deco-img"
-          loading="eager"
-          draggable="false"
-        />
-      </div>
+      <!-- [FIX v149] Logo e conteúdo agora compartilham um "frame"
+           comum (largura travada em min(1200px,92vw), igual à
+           classe .container). A logo é posicionada em relação a
+           ESTE frame, não mais em relação à .hero (que não tem
+           limite de largura) — por isso, acima de ~1300px de
+           viewport, nem o frame nem a posição da logo crescem
+           mais: ambos ficam ancorados ao mesmo bloco, do mesmo
+           jeito que no desktop aprovado. -->
+      <div class="container hero__frame">
+        <div class="hero__logo-deco" aria-hidden="true">
+          <img
+            src="img/logonova4.png"
+            alt=""
+            class="hero__logo-deco-img"
+            loading="eager"
+            draggable="false"
+          />
+        </div>
 
-      <div class="container hero__content">
-        <p class="hero__eyebrow">Medicina UFTM · Uberaba</p>
-        <h1 class="hero__title">
-          Diretório Acadêmico<br />
-          <em>Gaspar Vianna</em>
-        </h1>
-        <p class="hero__description">
-          A representação estudantil que une, amplia e transforma a experiência
-          acadêmica dos futuros médicos da UFTM.
-        </p>
-        <div class="hero__actions">
-          <a href="sobre.html" class="btn btn--primary hero-btn">
-            <i class="fa-solid fa-arrow-up-right hero-btn__icon" aria-hidden="true"></i>
-            Conheça o DAGV
-          </a>
-          <a href="#historico" class="btn btn--outline hero-btn">
-            <i class="fa-solid fa-book-open hero-btn__icon" aria-hidden="true"></i>
-            Resgate Histórico
-          </a>
-          <a href="manual.html" class="btn btn--outline hero-btn">
-            <i class="fa-solid fa-file-lines hero-btn__icon" aria-hidden="true"></i>
-            Manual do Estudante
-          </a>
+        <div class="hero__content">
+          <p class="hero__eyebrow">Medicina UFTM · Uberaba</p>
+          <h1 class="hero__title">
+            Diretório Acadêmico<br />
+            <em>Gaspar Vianna</em>
+          </h1>
+          <p class="hero__description">
+            A representação estudantil que une, amplia e transforma a experiência
+            acadêmica dos futuros médicos da UFTM.
+          </p>
+          <div class="hero__actions">
+            <a href="sobre.html" class="btn btn--primary hero-btn">
+              <i class="fa-solid fa-arrow-up-right hero-btn__icon" aria-hidden="true"></i>
+              Conheça o DAGV
+            </a>
+            <a href="#historico" class="btn btn--outline hero-btn">
+              <i class="fa-solid fa-book-open hero-btn__icon" aria-hidden="true"></i>
+              Resgate Histórico
+            </a>
+            <a href="manual.html" class="btn btn--outline hero-btn">
+              <i class="fa-solid fa-file-lines hero-btn__icon" aria-hidden="true"></i>
+              Manual do Estudante
+            </a>
+          </div>
         </div>
       </div>
       <a href="#about" class="hero__scroll-hint" aria-label="Ir para seção Sobre">
@@ -1440,15 +1449,15 @@
                 <ul class="carousel__track">
                   <li class="carousel__slide">
                     <div class="team__card">
-                      <div class="team__avatar"><div class="team__avatar-placeholder"><i class="fa-solid fa-user-doctor"></i></div></div>
-                      <h4 class="team__name">A definir</h4>
+                       <div class="team__avatar"><img src="img/CI1.jpeg" alt="Nome do Presidente" /></div>
+                      <h4 class="team__name">Henrique Faleiros<span class="team__nickname">(Melo)</span></h4>
                       <p class="team__role">Coordenador(a) de Internato</p>
                     </div>
                   </li>
                   <li class="carousel__slide">
                     <div class="team__card">
-                      <div class="team__avatar"><div class="team__avatar-placeholder"><i class="fa-solid fa-user-doctor"></i></div></div>
-                      <h4 class="team__name">A definir</h4>
+                      <div class="team__avatar"><img src="img/CI2.jpeg" alt="Nome do Presidente" /></div>
+                      <h4 class="team__name">Túlio<span class="team__nickname">(Jump)</span></h4>
                       <p class="team__role">Coordenador(a) de Internato</p>
                     </div>
                   </li>

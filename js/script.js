@@ -70,6 +70,59 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   /* ─────────────────────────────────────────────────────────
+     2b. NAV DESKTOP → DRAWER: colapso exato por espaço real
+     Substitui o antigo breakpoint fixo (900px) por medição
+     real do espaço entre o fim do .nav e o brand centralizado.
+     Quando não há espaço suficiente, aplica .nav--compact em
+     .header (esconde .nav, mostra hamburguer + drawer mobile).
+     ───────────────────────────────────────────────────────── */
+  const headerInner = document.querySelector('.header__inner');
+  const brand        = document.querySelector('.header__brand');
+  const navList      = document.querySelector('.nav__list');
+  const NAV_SAFE_GAP = 24; // px de folga mínima entre nav e a logo central
+
+  if (headerInner && brand && navList) {
+    // Mede a largura natural do .nav via clone fora da tela — não
+    // depende do .nav estar visível (ele pode já estar display:none
+    // pelo fallback mobile ao carregar a página numa tela estreita).
+    const measureNavWidth = () => {
+      const clone = navList.cloneNode(true);
+      clone.style.position   = 'absolute';
+      clone.style.visibility = 'hidden';
+      clone.style.display    = 'flex';
+      clone.style.width      = 'auto';
+      clone.style.whiteSpace = 'nowrap';
+      document.body.appendChild(clone);
+      const w = clone.scrollWidth;
+      document.body.removeChild(clone);
+      return w;
+    };
+
+    let navWidth = measureNavWidth();
+
+    const checkNavFit = () => {
+      const innerRect = headerInner.getBoundingClientRect();
+      const brandRect = brand.getBoundingClientRect();
+      const availableRight = innerRect.right - brandRect.right - NAV_SAFE_GAP;
+      header.classList.toggle('nav--compact', navWidth > availableRight);
+    };
+
+    window.addEventListener('load', () => {
+      navWidth = measureNavWidth(); // remedir após fontes carregarem
+      checkNavFit();
+    });
+
+    if (typeof ResizeObserver !== 'undefined') {
+      new ResizeObserver(checkNavFit).observe(headerInner);
+    } else {
+      window.addEventListener('resize', checkNavFit);
+    }
+
+    checkNavFit();
+  }
+
+
+  /* ─────────────────────────────────────────────────────────
      3. SMOOTH SCROLL para âncoras internas
      ───────────────────────────────────────────────────────── */
   document.querySelectorAll('a[href^="#"]').forEach(link => {
@@ -231,11 +284,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const logoDeco = heroEl.querySelector('.hero__logo-deco');
   const content  = heroEl.querySelector('.hero__content');
 
-  /* [elemento, fator de velocidade] – filtra nulos */
+  /* [elemento, fator de velocidade, precisa manter -50% de centralização vertical] */
   const layers = [
-    [bgShapes, 0.35],
-    [logoDeco, 0.18],
-    [content,  0.07],
+    [bgShapes, 0.35, false],
+    [logoDeco, 0.18, true],
+    [content,  0.07, false],
   ].filter(function(pair) { return pair[0] !== null; });
 
   if (!layers.length) return;
@@ -253,13 +306,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* Mobile (≤ 768px) ou hero fora do viewport → reseta */
     if (window.innerWidth <= 768 || scrollY > heroEl.offsetHeight) {
-      layers.forEach(function(pair) { pair[0].style.transform = ''; });
+      layers.forEach(function(pair) { pair[0].style.transform = pair[2] ? 'translateY(-50%)' : ''; });
       return;
     }
 
     layers.forEach(function(pair) {
       var offset = -(scrollY * pair[1]);
-      pair[0].style.transform = 'translateY(' + offset + 'px)';
+      /* [FIX salto da logo] .hero__logo-deco é centralizado via
+         CSS com transform:translateY(-50%). Sobrescrever com só
+         'translateY(Npx)' aqui apagava essa centralização assim
+         que o parallax rodava (mesmo com scroll=0) — a logo pulava
+         para baixo. Agora o -50% é preservado, combinado ao offset. */
+      pair[0].style.transform = pair[2]
+        ? 'translateY(calc(-50% + ' + offset + 'px))'
+        : 'translateY(' + offset + 'px)';
     });
   }
 
@@ -274,3 +334,28 @@ document.addEventListener('DOMContentLoaded', () => {
   onScroll();
 
 }());
+
+/* ─────────────────────────────────────────────────────────
+   4. LIMPEZA DE ANIMAÇÕES DE ENTRADA (hero)
+   Depois que a animação de entrada termina, removemos a
+   propriedade `animation` do elemento (em vez de deixar o
+   fill-mode:both segurando o estado final indefinidamente).
+   Isso evita um bug de composição visto em alguns motores de
+   renderização, onde uma animação "presa" no estado final pode
+   impedir o conteúdo filho (ex.: a imagem da logo) de pintar
+   corretamente, além de liberar a camada de GPU (--will-change)
+   que não é mais necessária depois da entrada.
+   Usamos setTimeout (não animationend): o evento pode disparar
+   antes do listener ser registrado (corrida), deixando a limpeza
+   sem efeito justamente quando mais precisa dela. Um tempo fixo,
+   maior que a maior animação (delay .3s + duração 1s = 1.3s),
+   garante a limpeza sempre. */
+var heroEntranceEls = document.querySelectorAll(
+  '.hero__logo-deco, .hero__content, .hero__eyebrow, .hero__title, .hero__description, .hero__actions'
+);
+setTimeout(function () {
+  heroEntranceEls.forEach(function (el) {
+    el.style.animation = 'none';
+    el.style.willChange = 'auto';
+  });
+}, 1500);

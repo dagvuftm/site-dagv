@@ -333,6 +333,15 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   transform: translateY(-1px);
 }
 
+/* ── Nav desktop → drawer mobile: alternância dirigida por JS ──
+   .nav--compact é aplicada em .header via ResizeObserver (script.js)
+   exatamente quando o espaço disponível deixa de comportar o .nav
+   sem colidir com o brand central. Fallback sem JS no breakpoint
+   mobile existente (≤768px), na seção 13. */
+.header.nav--compact .nav        { display: none; }
+.header.nav--compact .hamburger  { display: flex; }
+.header.nav--compact .nav-mobile { display: block; }
+
 /* [AJUSTE 6] Hamburguer com bordas arredondadas */
 .hamburger {
   display: none;
@@ -412,6 +421,59 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   min-height: 100svh;
   display: flex;
   align-items: center;
+  /* [FIX v149.1] Centralização explícita e redundante do .hero__frame
+     — não depende só de margin-inline:auto absorvendo o espaço livre
+     do flex (que não estava centralizando corretamente, "grudando"
+     tudo à esquerda). justify-content:center garante a centralização
+     do frame independentemente disso. */
+  justify-content: center;
+  /* [FIX responsividade v3] Única variável de escala do "conjunto"
+     hero (logo + texto). Aplicada como font-size em .hero__content
+     e .hero__logo-deco (ambos, mesmo valor) — tudo dentro de cada
+     um usa `em`, então escalam sempre na mesma proporção, sem
+     depender de reestruturação de layout (mais seguro/previsível
+     que Flexbox aqui, já que a posição continua vindo de
+     top/right fixos, iguais ao desktop, apenas os TAMANHOS mudam).
+     Em ≥1280px vale 16px = 1rem = idêntico à versão desktop atual. */
+  /* [FIX tablet] Piso subido de 9px para 12px: no tablet a Hero
+     estava encolhendo demais e ficando "vazia" — parecendo uma
+     versão mobile antecipada em vez de uma desktop reduzida.
+     Continua contínuo e sem saltos, só o chão da escala mudou. */
+  --hero-scale: clamp(9.7px, calc(0.22px + 1.2329vw), 16px);
+  /* [FIX real, testado com a fonte de verdade] O recuo esquerdo do
+     texto (--hero-margin-left) tem sua PRÓPRIA curva, mais agressiva
+     em telas de tablet, independente de --hero-scale. Por quê:
+     testei com a fonte real (Playfair Display, não a de fallback —
+     ela é ~8% mais larga) e "Diretório Acadêmico" já estava
+     quebrando linha em 769–1100px, e com margem de 1.9px até em
+     1280px. Encolher o recuo (não o texto nem a logo, que o usuário
+     quer maiores) libera espaço sem contradizer o pedido. Mesmo
+     valor de desktop (200px) preservado a partir de 1280px. */
+  --hero-margin-left: clamp(90px, calc(-44.06px + 17.433vw), 200px);
+  /* [FIX salto da logo — causa raiz] Esta variável antes só existia
+     DENTRO de uma media query (769–1439px); fora dela, o navegador
+     caía no fallback do var() (15%) — duas fontes de verdade para
+     o mesmo valor, calculadas em momentos diferentes da cascata.
+     Mesmo batendo numericamente nos limites, isso é o padrão exato
+     de "media queries conflitantes" que causa recomputação em vez
+     de fluxo único. Definida aqui, incondicional, junto de
+     --hero-scale: um único clamp() cobre 100% da faixa de larguras,
+     sem fallback, sem segunda fonte de verdade. */
+  /* [FIX real — testado em Chrome headless] A fórmula anterior
+     misturava "%" (resolve contra o containing block, .hero__frame,
+     travado em 1200px) com "vw" (resolve contra a viewport) no MESMO
+     calc(). São referências DIFERENTES — o resultado ficava travado
+     no valor mínimo (6%) sempre, nunca reagia ao redimensionamento.
+     Confirmado renderizando de verdade num Chrome headless (Puppeteer)
+     antes de aplicar. Agora é 100% em px (sem "%"), então não há
+     ambiguidade de referência — cresce de 42px a 180px continuamente
+     e trava em 180px (= 15% de 1200px, valor do desktop) a partir de
+     1280px de viewport. */
+  /* [FIX calibrado pela imagem de referência] O cap anterior (180px)
+     deixava a logo longe demais do bloco de texto. Recalibrado com
+     medição de pixels reais da referência: logo deve ficar a ~48px
+     da borda direita do frame em telas largas. */
+  --hero-logo-right: clamp(6px, calc(-15.07px + 2.74vw), 20px);
   /* Gradiente idêntico ao sobre-hero (consistência visual) */
   background: linear-gradient(145deg,
     var(--clr-dark)       0%,
@@ -580,35 +642,66 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   will-change: transform, opacity, filter;
 }
 
+/* [FIX v149] Frame comum: largura travada em min(1200px,92vw) via
+   classe .container (reaproveitada — mesmo padrão do resto do site).
+   É o CONTAINING BLOCK da logo (abaixo) — position:relative aqui,
+   não em .hero. Acima de ~1300px de viewport este frame para de
+   crescer, então a logo (ancorada a ele) também para de se afastar
+   do conteúdo — resolve o "distanciamento progressivo" no ultrawide. */
+.hero__frame {
+  width: min(1200px, 92vw);
+  margin-inline: auto;
+  position: relative;
+}
+
 .hero__content {
   position: relative;
-  z-index: 1;
-  max-width: 720px;
+  z-index: 2;
+  font-size: var(--hero-scale);
+  /* [FIX calibrado] Reference mostra o texto recuado da borda
+     esquerda do frame, não colado nela. 10.6em = 169.6px a escala
+     cheia (--hero-scale=16px), escala com o resto do conjunto. */
+  margin-left: var(--hero-margin-left);
+  /* Largura segura: nunca deixa a caixa (título + descrição) entrar
+  /* Largura segura: nunca deixa a caixa (título + descrição) entrar
+     na área da logo. contêiner − o próprio recuo esquerdo (margin-left)
+     − largura da logo (27.3em) − offset da logo (--hero-logo-right)
+     − 32px de folga. [FIX] faltava subtrair o margin-left aqui —
+     sem isso, com uma logo grande o bastante, a conta dava uma
+     largura "segura" que na verdade já invadia a logo, porque não
+     considerava que o conteúdo já começa deslocado para a direita. */
+  max-width: min(680px, 52%, calc(100% - var(--hero-margin-left) - 24.57em - var(--hero-logo-right, 20px) - 12px));
   padding-block: var(--space-2xl);
-  
 }
 
 /* ── Logo decorativa à direita do hero ─────────────────── */
 /* [AJUSTE 1] Logo hero com tamanho aumentado significativamente,
    alinhada à direita conforme imagem de referência.
-   Ocupa maior área vertical, mantendo proporção original.
+   Posição (top/right) igual à do desktop em qualquer largura —
+   só o tamanho muda (--hero-scale), nunca a posição relativa.
+   [FIX v149] Ancorada a .hero__frame (largura travada), não mais a
+   .hero (sem limite) — right:% agora é relativo a um bloco que para
+   de crescer, então a logo não se afasta mais do texto indefinidamente.
    Mobile: oculta via @media (max-width: 768px).              */
 .hero__logo-deco {
   position: absolute;
-  right: 15%;             /* cola mais na borda direita */
-  top: 48.5%;
+  right: 10%;
+  top: 40%;
   transform: translateY(-50%);
   z-index: 1;
+  font-size: var(--hero-scale);
   pointer-events: none;
   animation: heroLogoIn 1.1s var(--ease) .2s both;
-  /* Parallax layer 1 – movimento intermediário */
   will-change: transform;
 }
 
 .hero__logo-deco-img {
-  /* [AJUSTE 1] Tamanho aumentado – referência: ~43% da largura da viewport */
-  /* Responsividade fluida: clamp escala suavemente sem saltos entre breakpoints */
-  width: clamp(220px, 30vw, 480px);
+  /* 26em do --hero-scale compartilhado com .hero__content acima:
+     logo e texto sempre escalam na MESMA proporção, por construção
+     (mesma variável), então a relação espacial nunca muda. */
+  /* Reduzido de 26em para 22em: 26em (416px) ainda encostava no
+     título em tela cheia (limite calculado ficava ~20px negativo). */
+  width: 24.57em;
   height: auto;
   display: block;
   filter:
@@ -616,18 +709,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     drop-shadow(0 12px 40px rgba(0,0,0,.55));
   user-select: none;
   opacity: .90;
-  /* Transição suave para mudanças de tamanho ao redimensionar */
-  transition: width 0.3s ease, opacity 0.3s ease;
-}
-
-/* Garante que o texto hero não sobreponha a logo em desktops grandes */
-.hero__content {
-  position: relative;
-  z-index: 2;
-  max-width: clamp(320px, 52%, 680px);
-  padding-block: var(--space-2xl);
-  /* Parallax layer 2 – movimento mais sutil (mais próximo) */
-  will-change: transform;
 }
 
 @keyframes heroLogoIn {
@@ -659,7 +740,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   display: inline-flex;
   align-items: center;
   gap: .5em;
-  font-size: .78rem;
+  font-size: .78em;
   font-weight: 700;
   letter-spacing: .2em;           /* idêntico ao sobre-hero (.2em) */
   text-transform: uppercase;
@@ -678,7 +759,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 .hero__title {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 5vw, 3.6rem);   /* aumentado */
+  font-size: 3.6em;   /* 3.6em × font-size único = idêntico ao clamp cap anterior (3.6rem) em desktop */
   font-weight: 700;
   color: var(--clr-white);
   line-height: 1.14;
@@ -707,9 +788,13 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 .hero__description {
-  font-size: 1.12rem;
+  font-size: 1.12em;
   color: rgba(255,255,255,.82);
-  max-width: 540px;
+  /* 33.75em = 540px em desktop (--hero-scale=16px), idêntico ao valor
+     anterior — mas agora encolhe na MESMA taxa do título/logo, em vez
+     de ficar travado em 540px fixos (o que fazia a descrição "sobrar"
+     largura e parecer grande demais quando o resto já tinha encolhido). */
+  max-width: 33.75em;
   line-height: 1.72;
   margin-bottom: var(--space-lg);
   animation: slideUp 1s var(--ease) .2s both;
@@ -717,10 +802,22 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 .hero__actions {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-sm);
-  margin-top: var(--space-2xl);   /* desce mais os botões para não tampar a logo */
+  flex-wrap: nowrap;              /* nunca quebra linha antes do mobile */
+  gap: .5em;
+  margin-top: var(--space-2xl);
   animation: slideUp 1s var(--ease) .3s both;
+}
+
+/* Botões da hero: fonte em `em` de --hero-scale (compartilhada com
+   .hero__content, seção 7) — encolhem na mesma taxa que título/logo.
+   Padding/gap continuam em `em` do próprio botão (já eram), então
+   acompanham automaticamente. Em desktop (font-size = 16px) o
+   resultado é .95em × 16px = 15.2px = .95rem, idêntico ao valor
+   original — nada muda em telas grandes. */
+.hero__actions .btn {
+  font-size: .95em;
+  white-space: nowrap;
+  flex-shrink: 1;
 }
 
 .hero__scroll-hint {
@@ -1119,11 +1216,18 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 /* ── Responsividade ───────────────────────────────────── */
 @media (max-width: 1024px) {
   .inst-grid { grid-template-columns: repeat(2, 1fr); }
-  .inst-card--repr { grid-column: span 2; }
+  /* [FIX tablet] .inst-card--repr mantinha span:2 herdado do
+     desktop — num grid de 2 colunas isso quebrava o encaixe dos
+     6 cards (repr "pulava" pra própria linha, deixando o 5º card
+     sozinho com espaço vazio ao lado). Agora os 4 primeiros ficam
+     iguais (2×2) e só o 5º (cachacina-aaads) ocupa a linha toda. */
+  .inst-card--repr { grid-column: span 1; }
+  .inst-card--cachacina-aaads { grid-column: 1 / -1; }
 }
 @media (max-width: 640px) {
   .inst-grid { grid-template-columns: 1fr; }
   .inst-card--repr { grid-column: span 1; }
+  .inst-card--cachacina-aaads { grid-column: span 1; }
   .inst-repr-item { grid-template-columns: 70px 1fr auto; }
 }
 
@@ -1342,25 +1446,32 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
      ≥ 1200px – Desktop / ultrawide
    ══════════════════════════════════════════════════════════ */
 
-/* ── Tablet landscape + desktop médio (≤ 1100px) ───────── */
-@media (min-width: 769px) and (max-width: 1100px) {
-  .hero__logo-deco-img { width: clamp(200px, 28vw, 380px); opacity: .85; }
-  .hero__content       { max-width: 50%; }
-  .contact__wrapper    { gap: var(--space-lg); }
+/* ── Tablet + desktop médio (769px–1439px) ───────────────
+   --hero-scale e --hero-logo-right (seção 7) já escalam fonte/logo/
+   posição continuamente, sem precisar de nada aqui.
+   O que falta: a Hero usa min-height:100svh sempre — em telas de
+   tablet, o conteúdo (agora proporcionalmente menor) sobra dentro
+   de uma caixa do tamanho inteiro da viewport, parecendo "vazio".
+   Aqui a altura mínima acompanha a mesma curva de escala do
+   conteúdo, continuamente, chegando a 100svh exatamente em 1280px
+   (mesmo ponto onde --hero-scale satura) — a versão desktop (≥1280)
+   fica idêntica; só o tablet ganha uma Hero proporcionalmente menor. */
+@media (min-width: 769px) and (max-width: 1439px) {
+  .hero { min-height: clamp(65svh, calc(12.33svh + 6.849vw), 100svh); }
 }
 
-/* ── Tablet estreito (769px–900px): logo menor, não oculta ── */
-@media (min-width: 769px) and (max-width: 900px) {
-  /* [AJUSTE 4] Logo nunca some — apenas reduz e recua */
-  .hero__logo-deco {
-    right: 6%;
-    top: 44%;
-  }
-  .hero__logo-deco-img {
-    width: clamp(160px, 26vw, 300px);
-    opacity: .80;
-  }
-  .hero__content { max-width: 54%; }
+/* [FIX real] Os botões usavam o mesmo padding do desktop (1.05em
+   2em) em qualquer largura — verificado agora com soma real de
+   largura (não só detecção de quebra de linha, que não pega
+   overflow sem quebra): eles extrapolavam a caixa do conteúdo,
+   invisível mas real. Reduzido só no tablet, onde o espaço é mais
+   apertado; desktop (≥1280) e mobile (≤768) ficam exatamente iguais. */
+@media (min-width: 769px) and (max-width: 1279px) {
+  .hero-btn { padding: 1.05em 1.15em; gap: .5em; }
+}
+
+@media (min-width: 769px) and (max-width: 1100px) {
+  .contact__wrapper { gap: var(--space-lg); }
 }
 
 /* ── Tablet portrait (≤ 1024px) ───────────────────────── */
@@ -1384,26 +1495,39 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   }
 }
 
-/* ── Mobile padrão (≤ 900px) – nav links somem antes de sobrepor a logo ── */
-@media (max-width: 900px) {
-  /* Nav desktop oculta mais cedo para não sobrepor a logo centralizada */
+/* ── Mobile padrão (≤ 768px) ────────────────────────────── */
+@media (max-width: 768px) {
+  /* Fallback sem JS: garante o drawer mobile mesmo se o
+     ResizeObserver de script.js não rodar. Mesmo efeito de
+     .header.nav--compact, ver seção 6 (Header). */
   .nav        { display: none; }
   .hamburger  { display: flex; }
   .nav-mobile { display: block; }
-}
 
-/* ── Mobile padrão (≤ 768px) ────────────────────────────── */
-@media (max-width: 768px) {
   :root {
     --space-2xl: 3.5rem;
     --space-xl:  2rem;
     --space-lg:  1.75rem;
   }
 
-  /* Mobile: logo oculta, conteúdo centralizado */
+  /* [FIX v149] Desliga o comportamento de "container" do
+     .hero__frame (herdado da classe .container) — senão o
+     max-width:92% do .hero__content abaixo calcularia em cima da
+     largura do frame (já capada) em vez da .hero direto, encolhendo
+     demais. Mobile continua idêntico ao que já era. */
+  .hero__frame {
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+  }
+
+  /* Mobile: logo oculta, conteúdo centralizado. Volta a font-size
+     absoluto (1rem) — os overrides abaixo (título, descrição etc.)
+     já usam rem/vw própria, então isso é só clareza/segurança. */
   .hero__logo-deco { display: none; }
 
   .hero__content {
+    font-size: 1rem;
     margin-inline: auto;
     max-width: 92%;
     padding-inline: 4vw;
@@ -1416,10 +1540,10 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
   /* Casarão: reduz tamanho e opacidade no mobile */
   .hero::before {
-    width:   clamp(240px, 80vw, 500px);
+    width:   clamp(240px, 100vw, 800px);
     opacity: .60;
-    bottom:  -14.5%;
-    right:   15.72%;
+    bottom:  -20%;
+    right:   2%;
    
     filter:  brightness(1.2) contrast(.80) saturate(.5) blur(.5px);
   }
@@ -1507,10 +1631,10 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 @media (max-width: 480px) {
   /* Casarão: mínimo em mobile pequeno */
   .hero::before {
-    width:   clamp(200px, 80vw, 400px);   /* corrigido: era clamp(400px,48vw,280px) – min>max */
+    width:   clamp(200px, 120vw, 600px);   /* corrigido: era clamp(400px,48vw,280px) – min>max */
     opacity: .60;
-    bottom:  -8.5%;
-    right:   12.72%;
+    bottom:  -13.5%;
+    right:   -6.4%;
     filter:  brightness(1.1) contrast(.75) saturate(.45) blur(.6px);
     
   }
@@ -1556,6 +1680,11 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   body { overflow-x: hidden; }
 
   .container { width: 94vw; }
+
+  /* [FIX] .hero__frame carrega a classe .container — sem isto, a
+     regra acima (94vw) reaplica nele e desfaz a neutralização feita
+     em ≤768px, voltando a encolher o conteúdo em dobro. */
+  .hero__frame { width: 100%; max-width: none; margin-inline: 0; }
 
   /* Hero ainda mais compacto */
   .hero__title {
@@ -1615,8 +1744,14 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 /* ── Telas ultrawide (≥ 1440px) ─────────────────────────── */
 @media (min-width: 1440px) {
-  .hero__logo-deco-img { width: clamp(400px, 24vw, 600px); }
-  .hero__content       { max-width: clamp(500px, 46%, 740px); }
+  /* [FIX salto da logo] Removidas as regras que sobrescreviam a logo
+     (clamp(400px,24vw,600px)) e o conteúdo aqui: elas usavam uma
+     curva diferente da base, causando um salto brusco exatamente em
+     1440px (a logo saltava de 480px para 400px ao alargar, ou o
+     inverso ao estreitar — "aumentando" contra a direção esperada).
+     Sem essa sobrescrita, --hero-scale (seção 7) satura em 480px a
+     partir de 1280px e permanece constante — contínuo, sem saltos,
+     e sem alterar o tamanho aprovado da versão desktop. */
 }
 
 /* ── Redução de movimento (acessibilidade) ──────────────── */

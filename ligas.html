@@ -640,13 +640,20 @@
   }
 
   .liga-card__icon-wrap {
-    width: 44px; height: 44px;
-    border-radius: var(--radius-sm);
-    background: rgba(255,255,255,.15);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.25rem; color: var(--clr-accent);
-    flex-shrink: 0;
-    overflow: visible;
+   width: 44px; height: 44px; 
+  /* Coloque 0 no border-radius se quiser ele com os cantos retos (quadradinho) igual fizemos antes */
+  border-radius: var(--radius-sm); 
+  
+  /* 1. Altere o background para branco puro */
+  background: #ffffff; 
+  
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.25rem; 
+  /* 2. (Opcional) Ajuste a cor do ícone/texto caso ele suma no fundo branco */
+  color: var(--clr-accent); 
+  
+  flex-shrink: 0;
+  overflow: visible;
   }
   .liga-card__heading { flex: 1; min-width: 0; }
   .liga-card__sigla {
@@ -1422,7 +1429,7 @@
           <!-- LaCardio -->
           <article class="liga-card" data-cat="clinica" data-aos="fade-up" data-aos-delay="0">
             <div class="liga-card__header">
-              <div class="liga-card__icon-wrap"><i class="fa-solid fa-heart-pulse" aria-hidden="true"></i></div>
+              <div class="liga-card__icon-wrap"><img src="img/logolacardio.png"></i></div>
               <div class="liga-card__heading">
                 <span class="liga-card__sigla">LaCardio</span>
                 <div class="liga-card__name">Liga Acadêmica de Cardiologia</div>
@@ -1623,7 +1630,7 @@
           <!-- LANC -->
           <article class="liga-card" data-cat="cirurgia" data-aos="fade-up" data-aos-delay="120">
             <div class="liga-card__header">
-              <div class="liga-card__icon-wrap"><i class="fa-solid fa-head-side-virus" aria-hidden="true"></i></div>
+              <div class="liga-card__icon-wrap"><img src="img/logolanc.png"></i></div>
               <div class="liga-card__heading">
                 <span class="liga-card__sigla">LANC</span>
                 <div class="liga-card__name">Liga Acadêmica de Neurocirurgia</div>
