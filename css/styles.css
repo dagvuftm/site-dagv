@@ -178,6 +178,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   /* Justifica o ícone à esquerda e o texto ao centro */
   justify-content: center;
   gap: .75em;
+  /* Formato mais quadrado/retangular (sobrepõe o pill padrão do .btn) */
+  border-radius: var(--radius-sm);
 }
 
 /* Ícone sempre dourado em todos os estados */

@@ -247,6 +247,13 @@
   .historico__doc-card--wide {
     grid-column: span 1;
   }
+  .historico__text {
+    text-align: center;
+  }
+  .historico__eyebrow,
+  .btn-historico {
+    justify-content: center;
+  }
 }
 
 
