@@ -593,10 +593,9 @@
   var pagesInitialized = false;
 
   function afterCoverOpen(targetIndex) {
-    if (!pagesInitialized) {
-      initPagesExperience(targetIndex);
-      pagesInitialized = true;
-    } else if (typeof targetIndex === 'number') {
+    /* [FIX] initPagesExperience já roda antes, disparado no início de
+       openBook() — aqui só revela o que já está pronto. */
+    if (pagesInitialized && typeof targetIndex === 'number') {
       goToDocIndex(targetIndex);
     }
     book.classList.add('is-pages-visible');
@@ -614,6 +613,18 @@
     controls.setAttribute('aria-hidden', 'false');
     closeBtn.classList.add('is-visible');
     if (btnBookmark) btnBookmark.classList.add('is-visible');
+
+    /* [FIX] antes as ~189 páginas só começavam a ser montadas (e o
+       StPageFlip inicializado) DEPOIS da capa terminar de abrir — dava
+       aquele atraso visível até as páginas aparecerem. Como o
+       .book__pages já fica com opacity:0 até a classe is-pages-visible
+       entrar, é seguro montar tudo em paralelo, escondido, enquanto a
+       capa ainda está girando. Quando a animação termina, só falta
+       revelar (instantâneo). */
+    if (!pagesInitialized) {
+      initPagesExperience(targetIndex);
+      pagesInitialized = true;
+    }
 
     var onCoverOpen = function () { afterCoverOpen(targetIndex); };
 
