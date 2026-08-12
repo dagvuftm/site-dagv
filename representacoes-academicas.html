@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="48x48" href="img/favicon-48x48.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="img/android-chrome-192x192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="img/android-chrome-512x512.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Representações Acadêmicas — DENEM, DCE UFTM e DCU UFTM: entidades que representam os estudantes de Medicina em âmbito nacional, universitário e local." />
+  <meta name="keywords" content="DAGV, Medicina, UFTM, DENEM, DCE, DCU, representação estudantil" />
+  <meta name="author" content="DAGV – Medicina UFTM" />
+  <title>Representações Acadêmicas – DAGV | Medicina UFTM</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/sidemenu.css" />
+
+  <style>
+    /* ──────────────── HERO ──────────────── */
+    .rep-hero {
+      position: relative;
+      min-height: 52vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 80% 100% at 0% 60%,
+          #3d0018 0%,
+          var(--clr-green-dark) 38%,
+          transparent 72%),
+        linear-gradient(160deg,
+          var(--clr-green-dark) 0%,
+          var(--clr-green)      50%,
+          #1a0010               100%);
+      padding-top: calc(var(--header-h) + var(--space-2xl));
+      padding-bottom: var(--space-2xl);
+    }
+    .rep-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(90deg,transparent,transparent 58px,rgba(255,255,255,.04) 58px,rgba(255,255,255,.04) 60px),
+        repeating-linear-gradient(0deg,transparent,transparent 58px,rgba(255,255,255,.04) 58px,rgba(255,255,255,.04) 60px);
+    }
+    .rep-hero::after {
+      content: '';
+      position: absolute;
+      width: 480px; height: 480px;
+      border-radius: 50%;
+      border: 70px solid rgba(232,160,32,.09);
+      bottom: -180px; left: -120px;
+      pointer-events: none;
+    }
+    .rep-hero__content {
+      position: relative; z-index: 1;
+      text-align: center; color: var(--clr-white);
+      max-width: 760px; padding-inline: var(--space-md);
+    }
+    .rep-hero__eyebrow {
+      font-size: .78rem; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--clr-accent); font-weight: 600; margin-bottom: var(--space-sm); display: block;
+    }
+    .rep-hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      font-weight: 700; line-height: 1.15; margin-bottom: var(--space-md);
+    }
+    .rep-hero__title em { color: var(--clr-accent); font-style: italic; }
+    .rep-hero__desc {
+      font-size: 1.05rem; line-height: 1.75;
+      color: rgba(255,255,255,.82); max-width: 580px; margin-inline: auto;
+    }
+
+    /* ──────────────── NAV INTERNA (mesmo padrão de historico2.html) ──────────────── */
+    .rep-anchors {
+      background: var(--clr-off);
+      border-bottom: 2px solid var(--clr-gray-1);
+      border-top: 1px solid var(--clr-gray-1);
+      position: sticky; top: var(--header-h); z-index: 100;
+      padding-block: .65rem;
+    }
+    .rep-anchors__list {
+      display: flex; flex-wrap: wrap; gap: .25rem; justify-content: center; padding-inline: var(--space-md);
+    }
+    .rep-anchors__link {
+      display: flex; align-items: center; gap: .4em;
+      font-size: .8rem; font-weight: 600; color: var(--clr-gray-3);
+      padding: .4em 1em; border-radius: var(--radius-sm);
+      white-space: nowrap; text-decoration: none; border: 1px solid transparent;
+      transition: background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast);
+    }
+    .rep-anchors__link:hover { background: var(--clr-green-light); color: var(--clr-green); border-color: rgba(42,122,75,.15); }
+    @media (max-width: 560px) { .rep-anchors__link { flex: 1 1 45%; justify-content: center; text-align: center; } }
+
+    /* ──────────────── SEÇÕES DE ENTIDADES ──────────────── */
+    .rep-entity { padding-block: var(--space-2xl); scroll-margin-top: calc(var(--header-h) + 60px); }
+    .rep-entity:nth-child(even) { background: var(--clr-off); }
+    .rep-entity__grid {
+      display: grid; grid-template-columns: .85fr 1.15fr;
+      gap: var(--space-xl); align-items: start; margin-top: var(--space-xl);
+    }
+    .rep-entity__photo {
+      border-radius: var(--radius-lg); overflow: hidden;
+      box-shadow: var(--shadow-md); border: 1px solid var(--clr-gray-1);
+      background: var(--clr-white);
+      display: flex; align-items: center; justify-content: center;
+      padding: var(--space-lg);
+      min-height: 220px;
+    }
+    .rep-entity__photo img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .rep-entity__text p { font-size: .95rem; color: var(--clr-gray-3); line-height: 1.82; margin-bottom: 1rem; }
+    .rep-entity__text p:last-child { margin-bottom: 0; }
+    .rep-entity__text strong { color: var(--clr-dark); }
+    .rep-entity__text ul { margin: 0 0 1rem; padding-left: 1.3rem; font-size: .92rem; color: var(--clr-gray-3); line-height: 1.75; }
+    .rep-entity__text li { margin-bottom: .4rem; }
+    .rep-entity__deflist { margin: 0 0 1rem; }
+    .rep-entity__deflist dt {
+      font-weight: 700; color: var(--clr-dark); font-size: .9rem;
+      margin-top: .9rem;
+    }
+    .rep-entity__deflist dt:first-child { margin-top: 0; }
+    .rep-entity__deflist dd {
+      margin: .2rem 0 0; font-size: .9rem; color: var(--clr-gray-3); line-height: 1.7;
+    }
+    .rep-entity__toggle {
+      display: inline-flex; align-items: center; gap: .5em;
+      font-size: .85rem; font-weight: 600; color: var(--clr-green);
+      cursor: pointer; margin-top: .6rem; list-style: none;
+      padding: .5em 1em;
+      border: 1.5px solid rgba(42,122,75,.3);
+      border-radius: var(--radius-pill);
+      background: var(--clr-green-light);
+      width: fit-content;
+      transition: background var(--dur-fast), border-color var(--dur-fast);
+    }
+    .rep-entity__toggle:hover { background: rgba(42,122,75,.15); border-color: var(--clr-green); }
+    .rep-entity__toggle::-webkit-details-marker { display: none; }
+    .rep-entity__toggle::after {
+      content: '';
+      width: 8px; height: 8px;
+      border-right: 2px solid var(--clr-green);
+      border-bottom: 2px solid var(--clr-green);
+      transform: rotate(45deg);
+      transition: transform 220ms var(--ease);
+      margin-top: -3px;
+    }
+    details[open] > .rep-entity__toggle::after { transform: rotate(225deg); margin-top: 3px; }
+    .rep-entity__more { padding-top: .8rem; }
+    .rep-entity__link {
+      display: inline-flex; align-items: center; gap: .5em;
+      font-size: .88rem; font-weight: 600; color: var(--clr-green);
+      border: 1.5px solid var(--clr-green); border-radius: var(--radius-pill);
+      padding: .55em 1.3em; text-decoration: none; margin-top: .6rem;
+      transition: background var(--dur-fast), color var(--dur-fast);
+    }
+    .rep-entity__link:hover { background: var(--clr-green); color: var(--clr-white); }
+    @media (max-width: 768px) {
+      .rep-entity__grid { grid-template-columns: 1fr; }
+      .rep-entity__photo { max-width: 420px; margin-inline: auto; }
+    }
+
+    /* ──────────────── DCU (placeholder — sem conteúdo oficial ainda) ──────────────── */
+    .rep-placeholder {
+      background: var(--clr-white);
+      border: 1.5px dashed var(--clr-gray-1);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+      text-align: center;
+      margin-top: var(--space-xl);
+    }
+    .rep-placeholder i { font-size: 1.8rem; color: var(--clr-green); margin-bottom: .8rem; display: block; }
+    .rep-placeholder p { color: var(--clr-gray-3); font-size: .92rem; max-width: 480px; margin: 0 auto; line-height: 1.7; }
+
+    /* ──────────────── VOLTAR ──────────────── */
+    .back-section {
+      text-align: center;
+      padding-block: var(--space-xl);
+      background:
+        radial-gradient(ellipse 60% 80% at 50% 50%, var(--clr-green-dark) 0%, transparent 70%),
+        linear-gradient(220deg, #1a0010 0%, var(--clr-green) 55%, var(--clr-green-dark) 100%);
+    }
+    .btn--ghost-white {
+      background: transparent; color: var(--clr-white);
+      border: 2px solid rgba(255,255,255,.42); font-weight: 600;
+    }
+    .btn--ghost-white:hover {
+      background: rgba(255,255,255,.1);
+      border-color: rgba(255,255,255,.72);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== HEADER ===================== -->
+  <header id="header" class="header">
+    <div class="container header__inner">
+
+      <!-- =====================================================
+           [ADIÇÃO] Aba de menu – inserida antes do brand.
+           Posicionada à esquerda do logotipo graças ao flex
+           do .header__inner existente.
+           Nenhuma classe/id existente foi alterada.
+           ===================================================== -->
+      <div class="sidemenu-wrap" id="sidemenuWrap">
+
+        <!-- Aba toggle -->
+        <button
+          class="sidemenu-tab"
+          id="sidemenuTab"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="sidemenuPanel"
+          aria-label="Abrir menu de navegação"
+        >
+          <span class="sidemenu-tab__icon" aria-hidden="true">
+            <span class="sidemenu-tab__bar"></span>
+            <span class="sidemenu-tab__bar"></span>
+            <span class="sidemenu-tab__bar"></span>
+          </span>
+          <span class="sidemenu-tab__label">Menu</span>
+        </button>
+
+        <!-- Painel principal -->
+        <div class="sidemenu-panel" id="sidemenuPanel" role="navigation" aria-label="Menu lateral">
+          <ul class="sidemenu-list">
+
+            <!-- ── Links diretos principais ── -->
+            <li class="sidemenu-list__item">
+              <a href="sobre.html" class="sidemenu-list__link">
+                Sobre o DAGV
+                <i class="fa-solid fa-building-columns sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="historico2.html" class="sidemenu-list__link sidemenu-list__link--historico">
+                Resgate Histórico
+                <i class="fa-solid fa-scroll sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="coordenacao.html" class="sidemenu-list__link">
+                Coordenação
+                <i class="fa-solid fa-users sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="criadores.html" class="sidemenu-list__link">
+                Criadores
+                <i class="fa-solid fa-code sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Dropdown: Informações DAGV ── -->
+            <li class="sidemenu-list__item">
+              <button
+                class="sidemenu-list__btn"
+                data-dropdown="informacoes"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Informações DAGV
+                <i class="fa-solid fa-chevron-down sidemenu-list__arrow" aria-hidden="true"></i>
+              </button>
+              <ul class="sidemenu-dropdown" id="dropInformacoes">
+                <li><a href="estatuto.html" class="sidemenu-dropdown__link">Estatuto</a></li>              </ul>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Links institucionais ── -->
+            <li class="sidemenu-list__item">
+              <a href="pet-medicina.html" class="sidemenu-list__link">
+                PET Medicina
+                <i class="fa-solid fa-flask sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="ligas.html" class="sidemenu-list__link">
+                Ligas Acadêmicas
+                <i class="fa-solid fa-graduation-cap sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="manual.html" class="sidemenu-list__link">
+                Manual do Estudante
+                <i class="fa-solid fa-book-open-reader sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="cursinho-carolina.html" class="sidemenu-list__link">
+                Cursinho Carolina
+                <i class="fa-solid fa-book-open sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="aaads-cachacina.html" class="sidemenu-list__link">
+                AAADS e Cachacina
+                <i class="fa-solid fa-shield-halved sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="representacoes-academicas.html" class="sidemenu-list__link">
+                Representações Acadêmicas
+                <i class="fa-solid fa-landmark sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Final ── -->
+            <li class="sidemenu-list__item">
+              <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7" target="_blank" rel="noopener" class="sidemenu-list__link">
+                Suporte
+                <i class="fa-solid fa-headset sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+
+          </ul>
+        </div><!-- /sidemenu-panel -->
+
+      </div><!-- /sidemenu-wrap -->
+      <!-- ===================================================== -->
+
+      <!-- Logo + Nome -->
+      <a href="index.html" class="header__brand">
+        <div class="header__logo-wrap">
+          <!--
+            [ALTERAÇÃO] Logo DAGV – componente Logo dinâmico.
+            - Fundo vermelho/transparente → logo dourada (img.logo--gold)
+            - Fundo branco (scrolled)     → logo vermelha (img.logo--red)
+            A troca é feita via CSS: visibilidade controlada por .header.scrolled
+          -->
+          <img
+            src="img/logo dourada-sem fundo.png"
+            alt="Logo DAGV – Diretório Acadêmico Gaspar Vianna"
+            class="header__logo-svg logo--gold"
+            width="80" height="68"
+            loading="eager"
+          />
+          <img
+            src="img/Logo DAGV sem fundo verm.png"
+            alt="Logo DAGV – Diretório Acadêmico Gaspar Vianna"
+            class="header__logo-svg logo--red"
+            width="80" height="68"
+            loading="eager"
+            aria-hidden="true"
+          />
+        </div>
+        <div class="header__title-wrap">
+          <span class="header__dagv"></span>
+          <span class="header__subtitle"></span>
+        </div>
+      </a>
+
+      <!-- Nav desktop -->
+      <nav class="nav" aria-label="Navegação principal">
+        <ul class="nav__list">
+          <li><a href="sobre.html"                    class="nav__link">Sobre</a></li>
+          <li><a href="coordenacao.html"              class="nav__link">Coordenações</a></li>
+          <li><a href="index.html#events"             class="nav__link">Instituições UFTM</a></li>
+          <li><a href="index.html#eventos-academicos" class="nav__link">Eventos</a></li>
+          <li><a href="index.html#contact"            class="nav__link nav__link--cta">Contato</a></li>
+        </ul>
+      </nav>
+
+      <!-- Hamburguer -->
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Nav mobile (drawer) -->
+    <nav class="nav-mobile" id="navMobile" aria-hidden="true">
+      <ul class="nav-mobile__list">
+        <li><a href="index.html"                    class="nav-mobile__link">Início</a></li>
+        <li><a href="sobre.html"                    class="nav-mobile__link">Sobre</a></li>
+        <li><a href="criadores.html"                class="nav-mobile__link">Criadores</a></li>
+        <li><a href="coordenacao.html"              class="nav-mobile__link">Coordenações</a></li>
+        <li><a href="index.html#events"             class="nav-mobile__link">Instituições UFTM</a></li>
+        <li><a href="index.html#eventos-academicos" class="nav-mobile__link">Eventos</a></li>
+        <li><a href="index.html#contact"            class="nav-mobile__link">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+
+    <!-- ===================== HERO ===================== -->
+    <section class="rep-hero">
+      <div class="rep-hero__content">
+        <span class="rep-hero__eyebrow">Movimento estudantil</span>
+        <h1 class="rep-hero__title">Representações <em>Acadêmicas</em></h1>
+        <p class="rep-hero__desc">
+          Conheça as entidades que representam os estudantes de Medicina da UFTM em âmbito nacional,
+          universitário e local.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== NAV INTERNA ===================== -->
+    <nav class="rep-anchors" aria-label="Navegação interna da página">
+      <ul class="rep-anchors__list">
+        <li><a href="#denem" class="rep-anchors__link"><i class="fa-solid fa-globe" aria-hidden="true"></i> DENEM</a></li>
+        <li><a href="#dce" class="rep-anchors__link"><i class="fa-solid fa-building-columns" aria-hidden="true"></i> DCE UFTM</a></li>
+        <li><a href="#clev" class="rep-anchors__link"><i class="fa-solid fa-plane-departure" aria-hidden="true"></i> CLEV</a></li>
+        <li><a href="#cvu" class="rep-anchors__link"><i class="fa-solid fa-hand-holding-heart" aria-hidden="true"></i> CVU Uberaba</a></li>
+      </ul>
+    </nav>
+
+    <!-- ===================== DENEM ===================== -->
+    <section class="rep-entity" id="denem">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Representação Nacional</span>
+          <h2 class="section-title">DENEM</h2>
+          <p class="section-desc">Direção Executiva Nacional dos Estudantes de Medicina</p>
+        </div>
+        <div class="rep-entity__grid">
+          <div class="rep-entity__photo" data-aos="fade-up">
+            <img src="img/denem-logo.png" alt="DENEM – Direção Executiva Nacional dos Estudantes de Medicina" loading="lazy" />
+          </div>
+          <div class="rep-entity__text" data-aos="fade-up" data-aos-delay="120">
+            <p>
+              O Movimento Estudantil da Medicina também está presente para além dos muros da nossa Universidade.
+              O DAGV da UFTM é representado pela DENEM, compondo a <strong>Regional Sudeste-2</strong>.
+            </p>
+            <p>
+              Fundada em 1986, em Fortaleza, durante o XVII Encontro Científico dos Estudantes de Medicina (ECEM),
+              a DENEM é a <strong>entidade representativa dos estudantes de medicina</strong> em nível nacional,
+              com décadas de lutas e mobilizações — da defesa da educação médica à defesa do SUS público,
+              equânime e de qualidade.
+            </p>
+            <p>
+              Para facilitar o diálogo com os Centros e Diretórios Acadêmicos, a DENEM se organiza em
+              <strong> 8 regionais</strong>, além de uma sede nacional e do CENEPES (Centro de Pesquisas e Estudos
+              em Educação e Saúde). A participação democrática acontece em fóruns como o ECEM, o COBREM, o ROEX,
+              as Reuniões de Regional e os EREMs.
+            </p>
+
+            <details>
+              <summary class="rep-entity__toggle">Ver regionais, CENEPES e fóruns de decisão</summary>
+              <div class="rep-entity__more">
+                <p>
+                  As <strong>8 regionais</strong> e os estados que as compõem: Norte (AC, AM, RR, RO, PA, AP e MA);
+                  Nordeste-1 (BA, SE e AL); Nordeste-2 (PI, CE, RN, PB e PE); Centro-Oeste (MT, MS, GO, TO e DF);
+                  Sudeste-1 (RJ e ES); <strong>Sudeste-2 (MG — nossa regional)</strong>; Sul-1 (SC e RS); e Sul-2 (PR e SP).
+                  Cada regional tem uma coordenação responsável por visitar as Coordenações Locais (CL's — Centros
+                  e Diretórios Acadêmicos) e organizar os encontros estudantis regionais.
+                </p>
+                <p>
+                  Além da coordenação nacional (sede + coordenações de regionais + relações exteriores), a DENEM
+                  conta com o <strong>CENEPES</strong>, formado por coordenações de área:
+                </p>
+                <ul>
+                  <li>Coordenação de Políticas de Saúde (CPS)</li>
+                  <li>Coordenação de Educação (CoE)</li>
+                  <li>Coordenação de Extensão Universitária (CExU)</li>
+                  <li>Coordenação de Cultura e Meio Ambiente (CoCultMa)</li>
+                  <li>Coordenação Científica (CoCien)</li>
+                  <li>Coordenação de Estágios e Vivências (CEV)</li>
+                </ul>
+                <dl class="rep-entity__deflist">
+                  <dt>ECEM — Encontro Científico dos Estudantes de Medicina</dt>
+                  <dd>Maior fórum deliberativo da entidade, com voz e voto a todo estudante inscrito. Acontece em meados de julho.</dd>
+                  <dt>COBREM — Congresso Brasileiro dos Estudantes de Medicina</dt>
+                  <dd>Segundo maior espaço deliberativo, com voto dos delegados eleitos por curso. É onde se planeja o ano da Executiva, em meados de janeiro.</dd>
+                  <dt>ROEX — Reunião dos Órgãos Executivos (CA's e DA's)</dt>
+                  <dd>Terceiro maior espaço deliberativo, um voto por CA/DA. Acontecem várias ao longo do ano.</dd>
+                  <dt>RR — Reunião de Regional</dt>
+                  <dd>Espaço deliberativo em nível regional, um voto por CA/DA.</dd>
+                  <dt>EREM — Encontro Regional dos Estudantes de Medicina</dt>
+                  <dd>Maior espaço deliberativo em nível regional, com voz e voto a todo estudante na plenária final.</dd>
+                </dl>
+                <p>
+                  Quem quiser ajudar a construir a DENEM pode compor a <strong>Rede de Ajuda (RA)</strong>, que
+                  recruta estudantes voluntários a cada início de gestão.
+                </p>
+              </div>
+            </details>
+
+            <a href="https://www.denem.org.br/" target="_blank" rel="noopener" class="rep-entity__link">
+              <i class="fa-solid fa-external-link-alt" aria-hidden="true"></i> Site oficial da DENEM
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== DCE UFTM ===================== -->
+    <section class="rep-entity" id="dce">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Representação Universitária</span>
+          <h2 class="section-title">DCE UFTM</h2>
+          <p class="section-desc">Diretório Central dos Estudantes "Walkíria Afonso Costa"</p>
+        </div>
+        <div class="rep-entity__grid">
+          <div class="rep-entity__photo" data-aos="fade-up">
+            <img src="img/dce-uftm-logo.png" alt="DCE UFTM – Diretório Central dos Estudantes Walkíria Afonso Costa" loading="lazy" />
+          </div>
+          <div class="rep-entity__text" data-aos="fade-up" data-aos-delay="120">
+            <p>
+              O <strong>DCE (Diretório Central dos Estudantes)</strong> é a entidade máxima representativa de
+              todas e todos os estudantes de uma instituição de ensino superior — um espaço de disputas
+              democráticas em defesa dos interesses da categoria estudantil.
+            </p>
+            <p>
+              O DCE da UFTM, batizado <strong>DCE-WAC</strong>, é uma associação civil sem fins econômicos, de
+              duração indeterminada, regida pelo estatuto aprovado em assembleia em 2015, e é o órgão de
+              representação máxima dos estudantes de graduação, pós-graduação e nível técnico da UFTM.
+            </p>
+            <p>
+              <strong>Quem foi Walkíria Afonso Costa?</strong> Uberabense, nascida em 1947, foi estudante de
+              pedagogia na UFMG e militante do movimento estudantil — fundou, com companheiros, o Diretório
+              Acadêmico da Faculdade de Educação em 1968. Durante a Ditadura Militar, sua faculdade foi cercada e
+              colegas foram torturados e presos; Walkíria entrou para a clandestinidade e, em 1971, mudou-se com
+              seu companheiro para a região do Araguaia (sul do Pará), onde alfabetizavam, lecionavam e prestavam
+              socorro médico a camponeses.
+            </p>
+            <p>
+              Integrante do Destacamento B na Guerrilha do Araguaia, foi uma das últimas guerrilheiras a ser
+              presa pelo Exército — após meses de fuga, em dezembro de 1973, foi levada de helicóptero à base
+              militar de Xambioá, torturada e executada aos 27 anos. Como dezenas de outros militantes, seus
+              restos mortais nunca foram entregues à família. Seu nome representa, até hoje, o compromisso do
+              movimento estudantil com a classe trabalhadora e sua emancipação.
+            </p>
+
+            <details>
+              <summary class="rep-entity__toggle">Ver princípios e finalidades do DCE-WAC</summary>
+              <div class="rep-entity__more">
+                <ul>
+                  <li>Representar seus membros no âmbito da UFTM, defendendo os interesses do conjunto, sem distinção de raça, cor, religião, nacionalidade, sexo, idade ou convicção política;</li>
+                  <li>Lutar pela construção de uma universidade popular, pública, gratuita, democrática e de qualidade, voltada aos interesses da população, na UFTM e no Brasil;</li>
+                  <li>Organizar e incentivar promoções de caráter político, cultural, científico e social que aprimorem a formação profissional e pessoal;</li>
+                  <li>Repudiar todas as formas de opressão e exploração dentro e fora da universidade;</li>
+                  <li>Lutar por políticas que garantam a permanência e a conclusão de curso dos estudantes;</li>
+                  <li>Promover a efetiva ocupação das vagas discentes nos órgãos colegiados da UFTM;</li>
+                  <li>Defender a paridade da participação estudantil nos órgãos colegiados;</li>
+                  <li>Atender, sempre que possível, às demandas da classe trabalhadora e de suas organizações;</li>
+                  <li>Defender, em todo debate sobre educação, os princípios da autonomia universitária, gestão democrática e indissociabilidade entre ensino, pesquisa e extensão;</li>
+                  <li>Combater o arbítrio, o autoritarismo e o uso de recursos públicos para interesses privados na UFTM e na educação pública brasileira;</li>
+                  <li>Preservar e estimular o patrimônio artístico, científico e cultural dos estudantes da UFTM.</li>
+                </ul>
+              </div>
+            </details>
+
+            <a href="https://uftmdce.wordpress.com/" target="_blank" rel="noopener" class="rep-entity__link">
+              <i class="fa-solid fa-external-link-alt" aria-hidden="true"></i> Conheça mais sobre o DCE-WAC
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CLEV ===================== -->
+    <section class="rep-entity" id="clev">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Representação Local</span>
+          <h2 class="section-title">CLEV</h2>
+          <p class="section-desc">Coordenação Local de Estágios e Vivências</p>
+        </div>
+        <div class="rep-entity__grid">
+          <div class="rep-entity__photo" data-aos="fade-up">
+            <img src="img/logo-clev.png" alt="CLEV – Coordenação Local de Estágios e Vivências" loading="lazy" />
+          </div>
+          <div class="rep-entity__text" data-aos="fade-up" data-aos-delay="120">
+            <p>
+              A <strong>Coordenação Local de Estágios e Vivências (CLEV)</strong> é a representação local
+              da Coordenação de Estágios e Vivências (CEV), constituindo uma das ramificações da DENEM em
+              nível de universidade. É formada por estudantes de Medicina e, no caso da CLEV-UFTM, seus
+              membros são selecionados por meio de um processo seletivo anual.
+            </p>
+            <p>
+              As CLEVs proporcionam aos estudantes a ampliação de conhecimentos técnico-científicos por
+              meio da articulação e organização de <strong>estágios e intercâmbios</strong>, promovendo o
+              contato com diferentes sistemas de saúde ao redor do mundo e o encontro com outras culturas,
+              línguas e realidades.
+            </p>
+            <details>
+              <summary class="rep-entity__toggle">Como funciona</summary>
+              <div class="rep-entity__more">
+                <p>
+                  O objetivo é alcançado por meio da divulgação de editais anuais, oficinas de capacitação,
+                  organização de eventos em parceria com o Diretório Acadêmico ou outras CLEVs, e auxílio na
+                  resolução de dúvidas sobre as etapas do processo.
+                </p>
+                <p>
+                  Os estágios articulados pela CLEV, pela CEV e pela DENEM podem ocorrer em nível nacional
+                  ou internacional, no local de preferência do estudante, geralmente com duração de quatro
+                  semanas. A participação ocorre após seleção nos respectivos editais e mediante o pagamento
+                  da taxa estabelecida.
+                </p>
+              </div>
+            </details>
+
+            <a href="https://www.instagram.com/clevuftm/" target="_blank" rel="noopener" class="rep-entity__link">
+              <i class="fa-brands fa-instagram" aria-hidden="true"></i> @clevuftm no Instagram
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CVU UBERABA ===================== -->
+    <section class="rep-entity" id="cvu">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Representação Local</span>
+          <h2 class="section-title">CVU Uberaba</h2>
+          <p class="section-desc">Centro de Voluntariado Universitário</p>
+        </div>
+        <div class="rep-entity__grid">
+          <div class="rep-entity__photo" data-aos="fade-up">
+            <img src="img/logo-cvu.png" alt="CVU – Centro de Voluntariado Universitário" loading="lazy" />
+          </div>
+          <div class="rep-entity__text" data-aos="fade-up" data-aos-delay="120">
+            <p>
+              O <strong>Centro de Voluntariado Universitário (CVU)</strong> é um espaço em que a vontade
+              de ajudar se transforma em ações concretas. Formado por estudantes que acreditam que a
+              universidade vai além da sala de aula, o CVU promove iniciativas que reforçam o impacto
+              social, a responsabilidade e o compromisso com a comunidade.
+            </p>
+            <p>
+              Entre suas principais atividades estão a organização de ações solidárias, campanhas,
+              projetos sociais e visitas a instituições. O objetivo é conectar estudantes a causas que
+              realmente necessitam de apoio, gerando impacto tanto dentro quanto fora do ambiente
+              universitário. As ações desenvolvidas pelo CVU frequentemente apoiam instituições como a
+              ONG Mãos Amigas, o Centro Cultural de Capoeira Águia Branca, o Instituto Madre Teresa de
+              Calcutá, o Lar André Luiz e o Instituto da Hemodiálise de Uberaba — cada iniciativa é
+              planejada a partir da escuta das necessidades dessas instituições e da motivação dos
+              voluntários em contribuir de forma significativa.
+            </p>
+
+            <details>
+              <summary class="rep-entity__toggle">Ver diretorias e processo seletivo</summary>
+              <div class="rep-entity__more">
+                <p>
+                  Para organizar suas atividades, o CVU é estruturado em diferentes diretorias, cada uma
+                  com coordenadores e um ou dois diretores responsáveis por conduzir as demandas
+                  específicas de sua área:
+                </p>
+                <dl class="rep-entity__deflist">
+                  <dt>Administrativa/Financeira</dt>
+                  <dd>Responsável pela organização interna e pela gestão de recursos.</dd>
+                  <dt>Consultoria Social</dt>
+                  <dd>Atua na articulação das ações e no contato com as instituições.</dd>
+                  <dt>Cultura</dt>
+                  <dd>Desenvolve eventos e iniciativas culturais com impacto social.</dd>
+                  <dt>Marketing</dt>
+                  <dd>Cuida da divulgação e da comunicação.</dd>
+                  <dt>Relacionamento</dt>
+                  <dd>Fortalece parcerias e o vínculo com os voluntários.</dd>
+                  <dt>Gestão de Pessoas</dt>
+                  <dd>Trabalha na integração e no cuidado com os membros da equipe.</dd>
+                  <dt>Executivo</dt>
+                  <dd>Formado pelo presidente e pelo vice-presidente, coordena as atividades para garantir o funcionamento alinhado e estruturado da organização.</dd>
+                </dl>
+                <p>
+                  Para fazer parte do CVU, os interessados devem participar de um <strong>processo
+                  seletivo realizado semestralmente</strong>, com dias de dinâmicas em grupo nas quais
+                  são avaliadas habilidades como trabalho em equipe, considerada essencial para a atuação
+                  dentro do projeto.
+                </p>
+              </div>
+            </details>
+
+            <a href="https://www.instagram.com/cvuberaba/" target="_blank" rel="noopener" class="rep-entity__link">
+              <i class="fa-brands fa-instagram" aria-hidden="true"></i> @cvuberaba no Instagram
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== VOLTAR ===================== -->
+    <section class="back-section">
+      <a href="index.html" class="btn btn--ghost-white">
+        <i class="fa-solid fa-house" aria-hidden="true"></i>
+        Voltar ao Início
+      </a>
+    </section>
+
+  </main>
+  <footer class="footer">
+    <div class="container footer__inner">
+
+      <div class="footer__brand">
+        <img
+          src="img/logo dourada-sem fundo.png"
+          alt="Logo DAGV"
+          class="footer__logo"
+          width="64" height="54"
+          loading="lazy"
+        />
+        <div>
+          <p class="footer__name">DAGV – Gaspar Vianna</p>
+          <p class="footer__sub">Medicina UFTM · Uberaba – MG</p>
+        </div>
+      </div>
+
+      <nav class="footer__links" aria-label="Links úteis">
+        <a href="estatuto.html">Estatuto</a>
+        <a href="criadores.html">Criadores</a>
+        <a href="sobre.html">Sobre o DAGV</a>
+        <a href="coordenacao.html">Coordenação</a>
+        <a href="historico2.html">Resgate Histórico</a>
+        <a href="index.html#contact">Suporte</a>
+      </nav>
+
+      <div class="footer__social">
+        <a href="https://www.instagram.com/dagvmeduftm/" target="_blank" rel="noopener" aria-label="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=100009254539973" target="_blank" rel="noopener" aria-label="Facebook">
+          <i class="fa-brands fa-facebook"></i>
+        </a>
+        <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7" target="_blank" rel="noopener" aria-label="Formulário de contato">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+      </div>
+
+    </div>
+    <div class="footer__bottom">
+      <p>&copy; <span id="year"></span> Diretório Acadêmico Gaspar Vianna – Medicina UFTM. Todos os direitos reservados.</p>
+      <p class="footer__credit">Desenvolvido por <a href="criadores.html">Sérgio Lemuel Soares Santos &amp; João Paulo Soares Santos</a></p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/sidemenu.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,1028 @@
+/* ============================================================
+   DAGV – Resgate Histórico · Livro Interativo
+   book.css | Adição independente – não altera styles.css/historico.css
+   Stage 1: cena estática + abertura simples + navegação manual.
+   Stage 2 (futuro): GSAP (abertura cinematográfica) + StPageFlip
+   (virada física real de páginas) substituem os comportamentos
+   marcados como "[STAGE1]" abaixo, sem mudar o HTML/CSS base.
+   ============================================================ */
+
+.book-section {
+  position: relative;
+  background: var(--hist-parchment);
+  padding-block: var(--space-2xl);
+  overflow: hidden;
+}
+
+/* ── Cena: mesa de madeira + vinheta + poeira ─────────────── */
+.book-scene {
+  position: relative;
+  margin-top: var(--space-xl);
+  min-height: 560px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 20%, rgba(255,235,200,.08) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(20,14,9,.35) 0%, rgba(20,14,9,.15) 45%, rgba(10,7,4,.55) 100%),
+    url('../img/mesa-fundo.jpg');
+  background-size: cover;
+  background-position: center;
+  box-shadow: inset 0 0 120px rgba(0,0,0,.55);
+}
+
+/* Vinheta nas bordas */
+.book-scene::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 160px rgba(0,0,0,.6);
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Textura de madeira sutil da mesa (parte inferior) */
+.book-table {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  padding-block: var(--space-xl);
+}
+
+/* Partículas de poeira flutuando – decorativas, CSS puro */
+.book-scene__particles {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.book-scene__particles::before,
+.book-scene__particles::after {
+  content: '';
+  position: absolute;
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: rgba(255,240,210,.35);
+  box-shadow:
+    120px 60px  rgba(255,240,210,.25),
+    240px 180px rgba(255,240,210,.2),
+    60px  260px rgba(255,240,210,.3),
+    340px 90px  rgba(255,240,210,.18),
+    420px 220px rgba(255,240,210,.22),
+    180px 320px rgba(255,240,210,.16);
+  animation: book-dust-float 14s ease-in-out infinite;
+}
+
+.book-scene__particles::after {
+  animation-duration: 19s;
+  animation-direction: reverse;
+  opacity: .6;
+}
+
+@keyframes book-dust-float {
+  0%   { transform: translateY(0) translateX(0); }
+  50%  { transform: translateY(-24px) translateX(10px); }
+  100% { transform: translateY(0) translateX(0); }
+}
+
+@property --book-scale {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 1;
+}
+
+/* ── Livro fechado ─────────────────────────────────────────── */
+.book {
+  position: relative;
+  z-index: 2;
+  --cover-w: min(320px, 70vw);
+  --book-scale: 1;
+  width: var(--cover-w);
+  aspect-ratio: 3 / 4;
+  perspective: 2200px;
+  cursor: pointer;
+  outline: none;
+  transition: width 450ms var(--ease), aspect-ratio 450ms var(--ease);
+  animation: book-appear 900ms var(--ease) 200ms both,
+             book-float 4.6s ease-in-out 1100ms infinite;
+}
+
+@keyframes book-float {
+  0%, 100% { transform: translateY(0)    scale(var(--book-scale)); }
+  50%      { transform: translateY(-10px) scale(var(--book-scale)); }
+}
+
+.book:hover,
+.book:focus-visible {
+  animation-play-state: paused;
+  transform: translateY(-14px) scale(var(--book-scale));
+  transition: transform 350ms var(--ease);
+}
+
+/* Sombra de contato: some/encolhe quando o livro "sobe",
+   reforça quando ele "desce" — é o que vende a levitação. */
+.book-shadow {
+  width: var(--cover-w, 320px);
+  max-width: 70vw;
+  height: 28px;
+  margin-top: -10px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse closest-side, rgba(0,0,0,.55), transparent 75%);
+  filter: blur(2px);
+  animation: book-shadow-pulse 4.6s ease-in-out 1100ms infinite;
+  transition: opacity 350ms var(--ease), transform 350ms var(--ease);
+  pointer-events: none;
+}
+
+@keyframes book-shadow-pulse {
+  0%, 100% { transform: scaleX(1);   opacity: .55; }
+  50%      { transform: scaleX(.72); opacity: .3;  }
+}
+
+.book:hover ~ .book-shadow,
+.book:focus-visible ~ .book-shadow {
+  animation-play-state: paused;
+  transform: scaleX(.6);
+  opacity: .22;
+}
+
+.book.is-open ~ .book-shadow {
+  opacity: 0;
+}
+
+
+@keyframes book-appear {
+  from { opacity: 0; transform: translateY(24px) scale(.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.book:focus-visible .book__cover-face--front {
+  box-shadow: 0 0 0 3px var(--clr-accent), inset 0 0 0 6px rgba(0,0,0,.18), inset 0 0 30px rgba(0,0,0,.35);
+}
+
+/* Lombada envelhecida */
+.book__spine {
+  position: absolute;
+  left: -10px; top: 4%; bottom: 4%;
+  width: 22px;
+  border-radius: 4px 0 0 4px;
+  background: linear-gradient(180deg, #4a2c18, #2b160a 60%, #1c0d05);
+  box-shadow: inset -4px 0 8px rgba(0,0,0,.5), 0 10px 25px rgba(0,0,0,.5);
+  z-index: 0;
+}
+
+/* Capa em couro marrom com detalhes dourados */
+.book__cover--front {
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: var(--cover-w);
+  z-index: 2;
+  border-radius: 3px 8px 8px 3px;
+  transform-style: preserve-3d;
+  transform-origin: left center;
+  box-shadow: 0 24px 50px rgba(0,0,0,.5);
+  transition: transform 900ms cubic-bezier(.65,0,.35,1),
+              box-shadow 400ms var(--ease);
+  will-change: transform;
+}
+
+.book:hover .book__cover--front {
+  box-shadow: 0 30px 60px rgba(0,0,0,.55);
+  transform: translateY(-4px);
+}
+
+/* Cada face é uma folha própria, com backface-visibility: hidden —
+   é isso que impede o texto de aparecer espelhado/invertido durante
+   a rotação (o bug original vinha de um único elemento sem verso). */
+.book__cover-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 3px 8px 8px 3px;
+}
+
+.book__cover-face--front {
+  background-image: url('../img/capa-livro-dagv-v4.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow:
+    inset 0 0 0 6px rgba(0,0,0,.18),
+    inset 0 0 30px rgba(0,0,0,.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .75rem;
+  padding: var(--space-lg);
+  text-align: center;
+}
+
+/* Verso da capa: couro com textura de verdade (grão + veios +
+   vinheta), não um retângulo liso. É o que se vê assim que a capa
+   passa de ~90° — nunca o texto da frente. */
+.book__cover-face--back {
+  transform: rotateY(180deg);
+  background:
+    repeating-linear-gradient(115deg,
+      rgba(0,0,0,.05) 0px, rgba(0,0,0,.05) 1px,
+      transparent 1px, transparent 5px),
+    repeating-linear-gradient(25deg,
+      rgba(255,255,255,.02) 0px, rgba(255,255,255,.02) 1px,
+      transparent 1px, transparent 6px),
+    radial-gradient(120% 90% at 85% 15%, rgba(0,0,0,.25), transparent 55%),
+    linear-gradient(205deg, #46280f 0%, #301909 55%, #1f0f06 100%);
+  box-shadow:
+    inset 0 0 0 6px rgba(0,0,0,.3),
+    inset 0 0 40px rgba(0,0,0,.5);
+}
+
+/* Moldura dourada decorativa */
+/* Moldura e título ficam ocultos: já vêm desenhados na imagem da capa */
+.book__cover-ornament,
+.book__cover-title {
+  display: none;
+}
+
+.book-hint-below {
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #e8c98a;
+  background: rgba(20,10,4,.55);
+  border: 1px solid rgba(232,160,32,.4);
+  padding: 6px 16px;
+  border-radius: 999px;
+  backdrop-filter: blur(2px);
+  white-space: nowrap;
+  transition: opacity 300ms var(--ease);
+}
+
+.book.is-open ~ .book-hint-below {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── Livro aberto [STAGE1: rotação simples da capa] ─────────
+   Stage 2 troca a curva/timing por GSAP + inicializa StPageFlip
+   dentro de .book__pages, sem alterar estas classes base.       */
+.book.is-open {
+  animation-play-state: paused;
+  transform: translateY(0) scale(var(--book-scale));
+}
+
+.book.is-open .book__cover--front {
+  transform: rotateY(-165deg);
+  box-shadow: -10px 10px 30px rgba(0,0,0,.4);
+  pointer-events: none;
+}
+
+.book__pages {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 0; right: 0;
+  z-index: 1;
+  display: flex;
+  border-radius: 3px 8px 8px 3px;
+  overflow: hidden;
+  background: #e9dcc2;
+  opacity: 0;
+  transition: left 450ms var(--ease);
+}
+
+.book.is-pages-visible .book__pages {
+  opacity: 1;
+}
+
+.book-page.book-page--cover {
+  background:
+    repeating-linear-gradient(112deg,
+      rgba(0,0,0,.05) 0px, rgba(0,0,0,.05) 1px,
+      transparent 1px, transparent 5px),
+    repeating-linear-gradient(22deg,
+      rgba(255,255,255,.03) 0px, rgba(255,255,255,.03) 1px,
+      transparent 1px, transparent 6px),
+    radial-gradient(120% 90% at 15% 10%, rgba(255,255,255,.06), transparent 55%),
+    linear-gradient(155deg, #6b3d21 0%, #4a2712 55%, #351a0c 100%);
+  color: #e8c98a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .75rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.book-page {
+  position: relative;
+  flex: 1;
+  padding: var(--space-md);
+  overflow-y: auto;
+  background:
+    radial-gradient(60px 40px at 88% 12%, rgba(150,100,40,.10), transparent 70%),
+    radial-gradient(80px 55px at 8% 82%, rgba(150,100,40,.08), transparent 70%),
+    radial-gradient(50px 50px at 92% 90%, rgba(150,100,40,.07), transparent 70%),
+    repeating-linear-gradient(to bottom, transparent 0 26px, rgba(94,58,20,.06) 26px 27px),
+    repeating-linear-gradient(97deg, rgba(94,58,20,.035) 0px, rgba(94,58,20,.035) 1px, transparent 1px, transparent 4px),
+    linear-gradient(160deg, #f2e6cc, #e6d4ac);
+  box-shadow: inset 0 0 40px rgba(94,58,20,.12);
+  color: var(--hist-warm-dark);
+}
+
+.book-page--left { border-right: 1px solid rgba(94,58,20,.15); }
+
+.book-page__year {
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #935101;
+  display: block;
+  margin-bottom: .3rem;
+}
+
+.book-page__title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: .5rem;
+  line-height: 1.3;
+}
+
+.book-page__desc {
+  font-size: .85rem;
+  line-height: 1.55;
+}
+
+/* Página com imagem ou PDF digitalizado */
+.book-page__media {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1c130c;
+  cursor: zoom-in;
+}
+
+.book-page__zoom-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,.5);
+  color: #f2e6cc;
+  border: 1px solid rgba(232,201,138,.4);
+  transition: background 160ms var(--ease), transform 160ms var(--ease);
+}
+
+.book-page__media:hover .book-page__zoom-btn {
+  background: rgba(0,0,0,.7);
+  transform: scale(1.06);
+}
+
+.book-page__media img,
+.book-page__media canvas {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  box-shadow: 0 6px 18px rgba(0,0,0,.35);
+}
+
+.book-page__media-caption {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: .5rem .75rem;
+  background: linear-gradient(to top, rgba(0,0,0,.75), transparent);
+  color: #f2e6cc;
+}
+
+.book-page__media-caption .book-page__year {
+  color: var(--clr-accent);
+}
+
+.book-page__media-caption .book-page__title {
+  font-size: .85rem;
+  margin-bottom: 0;
+  color: #f2e6cc;
+}
+
+.book-page__media-caption .book-page__caption {
+  font-size: .68rem;
+  color: rgba(242,230,204,.75);
+  margin-top: .2rem;
+  line-height: 1.4;
+  display: block;
+}
+
+/* ── Lightbox: leitura em tela cheia na resolução original ──*/
+.book-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(8, 5, 3, .94);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.book-lightbox.is-open { display: flex; }
+
+.book-lightbox__viewport {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+  touch-action: none;
+}
+
+.book-lightbox__img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  object-fit: contain;
+  cursor: zoom-in;
+  box-shadow: 0 10px 40px rgba(0,0,0,.6);
+  image-rendering: auto;
+}
+
+.book-lightbox__img.is-zoomed { cursor: grab; }
+.book-lightbox__img.is-dragging { cursor: grabbing; }
+
+.book-lightbox__toolbar {
+  position: fixed;
+  top: max(var(--space-sm), env(safe-area-inset-top));
+  right: max(var(--space-sm), env(safe-area-inset-right));
+  z-index: 2001;
+  display: flex;
+  gap: .3rem;
+}
+
+.book-lightbox__btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.25);
+  color: #f2e6cc;
+  font-size: .85rem;
+  font-weight: 700;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 160ms var(--ease);
+}
+
+.book-lightbox__btn:hover { background: rgba(255,255,255,.2); }
+
+.book-lightbox__close { font-size: 1.1rem; }
+
+.book-lightbox__hint {
+  position: fixed;
+  left: 50%;
+  bottom: var(--space-md);
+  transform: translateX(-50%);
+  z-index: 2001;
+  font-size: .75rem;
+  letter-spacing: .04em;
+  color: #e8c98a;
+  background: rgba(0,0,0,.5);
+  border: 1px solid rgba(232,160,32,.35);
+  padding: 5px 14px;
+  border-radius: 999px;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .book-lightbox__hint { font-size: .68rem; padding: 4px 10px; }
+}
+.book-page__pdf-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .4em;
+  margin-top: .6rem;
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--clr-green);
+}
+
+.book-page__pdf-link:hover { color: var(--clr-green-dark); }
+
+/* ── Botão Índice ────────────────────────────────────────────*/
+.book-index-btn {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  gap: .5em;
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--hist-parchment);
+  background: rgba(0,0,0,.35);
+  border: 1px solid rgba(255,255,255,.25);
+  padding: .55em 1.1em;
+  border-radius: var(--radius-pill);
+  backdrop-filter: blur(4px);
+  transition: background 200ms var(--ease), border-color 200ms var(--ease);
+}
+
+.book-index-btn:hover {
+  background: rgba(0,0,0,.5);
+  border-color: rgba(255,255,255,.45);
+}
+
+/* Botão Fechar – aparece só com o livro aberto */
+.book-close-btn {
+  position: absolute;
+  top: var(--space-md);
+  left: var(--space-md);
+  z-index: 4;
+  display: none;
+  align-items: center;
+  gap: .5em;
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--hist-parchment);
+  background: rgba(0,0,0,.35);
+  border: 1px solid rgba(255,255,255,.25);
+  padding: .55em 1.1em;
+  border-radius: var(--radius-pill);
+  backdrop-filter: blur(4px);
+  transition: background 200ms var(--ease), border-color 200ms var(--ease);
+}
+
+.book-close-btn.is-visible { display: inline-flex; }
+
+.book-close-btn:hover {
+  background: rgba(0,0,0,.5);
+  border-color: rgba(255,255,255,.45);
+}
+
+/* Botão Tela cheia — discreto, acima do livro, sempre visível. */
+.book-fullscreen-btn {
+  position: absolute;
+  top: var(--space-sm);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .4rem .9rem;
+  font-family: inherit;
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--hist-parchment);
+  background: rgba(0,0,0,.35);
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 200ms var(--ease), border-color 200ms var(--ease), color 200ms var(--ease);
+}
+
+.book-fullscreen-btn:hover {
+  background: rgba(0,0,0,.5);
+  border-color: rgba(255,255,255,.45);
+}
+
+.book-fullscreen-btn[aria-pressed="true"] {
+  color: #e8c98a;
+  border-color: rgba(232,160,32,.55);
+}
+
+/* Em tela cheia o botão sai de cima do livro e vai pro canto
+   esquerdo, fixo na janela (o índice ocupa o direito), com
+   margem segura pra não cortar em notch. */
+.book-scene.is-fullscreen .book-fullscreen-btn {
+  position: fixed;
+  top: max(var(--space-md), env(safe-area-inset-top));
+  right: max(var(--space-md), env(safe-area-inset-right));
+  left: auto;
+  transform: none;
+  z-index: 1001;
+}
+
+/* Modo tela cheia: a cena cobre a janela toda e o livro cresce,
+   aproveitando o espaço extra pra ler melhor. */
+.book-scene.is-fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  border-radius: 0;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.book-scene.is-fullscreen .book-table {
+  padding-block: 0;
+}
+
+/* Tamanho fluido baseado na altura real da janela — sempre cabe
+   inteiro na tela (nada de cortar o topo), sem precisar de
+   degraus fixos por breakpoint. Reserva espaço em cima (botão) e
+   embaixo (setas/dica). */
+.book-scene.is-fullscreen .book {
+  /* Zoom visual só por transform — o tamanho REAL que o StPageFlip
+     mede nunca muda entre modos, então ele nunca precisa remedir
+     nem cai em bugs de página dupla / sumiço. Calcula um fator
+     fluido que cabe na altura da tela (reservando ~150px pros
+     botões) e também não estoura a largura em telas estreitas. */
+  --book-scale: max(1, min(
+    calc((100vh - 150px) / 426.67px),
+    calc(92vw / var(--cover-w)),
+    2.4
+  ));
+}
+
+body.book-fullscreen-lock {
+  overflow: hidden;
+}
+
+html.book-fullscreen-lock {
+  overflow: hidden;
+}
+
+.book-scene.is-fullscreen .book-page {
+  overflow-y: hidden;
+}
+
+/* Aviso "pressione ESC" — só aparece em tela cheia */
+.book-fullscreen-hint {
+  position: fixed;
+  left: 50%;
+  bottom: var(--space-md);
+  transform: translateX(-50%);
+  z-index: 1001;
+  display: none;
+  align-items: center;
+  gap: .5em;
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--hist-parchment);
+  background: rgba(0,0,0,.55);
+  border: 1px solid rgba(255,255,255,.25);
+  padding: .55em 1.1em;
+  border-radius: var(--radius-pill);
+  backdrop-filter: blur(4px);
+  pointer-events: none;
+}
+
+.book-fullscreen-hint.is-visible {
+  display: inline-flex;
+  animation: book-hint-fade 3.5s ease forwards;
+}
+
+@keyframes book-hint-fade {
+  0%   { opacity: 0; transform: translateX(-50%) translateY(8px); }
+  12%  { opacity: 1; transform: translateX(-50%) translateY(0); }
+  80%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Botão Marcador – ao lado do livro, canto inferior direito;
+   só aparece com o livro aberto (mesma lógica do Fechar). */
+.book-bookmark-btn {
+  position: absolute;
+  bottom: var(--space-md);
+  right: var(--space-md);
+  z-index: 4;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  font-size: 1rem;
+  color: var(--hist-parchment);
+  background: rgba(0,0,0,.35);
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 200ms var(--ease), border-color 200ms var(--ease), color 200ms var(--ease);
+}
+
+.book-bookmark-btn.is-visible { display: inline-flex; }
+
+.book-bookmark-btn:hover {
+  background: rgba(0,0,0,.5);
+  border-color: rgba(255,255,255,.45);
+}
+
+.book-bookmark-btn[aria-pressed="true"] {
+  color: #e8c98a;
+  background: rgba(0,0,0,.55);
+  border-color: rgba(232,160,32,.6);
+}
+
+/* ── Painel lateral Índice ──────────────────────────────────*/
+.book-index-panel {
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  z-index: 5;
+  width: min(300px, 82%);
+  background: var(--hist-parchment);
+  border-left: 1px solid var(--hist-border);
+  box-shadow: -12px 0 30px rgba(0,0,0,.35);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 320ms var(--ease);
+}
+
+.book-index-panel.is-open { transform: translateX(0); }
+
+.book-index-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--hist-border);
+}
+
+.book-index-panel__header h4 {
+  font-family: var(--font-display);
+  color: var(--hist-warm-dark);
+  font-size: 1.05rem;
+}
+
+.book-index-panel__close {
+  color: var(--hist-warm-dark);
+  font-size: 1rem;
+  line-height: 1;
+  padding: .3rem;
+}
+
+.book-index-panel__search {
+  display: flex;
+  align-items: center;
+  gap: .5em;
+  margin: var(--space-sm) var(--space-md) 0;
+  padding: .5em .8em;
+  background: #fff;
+  border: 1px solid var(--hist-border);
+  border-radius: var(--radius-sm);
+  color: var(--hist-warm-gray);
+}
+
+.book-index-panel__search input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: .85rem;
+  color: var(--hist-warm-dark);
+  width: 100%;
+}
+
+.book-index-panel__list {
+  list-style: none;
+  padding: var(--space-sm) var(--space-md);
+  overflow-y: auto;
+  flex: 1;
+}
+
+.book-index-panel__item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: .6em .5em;
+  border-radius: var(--radius-sm);
+  font-size: .85rem;
+  color: var(--hist-warm-dark);
+  transition: background 160ms var(--ease);
+}
+
+.book-index-panel__item:hover,
+.book-index-panel__item:focus-visible {
+  background: rgba(147,1,66,.08);
+}
+
+.book-index-panel__list--nested {
+  padding: 0 0 0 var(--space-sm);
+  overflow: visible;
+  flex: none;
+}
+
+.book-index-panel__theme {
+  border-bottom: 1px solid rgba(94,58,20,.12);
+  margin-bottom: .35rem;
+}
+
+.book-index-panel__theme:last-child { border-bottom: none; }
+
+.book-index-panel__theme-summary {
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: .95rem;
+  color: var(--hist-warm-dark);
+  padding: .55em .5em;
+  display: flex;
+  align-items: center;
+  gap: .5em;
+}
+
+.book-index-panel__theme-summary::-webkit-details-marker { display: none; }
+
+.book-index-panel__theme-summary::before {
+  content: '\25B8';
+  display: inline-block;
+  transition: transform 180ms var(--ease);
+  color: var(--clr-accent);
+  font-size: .8em;
+}
+
+.book-index-panel__theme[open] > .book-index-panel__theme-summary::before {
+  transform: rotate(90deg);
+}
+
+.book-index-panel__chapter {
+  margin: .1rem 0 .35rem var(--space-sm);
+}
+
+.book-index-panel__chapter-summary {
+  cursor: pointer;
+  list-style: none;
+  font-size: .8rem;
+  font-weight: 600;
+  color: #935101;
+  padding: .4em .5em;
+  display: flex;
+  align-items: center;
+  gap: .5em;
+}
+
+.book-index-panel__chapter-summary::-webkit-details-marker { display: none; }
+
+.book-index-panel__chapter-summary::before {
+  content: '\25B8';
+  display: inline-block;
+  transition: transform 180ms var(--ease);
+  font-size: .75em;
+}
+
+.book-index-panel__chapter[open] > .book-index-panel__chapter-summary::before {
+  transform: rotate(90deg);
+}
+
+/* ── Página divisória de tema/capítulo ──────────────────────*/
+.book-page--divider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: .9rem;
+  padding: var(--space-lg);
+}
+
+.book-page__divider-rule {
+  width: 60%;
+  max-width: 180px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #935101, transparent);
+}
+
+.book-page__divider-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 4vw, 1.6rem);
+  color: var(--hist-warm-dark);
+  letter-spacing: .04em;
+}
+
+.book-page__divider-subtitle {
+  font-size: .85rem;
+  color: #935101;
+  font-style: italic;
+}
+
+/* ── Controles de navegação (prev/next + contador) ──────────*/
+.book-controls {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.book-controls.is-visible { display: flex; }
+
+/* Em tela cheia, o .book-scene vira fixed cobrindo a janela; os
+   controles ficam fora dele no HTML, então precisam subir junto
+   pra não ficarem escondidos atrás do livro. */
+.book-scene.is-fullscreen ~ .book-controls.is-visible {
+  position: fixed;
+  left: 50%;
+  bottom: max(var(--space-md, 16px), env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  z-index: 1001;
+  background: rgba(20, 14, 9, .55);
+  backdrop-filter: blur(6px);
+  padding: 6px 12px;
+  border-radius: 999px;
+  margin-top: 0;
+  gap: var(--space-sm);
+}
+
+.book-scene.is-fullscreen ~ .book-controls.is-visible .book-nav {
+  width: 30px;
+  height: 30px;
+}
+
+.book-scene.is-fullscreen ~ .book-controls.is-visible .book-nav i {
+  font-size: .7rem;
+}
+
+.book-scene.is-fullscreen ~ .book-controls.is-visible .book-controls__counter {
+  font-size: .72rem;
+  min-width: 44px;
+}
+
+.book-nav {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: var(--clr-green);
+  color: var(--clr-white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 200ms var(--ease), transform 200ms var(--ease);
+}
+
+.book-nav:hover { background: var(--clr-green-dark); transform: translateY(-2px); }
+.book-nav:disabled { opacity: .35; pointer-events: none; }
+
+.book-controls__counter {
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--hist-warm-dark);
+  min-width: 60px;
+  text-align: center;
+}
+
+/* ── Responsividade ──────────────────────────────────────── */
+@media (max-width: 900px) {
+  .book-scene { min-height: 480px; }
+  .book { --cover-w: min(280px, 74vw); }
+}
+
+@media (max-width: 560px) {
+  .book-scene { min-height: 420px; padding-block: var(--space-md); }
+  .book { --cover-w: min(230px, 78vw); }
+  .book-page { padding: var(--space-sm); }
+  .book-page__title { font-size: .95rem; }
+  .book-page__desc { font-size: .8rem; }
+  /* [FIX mobile] só reduz fonte/linha das páginas de texto mais longas
+     (marcadas via JS), pra caber sem cortar — desktop/tablet não mudam. */
+  .book-page__desc--long { font-size: .7rem; line-height: 1.5; }
+  .book-index-panel { width: 88%; }
+
+  .book-lightbox__btn { width: 26px; height: 26px; font-size: .75rem; }
+  .book-lightbox__close { font-size: 1rem; }
+  .book-lightbox__toolbar { gap: .25rem; }
+  .book-lightbox__hint { font-size: .62rem; padding: 3px 9px; }
+
+  .book-scene.is-fullscreen ~ .book-controls.is-visible .book-nav {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .book,
+  .book-shadow,
+  .book__cover--front,
+  .book__pages,
+  .book-index-panel,
+  .book-scene__particles::before,
+  .book-scene__particles::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

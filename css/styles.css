@@ -866,6 +866,27 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   box-shadow: var(--shadow-md);
 }
 
+/* Variante com exatamente 3 cards (usada na página do PET):
+   3 colunas no desktop, 2 colunas + 3º item centralizado embaixo
+   em telas médias, 1 coluna no mobile estreito. */
+.about__cards--3col { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 900px) {
+  .about__cards--3col {
+    grid-template-columns: repeat(2, minmax(220px, 320px));
+    justify-content: center;
+  }
+  .about__cards--3col > .about__card:nth-child(3):last-child {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: 100%;
+    max-width: 320px;
+  }
+}
+@media (max-width: 480px) {
+  .about__cards--3col { grid-template-columns: 1fr; }
+  .about__cards--3col > .about__card:nth-child(3):last-child { max-width: none; }
+}
+
 .about__icon {
   width: 64px; height: 64px;
   border-radius: 50%;
@@ -1438,6 +1459,21 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   font-size: .8rem;
   color: rgba(255,255,255,.35);
 }
+.footer__credit {
+  margin-top: .35rem;
+  font-size: .78rem;
+  color: rgba(255,255,255,.4);
+}
+.footer__credit a {
+  color: var(--clr-accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(232,160,32,.35);
+  transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+}
+.footer__credit a:hover {
+  color: var(--clr-white);
+  border-color: var(--clr-white);
+}
 
 /* ══════════════════════════════════════════════════════════
    13. RESPONSIVIDADE COMPLETA
@@ -1499,6 +1535,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 /* ── Mobile padrão (≤ 768px) ────────────────────────────── */
 @media (max-width: 768px) {
+  /* Desce a seta de scroll da Hero até o limite inferior da área bordô */
+  .hero__scroll-hint { bottom: .6rem; }
+
   /* Fallback sem JS: garante o drawer mobile mesmo se o
      ResizeObserver de script.js não rodar. Mesmo efeito de
      .header.nav--compact, ver seção 6 (Header). */

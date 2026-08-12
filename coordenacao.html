@@ -2,6 +2,13 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="48x48" href="img/favicon-48x48.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="img/android-chrome-192x192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="img/android-chrome-512x512.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Coordenação e Gestão – Conheça as coordenadorias do DAGV Gaspar Vianna, suas atribuições e os responsáveis pela gestão estudantil na Medicina UFTM." />
   <meta name="keywords" content="DAGV, Medicina, UFTM, Coordenação, Gestão, Diretoria, Gaspar Vianna" />
@@ -101,6 +108,21 @@
       content: ''; position: absolute; bottom: 0; left: 8%; right: 8%;
       height: 3px; background: linear-gradient(90deg, transparent, var(--clr-accent), transparent);
       border-radius: 2px;
+    }
+    .rosa-patrono {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; align-items: center; gap: .5rem;
+      margin-bottom: 1.4rem;
+    }
+    .rosa-patrono img {
+      width: 108px; height: 108px; border-radius: 50%;
+      object-fit: cover; object-position: center 20%;
+      border: 3px solid var(--clr-accent);
+      box-shadow: 0 8px 24px rgba(0,0,0,.35);
+    }
+    .rosa-patrono__caption {
+      font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;
+      font-weight: 600; color: rgba(255,255,255,.65);
     }
     .rosa-quote-mark {
       position: relative; z-index: 1;
@@ -598,7 +620,13 @@
       text-decoration: none;
     }
     .back-link:hover { background: var(--clr-green); color: var(--clr-white); }
-    .back-section { text-align: center; padding-block: var(--space-xl); }
+    .back-section {
+      text-align: center;
+      padding-block: var(--space-xl);
+      background:
+        radial-gradient(ellipse 60% 80% at 50% 50%, var(--clr-green-dark) 0%, transparent 70%),
+        linear-gradient(220deg, #1a0010 0%, var(--clr-green) 55%, var(--clr-green-dark) 100%);
+    }
     @media (max-width: 780px) {
       .estrutura__level { gap: var(--space-xs); }
       .estrutura__node { min-width: 130px; padding: .65rem 1rem; }
@@ -663,6 +691,12 @@
                 <i class="fa-solid fa-users sidemenu-list__icon" aria-hidden="true"></i>
               </a>
             </li>
+            <li class="sidemenu-list__item">
+              <a href="criadores.html" class="sidemenu-list__link">
+                Criadores
+                <i class="fa-solid fa-code sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
 
             <li class="sidemenu-list__sep" role="separator"></li>
 
@@ -678,16 +712,14 @@
                 <i class="fa-solid fa-chevron-down sidemenu-list__arrow" aria-hidden="true"></i>
               </button>
               <ul class="sidemenu-dropdown" id="dropInformacoes">
-                <li><a href="https://dagvmeduftm.wordpress.com/estatuto-dagv/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">Estatuto</a></li>
-                <li><a href="https://dagvmeduftm.wordpress.com/galeria-de-fotos/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">Galeria de Fotos</a></li>
-              </ul>
+                <li><a href="estatuto.html" class="sidemenu-dropdown__link">Estatuto</a></li>              </ul>
             </li>
 
             <li class="sidemenu-list__sep" role="separator"></li>
 
             <!-- ── Links institucionais ── -->
             <li class="sidemenu-list__item">
-              <a href="https://dagvmeduftm.wordpress.com/pet-medicina-1/" target="_blank" rel="noopener" class="sidemenu-list__link">
+              <a href="pet-medicina.html" class="sidemenu-list__link">
                 PET Medicina
                 <i class="fa-solid fa-flask sidemenu-list__icon" aria-hidden="true"></i>
               </a>
@@ -705,31 +737,22 @@
               </a>
             </li>
             <li class="sidemenu-list__item">
-              <a href="https://dagvmeduftm.wordpress.com/cursinho-carolina/" target="_blank" rel="noopener" class="sidemenu-list__link">
+              <a href="cursinho-carolina.html" class="sidemenu-list__link">
                 Cursinho Carolina
                 <i class="fa-solid fa-book-open sidemenu-list__icon" aria-hidden="true"></i>
               </a>
             </li>
-
-            <li class="sidemenu-list__sep" role="separator"></li>
-
-            <!-- ── Dropdown: Instituições ── -->
             <li class="sidemenu-list__item">
-              <button
-                class="sidemenu-list__btn"
-                data-dropdown="instituicoes"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Instituições
-                <i class="fa-solid fa-chevron-down sidemenu-list__arrow" aria-hidden="true"></i>
-              </button>
-              <ul class="sidemenu-dropdown" id="dropInstituicoes">
-                <li><a href="https://dagvmeduftm.wordpress.com/denem/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">DENEM</a></li>
-                <li><a href="https://dagvmeduftm.wordpress.com/dce-uftm/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">DCE</a></li>
-                <li><a href="https://dagvmeduftm.wordpress.com/cvu-uberaba/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">CVU</a></li>
-                <li><a href="https://dagvmeduftm.wordpress.com/cepop-uftm/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">CEPOP</a></li>
-              </ul>
+              <a href="aaads-cachacina.html" class="sidemenu-list__link">
+                AAADS e Cachacina
+                <i class="fa-solid fa-shield-halved sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="representacoes-academicas.html" class="sidemenu-list__link">
+                Representações Acadêmicas
+                <i class="fa-solid fa-landmark sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
             </li>
 
             <li class="sidemenu-list__sep" role="separator"></li>
@@ -801,6 +824,7 @@
       <ul class="nav-mobile__list">
         <li><a href="index.html"                    class="nav-mobile__link">Início</a></li>
         <li><a href="sobre.html"                    class="nav-mobile__link">Sobre</a></li>
+        <li><a href="criadores.html"                class="nav-mobile__link">Criadores</a></li>
         <li><a href="coordenacao.html"              class="nav-mobile__link">Coordenações</a></li>
         <li><a href="index.html#events"             class="nav-mobile__link">Instituições UFTM</a></li>
         <li><a href="index.html#eventos-academicos" class="nav-mobile__link">Eventos</a></li>
@@ -877,6 +901,17 @@
             <p>Assim como Rosa navegou entre mundos — a medicina e a literatura, o sertão e a diplomacia —, esta gestão busca conectar ensino, pesquisa, extensão e bem-estar, colocando sempre o estudante no centro de cada decisão.</p>
           </div>
           <div class="rosa-quote-card" data-aos="fade-left" data-aos-delay="100">
+            <!--
+              FOTO DO(A) PATRONO(A) DA GESTÃO
+              Pra trocar em gestões futuras: basta substituir o arquivo
+              img/gestao/patrono.jpg por uma nova foto (mesmo nome de
+              arquivo) — ou, se preferir manter as duas, trocar só o
+              caminho no src abaixo e o texto do alt/legenda.
+            -->
+            <div class="rosa-patrono">
+              <img src="img/gestao/patrono.jpg" alt="João Guimarães Rosa, patrono da gestão 2025–2026" loading="lazy" />
+              <span class="rosa-patrono__caption">João Guimarães Rosa</span>
+            </div>
             <span class="rosa-quote-mark">"</span>
             <p class="rosa-quote-text">O correr da vida embrulha tudo. A vida é assim: esquenta e esfria, aperta e daí afrouxa, sossega e depois desinquieta. O que ela quer da gente é coragem.</p>
             <p class="rosa-quote-author">João Guimarães Rosa · Grande Sertão: Veredas</p>
@@ -975,8 +1010,9 @@
 
     <!-- ===================== VOLTAR ===================== -->
     <section class="back-section">
-      <a href="index.html" class="back-link">
-        Voltar ao site principal
+      <a href="index.html" class="btn btn--ghost-white">
+        <i class="fa-solid fa-house" aria-hidden="true"></i>
+        Voltar ao Início
       </a>
     </section>
 
@@ -985,28 +1021,46 @@
   <!-- ===================== FOOTER ===================== -->
   <footer class="footer">
     <div class="container footer__inner">
+
       <div class="footer__brand">
-        <img src="img/logo-dagv-gold.png" alt="Logo DAGV" class="footer__logo" width="64" height="54" loading="lazy" />
+        <img
+          src="img/logo dourada-sem fundo.png"
+          alt="Logo DAGV"
+          class="footer__logo"
+          width="64" height="54"
+          loading="lazy"
+        />
         <div>
           <p class="footer__name">DAGV – Gaspar Vianna</p>
           <p class="footer__sub">Medicina UFTM · Uberaba – MG</p>
         </div>
       </div>
+
       <nav class="footer__links" aria-label="Links úteis">
-        <a href="https://dagvmeduftm.wordpress.com/estatuto-dagv/"     target="_blank" rel="noopener">Estatuto</a>
-        <a href="https://dagvmeduftm.wordpress.com/ligas-academicas/"  target="_blank" rel="noopener">Ligas</a>
-        <a href="https://dagvmeduftm.wordpress.com/cursinho-carolina/" target="_blank" rel="noopener">Cursinho Carolina</a>
-        <a href="https://dagvmeduftm.wordpress.com/pet-medicina-1/"    target="_blank" rel="noopener">PET Medicina</a>
-        <a href="https://dagvmeduftm.wordpress.com/dce-uftm/"         target="_blank" rel="noopener">DCE UFTM</a>
+        <a href="estatuto.html">Estatuto</a>
+        <a href="criadores.html">Criadores</a>
+        <a href="sobre.html">Sobre o DAGV</a>
+        <a href="coordenacao.html">Coordenação</a>
+        <a href="historico2.html">Resgate Histórico</a>
+        <a href="index.html#contact">Suporte</a>
       </nav>
+
       <div class="footer__social">
-        <a href="https://www.instagram.com/dagvmeduftm/"                    target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a href="https://www.facebook.com/profile.php?id=100009254539973"   target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
-        <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7"                       target="_blank" rel="noopener" aria-label="Contato"><i class="fa-solid fa-envelope"></i></a>
+        <a href="https://www.instagram.com/dagvmeduftm/" target="_blank" rel="noopener" aria-label="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=100009254539973" target="_blank" rel="noopener" aria-label="Facebook">
+          <i class="fa-brands fa-facebook"></i>
+        </a>
+        <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7" target="_blank" rel="noopener" aria-label="Formulário de contato">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
       </div>
+
     </div>
     <div class="footer__bottom">
       <p>&copy; <span id="year"></span> Diretório Acadêmico Gaspar Vianna – Medicina UFTM. Todos os direitos reservados.</p>
+      <p class="footer__credit">Desenvolvido por <a href="criadores.html">Sérgio Lemuel Soares Santos &amp; João Paulo Soares Santos</a></p>
     </div>
   </footer>
 

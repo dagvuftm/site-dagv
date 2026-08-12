@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="48x48" href="img/favicon-48x48.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="img/android-chrome-192x192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="img/android-chrome-512x512.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cursinho Carolina Maria de Jesus — Curso popular gratuito de preparação para o ENEM e vestibulares, projeto de extensão da UFTM organizado pelo DAGV." />
+  <meta name="keywords" content="DAGV, Medicina, UFTM, Cursinho Carolina, Curso Popular, ENEM, vestibular, extensão" />
+  <meta name="author" content="DAGV – Medicina UFTM" />
+  <title>Cursinho Carolina – DAGV | Medicina UFTM</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/sidemenu.css" />
+
+  <style>
+    /* ──────────────── HERO ──────────────── */
+    .car-hero {
+      position: relative;
+      min-height: 56vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 80% 100% at 0% 60%,
+          #3d0018 0%,
+          var(--clr-green-dark) 38%,
+          transparent 72%),
+        linear-gradient(160deg,
+          var(--clr-green-dark) 0%,
+          var(--clr-green)      50%,
+          #1a0010               100%);
+      padding-top: calc(var(--header-h) + var(--space-2xl));
+      padding-bottom: var(--space-2xl);
+    }
+    .car-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(90deg,transparent,transparent 58px,rgba(255,255,255,.04) 58px,rgba(255,255,255,.04) 60px),
+        repeating-linear-gradient(0deg,transparent,transparent 58px,rgba(255,255,255,.04) 58px,rgba(255,255,255,.04) 60px);
+    }
+    .car-hero::after {
+      content: '';
+      position: absolute;
+      width: 480px; height: 480px;
+      border-radius: 50%;
+      border: 70px solid rgba(232,160,32,.09);
+      bottom: -180px; left: -120px;
+      pointer-events: none;
+    }
+    .car-hero__content {
+      position: relative; z-index: 1;
+      text-align: center; color: var(--clr-white);
+      max-width: 760px; padding-inline: var(--space-md);
+    }
+    .car-hero__eyebrow {
+      font-size: .78rem; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--clr-accent); font-weight: 600; margin-bottom: var(--space-sm); display: block;
+    }
+    .car-hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      font-weight: 700; line-height: 1.15; margin-bottom: var(--space-md);
+    }
+    .car-hero__title em { color: var(--clr-accent); font-style: italic; }
+    .car-hero__desc {
+      font-size: 1.05rem; line-height: 1.75;
+      color: rgba(255,255,255,.82); max-width: 580px; margin-inline: auto;
+    }
+
+    /* ──────────────── INTRO ──────────────── */
+    .car-intro { padding-block: var(--space-2xl); }
+    .car-grid {
+      display: grid; grid-template-columns: .9fr 1.1fr;
+      gap: var(--space-xl); align-items: start; margin-top: var(--space-xl);
+    }
+    .car-photo {
+      border-radius: var(--radius-lg); overflow: hidden;
+      box-shadow: var(--shadow-md); border: 1px solid var(--clr-gray-1);
+    }
+    .car-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .car-text p { font-size: .98rem; color: var(--clr-gray-3); line-height: 1.86; margin-bottom: 1.1rem; }
+    .car-text p:last-child { margin-bottom: 0; }
+    .car-text strong { color: var(--clr-dark); }
+    @media (max-width: 768px) {
+      .car-grid { grid-template-columns: 1fr; }
+      .car-photo { max-width: 460px; margin-inline: auto; }
+    }
+
+    /* ──────────────── MATÉRIAS ──────────────── */
+    .car-materias { padding-block: var(--space-2xl); background: var(--clr-off); }
+    .car-tags { display: flex; flex-wrap: wrap; gap: .6rem; justify-content: center; margin-top: var(--space-lg); }
+    .car-tag {
+      display: inline-flex; align-items: center; gap: .4em;
+      background: var(--clr-white); border: 1px solid var(--clr-gray-1);
+      border-radius: var(--radius-pill); padding: .55em 1.2em;
+      font-size: .85rem; font-weight: 600; color: var(--clr-gray-3);
+    }
+    .car-tag i { color: var(--clr-green); }
+
+    /* ──────────────── COMO INGRESSAR ──────────────── */
+    .car-ingresso { padding-block: var(--space-2xl); }
+    .car-notice {
+      background: var(--clr-green-light);
+      border-left: 4px solid var(--clr-accent);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 1.2rem 1.4rem;
+      margin-top: var(--space-lg);
+      font-size: .92rem; color: var(--clr-gray-3); line-height: 1.7;
+    }
+    .car-notice strong { color: var(--clr-dark); }
+
+    /* ──────────────── CTA ──────────────── */
+    .car-cta {
+      background:
+        radial-gradient(ellipse 60% 80% at 50% 50%, var(--clr-green-dark) 0%, transparent 70%),
+        linear-gradient(220deg, #1a0010 0%, var(--clr-green) 55%, var(--clr-green-dark) 100%);
+      padding-block: var(--space-2xl);
+      text-align: center;
+    }
+    .car-cta__title {
+      font-family: var(--font-display); color: var(--clr-white);
+      font-size: clamp(1.4rem, 3vw, 2rem); margin-bottom: var(--space-sm);
+    }
+    .car-cta p { color: rgba(255,255,255,.78); max-width: 560px; margin: 0 auto var(--space-lg); }
+    .car-cta__actions { display: flex; gap: var(--space-sm); justify-content: center; flex-wrap: wrap; }
+
+    /* ──────────────── QUEM FOI CAROLINA ──────────────── */
+    .car-bio { padding-block: var(--space-2xl); }
+    .car-bio__grid {
+      display: grid; grid-template-columns: .85fr 1.15fr;
+      gap: var(--space-xl); align-items: start; margin-top: var(--space-xl);
+    }
+    .car-bio__photo { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); border: 1px solid var(--clr-gray-1); }
+    .car-bio__photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .car-bio__text p { font-size: .95rem; color: var(--clr-gray-3); line-height: 1.82; margin-bottom: 1rem; }
+    .car-bio__text p:last-child { margin-bottom: 0; }
+    .car-bio__text strong { color: var(--clr-dark); }
+    .car-bio__subtitle {
+      font-family: var(--font-display); font-weight: 700; color: var(--clr-dark);
+      font-size: 1.05rem; margin: 1.4rem 0 .6rem;
+    }
+    .car-bio__highlight {
+      background: var(--clr-green-light);
+      border-left: 4px solid var(--clr-accent);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 1.1rem 1.3rem;
+      margin-top: 1.2rem;
+      font-size: .92rem; color: var(--clr-gray-3); line-height: 1.7;
+    }
+    @media (max-width: 768px) {
+      .car-bio__grid { grid-template-columns: 1fr; }
+      .car-bio__photo { max-width: 420px; margin-inline: auto; }
+    }
+
+    /* ──────────────── EQUIPE ──────────────── */
+    .car-team { padding-block: var(--space-2xl); background: var(--clr-off); }
+    .car-team__grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-md); margin-top: var(--space-xl);
+    }
+    @media (max-width: 900px) {
+      .car-team__grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .car-team__grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 420px) {
+      .car-team__grid { grid-template-columns: repeat(1, 1fr); }
+    }
+    .car-team__photo {
+      border-radius: var(--radius-md); overflow: hidden;
+      aspect-ratio: 1 / 1; box-shadow: var(--shadow-sm);
+      border: 1px solid var(--clr-gray-1);
+      background: var(--clr-white);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .car-team__photo img { width: 100%; height: 100%; object-fit: contain; display: block; transition: transform var(--dur-med) var(--ease); }
+    .car-team__photo:hover img { transform: scale(1.06); }
+
+    /* ──────────────── VOLTAR ──────────────── */
+    .back-section {
+      text-align: center;
+      padding-block: var(--space-xl);
+      background:
+        radial-gradient(ellipse 60% 80% at 50% 50%, var(--clr-green-dark) 0%, transparent 70%),
+        linear-gradient(220deg, #1a0010 0%, var(--clr-green) 55%, var(--clr-green-dark) 100%);
+    }
+    .btn--ghost-white {
+      background: transparent; color: var(--clr-white);
+      border: 2px solid rgba(255,255,255,.42); font-weight: 600;
+    }
+    .btn--ghost-white:hover {
+      background: rgba(255,255,255,.1);
+      border-color: rgba(255,255,255,.72);
+      transform: translateY(-2px);
+    }
+    .btn--accent { background: var(--clr-accent); color: #3a2400; box-shadow: 0 4px 16px rgba(232,160,32,.4); }
+    .btn--accent:hover { background: #f5b230; box-shadow: 0 6px 20px rgba(232,160,32,.4); transform: translateY(-2px); }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== HEADER ===================== -->
+  <header id="header" class="header">
+    <div class="container header__inner">
+
+      <!-- =====================================================
+           [ADIÇÃO] Aba de menu – inserida antes do brand.
+           Posicionada à esquerda do logotipo graças ao flex
+           do .header__inner existente.
+           Nenhuma classe/id existente foi alterada.
+           ===================================================== -->
+      <div class="sidemenu-wrap" id="sidemenuWrap">
+
+        <!-- Aba toggle -->
+        <button
+          class="sidemenu-tab"
+          id="sidemenuTab"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="sidemenuPanel"
+          aria-label="Abrir menu de navegação"
+        >
+          <span class="sidemenu-tab__icon" aria-hidden="true">
+            <span class="sidemenu-tab__bar"></span>
+            <span class="sidemenu-tab__bar"></span>
+            <span class="sidemenu-tab__bar"></span>
+          </span>
+          <span class="sidemenu-tab__label">Menu</span>
+        </button>
+
+        <!-- Painel principal -->
+        <div class="sidemenu-panel" id="sidemenuPanel" role="navigation" aria-label="Menu lateral">
+          <ul class="sidemenu-list">
+
+            <!-- ── Links diretos principais ── -->
+            <li class="sidemenu-list__item">
+              <a href="sobre.html" class="sidemenu-list__link">
+                Sobre o DAGV
+                <i class="fa-solid fa-building-columns sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="historico2.html" class="sidemenu-list__link sidemenu-list__link--historico">
+                Resgate Histórico
+                <i class="fa-solid fa-scroll sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="coordenacao.html" class="sidemenu-list__link">
+                Coordenação
+                <i class="fa-solid fa-users sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="criadores.html" class="sidemenu-list__link">
+                Criadores
+                <i class="fa-solid fa-code sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Dropdown: Informações DAGV ── -->
+            <li class="sidemenu-list__item">
+              <button
+                class="sidemenu-list__btn"
+                data-dropdown="informacoes"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Informações DAGV
+                <i class="fa-solid fa-chevron-down sidemenu-list__arrow" aria-hidden="true"></i>
+              </button>
+              <ul class="sidemenu-dropdown" id="dropInformacoes">
+                <li><a href="estatuto.html" class="sidemenu-dropdown__link">Estatuto</a></li>              </ul>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Links institucionais ── -->
+            <li class="sidemenu-list__item">
+              <a href="pet-medicina.html" class="sidemenu-list__link">
+                PET Medicina
+                <i class="fa-solid fa-flask sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="ligas.html" class="sidemenu-list__link">
+                Ligas Acadêmicas
+                <i class="fa-solid fa-graduation-cap sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="manual.html" class="sidemenu-list__link">
+                Manual do Estudante
+                <i class="fa-solid fa-book-open-reader sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="cursinho-carolina.html" class="sidemenu-list__link">
+                Cursinho Carolina
+                <i class="fa-solid fa-book-open sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="aaads-cachacina.html" class="sidemenu-list__link">
+                AAADS e Cachacina
+                <i class="fa-solid fa-shield-halved sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="representacoes-academicas.html" class="sidemenu-list__link">
+                Representações Acadêmicas
+                <i class="fa-solid fa-landmark sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Final ── -->
+            <li class="sidemenu-list__item">
+              <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7" target="_blank" rel="noopener" class="sidemenu-list__link">
+                Suporte
+                <i class="fa-solid fa-headset sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+
+          </ul>
+        </div><!-- /sidemenu-panel -->
+
+      </div><!-- /sidemenu-wrap -->
+      <!-- ===================================================== -->
+
+      <!-- Logo + Nome -->
+      <a href="index.html" class="header__brand">
+        <div class="header__logo-wrap">
+          <!--
+            [ALTERAÇÃO] Logo DAGV – componente Logo dinâmico.
+            - Fundo vermelho/transparente → logo dourada (img.logo--gold)
+            - Fundo branco (scrolled)     → logo vermelha (img.logo--red)
+            A troca é feita via CSS: visibilidade controlada por .header.scrolled
+          -->
+          <img
+            src="img/logo dourada-sem fundo.png"
+            alt="Logo DAGV – Diretório Acadêmico Gaspar Vianna"
+            class="header__logo-svg logo--gold"
+            width="80" height="68"
+            loading="eager"
+          />
+          <img
+            src="img/Logo DAGV sem fundo verm.png"
+            alt="Logo DAGV – Diretório Acadêmico Gaspar Vianna"
+            class="header__logo-svg logo--red"
+            width="80" height="68"
+            loading="eager"
+            aria-hidden="true"
+          />
+        </div>
+        <div class="header__title-wrap">
+          <span class="header__dagv"></span>
+          <span class="header__subtitle"></span>
+        </div>
+      </a>
+
+      <!-- Nav desktop -->
+      <nav class="nav" aria-label="Navegação principal">
+        <ul class="nav__list">
+          <li><a href="sobre.html"                    class="nav__link">Sobre</a></li>
+          <li><a href="coordenacao.html"              class="nav__link">Coordenações</a></li>
+          <li><a href="index.html#events"             class="nav__link">Instituições UFTM</a></li>
+          <li><a href="index.html#eventos-academicos" class="nav__link">Eventos</a></li>
+          <li><a href="index.html#contact"            class="nav__link nav__link--cta">Contato</a></li>
+        </ul>
+      </nav>
+
+      <!-- Hamburguer -->
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Nav mobile (drawer) -->
+    <nav class="nav-mobile" id="navMobile" aria-hidden="true">
+      <ul class="nav-mobile__list">
+        <li><a href="index.html"                    class="nav-mobile__link">Início</a></li>
+        <li><a href="sobre.html"                    class="nav-mobile__link">Sobre</a></li>
+        <li><a href="criadores.html"                class="nav-mobile__link">Criadores</a></li>
+        <li><a href="coordenacao.html"              class="nav-mobile__link">Coordenações</a></li>
+        <li><a href="index.html#events"             class="nav-mobile__link">Instituições UFTM</a></li>
+        <li><a href="index.html#eventos-academicos" class="nav-mobile__link">Eventos</a></li>
+        <li><a href="index.html#contact"            class="nav-mobile__link">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+
+    <!-- ===================== HERO ===================== -->
+    <section class="car-hero">
+      <div class="car-hero__content">
+        <span class="car-hero__eyebrow">Projeto de extensão · UFTM</span>
+        <h1 class="car-hero__title">Cursinho <em>Carolina</em></h1>
+        <p class="car-hero__desc">
+          Curso Popular Carolina Maria de Jesus: preparação gratuita para o ENEM e vestibulares,
+          organizado majoritariamente pelo DAGV para democratizar o acesso ao ensino superior público.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== INTRO ===================== -->
+    <section class="car-intro">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Carolina Maria de Jesus</span>
+          <h2 class="section-title">Sobre o Cursinho</h2>
+        </div>
+
+        <div class="car-grid">
+          <div class="car-photo" data-aos="fade-up">
+            <img src="img/cursinho-carolina-logo.png" alt="Logo do Cursinho Popular Carolina Maria de Jesus" loading="lazy" />
+          </div>
+          <div class="car-text" data-aos="fade-up" data-aos-delay="120">
+            <p>
+              O <strong>Curso Popular Carolina Maria de Jesus</strong> da UFTM é um cursinho que oferece preparação
+              gratuita para o ENEM e vestibulares. Configura-se como um projeto de extensão da UFTM, organizado
+              majoritariamente pelo Diretório Acadêmico Gaspar Vianna (DAGV), com o objetivo de democratizar o
+              acesso ao ensino superior, oferecendo educação de qualidade para alunos da rede pública.
+            </p>
+            <p>
+              Sabemos como o ingresso nas universidades públicas é cada vez mais concorrido, e como muitos não
+              possuem recursos para pagar por uma preparação em cursinhos privados. Assim, o projeto nasce do
+              desejo de mudar realidades a partir do acesso ao ensino superior público e de qualidade — pensado
+              para oferecer um ensino preparatório e emancipador aos egressos do ensino público de Uberaba e região.
+            </p>
+            <p>
+              Fundado em <strong>2023</strong> por membros do DAGV, o cursinho é administrado voluntariamente por
+              discentes da UFTM. Anualmente é aberto edital para seleção de professores, monitores e tutores (com
+              certificação de horas de extensão) e, separadamente, para seleção dos alunos — divulgada nas escolas
+              públicas de Uberaba e no Instagram do projeto. As aulas acontecem no período da noite, de segunda a
+              sexta-feira, no espaço da universidade.
+            </p>
+            <a href="https://www.instagram.com/cursinho.carolina.uftm/" target="_blank" rel="noopener" class="btn btn--outline" style="margin-top:.5rem;">
+              <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+              @cursinho.carolina.uftm no Instagram
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== MATÉRIAS ===================== -->
+    <section class="car-materias">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Grade de estudos</span>
+          <h2 class="section-title">Matérias Oferecidas</h2>
+          <p class="section-desc">
+            Aulas ministradas por alunos de graduação da UFTM, com equipe de monitores para tirar dúvidas
+            e orientar os estudos.
+          </p>
+        </div>
+        <div class="car-tags" data-aos="fade-up">
+          <span class="car-tag"><i class="fa-solid fa-language" aria-hidden="true"></i> Português</span>
+          <span class="car-tag"><i class="fa-solid fa-pen-nib" aria-hidden="true"></i> Redação</span>
+          <span class="car-tag"><i class="fa-solid fa-book" aria-hidden="true"></i> Literatura</span>
+          <span class="car-tag"><i class="fa-solid fa-landmark" aria-hidden="true"></i> História</span>
+          <span class="car-tag"><i class="fa-solid fa-earth-americas" aria-hidden="true"></i> Geografia</span>
+          <span class="car-tag"><i class="fa-solid fa-brain" aria-hidden="true"></i> Filosofia</span>
+          <span class="car-tag"><i class="fa-solid fa-people-group" aria-hidden="true"></i> Sociologia</span>
+          <span class="car-tag"><i class="fa-solid fa-square-root-variable" aria-hidden="true"></i> Matemática</span>
+          <span class="car-tag"><i class="fa-solid fa-magnet" aria-hidden="true"></i> Física</span>
+          <span class="car-tag"><i class="fa-solid fa-flask" aria-hidden="true"></i> Química</span>
+          <span class="car-tag"><i class="fa-solid fa-dna" aria-hidden="true"></i> Biologia</span>
+        </div>
+        <p class="section-desc" style="margin-top: var(--space-lg); text-align:center; max-width:680px; margin-inline:auto;">
+          O cursinho também oferece material de estudo e apoio, principalmente aos alunos menos favorecidos. Os
+          livros pré-vestibulares vêm do Sistema Gabarito
+          (<a href="https://www.instagram.com/gabaritouberaba/" target="_blank" rel="noopener" style="color:var(--clr-green); font-weight:600;">@gabaritouberaba</a> e
+          <a href="https://www.instagram.com/gabaritoeducacao/" target="_blank" rel="noopener" style="color:var(--clr-green); font-weight:600;">@gabaritoeducacao</a>),
+          apoiador do Cursinho, com conteúdo teórico, exercícios, materiais extras e simulados.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== COMO INGRESSAR ===================== -->
+    <section class="car-ingresso">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Participação</span>
+          <h2 class="section-title">Quem Pode Ingressar?</h2>
+        </div>
+        <div class="car-notice" data-aos="fade-up">
+          <strong>📍 Quem pode participar:</strong> o projeto é destinado a alunos que cursam ou já cursaram o
+          3º ano do Ensino Médio em escolas públicas. O cursinho conta com uma lista de espera ativa durante todo
+          o ano, permitindo que interessados entrem a qualquer momento, se houver vagas disponíveis. A prova de
+          seleção ocorre no início do primeiro período letivo da UFTM, no mês de março.
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== QUEM FOI CAROLINA ===================== -->
+    <section class="car-bio">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">A patrona do cursinho</span>
+          <h2 class="section-title">Quem foi Carolina Maria de Jesus</h2>
+        </div>
+
+        <div class="car-bio__grid">
+          <div class="car-bio__photo" data-aos="fade-up">
+            <img src="https://dagvmeduftm.wordpress.com/wp-content/uploads/2025/09/carolina-maria-de-jesus.webp" alt="Carolina Maria de Jesus" loading="lazy" />
+          </div>
+          <div class="car-bio__text" data-aos="fade-up" data-aos-delay="120">
+            <p>
+              <strong>Carolina Maria de Jesus</strong> (Sacramento, 14 de março de 1914 – São Paulo, 13 de fevereiro
+              de 1977) foi uma escritora, cantora, compositora e poetisa brasileira. Uma das primeiras escritoras
+              negras do Brasil, é considerada uma das mais importantes escritoras do país. Viveu boa parte da vida
+              na favela do Canindé, em São Paulo, sustentando a si mesma e seus três filhos como catadora de papéis.
+            </p>
+            <p>
+              Apesar de ter apenas dois anos de estudo formal, tornou-se escritora e ficou nacionalmente conhecida
+              em 1960, com a publicação de <strong>Quarto de despejo: diário de uma favelada</strong>, no qual
+              relatou seu dia a dia na favela. O livro traz as memórias de uma mulher negra e favelada que via a
+              escrita como forma de sair da invisibilidade social em que se encontrava.
+            </p>
+
+            <h3 class="car-bio__subtitle">Biografia</h3>
+            <p>
+              Nasceu em 1914, em Sacramento (MG), numa comunidade rural, filha de pais negros. Por ser pobre, teve
+              apenas dois anos de educação formal. Em 1937, após a morte da mãe, migrou para São Paulo, onde
+              construiu sua própria casa com madeira, lata e papelão, e trabalhou como empregada doméstica. Em
+              1947, instalou-se na extinta favela do Canindé, onde nasceram seus três filhos.
+            </p>
+            <p>
+              Apaixonada pela leitura e pela escrita, foi apenas em 1958 que o jornalista Audálio Dantas descobriu
+              seus diários sobre a realidade da favela e ajudou a publicá-los. Em 1960, <em>Quarto de despejo</em>
+              se tornou um sucesso de vendas, traduzido para vários idiomas e hoje conhecido em cerca de 40 países.
+              A autora recebeu homenagens da Academia Paulista de Letras e virou nome de rua e de biblioteca,
+              consolidando um lugar de destaque na literatura e na história nacional.
+            </p>
+
+            <div class="car-bio__highlight">
+              <strong>Por que ela dá nome ao nosso cursinho?</strong> Porque representa a luta contra a
+              desigualdade — a possibilidade de vencer as desigualdades sociais por meio da literatura, da escrita
+              e do conhecimento. É um símbolo de denúncia, de resistência e de segundas chances: mostra como
+              alguém de origem humilde pode ocupar espaços nunca imaginados por meio do estudo e da dedicação.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== EQUIPE ===================== -->
+    <section class="car-team">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Coordenação</span>
+          <h2 class="section-title">Conheça Nossa Equipe</h2>
+          <p class="section-desc">Os voluntários por trás do Cursinho Popular Carolina Maria de Jesus.</p>
+        </div>
+        <div class="car-team__grid" data-aos="fade-up">
+          <div class="car-team__photo"><img src="https://dagvmeduftm.wordpress.com/wp-content/uploads/2026/02/zika-3.png" alt="Membro da equipe do Cursinho Carolina" loading="lazy" /></div>
+          <div class="car-team__photo"><img src="https://dagvmeduftm.wordpress.com/wp-content/uploads/2026/02/turquesa-1.png" alt="Membro da equipe do Cursinho Carolina" loading="lazy" /></div>
+          <div class="car-team__photo"><img src="https://dagvmeduftm.wordpress.com/wp-content/uploads/2026/02/kali.png" alt="Membro da equipe do Cursinho Carolina" loading="lazy" /></div>
+          <div class="car-team__photo"><img src="https://dagvmeduftm.wordpress.com/wp-content/uploads/2026/02/window.png" alt="Membro da equipe do Cursinho Carolina" loading="lazy" /></div>
+          <div class="car-team__photo"><img src="https://dagvmeduftm.wordpress.com/wp-content/uploads/2026/02/machado-6.png" alt="Membro da equipe do Cursinho Carolina" loading="lazy" /></div>
+          <div class="car-team__photo"><img src="https://dagvmeduftm.wordpress.com/wp-content/uploads/2026/02/pingolas-8.png" alt="Membro da equipe do Cursinho Carolina" loading="lazy" /></div>
+          <div class="car-team__photo"><img src="https://dagvmeduftm.wordpress.com/wp-content/uploads/2026/02/caos.png" alt="Membro da equipe do Cursinho Carolina" loading="lazy" /></div>
+          <div class="car-team__photo"><img src="https://dagvmeduftm.wordpress.com/wp-content/uploads/2026/02/tadala.png" alt="Membro da equipe do Cursinho Carolina" loading="lazy" /></div>
+          <div class="car-team__photo"><img src="https://dagvmeduftm.wordpress.com/wp-content/uploads/2026/02/mula.png" alt="Membro da equipe do Cursinho Carolina" loading="lazy" /></div>
+          <div class="car-team__photo"><img src="https://dagvmeduftm.wordpress.com/wp-content/uploads/2026/02/adao.png" alt="Membro da equipe do Cursinho Carolina" loading="lazy" /></div>
+          <div class="car-team__photo"><img src="https://dagvmeduftm.wordpress.com/wp-content/uploads/2026/02/letras.png" alt="Membro da equipe do Cursinho Carolina" loading="lazy" /></div>
+          <div class="car-team__photo"><img src="https://dagvmeduftm.wordpress.com/wp-content/uploads/2026/02/dombro.png" alt="Membro da equipe do Cursinho Carolina" loading="lazy" /></div>
+          <div class="car-team__photo"><img src="https://dagvmeduftm.wordpress.com/wp-content/uploads/2026/02/guima.png" alt="Membro da equipe do Cursinho Carolina" loading="lazy" /></div>
+          <div class="car-team__photo"><img src="https://dagvmeduftm.wordpress.com/wp-content/uploads/2026/02/emma.png" alt="Membro da equipe do Cursinho Carolina" loading="lazy" /></div>
+          <div class="car-team__photo"><img src="https://dagvmeduftm.wordpress.com/wp-content/uploads/2026/02/benga.png" alt="Membro da equipe do Cursinho Carolina" loading="lazy" /></div>
+          <div class="car-team__photo"><img src="https://dagvmeduftm.wordpress.com/wp-content/uploads/2026/02/nokia.png" alt="Membro da equipe do Cursinho Carolina" loading="lazy" /></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CTA ===================== -->
+    <section class="car-cta">
+      <div class="container">
+        <h2 class="car-cta__title">Quer fazer parte do Cursinho Carolina?</h2>
+        <p>Inscreva-se na lista de espera e venha estudar com a gente.</p>
+        <div class="car-cta__actions">
+          <a href="https://linktr.ee/cursinhocarolinauftm?utm_source=linktree_profile_share&ltsid=08bc8252-a251-4047-a691-d37d255d5c68" target="_blank" rel="noopener" class="btn btn--accent">
+            <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
+            Fazer inscrição
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== VOLTAR ===================== -->
+    <section class="back-section">
+      <a href="index.html" class="btn btn--ghost-white">
+        <i class="fa-solid fa-house" aria-hidden="true"></i>
+        Voltar ao Início
+      </a>
+    </section>
+
+  </main>
+  <footer class="footer">
+    <div class="container footer__inner">
+
+      <div class="footer__brand">
+        <img
+          src="img/logo dourada-sem fundo.png"
+          alt="Logo DAGV"
+          class="footer__logo"
+          width="64" height="54"
+          loading="lazy"
+        />
+        <div>
+          <p class="footer__name">DAGV – Gaspar Vianna</p>
+          <p class="footer__sub">Medicina UFTM · Uberaba – MG</p>
+        </div>
+      </div>
+
+      <nav class="footer__links" aria-label="Links úteis">
+        <a href="estatuto.html">Estatuto</a>
+        <a href="criadores.html">Criadores</a>
+        <a href="sobre.html">Sobre o DAGV</a>
+        <a href="coordenacao.html">Coordenação</a>
+        <a href="historico2.html">Resgate Histórico</a>
+        <a href="index.html#contact">Suporte</a>
+      </nav>
+
+      <div class="footer__social">
+        <a href="https://www.instagram.com/dagvmeduftm/" target="_blank" rel="noopener" aria-label="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=100009254539973" target="_blank" rel="noopener" aria-label="Facebook">
+          <i class="fa-brands fa-facebook"></i>
+        </a>
+        <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7" target="_blank" rel="noopener" aria-label="Formulário de contato">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+      </div>
+
+    </div>
+    <div class="footer__bottom">
+      <p>&copy; <span id="year"></span> Diretório Acadêmico Gaspar Vianna – Medicina UFTM. Todos os direitos reservados.</p>
+      <p class="footer__credit">Desenvolvido por <a href="criadores.html">Sérgio Lemuel Soares Santos &amp; João Paulo Soares Santos</a></p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/sidemenu.js"></script>
+
+
+</body>
+</html>

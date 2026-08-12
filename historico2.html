@@ -2,6 +2,13 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="48x48" href="img/favicon-48x48.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="img/android-chrome-192x192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="img/android-chrome-512x512.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Resgate Histórico – Memória acadêmica da UFTM e do DAGV Medicina. Documentos, registros e marcos históricos." />
   <meta name="keywords" content="DAGV, Medicina, UFTM, História, Gaspar Vianna, Memória Acadêmica" />
@@ -24,6 +31,9 @@
 
   <!-- [AJUSTE 4] Estilos do sidemenu – idênticos ao index.html -->
   <link rel="stylesheet" href="css/sidemenu.css" />
+
+  <!-- [ADIÇÃO] Livro Histórico Interativo -->
+  <link rel="stylesheet" href="css/book.css" />
 
   <!-- [ADIÇÃO] Estilos exclusivos da página Resgate Histórico -->
   <style>
@@ -176,6 +186,55 @@
       color: rgba(255,255,255,.72);
       max-width: 560px;
       margin-inline: auto;
+    }
+
+    /* ── Barra de navegação interna (mesmo padrão de .ligas-anchors) ── */
+    .hist-anchors {
+      background: var(--hist-parchment);
+      border-bottom: 2px solid rgba(94,58,20,.12);
+      border-top: 1px solid var(--clr-gray-1);
+      position: sticky;
+      top: var(--header-h);
+      z-index: 100;
+      padding-block: .65rem;
+    }
+    .hist-anchors__list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .25rem;
+      justify-content: center;
+      padding-inline: var(--space-md);
+    }
+    .hist-anchors__link {
+      display: flex;
+      align-items: center;
+      gap: .4em;
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--clr-gray-3);
+      padding: .4em 1em;
+      border-radius: var(--radius-sm);
+      white-space: nowrap;
+      transition: background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast);
+      text-decoration: none;
+      border: 1px solid transparent;
+    }
+    .hist-anchors__link:hover,
+    .hist-anchors__link.active {
+      background: rgba(147,81,1,.1);
+      color: var(--hist-warm-dark);
+      border-color: rgba(147,81,1,.25);
+    }
+
+    @media (max-width: 768px) {
+      .hist-anchors__link {
+        flex: 1 1 calc(50% - .3rem);
+        justify-content: center; text-align: center;
+        min-height: 36px; font-size: .75rem;
+      }
+    }
+    @media (max-width: 500px) {
+      .hist-anchors__link { flex: 1 1 100%; min-height: 40px; font-size: .73rem; }
     }
 
     /* ══════════════════════════════════════════════════════════════
@@ -626,33 +685,20 @@
     .back-section {
       text-align: center;
       padding-block: var(--space-xl);
-      background: var(--hist-parchment);
-      border-top: 1px solid var(--hist-border);
+      background:
+        radial-gradient(ellipse 60% 80% at 50% 50%, var(--clr-green-dark) 0%, transparent 70%),
+        linear-gradient(220deg, #1a0010 0%, var(--clr-green) 55%, var(--clr-green-dark) 100%);
     }
 
-    /* Botão voltar: institucional, sem cores fortes */
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: .55em;
-      font-size: .9rem;
-      font-weight: 600;
-      color: var(--clr-green-dark);
-      padding: .62rem 1.4rem;
-      border: 1.5px solid rgba(147,1,66,.3);
-      border-radius: var(--radius-sm);
-      background: transparent;
-      transition: background 320ms var(--ease),
-                  border-color 320ms var(--ease),
-                  color 320ms var(--ease);
-      text-decoration: none;
-      letter-spacing: .04em;
+    /* Botão voltar: mesmo componente usado em Ligas Acadêmicas */
+    .btn--ghost-white {
+      background: transparent; color: var(--clr-white);
+      border: 2px solid rgba(255,255,255,.42); font-weight: 600;
     }
-
-    .back-link:hover {
-      background: rgba(147,1,66,.08);
-      border-color: rgba(147,1,66,.5);
-      color: var(--clr-green);
+    .btn--ghost-white:hover {
+      background: rgba(255,255,255,.1);
+      border-color: rgba(255,255,255,.72);
+      transform: translateY(-2px);
     }
 
     /* ══════════════════════════════════════════════════════════════
@@ -773,6 +819,12 @@
                 <i class="fa-solid fa-users sidemenu-list__icon" aria-hidden="true"></i>
               </a>
             </li>
+            <li class="sidemenu-list__item">
+              <a href="criadores.html" class="sidemenu-list__link">
+                Criadores
+                <i class="fa-solid fa-code sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
 
             <li class="sidemenu-list__sep" role="separator"></li>
 
@@ -788,16 +840,14 @@
                 <i class="fa-solid fa-chevron-down sidemenu-list__arrow" aria-hidden="true"></i>
               </button>
               <ul class="sidemenu-dropdown" id="dropInformacoes">
-                <li><a href="https://dagvmeduftm.wordpress.com/estatuto-dagv/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">Estatuto</a></li>
-                <li><a href="https://dagvmeduftm.wordpress.com/galeria-de-fotos/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">Galeria de Fotos</a></li>
-              </ul>
+                <li><a href="estatuto.html" class="sidemenu-dropdown__link">Estatuto</a></li>              </ul>
             </li>
 
             <li class="sidemenu-list__sep" role="separator"></li>
 
             <!-- ── Links institucionais ── -->
             <li class="sidemenu-list__item">
-              <a href="https://dagvmeduftm.wordpress.com/pet-medicina-1/" target="_blank" rel="noopener" class="sidemenu-list__link">
+              <a href="pet-medicina.html" class="sidemenu-list__link">
                 PET Medicina
                 <i class="fa-solid fa-flask sidemenu-list__icon" aria-hidden="true"></i>
               </a>
@@ -815,31 +865,22 @@
               </a>
             </li>
             <li class="sidemenu-list__item">
-              <a href="https://dagvmeduftm.wordpress.com/cursinho-carolina/" target="_blank" rel="noopener" class="sidemenu-list__link">
+              <a href="cursinho-carolina.html" class="sidemenu-list__link">
                 Cursinho Carolina
                 <i class="fa-solid fa-book-open sidemenu-list__icon" aria-hidden="true"></i>
               </a>
             </li>
-
-            <li class="sidemenu-list__sep" role="separator"></li>
-
-            <!-- ── Dropdown: Instituições ── -->
             <li class="sidemenu-list__item">
-              <button
-                class="sidemenu-list__btn"
-                data-dropdown="instituicoes"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Instituições
-                <i class="fa-solid fa-chevron-down sidemenu-list__arrow" aria-hidden="true"></i>
-              </button>
-              <ul class="sidemenu-dropdown" id="dropInstituicoes">
-                <li><a href="https://dagvmeduftm.wordpress.com/denem/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">DENEM</a></li>
-                <li><a href="https://dagvmeduftm.wordpress.com/dce-uftm/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">DCE</a></li>
-                <li><a href="https://dagvmeduftm.wordpress.com/cvu-uberaba/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">CVU</a></li>
-                <li><a href="https://dagvmeduftm.wordpress.com/cepop-uftm/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">CEPOP</a></li>
-              </ul>
+              <a href="aaads-cachacina.html" class="sidemenu-list__link">
+                AAADS e Cachacina
+                <i class="fa-solid fa-shield-halved sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="representacoes-academicas.html" class="sidemenu-list__link">
+                Representações Acadêmicas
+                <i class="fa-solid fa-landmark sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
             </li>
 
             <li class="sidemenu-list__sep" role="separator"></li>
@@ -911,6 +952,7 @@
       <ul class="nav-mobile__list">
         <li><a href="index.html"                    class="nav-mobile__link">Início</a></li>
         <li><a href="sobre.html"                    class="nav-mobile__link">Sobre</a></li>
+        <li><a href="criadores.html"                class="nav-mobile__link">Criadores</a></li>
         <li><a href="coordenacao.html"              class="nav-mobile__link">Coordenações</a></li>
         <li><a href="index.html#events"             class="nav-mobile__link">Instituições UFTM</a></li>
         <li><a href="index.html#eventos-academicos" class="nav-mobile__link">Eventos</a></li>
@@ -935,8 +977,29 @@
       </div>
     </section>
 
+    <!-- ===================== NAVEGAÇÃO INTERNA (barra própria) ===================== -->
+    <nav class="hist-anchors" aria-label="Navegação interna da página">
+      <ul class="hist-anchors__list">
+        <li>
+          <a href="#linha-tempo" class="hist-anchors__link">
+            <i class="fa-solid fa-timeline" aria-hidden="true"></i> Linha do Tempo
+          </a>
+        </li>
+        <li>
+          <a href="#livro-historico" class="hist-anchors__link">
+            <i class="fa-solid fa-book-open" aria-hidden="true"></i> Livro Interativo
+          </a>
+        </li>
+        <li>
+          <a href="#documentos" class="hist-anchors__link">
+            <i class="fa-solid fa-folder-open" aria-hidden="true"></i> Documentos & Registros
+          </a>
+        </li>
+      </ul>
+    </nav>
+
     <!-- ===================== LINHA DO TEMPO ===================== -->
-    <section class="timeline section">
+    <section class="timeline section" id="linha-tempo">
       <div class="container">
 
         <div class="section-header" data-aos="fade-up">
@@ -1028,8 +1091,88 @@
       </div>
     </section>
 
+    <!-- ===================== LIVRO HISTÓRICO INTERATIVO ===================== -->
+    <section class="book-section" id="livro-historico">
+      <div class="container">
+
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Acervo Interativo</span>
+          <h2 class="section-title">Documentos Históricos DAGV</h2>
+          <p class="section-desc">Explore, página a página, os marcos que construíram a história do DAGV e da Medicina UFTM.</p>
+        </div>
+
+        <div class="book-scene" id="bookScene">
+          <div class="book-scene__particles" aria-hidden="true"></div>
+
+          <button class="book-fullscreen-btn" id="bookFullscreenBtn" aria-pressed="false" aria-label="Tela cheia">
+            <i class="fa-solid fa-expand" id="bookFullscreenIcon" aria-hidden="true"></i>
+            <span>Tela cheia</span>
+          </button>
+
+          <div class="book-fullscreen-hint" id="bookFullscreenHint" aria-hidden="true">
+            <i class="fa-solid fa-keyboard" aria-hidden="true"></i> Pressione ESC para sair da tela cheia
+          </div>
+
+          <div class="book-table">
+            <div class="book" id="book" tabindex="0" role="button" aria-label="Abrir Documentos Históricos DAGV" aria-expanded="false">
+              <div class="book__spine" aria-hidden="true"></div>
+              <div class="book__cover book__cover--front">
+                <div class="book__cover-face book__cover-face--front">
+                  <span class="book__cover-ornament" aria-hidden="true"></span>
+                  <h3 class="book__cover-title">Documentos<br />Históricos DAGV</h3>
+                </div>
+                <div class="book__cover-face book__cover-face--back" aria-hidden="true"></div>
+              </div>
+              <div class="book__pages" id="bookPages" aria-hidden="true">
+                <!-- Páginas montadas dinamicamente pelo book.js (StPageFlip) -->
+              </div>
+            </div>
+            <div class="book-shadow" id="bookShadow" aria-hidden="true"></div>
+            <span class="book-hint-below" id="bookHintBelow">Toque para abrir</span>
+          </div>
+
+          <button class="book-close-btn" id="bookCloseBtn" aria-label="Fechar livro">
+            <i class="fa-solid fa-xmark" aria-hidden="true"></i> Fechar
+          </button>
+
+          <button class="book-bookmark-btn" id="bookBookmarkBtn" aria-label="Marcar esta página" aria-pressed="false">
+            <i class="fa-solid fa-bookmark" aria-hidden="true"></i>
+          </button>
+
+          <button class="book-index-btn" id="bookIndexBtn" aria-haspopup="dialog" aria-controls="bookIndexPanel" aria-expanded="false">
+            <i class="fa-solid fa-list" aria-hidden="true"></i> Índice
+          </button>
+
+          <aside class="book-index-panel" id="bookIndexPanel" role="dialog" aria-modal="true" aria-label="Índice de documentos" aria-hidden="true">
+            <div class="book-index-panel__header">
+              <h4>Índice</h4>
+              <button class="book-index-panel__close" id="bookIndexClose" aria-label="Fechar índice">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="book-index-panel__search">
+              <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+              <input type="text" id="bookIndexSearch" placeholder="Buscar documento..." aria-label="Buscar documento" />
+            </div>
+            <div class="book-index-panel__list" id="bookIndexList"></div>
+          </aside>
+        </div>
+
+        <div class="book-controls" id="bookControls" aria-hidden="true">
+          <button class="book-nav book-nav--prev" id="bookPrev" aria-label="Página anterior">
+            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+          </button>
+          <span class="book-controls__counter" id="bookCounter">1 / 1</span>
+          <button class="book-nav book-nav--next" id="bookNext" aria-label="Próxima página">
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
     <!-- ===================== DOCUMENTOS E REGISTROS ===================== -->
-    <section class="docs-section">
+    <section class="docs-section" id="documentos">
       <div class="container">
 
         <div class="section-header" data-aos="fade-up">
@@ -1040,7 +1183,7 @@
 
         <div class="docs__grid">
 
-          <a href="https://dagvmeduftm.wordpress.com/estatuto-dagv/" target="_blank" rel="noopener" class="doc-card" data-aos="fade-up" data-aos-delay="0">
+          <a href="estatuto.html" class="doc-card" data-aos="fade-up" data-aos-delay="0">
             <div class="doc-card__header">
               <i class="fa-solid fa-scroll doc-card__icon" aria-hidden="true"></i>
               <h4>Estatuto do DAGV</h4>
@@ -1062,7 +1205,7 @@
             </div>
           </a>
 
-          <a href="https://dagvmeduftm.wordpress.com/galeria-de-fotos/" target="_blank" rel="noopener" class="doc-card" data-aos="fade-up" data-aos-delay="200">
+          <a href="#livro-historico" class="doc-card" data-aos="fade-up" data-aos-delay="200">
             <div class="doc-card__header">
               <i class="fa-solid fa-box-archive doc-card__icon" aria-hidden="true"></i>
               <h4>Documentos Históricos DAGV</h4>
@@ -1073,7 +1216,7 @@
             </div>
           </a>
 
-          <a href="https://dagvmeduftm.wordpress.com/" target="_blank" rel="noopener" class="doc-card" data-aos="fade-up" data-aos-delay="300">
+          <a href="#livro-historico" class="doc-card" data-aos="fade-up" data-aos-delay="300">
             <div class="doc-card__header">
               <i class="fa-solid fa-book-open doc-card__icon" aria-hidden="true"></i>
               <h4>O Epíplon</h4>
@@ -1091,8 +1234,9 @@
 
     <!-- ===================== VOLTAR ===================== -->
     <section class="back-section">
-      <a href="index.html" class="back-link">
-        Voltar ao site principal
+      <a href="index.html" class="btn btn--ghost-white">
+        <i class="fa-solid fa-house" aria-hidden="true"></i>
+        Voltar ao Início
       </a>
     </section>
 
@@ -1117,11 +1261,12 @@
       </div>
 
       <nav class="footer__links" aria-label="Links úteis">
-        <a href="https://dagvmeduftm.wordpress.com/estatuto-dagv/" target="_blank" rel="noopener">Estatuto</a>
-        <a href="https://dagvmeduftm.wordpress.com/ligas-academicas/" target="_blank" rel="noopener">Ligas</a>
-        <a href="https://dagvmeduftm.wordpress.com/cursinho-carolina/" target="_blank" rel="noopener">Cursinho Carolina</a>
-        <a href="https://dagvmeduftm.wordpress.com/pet-medicina-1/" target="_blank" rel="noopener">PET Medicina</a>
-        <a href="https://dagvmeduftm.wordpress.com/dce-uftm/" target="_blank" rel="noopener">DCE UFTM</a>
+        <a href="estatuto.html">Estatuto</a>
+        <a href="criadores.html">Criadores</a>
+        <a href="sobre.html">Sobre o DAGV</a>
+        <a href="coordenacao.html">Coordenação</a>
+        <a href="historico2.html">Resgate Histórico</a>
+        <a href="index.html#contact">Suporte</a>
       </nav>
 
       <div class="footer__social">
@@ -1139,6 +1284,7 @@
     </div>
     <div class="footer__bottom">
       <p>&copy; <span id="year"></span> Diretório Acadêmico Gaspar Vianna – Medicina UFTM. Todos os direitos reservados.</p>
+      <p class="footer__credit">Desenvolvido por <a href="criadores.html">Sérgio Lemuel Soares Santos &amp; João Paulo Soares Santos</a></p>
     </div>
   </footer>
 
@@ -1151,5 +1297,41 @@
   -->
   <script src="js/script.js"></script>
   <script src="js/sidemenu.js"></script>
+
+  <!-- [ADIÇÃO] Livro Histórico Interativo -->
+  <!-- GSAP – abertura cinematográfica -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <!-- StPageFlip – virada física real de páginas -->
+  <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
+  <!-- PDF.js – renderiza documentos PDF digitalizados dentro das páginas -->
+  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/legacy/build/pdf.min.js"></script>
+  <script src="js/book-data.js"></script>
+  <script src="js/book.js"></script>
+  <script>
+  (function () {
+    'use strict';
+    /* ── Highlight da âncora ativa ao scroll (mesmo padrão do ligas.html) ── */
+    var sections = ['linha-tempo', 'livro-historico', 'documentos']
+      .map(function (id) { return document.getElementById(id); })
+      .filter(Boolean);
+    var anchorLinks = document.querySelectorAll('.hist-anchors__link');
+    var header = document.getElementById('header');
+
+    function onScroll() {
+      var scrollY = window.scrollY + (header ? header.offsetHeight : 72) + 48;
+      var current = sections[0];
+      sections.forEach(function (sec) {
+        if (sec.getBoundingClientRect().top + window.scrollY <= scrollY) current = sec;
+      });
+      anchorLinks.forEach(function (link) {
+        var href = link.getAttribute('href').replace('#', '');
+        link.classList.toggle('active', current && href === current.id);
+      });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+  </script>
 </body>
 </html>

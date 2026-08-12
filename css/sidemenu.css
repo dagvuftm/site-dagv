@@ -123,7 +123,6 @@
   border-radius: 0 0 var(--sm-radius) var(--sm-radius);
   box-shadow: var(--sm-shadow);
   z-index: 1050;      /* acima do header (z-index 1000) */
-  overflow: hidden;
 
   /* Animação de abertura/fechamento */
   max-height: 0;
@@ -131,11 +130,31 @@
   pointer-events: none;
   transition: max-height .38s var(--sm-ease),
               opacity    .25s var(--sm-ease);
+
+  /* Rolagem interna: aparece só quando o conteúdo não cabe na
+     altura disponível da janela — a aba/gatilho do menu continua
+     fixa fora deste bloco, só o conteúdo listado rola. */
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
 }
+
+/* Barra de rolagem discreta, no mesmo tom do menu */
+.sidemenu-panel::-webkit-scrollbar { width: 6px; }
+.sidemenu-panel::-webkit-scrollbar-track { background: transparent; }
+.sidemenu-panel::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,.22);
+  border-radius: 999px;
+}
+.sidemenu-panel::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,.38); }
+.sidemenu-panel { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.25) transparent; }
 
 /* Estado aberto (classe toggled via JS) */
 .sidemenu-wrap.open .sidemenu-panel {
-  max-height: 700px;  /* [AJUSTE 2] aumentado para acomodar mais itens */
+  /* Cresce até 700px, mas nunca além do espaço realmente livre
+     abaixo do cabeçalho — em telas baixas, o excedente rola. */
+  max-height: min(700px, calc(100vh - var(--header-h, 72px) - 16px));
   opacity: 1;
   pointer-events: all;
 }

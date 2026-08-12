@@ -2,6 +2,13 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="48x48" href="img/favicon-48x48.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="img/android-chrome-192x192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="img/android-chrome-512x512.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Conheça o Diretório Acadêmico Gaspar Vianna (DAGV) – história, fundação em 1954, missão e quem foi Gaspar Vianna, o cientista que dá nome ao diretório do curso de Medicina da UFTM." />
   <meta name="keywords" content="DAGV, Gaspar Vianna, Medicina UFTM, história, fundação, 1954" />
@@ -978,6 +985,12 @@
                 <i class="fa-solid fa-users sidemenu-list__icon" aria-hidden="true"></i>
               </a>
             </li>
+            <li class="sidemenu-list__item">
+              <a href="criadores.html" class="sidemenu-list__link">
+                Criadores
+                <i class="fa-solid fa-code sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
 
             <li class="sidemenu-list__sep" role="separator"></li>
 
@@ -993,16 +1006,14 @@
                 <i class="fa-solid fa-chevron-down sidemenu-list__arrow" aria-hidden="true"></i>
               </button>
               <ul class="sidemenu-dropdown" id="dropInformacoes">
-                <li><a href="https://dagvmeduftm.wordpress.com/estatuto-dagv/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">Estatuto</a></li>
-                <li><a href="https://dagvmeduftm.wordpress.com/galeria-de-fotos/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">Galeria de Fotos</a></li>
-              </ul>
+                <li><a href="estatuto.html" class="sidemenu-dropdown__link">Estatuto</a></li>              </ul>
             </li>
 
             <li class="sidemenu-list__sep" role="separator"></li>
 
             <!-- ── Links institucionais ── -->
             <li class="sidemenu-list__item">
-              <a href="https://dagvmeduftm.wordpress.com/pet-medicina-1/" target="_blank" rel="noopener" class="sidemenu-list__link">
+              <a href="pet-medicina.html" class="sidemenu-list__link">
                 PET Medicina
                 <i class="fa-solid fa-flask sidemenu-list__icon" aria-hidden="true"></i>
               </a>
@@ -1020,31 +1031,22 @@
               </a>
             </li>
             <li class="sidemenu-list__item">
-              <a href="https://dagvmeduftm.wordpress.com/cursinho-carolina/" target="_blank" rel="noopener" class="sidemenu-list__link">
+              <a href="cursinho-carolina.html" class="sidemenu-list__link">
                 Cursinho Carolina
                 <i class="fa-solid fa-book-open sidemenu-list__icon" aria-hidden="true"></i>
               </a>
             </li>
-
-            <li class="sidemenu-list__sep" role="separator"></li>
-
-            <!-- ── Dropdown: Instituições ── -->
             <li class="sidemenu-list__item">
-              <button
-                class="sidemenu-list__btn"
-                data-dropdown="instituicoes"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Instituições
-                <i class="fa-solid fa-chevron-down sidemenu-list__arrow" aria-hidden="true"></i>
-              </button>
-              <ul class="sidemenu-dropdown" id="dropInstituicoes">
-                <li><a href="https://dagvmeduftm.wordpress.com/denem/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">DENEM</a></li>
-                <li><a href="https://dagvmeduftm.wordpress.com/dce-uftm/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">DCE</a></li>
-                <li><a href="https://dagvmeduftm.wordpress.com/cvu-uberaba/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">CVU</a></li>
-                <li><a href="https://dagvmeduftm.wordpress.com/cepop-uftm/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">CEPOP</a></li>
-              </ul>
+              <a href="aaads-cachacina.html" class="sidemenu-list__link">
+                AAADS e Cachacina
+                <i class="fa-solid fa-shield-halved sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="representacoes-academicas.html" class="sidemenu-list__link">
+                Representações Acadêmicas
+                <i class="fa-solid fa-landmark sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
             </li>
 
             <li class="sidemenu-list__sep" role="separator"></li>
@@ -1116,6 +1118,7 @@
       <ul class="nav-mobile__list">
         <li><a href="index.html"                    class="nav-mobile__link">Início</a></li>
         <li><a href="sobre.html"                    class="nav-mobile__link">Sobre</a></li>
+        <li><a href="criadores.html"                class="nav-mobile__link">Criadores</a></li>
         <li><a href="coordenacao.html"              class="nav-mobile__link">Coordenações</a></li>
         <li><a href="index.html#events"             class="nav-mobile__link">Instituições UFTM</a></li>
         <li><a href="index.html#eventos-academicos" class="nav-mobile__link">Eventos</a></li>
@@ -1312,13 +1315,23 @@
               Em 1º de maio de 1954, acontece a primeira reunião do
               <strong>Centro Acadêmico Gaspar Vianna (CAGV)</strong>, com a presença
               do diretor da FMTM, Mozart Furtado Nunes. Os alunos elegeram Wander Magalhães
-              Moreira como primeiro presidente. Uma comissão foi formada para elaborar
-              o estatuto da entidade recém-criada.
+              Moreira como primeiro presidente. Uma comissão — formada por Wander Magalhães
+              Moreira, Lafaiete Ribeiro, Nivaldo Guimarães, Luiz Maurício e João de Calais —
+              foi encarregada de elaborar o estatuto da entidade recém-criada.
+            </p>
+            <p class="tl-body">
+              Completavam a primeira diretoria: Benito Rui Meneghelo (1º vice-presidente),
+              Nilza Martinelli Gomes (2ª vice-presidente), João de Callais de Oliveira
+              (secretário-geral), Luiz Maurício Araújo (1º secretário), Zoé Lopes
+              (2º secretário), Lafaiette Ribeiro (tesoureiro-geral), Frederico Frange Oliveira
+              (1º tesoureiro) e Comte José de Oliveira (2º tesoureiro).
             </p>
             <blockquote class="tl-quote">
               "Num ambiente de cordialidade, proporcionado pelo nosso diretor, foi encerrada a primeira reunião,
-              que causou a todos nós muita alegria e contentamento."
-              <br /><strong>— Ata do CAGV, 1954</strong>
+              que causou a todos nós muita alegria e contentamento por vermos à frente de nossa Faculdade um
+              homem de princípios cristãos, de fibra inquebrantável e que viria por certo nos garantir um curso
+              médico perfeito."
+              <br /><strong>— João de Callais Oliveira, secretário, Ata do CAGV (FMTM, 1964, s.p.)</strong>
             </blockquote>
           </div>
 
@@ -1377,6 +1390,12 @@
           </div>
 
         </div><!-- /timeline -->
+
+        <p style="text-align:center; font-size:.8rem; color:var(--clr-gray-2); margin-top:var(--space-lg); font-style:italic;">
+          As informações sobre a fundação do CAGV (1953–1960) têm como fonte o livro
+          <strong>"A criação da Faculdade de Medicina do Triângulo Mineiro: primeiros anos (1953–1960)"</strong>,
+          de Sonia Maria Gomes Lopes.
+        </p>
 
       </div>
     </section>
@@ -1542,28 +1561,46 @@
   <!-- ===== FOOTER (idêntico ao index.html) ===== -->
   <footer class="footer">
     <div class="container footer__inner">
+
       <div class="footer__brand">
-        <img src="img/logo dourada-sem fundo.png" alt="Logo DAGV" class="footer__logo" width="64" height="54" loading="lazy" />
+        <img
+          src="img/logo dourada-sem fundo.png"
+          alt="Logo DAGV"
+          class="footer__logo"
+          width="64" height="54"
+          loading="lazy"
+        />
         <div>
           <p class="footer__name">DAGV – Gaspar Vianna</p>
           <p class="footer__sub">Medicina UFTM · Uberaba – MG</p>
         </div>
       </div>
+
       <nav class="footer__links" aria-label="Links úteis">
-        <a href="https://dagvmeduftm.wordpress.com/estatuto-dagv/" target="_blank" rel="noopener">Estatuto</a>
-        <a href="https://dagvmeduftm.wordpress.com/ligas-academicas/" target="_blank" rel="noopener">Ligas</a>
-        <a href="https://dagvmeduftm.wordpress.com/cursinho-carolina/" target="_blank" rel="noopener">Cursinho Carolina</a>
-        <a href="https://dagvmeduftm.wordpress.com/pet-medicina-1/" target="_blank" rel="noopener">PET Medicina</a>
-        <a href="https://dagvmeduftm.wordpress.com/dce-uftm/" target="_blank" rel="noopener">DCE UFTM</a>
+        <a href="estatuto.html">Estatuto</a>
+        <a href="criadores.html">Criadores</a>
+        <a href="sobre.html">Sobre o DAGV</a>
+        <a href="coordenacao.html">Coordenação</a>
+        <a href="historico2.html">Resgate Histórico</a>
+        <a href="index.html#contact">Suporte</a>
       </nav>
+
       <div class="footer__social">
-        <a href="https://www.instagram.com/dagvmeduftm/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a href="https://www.facebook.com/profile.php?id=100009254539973" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
-        <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7" target="_blank" rel="noopener" aria-label="Contato"><i class="fa-solid fa-envelope"></i></a>
+        <a href="https://www.instagram.com/dagvmeduftm/" target="_blank" rel="noopener" aria-label="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=100009254539973" target="_blank" rel="noopener" aria-label="Facebook">
+          <i class="fa-brands fa-facebook"></i>
+        </a>
+        <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7" target="_blank" rel="noopener" aria-label="Formulário de contato">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
       </div>
+
     </div>
     <div class="footer__bottom">
       <p>&copy; <span id="year"></span> Diretório Acadêmico Gaspar Vianna – Medicina UFTM. Todos os direitos reservados.</p>
+      <p class="footer__credit">Desenvolvido por <a href="criadores.html">Sérgio Lemuel Soares Santos &amp; João Paulo Soares Santos</a></p>
     </div>
   </footer>
 

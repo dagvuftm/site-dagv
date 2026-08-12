@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Conheça os estudantes responsáveis pelo desenvolvimento do Portal Oficial do Diretório Acadêmico Gaspar Vianna (DAGV) da Faculdade de Medicina da UFTM." />
+  <meta name="keywords" content="DAGV, Criadores, Desenvolvedores, UFTM, Medicina, Portal" />
+  <title>Criadores | DAGV UFTM</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/sidemenu.css" />
+
+  <style>
+  /* ============================================================
+     criadores.html – estilos exclusivos desta página
+     Identidade DAGV preservada (bordô + dourado + tipografia).
+     ============================================================ */
+
+  .criadores-hero {
+    position: relative;
+    min-height: 46vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    text-align: center;
+    background:
+      radial-gradient(ellipse 80% 100% at 50% 0%, #3d0018 0%, var(--clr-green-dark) 40%, transparent 75%),
+      linear-gradient(160deg, var(--clr-green-dark) 0%, var(--clr-green) 50%, #1a0010 100%);
+    padding-top: calc(var(--header-h) + 4.5rem);
+    padding-bottom: 4rem;
+  }
+  .criadores-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+  .criadores-hero__content { position: relative; z-index: 1; max-width: 780px; padding-inline: var(--space-md); }
+  .criadores-hero__eyebrow {
+    display: inline-block;
+    color: var(--clr-accent);
+    font-size: .8rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .criadores-hero__title {
+    font-family: var(--font-display);
+    color: var(--clr-white);
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    margin-bottom: 1rem;
+  }
+  .criadores-hero__subtitle {
+    color: var(--clr-gray-1);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    max-width: 640px;
+    margin-inline: auto;
+  }
+
+  .criadores-cards {
+    padding-block: var(--space-2xl);
+    background: var(--clr-off);
+  }
+  .criadores-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(280px, 380px));
+    gap: var(--space-lg);
+    justify-content: center;
+    max-width: 900px;
+    margin-inline: auto;
+  }
+  .criador-card {
+    position: relative;
+    background: rgba(255,255,255,.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(147,1,66,.08);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: var(--space-lg) var(--space-md);
+    text-align: center;
+    transition: transform var(--dur-med) var(--ease), box-shadow var(--dur-med) var(--ease);
+  }
+  .criador-card:hover {
+    transform: translateY(-6px) scale(1.015);
+    box-shadow: var(--shadow-lg);
+  }
+  .criador-card__photo {
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    margin: 0 auto 1.25rem;
+    overflow: hidden;
+    border: 3px solid var(--clr-accent);
+    box-shadow: var(--shadow-sm);
+    background: var(--clr-gray-1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .criador-card__photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .criador-card__photo .placeholder-icon { color: var(--clr-gray-2); font-size: 2.6rem; }
+  .criador-card__name {
+    font-family: var(--font-display);
+    color: var(--clr-green-dark);
+    font-size: 1.25rem;
+    margin-bottom: .35rem;
+  }
+  .criador-card__curso {
+    display: inline-block;
+    color: var(--clr-teal);
+    font-size: .8rem;
+    font-weight: 600;
+    letter-spacing: .02em;
+    margin-bottom: .85rem;
+  }
+  .criador-card__desc {
+    color: var(--clr-gray-3);
+    font-size: .92rem;
+    line-height: 1.7;
+  }
+
+  .criadores-final {
+    padding-block: var(--space-xl);
+    background: var(--clr-white);
+    text-align: center;
+  }
+  .criadores-final__text {
+    max-width: 720px;
+    margin-inline: auto;
+    color: var(--clr-gray-3);
+    font-size: 1.02rem;
+    line-height: 1.85;
+    padding-inline: var(--space-md);
+  }
+
+  @media (max-width: 780px) {
+    .criadores-grid { grid-template-columns: 1fr; max-width: 380px; }
+  }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER (idêntico ao index.html) ===== -->
+  <header id="header" class="header">
+    <div class="container header__inner">
+
+      <!-- =====================================================
+           [ADIÇÃO] Aba de menu – inserida antes do brand.
+           Posicionada à esquerda do logotipo graças ao flex
+           do .header__inner existente.
+           Nenhuma classe/id existente foi alterada.
+           ===================================================== -->
+      <div class="sidemenu-wrap" id="sidemenuWrap">
+
+        <!-- Aba toggle -->
+        <button
+          class="sidemenu-tab"
+          id="sidemenuTab"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="sidemenuPanel"
+          aria-label="Abrir menu de navegação"
+        >
+          <span class="sidemenu-tab__icon" aria-hidden="true">
+            <span class="sidemenu-tab__bar"></span>
+            <span class="sidemenu-tab__bar"></span>
+            <span class="sidemenu-tab__bar"></span>
+          </span>
+          <span class="sidemenu-tab__label">Menu</span>
+        </button>
+
+        <!-- Painel principal -->
+        <div class="sidemenu-panel" id="sidemenuPanel" role="navigation" aria-label="Menu lateral">
+          <ul class="sidemenu-list">
+
+            <!-- ── Links diretos principais ── -->
+            <li class="sidemenu-list__item">
+              <a href="sobre.html" class="sidemenu-list__link">
+                Sobre o DAGV
+                <i class="fa-solid fa-building-columns sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="historico2.html" class="sidemenu-list__link sidemenu-list__link--historico">
+                Resgate Histórico
+                <i class="fa-solid fa-scroll sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="coordenacao.html" class="sidemenu-list__link">
+                Coordenação
+                <i class="fa-solid fa-users sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="criadores.html" class="sidemenu-list__link sidemenu-list__link--active">
+                Criadores
+                <i class="fa-solid fa-code sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Dropdown: Informações DAGV ── -->
+            <li class="sidemenu-list__item">
+              <button
+                class="sidemenu-list__btn"
+                data-dropdown="informacoes"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Informações DAGV
+                <i class="fa-solid fa-chevron-down sidemenu-list__arrow" aria-hidden="true"></i>
+              </button>
+              <ul class="sidemenu-dropdown" id="dropInformacoes">
+                <li><a href="https://dagvmeduftm.wordpress.com/estatuto-dagv/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">Estatuto</a></li>
+                <li><a href="https://dagvmeduftm.wordpress.com/galeria-de-fotos/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">Galeria de Fotos</a></li>
+              </ul>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Links institucionais ── -->
+            <li class="sidemenu-list__item">
+              <a href="https://dagvmeduftm.wordpress.com/pet-medicina-1/" target="_blank" rel="noopener" class="sidemenu-list__link">
+                PET Medicina
+                <i class="fa-solid fa-flask sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="ligas.html" class="sidemenu-list__link">
+                Ligas Acadêmicas
+                <i class="fa-solid fa-graduation-cap sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="manual.html" class="sidemenu-list__link">
+                Manual do Estudante
+                <i class="fa-solid fa-book-open-reader sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="https://dagvmeduftm.wordpress.com/cursinho-carolina/" target="_blank" rel="noopener" class="sidemenu-list__link">
+                Cursinho Carolina
+                <i class="fa-solid fa-book-open sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Dropdown: Instituições ── -->
+            <li class="sidemenu-list__item">
+              <button
+                class="sidemenu-list__btn"
+                data-dropdown="instituicoes"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Instituições
+                <i class="fa-solid fa-chevron-down sidemenu-list__arrow" aria-hidden="true"></i>
+              </button>
+              <ul class="sidemenu-dropdown" id="dropInstituicoes">
+                <li><a href="https://dagvmeduftm.wordpress.com/denem/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">DENEM</a></li>
+                <li><a href="https://dagvmeduftm.wordpress.com/dce-uftm/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">DCE</a></li>
+                <li><a href="https://dagvmeduftm.wordpress.com/cvu-uberaba/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">CVU</a></li>
+                <li><a href="https://dagvmeduftm.wordpress.com/cepop-uftm/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">CEPOP</a></li>
+              </ul>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Final ── -->
+            <li class="sidemenu-list__item">
+              <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7" target="_blank" rel="noopener" class="sidemenu-list__link">
+                Suporte
+                <i class="fa-solid fa-headset sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+
+          </ul>
+        </div><!-- /sidemenu-panel -->
+
+      </div><!-- /sidemenu-wrap -->
+      <!-- ===================================================== -->
+
+      <!-- Logo + Nome -->
+      <a href="index.html" class="header__brand">
+        <div class="header__logo-wrap">
+          <img
+            src="img/logo dourada-sem fundo.png"
+            alt="Logo DAGV – Diretório Acadêmico Gaspar Vianna"
+            class="header__logo-svg logo--gold"
+            width="80" height="68"
+            loading="eager"
+          />
+          <img
+            src="img/Logo DAGV sem fundo verm.png"
+            alt="Logo DAGV – Diretório Acadêmico Gaspar Vianna"
+            class="header__logo-svg logo--red"
+            width="80" height="68"
+            loading="eager"
+            aria-hidden="true"
+          />
+        </div>
+        <div class="header__title-wrap">
+          <span class="header__dagv"></span>
+          <span class="header__subtitle"></span>
+        </div>
+      </a>
+
+      <!-- Nav desktop -->
+      <nav class="nav" aria-label="Navegação principal">
+        <ul class="nav__list">
+          <li><a href="sobre.html"                    class="nav__link">Sobre</a></li>
+          <li><a href="coordenacao.html"              class="nav__link">Coordenações</a></li>
+          <li><a href="index.html#events"             class="nav__link">Instituições UFTM</a></li>
+          <li><a href="index.html#eventos-academicos" class="nav__link">Eventos</a></li>
+          <li><a href="index.html#contact"            class="nav__link nav__link--cta">Contato</a></li>
+        </ul>
+      </nav>
+
+      <!-- Hamburguer -->
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Nav mobile (drawer) -->
+    <nav class="nav-mobile" id="navMobile" aria-hidden="true">
+      <ul class="nav-mobile__list">
+        <li><a href="index.html"                    class="nav-mobile__link">Início</a></li>
+        <li><a href="sobre.html"                    class="nav-mobile__link">Sobre</a></li>
+        <li><a href="criadores.html"                class="nav-mobile__link">Criadores</a></li>
+        <li><a href="coordenacao.html"              class="nav-mobile__link">Coordenações</a></li>
+        <li><a href="index.html#events"             class="nav-mobile__link">Instituições UFTM</a></li>
+        <li><a href="index.html#eventos-academicos" class="nav-mobile__link">Eventos</a></li>
+        <li><a href="index.html#contact"            class="nav-mobile__link">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="criadores-hero" aria-labelledby="criadores-hero-title">
+      <div class="criadores-hero__content" data-aos="fade-up">
+        <span class="criadores-hero__eyebrow">DAGV · Bastidores</span>
+        <h1 class="criadores-hero__title" id="criadores-hero-title">Criadores do Site</h1>
+        <p class="criadores-hero__subtitle">
+          Este portal foi idealizado e desenvolvido por estudantes comprometidos com a
+          inovação, preservação histórica e fortalecimento da comunidade acadêmica da
+          Faculdade de Medicina da UFTM.
+        </p>
+      </div>
+    </section>
+
+    <!-- CARDS -->
+    <section class="criadores-cards">
+      <div class="container">
+        <div class="criadores-grid">
+
+          <div class="criador-card" data-aos="fade-up">
+            <div class="criador-card__photo">
+              <img src="img/DT1.jpeg" alt="Foto de Sérgio Lemuel Soares Santos" onerror="this.parentElement.innerHTML='&lt;i class=\'fa-solid fa-user placeholder-icon\' aria-hidden=\'true\'&gt;&lt;/i&gt;';" />
+            </div>
+            <h3 class="criador-card__name">Sérgio Lemuel Soares Santos</h3>
+            <span class="criador-card__curso">Medicina — Universidade Federal do Triângulo Mineiro (UFTM)</span>
+            <p class="criador-card__desc">
+              Responsável pela idealização do projeto, arquitetura do sistema, design da experiência do usuário (UI/UX), redação de conteúdo e coordenação geral do desenvolvimento do
+              portal institucional do DAGV.
+            </p>
+          </div>
+
+          <div class="criador-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="criador-card__photo">
+              <img src="img/Desenvolvedor.jpg" alt="Foto de João Paulo Soares Santos" onerror="this.parentElement.innerHTML='&lt;i class=\'fa-solid fa-user placeholder-icon\' aria-hidden=\'true\'&gt;&lt;/i&gt;';" />
+            </div>
+            <h3 class="criador-card__name">João Paulo Soares Santos</h3>
+            <span class="criador-card__curso">Engenharia da Computação — Instituto Federal do Triângulo Mineiro (IFTM)</span>
+            <p class="criador-card__desc">
+              Responsável pelo desenvolvimento de funcionalidades do sistema, colaboração
+              na arquitetura do software, desenvolvimento Full Stack, integração
+              de inteligência artificial, implementação técnica e apoio no desenvolvimento
+              da plataforma.
+            </p>
+          </div>
+
+          <div class="criador-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="criador-card__photo">
+              <img src="img/christian.jpg" alt="Foto de Christian Oliveira" onerror="this.parentElement.innerHTML='&lt;i class=\'fa-solid fa-user placeholder-icon\' aria-hidden=\'true\'&gt;&lt;/i&gt;';" />
+            </div>
+            <h3 class="criador-card__name">Christian Oliveira <span style="opacity:.7; font-weight:600;">(CAPS)</span></h3>
+            <span class="criador-card__curso">Colaborador — DAGV UFTM</span>
+            <p class="criador-card__desc">
+              Colaborador no desenvolvimento do portal institucional do DAGV, com apoio
+              em funcionalidades e conteúdo da plataforma.
+            </p>
+          </div>
+
+          <div class="criador-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="criador-card__photo">
+              <img src="img/gabriel.jpg" alt="Foto de Gabriel Martins" onerror="this.parentElement.innerHTML='&lt;i class=\'fa-solid fa-user placeholder-icon\' aria-hidden=\'true\'&gt;&lt;/i&gt;';" />
+            </div>
+            <h3 class="criador-card__name">Gabriel Martins <span style="opacity:.7; font-weight:600;">(Zelelé)</span></h3>
+            <span class="criador-card__curso">Colaborador — DAGV UFTM</span>
+            <p class="criador-card__desc">
+              Colaborador no desenvolvimento do portal institucional do DAGV, com apoio
+              em funcionalidades e conteúdo da plataforma.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- MENSAGEM FINAL -->
+    <section class="criadores-final" data-aos="fade-up">
+      <p class="criadores-final__text">
+        O Portal do Diretório Acadêmico Gaspar Vianna é resultado da dedicação de
+        estudantes que acreditam no poder da tecnologia como ferramenta para preservar
+        a história, facilitar o acesso à informação e fortalecer a comunidade acadêmica
+        da Faculdade de Medicina da UFTM. Este projeto representa o compromisso com a
+        inovação, a colaboração e a valorização da memória institucional.
+      </p>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER (idêntico ao index.html) ===== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <img src="img/logo dourada-sem fundo.png" alt="Logo DAGV" class="footer__logo" width="64" height="54" loading="lazy" />
+        <div>
+          <p class="footer__name">DAGV – Gaspar Vianna</p>
+          <p class="footer__sub">Medicina UFTM · Uberaba – MG</p>
+        </div>
+      </div>
+      <nav class="footer__links" aria-label="Links úteis">
+        <a href="https://dagvmeduftm.wordpress.com/estatuto-dagv/" target="_blank" rel="noopener">Estatuto</a>
+        <a href="https://dagvmeduftm.wordpress.com/ligas-academicas/" target="_blank" rel="noopener">Ligas</a>
+        <a href="https://dagvmeduftm.wordpress.com/cursinho-carolina/" target="_blank" rel="noopener">Cursinho Carolina</a>
+        <a href="https://dagvmeduftm.wordpress.com/pet-medicina-1/" target="_blank" rel="noopener">PET Medicina</a>
+        <a href="https://dagvmeduftm.wordpress.com/dce-uftm/" target="_blank" rel="noopener">DCE UFTM</a>
+      </nav>
+      <div class="footer__social">
+        <a href="https://www.instagram.com/dagvmeduftm/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.facebook.com/profile.php?id=100009254539973" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+        <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7" target="_blank" rel="noopener" aria-label="Contato"><i class="fa-solid fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>&copy; <span id="year"></span> Diretório Acadêmico Gaspar Vianna – Medicina UFTM. Todos os direitos reservados.</p>
+      <p class="footer__credit">Desenvolvido por <a href="criadores.html">Sérgio Lemuel Soares Santos &amp; João Paulo Soares Santos</a></p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/sidemenu.js"></script>
+
+</body>
+</html>

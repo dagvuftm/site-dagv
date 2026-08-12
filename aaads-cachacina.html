@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="48x48" href="img/favicon-48x48.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="img/android-chrome-192x192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="img/android-chrome-512x512.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AAADS e Cachacina — Atlética e Bateria da Medicina UFTM, responsáveis pela energia, tradição e espírito esportivo dos estudantes." />
+  <meta name="keywords" content="DAGV, Medicina, UFTM, AAADS, Atlética, Cachacina, Bateria" />
+  <meta name="author" content="DAGV – Medicina UFTM" />
+  <title>AAADS e Cachacina – DAGV | Medicina UFTM</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/sidemenu.css" />
+
+  <style>
+    /* ──────────────── HERO ──────────────── */
+    .aa-hero {
+      position: relative;
+      min-height: 52vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 80% 100% at 0% 60%,
+          #3d0018 0%,
+          var(--clr-green-dark) 38%,
+          transparent 72%),
+        linear-gradient(160deg,
+          var(--clr-green-dark) 0%,
+          var(--clr-green)      50%,
+          #1a0010               100%);
+      padding-top: calc(var(--header-h) + var(--space-2xl));
+      padding-bottom: var(--space-2xl);
+    }
+    .aa-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(90deg,transparent,transparent 58px,rgba(255,255,255,.04) 58px,rgba(255,255,255,.04) 60px),
+        repeating-linear-gradient(0deg,transparent,transparent 58px,rgba(255,255,255,.04) 58px,rgba(255,255,255,.04) 60px);
+    }
+    .aa-hero::after {
+      content: '';
+      position: absolute;
+      width: 480px; height: 480px;
+      border-radius: 50%;
+      border: 70px solid rgba(232,160,32,.09);
+      bottom: -180px; left: -120px;
+      pointer-events: none;
+    }
+    .aa-hero__content {
+      position: relative; z-index: 1;
+      text-align: center; color: var(--clr-white);
+      max-width: 760px; padding-inline: var(--space-md);
+    }
+    .aa-hero__eyebrow {
+      font-size: .78rem; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--clr-accent); font-weight: 600; margin-bottom: var(--space-sm); display: block;
+    }
+    .aa-hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      font-weight: 700; line-height: 1.15; margin-bottom: var(--space-md);
+    }
+    .aa-hero__title em { color: var(--clr-accent); font-style: italic; }
+    .aa-hero__desc {
+      font-size: 1.05rem; line-height: 1.75;
+      color: rgba(255,255,255,.82); max-width: 580px; margin-inline: auto;
+    }
+
+    /* ──────────────── INTRO ──────────────── */
+    .aa-intro { padding-block: var(--space-2xl); text-align: center; }
+    .aa-intro p {
+      font-size: 1rem; color: var(--clr-gray-3); line-height: 1.86;
+      max-width: 680px; margin: 0 auto;
+    }
+
+    /* ──────────────── CARDS AAADS / CACHACINA ──────────────── */
+    .aa-cards { padding-block: var(--space-2xl); background: var(--clr-off); }
+    .aa-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg); margin-top: var(--space-xl);
+    }
+    .aa-card {
+      background: var(--clr-white);
+      border: 1px solid var(--clr-gray-1);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--dur-med) var(--ease), box-shadow var(--dur-med) var(--ease);
+    }
+    .aa-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .aa-card__header {
+      background: linear-gradient(135deg, var(--clr-green-dark) 0%, var(--clr-green) 100%);
+      padding: 2.2rem 1.6rem;
+      display: flex; flex-direction: column; align-items: center; gap: .8rem;
+      text-align: center;
+    }
+    .aa-card__icon {
+      width: 88px; height: 88px; border-radius: 50%;
+      background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; color: var(--clr-white);
+      overflow: hidden;
+    }
+    .aa-card__icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .aa-card__name { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: var(--clr-white); }
+    .aa-card__tag { font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--clr-accent); font-weight: 600; }
+    .aa-card__body { padding: 1.6rem; }
+    .aa-card__body p { font-size: .92rem; color: var(--clr-gray-3); line-height: 1.75; margin-bottom: 1rem; }
+    .aa-card__body p:last-of-type { margin-bottom: 1.2rem; }
+    .aa-card__link {
+      display: inline-flex; align-items: center; gap: .5em;
+      font-size: .88rem; font-weight: 600; color: var(--clr-green);
+      border: 1.5px solid var(--clr-green); border-radius: var(--radius-pill);
+      padding: .55em 1.3em; text-decoration: none;
+      transition: background var(--dur-fast), color var(--dur-fast);
+    }
+    .aa-card__link:hover { background: var(--clr-green); color: var(--clr-white); }
+    @media (max-width: 768px) {
+      .aa-grid { grid-template-columns: 1fr; max-width: 460px; margin-inline: auto; }
+    }
+
+    /* ──────────────── CTA ──────────────── */
+    .aa-cta {
+      background:
+        radial-gradient(ellipse 60% 80% at 50% 50%, var(--clr-green-dark) 0%, transparent 70%),
+        linear-gradient(220deg, #1a0010 0%, var(--clr-green) 55%, var(--clr-green-dark) 100%);
+      padding-block: var(--space-2xl);
+      text-align: center;
+    }
+    .aa-cta__title {
+      font-family: var(--font-display); color: var(--clr-white);
+      font-size: clamp(1.4rem, 3vw, 2rem); margin-bottom: var(--space-sm);
+    }
+    .aa-cta p { color: rgba(255,255,255,.78); max-width: 560px; margin: 0 auto var(--space-lg); }
+    .aa-cta__actions { display: flex; gap: var(--space-sm); justify-content: center; flex-wrap: wrap; }
+
+    /* ──────────────── VOLTAR ──────────────── */
+    .back-section {
+      text-align: center;
+      padding-block: var(--space-xl);
+      background:
+        radial-gradient(ellipse 60% 80% at 50% 50%, var(--clr-green-dark) 0%, transparent 70%),
+        linear-gradient(220deg, #1a0010 0%, var(--clr-green) 55%, var(--clr-green-dark) 100%);
+    }
+    .btn--ghost-white {
+      background: transparent; color: var(--clr-white);
+      border: 2px solid rgba(255,255,255,.42); font-weight: 600;
+    }
+    .btn--ghost-white:hover {
+      background: rgba(255,255,255,.1);
+      border-color: rgba(255,255,255,.72);
+      transform: translateY(-2px);
+    }
+  /* Detalhes históricos expansíveis nos cards */
+  .aa-card__deflist { margin: 0 0 1rem; }
+  .aa-card__deflist dt { font-weight: 700; color: var(--clr-dark); font-size: .88rem; margin-top: .8rem; }
+  .aa-card__deflist dt:first-child { margin-top: 0; }
+  .aa-card__deflist dd { margin: .2rem 0 0; font-size: .88rem; color: var(--clr-gray-3); line-height: 1.65; }
+  .aa-card__toggle {
+    display: inline-flex; align-items: center; gap: .5em;
+    font-size: .82rem; font-weight: 600; color: var(--clr-green);
+    cursor: pointer; margin: .4rem 0; list-style: none;
+    padding: .5em 1em;
+    border: 1.5px solid rgba(42,122,75,.3);
+    border-radius: var(--radius-pill);
+    background: var(--clr-green-light);
+    width: fit-content;
+  }
+  .aa-card__toggle::-webkit-details-marker { display: none; }
+  .aa-card__more p { font-size: .88rem; color: var(--clr-gray-3); line-height: 1.7; margin-bottom: .8rem; }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== HEADER ===================== -->
+  <header id="header" class="header">
+    <div class="container header__inner">
+
+      <!-- =====================================================
+           [ADIÇÃO] Aba de menu – inserida antes do brand.
+           Posicionada à esquerda do logotipo graças ao flex
+           do .header__inner existente.
+           Nenhuma classe/id existente foi alterada.
+           ===================================================== -->
+      <div class="sidemenu-wrap" id="sidemenuWrap">
+
+        <!-- Aba toggle -->
+        <button
+          class="sidemenu-tab"
+          id="sidemenuTab"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="sidemenuPanel"
+          aria-label="Abrir menu de navegação"
+        >
+          <span class="sidemenu-tab__icon" aria-hidden="true">
+            <span class="sidemenu-tab__bar"></span>
+            <span class="sidemenu-tab__bar"></span>
+            <span class="sidemenu-tab__bar"></span>
+          </span>
+          <span class="sidemenu-tab__label">Menu</span>
+        </button>
+
+        <!-- Painel principal -->
+        <div class="sidemenu-panel" id="sidemenuPanel" role="navigation" aria-label="Menu lateral">
+          <ul class="sidemenu-list">
+
+            <!-- ── Links diretos principais ── -->
+            <li class="sidemenu-list__item">
+              <a href="sobre.html" class="sidemenu-list__link">
+                Sobre o DAGV
+                <i class="fa-solid fa-building-columns sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="historico2.html" class="sidemenu-list__link sidemenu-list__link--historico">
+                Resgate Histórico
+                <i class="fa-solid fa-scroll sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="coordenacao.html" class="sidemenu-list__link">
+                Coordenação
+                <i class="fa-solid fa-users sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="criadores.html" class="sidemenu-list__link">
+                Criadores
+                <i class="fa-solid fa-code sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Dropdown: Informações DAGV ── -->
+            <li class="sidemenu-list__item">
+              <button
+                class="sidemenu-list__btn"
+                data-dropdown="informacoes"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Informações DAGV
+                <i class="fa-solid fa-chevron-down sidemenu-list__arrow" aria-hidden="true"></i>
+              </button>
+              <ul class="sidemenu-dropdown" id="dropInformacoes">
+                <li><a href="estatuto.html" class="sidemenu-dropdown__link">Estatuto</a></li>              </ul>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Links institucionais ── -->
+            <li class="sidemenu-list__item">
+              <a href="pet-medicina.html" class="sidemenu-list__link">
+                PET Medicina
+                <i class="fa-solid fa-flask sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="ligas.html" class="sidemenu-list__link">
+                Ligas Acadêmicas
+                <i class="fa-solid fa-graduation-cap sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="manual.html" class="sidemenu-list__link">
+                Manual do Estudante
+                <i class="fa-solid fa-book-open-reader sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="cursinho-carolina.html" class="sidemenu-list__link">
+                Cursinho Carolina
+                <i class="fa-solid fa-book-open sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="aaads-cachacina.html" class="sidemenu-list__link">
+                AAADS e Cachacina
+                <i class="fa-solid fa-shield-halved sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="representacoes-academicas.html" class="sidemenu-list__link">
+                Representações Acadêmicas
+                <i class="fa-solid fa-landmark sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Final ── -->
+            <li class="sidemenu-list__item">
+              <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7" target="_blank" rel="noopener" class="sidemenu-list__link">
+                Suporte
+                <i class="fa-solid fa-headset sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+
+          </ul>
+        </div><!-- /sidemenu-panel -->
+
+      </div><!-- /sidemenu-wrap -->
+      <!-- ===================================================== -->
+
+      <!-- Logo + Nome -->
+      <a href="index.html" class="header__brand">
+        <div class="header__logo-wrap">
+          <!--
+            [ALTERAÇÃO] Logo DAGV – componente Logo dinâmico.
+            - Fundo vermelho/transparente → logo dourada (img.logo--gold)
+            - Fundo branco (scrolled)     → logo vermelha (img.logo--red)
+            A troca é feita via CSS: visibilidade controlada por .header.scrolled
+          -->
+          <img
+            src="img/logo dourada-sem fundo.png"
+            alt="Logo DAGV – Diretório Acadêmico Gaspar Vianna"
+            class="header__logo-svg logo--gold"
+            width="80" height="68"
+            loading="eager"
+          />
+          <img
+            src="img/Logo DAGV sem fundo verm.png"
+            alt="Logo DAGV – Diretório Acadêmico Gaspar Vianna"
+            class="header__logo-svg logo--red"
+            width="80" height="68"
+            loading="eager"
+            aria-hidden="true"
+          />
+        </div>
+        <div class="header__title-wrap">
+          <span class="header__dagv"></span>
+          <span class="header__subtitle"></span>
+        </div>
+      </a>
+
+      <!-- Nav desktop -->
+      <nav class="nav" aria-label="Navegação principal">
+        <ul class="nav__list">
+          <li><a href="sobre.html"                    class="nav__link">Sobre</a></li>
+          <li><a href="coordenacao.html"              class="nav__link">Coordenações</a></li>
+          <li><a href="index.html#events"             class="nav__link">Instituições UFTM</a></li>
+          <li><a href="index.html#eventos-academicos" class="nav__link">Eventos</a></li>
+          <li><a href="index.html#contact"            class="nav__link nav__link--cta">Contato</a></li>
+        </ul>
+      </nav>
+
+      <!-- Hamburguer -->
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Nav mobile (drawer) -->
+    <nav class="nav-mobile" id="navMobile" aria-hidden="true">
+      <ul class="nav-mobile__list">
+        <li><a href="index.html"                    class="nav-mobile__link">Início</a></li>
+        <li><a href="sobre.html"                    class="nav-mobile__link">Sobre</a></li>
+        <li><a href="criadores.html"                class="nav-mobile__link">Criadores</a></li>
+        <li><a href="coordenacao.html"              class="nav-mobile__link">Coordenações</a></li>
+        <li><a href="index.html#events"             class="nav-mobile__link">Instituições UFTM</a></li>
+        <li><a href="index.html#eventos-academicos" class="nav-mobile__link">Eventos</a></li>
+        <li><a href="index.html#contact"            class="nav-mobile__link">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+
+    <!-- ===================== HERO ===================== -->
+    <section class="aa-hero">
+      <div class="aa-hero__content">
+        <span class="aa-hero__eyebrow">Vida estudantil · UFTM</span>
+        <h1 class="aa-hero__title">AAADS e <em>Cachacina</em></h1>
+        <p class="aa-hero__desc">
+          Bateria e Atlética da Medicina, responsáveis pela energia, a tradição e o espírito esportivo dos estudantes.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== INTRO ===================== -->
+    <section class="aa-intro">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Tradição estudantil</span>
+          <h2 class="section-title">Duas entidades, um só espírito</h2>
+        </div>
+        <p data-aos="fade-up">
+          Ao lado do DAGV, a AAADS e a Cachacina fazem parte do dia a dia de quem estuda Medicina na UFTM —
+          uma cuidando do esporte e da competição, outra do ritmo e da festa. Juntas, elas movimentam a vida
+          estudantil dentro e fora da faculdade.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== CARDS ===================== -->
+    <section class="aa-cards">
+      <div class="container">
+        <div class="aa-grid">
+
+          <div class="aa-card" data-aos="fade-up" data-aos-delay="0">
+            <div class="aa-card__header">
+              <div class="aa-card__icon"><img src="img/instituicoes/aaads-logo.png" alt="Logo AAADS" loading="lazy" /></div>
+              <span class="aa-card__tag">Atlética da Medicina</span>
+              <h3 class="aa-card__name">AAADS</h3>
+            </div>
+            <div class="aa-card__body">
+              <p>
+                A AAADS é a Associação Atlética Acadêmica Djalma Santos, formada por estudantes de Medicina da
+                UFTM organizados em diferentes diretorias, responsáveis pela gestão esportiva e administrativa
+                da entidade.
+              </p>
+              <p>
+                A associação organiza treinamentos, infraestrutura e a participação da faculdade em competições
+                universitárias, contemplando modalidades coletivas e individuais — além de, recentemente, iniciar
+                a estruturação de equipes voltadas aos esportes eletrônicos.
+              </p>
+              <details>
+                <summary class="aa-card__toggle">Ver história da fundação</summary>
+                <div class="aa-card__more">
+                  <p>
+                    Até 1994, as atividades esportivas da então FMTM eram organizadas pelo Departamento de
+                    Esportes do próprio DAGV, responsável por estruturar a participação dos estudantes em
+                    competições universitárias, incluindo o primeiro Intermed Minas, realizado em Uberlândia.
+                    Em 1995, um grupo de acadêmicos — Ricardo Boggio, Ângelo Mattheus, Díminson Braz, José
+                    Carlos Costa e Nilo Santos — decidiu criar uma associação atlética independente, seguindo o
+                    modelo já existente em outras faculdades de Medicina do país, fundando a <strong>Associação
+                    Atlética Acadêmica Djalma Santos (AAADS)</strong>, nome escolhido em homenagem ao atleta
+                    uberabense Djalma Santos, bicampeão mundial de futebol em 1958 e 1962.
+                  </p>
+                  <p>
+                    Uma das primeiras conquistas da associação foi a unificação das duas competições Intermed
+                    que existiam em Minas Gerais, com o evento unificado sediado em Uberaba já em 1995 — ano em
+                    que a instituição se consagrou campeã geral.
+                  </p>
+                  <p><strong>Loja da atlética:</strong> Rua dos Andradas, 330 (Campus 1)</p>
+                </div>
+              </details>
+              <a href="https://www.instagram.com/aaadsmeduftm/" target="_blank" rel="noopener" class="aa-card__link">
+                <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                Seguir no Instagram
+              </a>
+            </div>
+          </div>
+
+          <div class="aa-card" data-aos="fade-up" data-aos-delay="120">
+            <div class="aa-card__header">
+              <div class="aa-card__icon"><img src="img/instituicoes/cachacina-logo.png" alt="Logo Cachacina" loading="lazy" /></div>
+              <span class="aa-card__tag">Bateria da Medicina</span>
+              <h3 class="aa-card__name">Cachacina</h3>
+            </div>
+            <div class="aa-card__body">
+              <p>
+                A Cachacina é a torcida organizada dos estudantes de Medicina da UFTM, uma das principais
+                expressões culturais e esportivas da comunidade acadêmica do curso, com presença constante nas
+                arquibancadas e nos eventos acadêmicos e esportivos da instituição.
+              </p>
+              <p>
+                Ao longo dos anos, a Cachacina participa ativamente de competições universitárias, eventos
+                institucionais e celebrações estudantis, mantendo viva a tradição iniciada nas arquibancadas das
+                primeiras Intermeds.
+              </p>
+              <details>
+                <summary class="aa-card__toggle">Ver história da fundação</summary>
+                <div class="aa-card__more">
+                  <p>
+                    Nas primeiras edições da Intermed, a torcida da então FMTM contava com recursos bastante
+                    simples, como buzinas de caminhão e bombas para animar as arquibancadas. Foi na Intermed
+                    Minas V, realizada em 1998 em Itajubá (MG), que surgiu a ideia concreta de organizar uma
+                    torcida estruturada: um grupo de estudantes — Marcelo Arantes, Miquelante, Fenelon,
+                    Anderson, Hermes e Chiquim — criou o bloco <strong>"Eu acredito em DuenTes"</strong>,
+                    marcando o início da tradição que originaria a bateria organizada, uma das poucas de Minas
+                    Gerais criadas ainda no século XX.
+                  </p>
+                  <p>
+                    No ano seguinte, em 1999, foi oficialmente fundada a <strong>Cachacina</strong>. O grupo
+                    inicial se reunia frequentemente no Bar da Nilza, próximo ao Campus I, para ensaiar com
+                    instrumentos e estruturar a bateria, inicialmente com auxílio de um puxador contratado —
+                    função que logo passou a ser exercida pelos próprios integrantes. Desse período também
+                    surgiu um dos principais símbolos da torcida: o mascote inspirado no personagem Kenny, de
+                    South Park, adaptado nas cores preto e amarelo da instituição. Em 2011, sob a liderança de
+                    integrantes da 68ª turma, a bateria passou por uma renovação musical e organizacional que
+                    incorporou novos conceitos e tradições, moldando a Cachacina como ela é hoje.
+                  </p>
+                </div>
+              </details>
+              <a href="https://www.instagram.com/cachacina/" target="_blank" rel="noopener" class="aa-card__link">
+                <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                Seguir no Instagram
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CTA ===================== -->
+    <section class="aa-cta">
+      <div class="container">
+        <h2 class="aa-cta__title">Quer fazer parte?</h2>
+        <p>Acompanhe a AAADS e a Cachacina nas redes sociais para ficar por dentro dos próximos eventos, treinos e ensaios.</p>
+        <div class="aa-cta__actions">
+          <a href="https://www.instagram.com/dagvmeduftm/" target="_blank" rel="noopener" class="btn btn--ghost-white">
+            <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+            Instagram DAGV
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== VOLTAR ===================== -->
+    <section class="back-section">
+      <a href="index.html" class="btn btn--ghost-white">
+        <i class="fa-solid fa-house" aria-hidden="true"></i>
+        Voltar ao Início
+      </a>
+    </section>
+
+  </main>
+  <footer class="footer">
+    <div class="container footer__inner">
+
+      <div class="footer__brand">
+        <img
+          src="img/logo dourada-sem fundo.png"
+          alt="Logo DAGV"
+          class="footer__logo"
+          width="64" height="54"
+          loading="lazy"
+        />
+        <div>
+          <p class="footer__name">DAGV – Gaspar Vianna</p>
+          <p class="footer__sub">Medicina UFTM · Uberaba – MG</p>
+        </div>
+      </div>
+
+      <nav class="footer__links" aria-label="Links úteis">
+        <a href="estatuto.html">Estatuto</a>
+        <a href="criadores.html">Criadores</a>
+        <a href="sobre.html">Sobre o DAGV</a>
+        <a href="coordenacao.html">Coordenação</a>
+        <a href="historico2.html">Resgate Histórico</a>
+        <a href="index.html#contact">Suporte</a>
+      </nav>
+
+      <div class="footer__social">
+        <a href="https://www.instagram.com/dagvmeduftm/" target="_blank" rel="noopener" aria-label="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=100009254539973" target="_blank" rel="noopener" aria-label="Facebook">
+          <i class="fa-brands fa-facebook"></i>
+        </a>
+        <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7" target="_blank" rel="noopener" aria-label="Formulário de contato">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+      </div>
+
+    </div>
+    <div class="footer__bottom">
+      <p>&copy; <span id="year"></span> Diretório Acadêmico Gaspar Vianna – Medicina UFTM. Todos os direitos reservados.</p>
+      <p class="footer__credit">Desenvolvido por <a href="criadores.html">Sérgio Lemuel Soares Santos &amp; João Paulo Soares Santos</a></p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/sidemenu.js"></script>
+
+
+</body>
+</html>

@@ -2,6 +2,13 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="48x48" href="img/favicon-48x48.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="img/android-chrome-192x192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="img/android-chrome-512x512.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Ligas Acadêmicas do curso de Medicina da UFTM – conheça as ligas vinculadas ao DAGV Gaspar Vianna, suas missões, atividades e como participar." />
   <meta name="keywords" content="Ligas Acadêmicas, Medicina, UFTM, DAGV, LaCardio, LUAO, Sarakura, LHA, LASMP, LEC, LAN, LAGO, LANC, LiAPSIH, LiNce, LUAMA" />
@@ -504,11 +511,12 @@
   .ligas-slider {
     flex: 1;
     position: relative;
-    min-height: 500px;   /* [AJUSTE 2] era 360px — cards maiores precisam de mais altura */
-    height: 500px;
+    min-height: 520px;   /* [AJUSTE 2] era 360px — cards maiores precisam de mais altura */
+    height: 520px;        /* fallback antes do JS calcular a altura real do card ativo */
     overflow: hidden;
     border-radius: var(--radius-lg);
     box-shadow: 0 12px 48px rgba(0,0,0,.12);
+    transition: height 240ms ease;
   }
 
   .ligas-slider__track {
@@ -530,6 +538,7 @@
     transition: opacity 360ms ease-in-out, visibility 360ms ease-in-out;
     pointer-events: none;
     overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .liga-card.is-active {
@@ -539,15 +548,19 @@
     visibility: visible;
     pointer-events: auto;
     overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .liga-card[aria-hidden="true"] { display: none; }
 
   /* [AJUSTE 2] Header maior: ícone em destaque, mais padding */
   .liga-card__header {
-    padding: 2.8rem 3rem 2.2rem;
+    padding: 1rem 3rem 1rem;
     gap: 1.6rem;
     align-items: center;
+  }
+  @media (min-width: 641px) {
+    .liga-card__header { min-height: 128px; }
   }
   /* [AJUSTE 2] Ícone muito maior: 96px com glow */
   .liga-card__icon-wrap {
@@ -614,13 +627,16 @@
   @media (max-width: 640px) {
     .ligas-slider-wrap { gap: .4rem; }
     .slider-side-btn   { width: 40px; height: 40px; font-size: .9rem; }
-    /* [AJUSTE 2] Mobile: altura maior, card continua legível */
-    .ligas-slider      { min-height: 420px; height: 420px; }
-    .liga-card__header { padding: 2rem 1.8rem 1.6rem; gap: 1.1rem; min-height: 110px; overflow: visible; align-items: center; }
+    /* [FIX responsivo] Altura suficiente pro conteúdo completo do card
+       (incluindo meta em coluna única) caber sem cortar nada. */
+    .ligas-slider      { min-height: 640px; height: 640px; } /* fallback antes do JS ajustar */
+    .liga-card__header { padding: 1.1rem 1.8rem 1.1rem; gap: 1.1rem; min-height: 128px !important; overflow: visible; align-items: center; }
     .liga-card__icon-wrap { width: 72px !important; height: 72px !important; font-size: 2rem !important; overflow: visible; }
     .liga-card__name   { font-size: 0.8rem !important; }
-    .liga-card__body   { padding: 1.8rem 1.8rem 2.2rem; gap: 1.1rem; }
-    .liga-card__desc   { font-size: .96rem !important; line-height: 1.78; }
+    /* [FIX responsivo] Padding e fonte proporcionais ao desktop —
+       os valores antigos (bem maiores) estouravam a altura do card. */
+    .liga-card__body   { padding: 1.1rem 1.3rem 1.4rem; gap: .6rem; }
+    .liga-card__desc   { font-size: .85rem !important; line-height: 1.55; }
   }
 
   .liga-card__header {
@@ -669,17 +685,18 @@
   }
 
   .liga-card__body {
-    padding: 1.3rem 1.4rem;
-    display: flex; flex-direction: column; gap: .8rem;
+    padding: 1.1rem 1.4rem;
+    display: flex; flex-direction: column; gap: .6rem;
     flex: 1;
+    overflow-wrap: break-word;
   }
   .liga-card__desc {
-    font-size: .88rem; color: var(--clr-gray-3); line-height: 1.72;
+    font-size: .88rem; color: var(--clr-gray-3); line-height: 1.55;
   }
 
   .liga-card__tags {
     display: flex; flex-wrap: wrap; gap: .35rem;
-    margin-top: auto; padding-top: .6rem;
+    padding-top: .6rem;
     border-top: 1px solid var(--clr-gray-1);
   }
   .liga-tag {
@@ -689,6 +706,32 @@
     background: var(--clr-green-light);
     border-radius: var(--radius-sm);
     padding: .22em .7em;
+  }
+
+  /* ── Metadados institucionais do card (coordenador, ligantes, etc.) ── */
+  .liga-card__meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .4rem .9rem;
+    padding: .55rem 0;
+    border-top: 1px solid var(--clr-gray-1);
+    border-bottom: 1px solid var(--clr-gray-1);
+  }
+  .liga-card__meta-item { display: flex; flex-direction: column; gap: .1rem; min-width: 0; }
+  .liga-card__meta-label {
+    font-size: .64rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .05em; color: var(--clr-accent);
+  }
+  .liga-card__meta-value { font-size: .8rem; color: var(--clr-gray-3); line-height: 1.4; }
+  .liga-card__link {
+    display: inline-flex; align-items: center; gap: .4em;
+    font-size: .8rem; font-weight: 600; color: var(--clr-green);
+    text-decoration: none; margin-top: auto;
+    transition: gap var(--dur-fast);
+  }
+  .liga-card__link:hover { gap: .65em; }
+  @media (max-width: 640px) {
+    .liga-card__meta { grid-template-columns: 1fr; }
   }
 
   /* ── Outras ligas – lista compacta ──────────────────────────── */
@@ -877,6 +920,12 @@
                 <i class="fa-solid fa-users sidemenu-list__icon" aria-hidden="true"></i>
               </a>
             </li>
+            <li class="sidemenu-list__item">
+              <a href="criadores.html" class="sidemenu-list__link">
+                Criadores
+                <i class="fa-solid fa-code sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
 
             <li class="sidemenu-list__sep" role="separator"></li>
 
@@ -892,16 +941,14 @@
                 <i class="fa-solid fa-chevron-down sidemenu-list__arrow" aria-hidden="true"></i>
               </button>
               <ul class="sidemenu-dropdown" id="dropInformacoes">
-                <li><a href="https://dagvmeduftm.wordpress.com/estatuto-dagv/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">Estatuto</a></li>
-                <li><a href="https://dagvmeduftm.wordpress.com/galeria-de-fotos/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">Galeria de Fotos</a></li>
-              </ul>
+                <li><a href="estatuto.html" class="sidemenu-dropdown__link">Estatuto</a></li>              </ul>
             </li>
 
             <li class="sidemenu-list__sep" role="separator"></li>
 
             <!-- ── Links institucionais ── -->
             <li class="sidemenu-list__item">
-              <a href="https://dagvmeduftm.wordpress.com/pet-medicina-1/" target="_blank" rel="noopener" class="sidemenu-list__link">
+              <a href="pet-medicina.html" class="sidemenu-list__link">
                 PET Medicina
                 <i class="fa-solid fa-flask sidemenu-list__icon" aria-hidden="true"></i>
               </a>
@@ -919,31 +966,22 @@
               </a>
             </li>
             <li class="sidemenu-list__item">
-              <a href="https://dagvmeduftm.wordpress.com/cursinho-carolina/" target="_blank" rel="noopener" class="sidemenu-list__link">
+              <a href="cursinho-carolina.html" class="sidemenu-list__link">
                 Cursinho Carolina
                 <i class="fa-solid fa-book-open sidemenu-list__icon" aria-hidden="true"></i>
               </a>
             </li>
-
-            <li class="sidemenu-list__sep" role="separator"></li>
-
-            <!-- ── Dropdown: Instituições ── -->
             <li class="sidemenu-list__item">
-              <button
-                class="sidemenu-list__btn"
-                data-dropdown="instituicoes"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Instituições
-                <i class="fa-solid fa-chevron-down sidemenu-list__arrow" aria-hidden="true"></i>
-              </button>
-              <ul class="sidemenu-dropdown" id="dropInstituicoes">
-                <li><a href="https://dagvmeduftm.wordpress.com/denem/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">DENEM</a></li>
-                <li><a href="https://dagvmeduftm.wordpress.com/dce-uftm/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">DCE</a></li>
-                <li><a href="https://dagvmeduftm.wordpress.com/cvu-uberaba/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">CVU</a></li>
-                <li><a href="https://dagvmeduftm.wordpress.com/cepop-uftm/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">CEPOP</a></li>
-              </ul>
+              <a href="aaads-cachacina.html" class="sidemenu-list__link">
+                AAADS e Cachacina
+                <i class="fa-solid fa-shield-halved sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="representacoes-academicas.html" class="sidemenu-list__link">
+                Representações Acadêmicas
+                <i class="fa-solid fa-landmark sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
             </li>
 
             <li class="sidemenu-list__sep" role="separator"></li>
@@ -1015,6 +1053,7 @@
       <ul class="nav-mobile__list">
         <li><a href="index.html"                    class="nav-mobile__link">Início</a></li>
         <li><a href="sobre.html"                    class="nav-mobile__link">Sobre</a></li>
+        <li><a href="criadores.html"                class="nav-mobile__link">Criadores</a></li>
         <li><a href="coordenacao.html"              class="nav-mobile__link">Coordenações</a></li>
         <li><a href="index.html#events"             class="nav-mobile__link">Instituições UFTM</a></li>
         <li><a href="index.html#eventos-academicos" class="nav-mobile__link">Eventos</a></li>
@@ -1429,7 +1468,7 @@
           <!-- LaCardio -->
           <article class="liga-card" data-cat="clinica" data-aos="fade-up" data-aos-delay="0">
             <div class="liga-card__header">
-              <div class="liga-card__icon-wrap"><img src="img/logolacardio.png"></i></div>
+              <div class="liga-card__icon-wrap"><img src="img/logolacardio.png" alt="Logo LaCardio"></div>
               <div class="liga-card__heading">
                 <span class="liga-card__sigla">LaCardio</span>
                 <div class="liga-card__name">Liga Acadêmica de Cardiologia</div>
@@ -1443,18 +1482,39 @@
                 de hemodinâmica e atividades de extensão voltadas à prevenção de
                 doenças cardiovasculares na comunidade.
               </p>
+            <div class="liga-card__meta">
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Coordenador Docente</span>
+                <span class="liga-card__meta-value">Dr. Fernando de Martino</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Nº de Ligantes</span>
+                <span class="liga-card__meta-value">20 ligantes</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Pré-Requisito</span>
+                <span class="liga-card__meta-value">Mínimo 2º período</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Admissão / Duração</span>
+                <span class="liga-card__meta-value">Início do ano · Ciclo anual</span>
+              </div>
+            </div>
               <div class="liga-card__tags">
                 <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Clínica</span>
                 <span class="liga-tag"><i class="fa-solid fa-heartbeat" aria-hidden="true"></i> Cardiologia</span>
                 <span class="liga-tag"><i class="fa-solid fa-hands-holding-circle" aria-hidden="true"></i> Extensão</span>
               </div>
+              <a href="https://www.instagram.com/lacardio.uftm/" target="_blank" rel="noopener" class="liga-card__link">
+                Seguir no Instagram <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+              </a>
             </div>
           </article>
 
           <!-- LUAO -->
           <article class="liga-card" data-cat="clinica" data-aos="fade-up" data-aos-delay="60">
             <div class="liga-card__header">
-              <div class="liga-card__icon-wrap"><i class="fa-solid fa-ribbon" aria-hidden="true"></i></div>
+              <div class="liga-card__icon-wrap"><img src="img/logo-luao.png" alt="Logo LUAO"></div>
               <div class="liga-card__heading">
                 <span class="liga-card__sigla">LUAO</span>
                 <div class="liga-card__name">Liga Uberabense de Oncologia</div>
@@ -1468,18 +1528,39 @@
                 campanhas de prevenção ao câncer e atividades de apoio a pacientes
                 oncológicos, reforçando a dimensão humana do cuidado médico.
               </p>
+            <div class="liga-card__meta">
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Coordenador Docente</span>
+                <span class="liga-card__meta-value">Prof. Dr. Guilherme Freire Angotti Carrara</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Nº de Ligantes</span>
+                <span class="liga-card__meta-value">30 ligantes</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Pré-Requisito</span>
+                <span class="liga-card__meta-value">Sem pré-requisitos</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Admissão / Duração</span>
+                <span class="liga-card__meta-value">Início do ano · Ciclo anual</span>
+              </div>
+            </div>
               <div class="liga-card__tags">
                 <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Clínica</span>
                 <span class="liga-tag"><i class="fa-solid fa-ribbon" aria-hidden="true"></i> Oncologia</span>
                 <span class="liga-tag"><i class="fa-solid fa-microscope" aria-hidden="true"></i> Pesquisa</span>
               </div>
+              <a href="https://www.instagram.com/luao_uftm/" target="_blank" rel="noopener" class="liga-card__link">
+                Seguir no Instagram <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+              </a>
             </div>
           </article>
 
           <!-- SARAKURA -->
           <article class="liga-card" data-cat="humanizacao" data-aos="fade-up" data-aos-delay="120">
             <div class="liga-card__header">
-              <div class="liga-card__icon-wrap"><i class="fa-solid fa-hands-holding-heart" aria-hidden="true"></i></div>
+              <div class="liga-card__icon-wrap"><img src="img/logo-sarakura.png" alt="Logo Sarakura"></div>
               <div class="liga-card__heading">
                 <span class="liga-card__sigla">SARAKURA</span>
                 <div class="liga-card__name">Liga de Humanização Sarakura</div>
@@ -1493,18 +1574,39 @@
                 familiares e profissionais de saúde, promovendo atividades lúdicas,
                 escuta ativa e cuidado integral nos ambientes hospitalares e sociais da região.
               </p>
+            <div class="liga-card__meta">
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Coordenador Docente</span>
+                <span class="liga-card__meta-value">Luciana Maria da Silva</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Nº de Ligantes</span>
+                <span class="liga-card__meta-value">30 ligantes</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Pré-Requisito</span>
+                <span class="liga-card__meta-value">Sem pré-requisitos</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Admissão / Duração</span>
+                <span class="liga-card__meta-value">Início do ano · Ciclo anual</span>
+              </div>
+            </div>
               <div class="liga-card__tags">
                 <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Humanização</span>
                 <span class="liga-tag"><i class="fa-solid fa-hospital" aria-hidden="true"></i> Hospital</span>
                 <span class="liga-tag"><i class="fa-solid fa-heart" aria-hidden="true"></i> Cuidado Integral</span>
               </div>
+              <a href="https://www.instagram.com/sarakurauftm/" target="_blank" rel="noopener" class="liga-card__link">
+                Seguir no Instagram <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+              </a>
             </div>
           </article>
 
           <!-- LHA -->
           <article class="liga-card" data-cat="clinica" data-aos="fade-up" data-aos-delay="0">
             <div class="liga-card__header">
-              <div class="liga-card__icon-wrap"><i class="fa-solid fa-droplet" aria-hidden="true"></i></div>
+              <div class="liga-card__icon-wrap"><img src="img/logo-lha.png" alt="Logo LHA"></div>
               <div class="liga-card__heading">
                 <span class="liga-card__sigla">LHA</span>
                 <div class="liga-card__name">Liga de Hipertensão Arterial</div>
@@ -1519,18 +1621,39 @@
                 junto à comunidade, com aferição de pressão em eventos públicos
                 e orientações de saúde cardiovascular.
               </p>
+            <div class="liga-card__meta">
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Coordenador Docente</span>
+                <span class="liga-card__meta-value">Dr. Luiz Antônio Pertili Rodrigues de Resende</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Nº de Ligantes</span>
+                <span class="liga-card__meta-value">30 ligantes</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Pré-Requisito</span>
+                <span class="liga-card__meta-value">Sem pré-requisitos</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Admissão / Duração</span>
+                <span class="liga-card__meta-value">Início do ano · Ciclo anual</span>
+              </div>
+            </div>
               <div class="liga-card__tags">
                 <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Clínica</span>
                 <span class="liga-tag"><i class="fa-solid fa-droplet" aria-hidden="true"></i> Cardiologia</span>
                 <span class="liga-tag"><i class="fa-solid fa-users" aria-hidden="true"></i> Comunidade</span>
               </div>
+              <a href="https://www.instagram.com/lhauftm/" target="_blank" rel="noopener" class="liga-card__link">
+                Seguir no Instagram <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+              </a>
             </div>
           </article>
 
           <!-- LASMP -->
           <article class="liga-card" data-cat="saude-mental" data-aos="fade-up" data-aos-delay="60">
             <div class="liga-card__header">
-              <div class="liga-card__icon-wrap"><i class="fa-solid fa-brain" aria-hidden="true"></i></div>
+              <div class="liga-card__icon-wrap"><img src="img/logo-lasmp.png" alt="Logo LASMP"></div>
               <div class="liga-card__heading">
                 <span class="liga-card__sigla">LASMP</span>
                 <div class="liga-card__name">Liga Acadêmica de Saúde Mental e Psiquiatria</div>
@@ -1544,18 +1667,39 @@
                 mental públicos, CAPS e hospitais, além de realizar eventos de conscientização
                 dentro e fora da UFTM.
               </p>
+            <div class="liga-card__meta">
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Coordenador Docente</span>
+                <span class="liga-card__meta-value">Vinícius dos Santos Sguerri</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Nº de Ligantes</span>
+                <span class="liga-card__meta-value">24 ligantes</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Pré-Requisito</span>
+                <span class="liga-card__meta-value">Mínimo 2º período</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Admissão / Duração</span>
+                <span class="liga-card__meta-value">Início do ano · Ciclo anual</span>
+              </div>
+            </div>
               <div class="liga-card__tags">
                 <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Saúde Mental</span>
                 <span class="liga-tag"><i class="fa-solid fa-brain" aria-hidden="true"></i> Psiquiatria</span>
                 <span class="liga-tag"><i class="fa-solid fa-heart" aria-hidden="true"></i> Humanização</span>
               </div>
+              <a href="https://www.instagram.com/lasmuftm/" target="_blank" rel="noopener" class="liga-card__link">
+                Seguir no Instagram <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+              </a>
             </div>
           </article>
 
           <!-- LEC -->
           <article class="liga-card" data-cat="clinica" data-aos="fade-up" data-aos-delay="120">
             <div class="liga-card__header">
-              <div class="liga-card__icon-wrap"><i class="fa-solid fa-truck-medical" aria-hidden="true"></i></div>
+              <div class="liga-card__icon-wrap"><img src="img/logo-lec.png" alt="Logo LEC"></div>
               <div class="liga-card__heading">
                 <span class="liga-card__sigla">LEC</span>
                 <div class="liga-card__name">Liga de Emergências Clínicas</div>
@@ -1569,18 +1713,39 @@
                 atividades de extensão em primeiros socorros para a comunidade
                 e visitas supervisionadas a prontos-socorros e UPAs.
               </p>
+            <div class="liga-card__meta">
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Coordenador Docente</span>
+                <span class="liga-card__meta-value">Dr. Leandro de Resende Yamamoto</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Nº de Ligantes</span>
+                <span class="liga-card__meta-value">30 ligantes</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Pré-Requisito</span>
+                <span class="liga-card__meta-value">Mínimo 4º período</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Admissão / Duração</span>
+                <span class="liga-card__meta-value">Início do ano · Ciclo anual</span>
+              </div>
+            </div>
               <div class="liga-card__tags">
                 <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Clínica</span>
                 <span class="liga-tag"><i class="fa-solid fa-ambulance" aria-hidden="true"></i> Emergência</span>
                 <span class="liga-tag"><i class="fa-solid fa-person-running" aria-hidden="true"></i> Prática</span>
               </div>
+              <a href="https://www.instagram.com/lec.uftm/" target="_blank" rel="noopener" class="liga-card__link">
+                Seguir no Instagram <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+              </a>
             </div>
           </article>
 
           <!-- LAN -->
           <article class="liga-card" data-cat="materno-infantil" data-aos="fade-up" data-aos-delay="0">
             <div class="liga-card__header">
-              <div class="liga-card__icon-wrap"><i class="fa-solid fa-baby" aria-hidden="true"></i></div>
+              <div class="liga-card__icon-wrap"><img src="img/logo-lan.png" alt="Logo LAN"></div>
               <div class="liga-card__heading">
                 <span class="liga-card__sigla">LAN</span>
                 <div class="liga-card__name">Liga Acadêmica de Neonatologia</div>
@@ -1594,18 +1759,39 @@
                 junto às maternidades de Uberaba e projetos de educação em saúde
                 voltados a gestantes e famílias de bebês prematuros ou com condições especiais.
               </p>
+            <div class="liga-card__meta">
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Coordenador Docente</span>
+                <span class="liga-card__meta-value">Dra. Valéria Cardoso Alves Cunali</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Nº de Ligantes</span>
+                <span class="liga-card__meta-value">20 ligantes</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Pré-Requisito</span>
+                <span class="liga-card__meta-value">Sem pré-requisitos</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Admissão / Duração</span>
+                <span class="liga-card__meta-value">Início do ano · Ciclo anual</span>
+              </div>
+            </div>
               <div class="liga-card__tags">
                 <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Materno-infantil</span>
                 <span class="liga-tag"><i class="fa-solid fa-baby" aria-hidden="true"></i> Neonatologia</span>
                 <span class="liga-tag"><i class="fa-solid fa-hospital" aria-hidden="true"></i> UTI Neonatal</span>
               </div>
+              <a href="https://www.instagram.com/lan.uftm/" target="_blank" rel="noopener" class="liga-card__link">
+                Seguir no Instagram <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+              </a>
             </div>
           </article>
 
           <!-- LAGO -->
           <article class="liga-card" data-cat="materno-infantil" data-aos="fade-up" data-aos-delay="60">
             <div class="liga-card__header">
-              <div class="liga-card__icon-wrap"><i class="fa-solid fa-venus" aria-hidden="true"></i></div>
+              <div class="liga-card__icon-wrap"><img src="img/logo-lago.png" alt="Logo LAGO"></div>
               <div class="liga-card__heading">
                 <span class="liga-card__sigla">LAGO</span>
                 <div class="liga-card__name">Liga Acadêmica de Ginecologia e Obstetrícia</div>
@@ -1619,18 +1805,39 @@
                 ao parto humanizado. Realiza extensão junto a centros de saúde e
                 promove eventos científicos e de conscientização voltados à saúde feminina.
               </p>
+            <div class="liga-card__meta">
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Coordenador Docente</span>
+                <span class="liga-card__meta-value">Dra. Mariana Kefelás Oliveira Gomes</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Nº de Ligantes</span>
+                <span class="liga-card__meta-value">15 ligantes</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Pré-Requisito</span>
+                <span class="liga-card__meta-value">Mínimo 2º período</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Admissão / Duração</span>
+                <span class="liga-card__meta-value">Início do ano · Ciclo anual</span>
+              </div>
+            </div>
               <div class="liga-card__tags">
                 <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Materno-infantil</span>
                 <span class="liga-tag"><i class="fa-solid fa-venus" aria-hidden="true"></i> Ginecologia</span>
                 <span class="liga-tag"><i class="fa-solid fa-baby-carriage" aria-hidden="true"></i> Obstetrícia</span>
               </div>
+              <a href="https://www.instagram.com/lago.uftm/" target="_blank" rel="noopener" class="liga-card__link">
+                Seguir no Instagram <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+              </a>
             </div>
           </article>
 
           <!-- LANC -->
           <article class="liga-card" data-cat="cirurgia" data-aos="fade-up" data-aos-delay="120">
             <div class="liga-card__header">
-              <div class="liga-card__icon-wrap"><img src="img/logolanc.png"></i></div>
+              <div class="liga-card__icon-wrap"><img src="img/logo-lanc.png" alt="Logo LANC"></div>
               <div class="liga-card__heading">
                 <span class="liga-card__sigla">LANC</span>
                 <div class="liga-card__name">Liga Acadêmica de Neurocirurgia</div>
@@ -1644,18 +1851,39 @@
                 neurocirúrgicos complexos, eventos científicos e visita a centros de
                 referência em neurologia e neurocirurgia da região.
               </p>
+            <div class="liga-card__meta">
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Coordenador Docente</span>
+                <span class="liga-card__meta-value">Dr. Roberto Alexandre Dezena</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Nº de Ligantes</span>
+                <span class="liga-card__meta-value">15 ligantes</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Pré-Requisito</span>
+                <span class="liga-card__meta-value">Mínimo 3º período</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Admissão / Duração</span>
+                <span class="liga-card__meta-value">Meio do ano · Ciclo anual</span>
+              </div>
+            </div>
               <div class="liga-card__tags">
                 <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Cirurgia</span>
                 <span class="liga-tag"><i class="fa-solid fa-scalpel" aria-hidden="true"></i> Neurocirurgia</span>
                 <span class="liga-tag"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> Eventos</span>
               </div>
+              <a href="https://www.instagram.com/lanc.uftm/" target="_blank" rel="noopener" class="liga-card__link">
+                Seguir no Instagram <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+              </a>
             </div>
           </article>
 
           <!-- LiAPSIH -->
           <article class="liga-card" data-cat="saude-mental" data-aos="fade-up" data-aos-delay="0">
             <div class="liga-card__header">
-              <div class="liga-card__icon-wrap"><i class="fa-solid fa-comments" aria-hidden="true"></i></div>
+              <div class="liga-card__icon-wrap"><img src="img/logo-liapsih.png" alt="Logo LiAPSIH"></div>
               <div class="liga-card__heading">
                 <span class="liga-card__sigla">LiAPSIH</span>
                 <div class="liga-card__name">Liga Acadêmica de Psicologia Hospitalar</div>
@@ -1670,18 +1898,39 @@
                 a enfermarias, UTIs e ambulatórios, com enfoque na comunicação
                 médico-paciente e no suporte emocional.
               </p>
+            <div class="liga-card__meta">
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Coordenador Docente</span>
+                <span class="liga-card__meta-value">Prof. Dra. Beatriz Oliveira Valeri</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Nº de Ligantes</span>
+                <span class="liga-card__meta-value">18 ligantes</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Pré-Requisito</span>
+                <span class="liga-card__meta-value">Mínimo 6º período</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Admissão / Duração</span>
+                <span class="liga-card__meta-value">Meio do ano · Ciclo anual</span>
+              </div>
+            </div>
               <div class="liga-card__tags">
                 <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Saúde Mental</span>
                 <span class="liga-tag"><i class="fa-solid fa-comments" aria-hidden="true"></i> Psicologia</span>
                 <span class="liga-tag"><i class="fa-solid fa-hospital" aria-hidden="true"></i> Hospital</span>
               </div>
+              <a href="https://www.instagram.com/liapsih/" target="_blank" rel="noopener" class="liga-card__link">
+                Seguir no Instagram <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+              </a>
             </div>
           </article>
 
           <!-- LiNce -->
           <article class="liga-card" data-cat="neurociencias" data-aos="fade-up" data-aos-delay="60">
             <div class="liga-card__header">
-              <div class="liga-card__icon-wrap"><i class="fa-solid fa-atom" aria-hidden="true"></i></div>
+              <div class="liga-card__icon-wrap"><img src="img/logo-lince.png" alt="Logo LiNce"></div>
               <div class="liga-card__heading">
                 <span class="liga-card__sigla">LiNce</span>
                 <div class="liga-card__name">Liga Acadêmica de Neurociências</div>
@@ -1695,18 +1944,39 @@
                 participação em congressos e atividades de extensão que aproximam
                 o conhecimento neurocientífico da população e dos pacientes.
               </p>
+            <div class="liga-card__meta">
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Coordenador Docente</span>
+                <span class="liga-card__meta-value">Patrícia Helena Zanier Gomes</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Nº de Ligantes</span>
+                <span class="liga-card__meta-value">34 ligantes</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Pré-Requisito</span>
+                <span class="liga-card__meta-value">Sem pré-requisitos</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Admissão / Duração</span>
+                <span class="liga-card__meta-value">Início do ano · Ciclo anual</span>
+              </div>
+            </div>
               <div class="liga-card__tags">
                 <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Neurociências</span>
                 <span class="liga-tag"><i class="fa-solid fa-microscope" aria-hidden="true"></i> Pesquisa</span>
                 <span class="liga-tag"><i class="fa-solid fa-flask" aria-hidden="true"></i> Ciência</span>
               </div>
+              <a href="https://www.instagram.com/linceuftm/" target="_blank" rel="noopener" class="liga-card__link">
+                Seguir no Instagram <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+              </a>
             </div>
           </article>
 
           <!-- LUAMA -->
           <article class="liga-card" data-cat="materno-infantil" data-aos="fade-up" data-aos-delay="120">
             <div class="liga-card__header">
-              <div class="liga-card__icon-wrap"><i class="fa-solid fa-person-breastfeeding" aria-hidden="true"></i></div>
+              <div class="liga-card__icon-wrap"><img src="img/logo-luama.png" alt="Logo LUAMA"></div>
               <div class="liga-card__heading">
                 <span class="liga-card__sigla">LUAMA</span>
                 <div class="liga-card__name">Liga Universitária da Amamentação</div>
@@ -1721,22 +1991,279 @@
                 sobre os benefícios e desafios da amamentação no Brasil,
                 com impacto direto nas taxas de aleitamento da região.
               </p>
+            <div class="liga-card__meta">
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Coordenador Docente</span>
+                <span class="liga-card__meta-value">Prof. Dr. Luciano Borges Santiago</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Nº de Ligantes</span>
+                <span class="liga-card__meta-value">15 ligantes</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Pré-Requisito</span>
+                <span class="liga-card__meta-value">Sem pré-requisitos</span>
+              </div>
+              <div class="liga-card__meta-item">
+                <span class="liga-card__meta-label">Admissão / Duração</span>
+                <span class="liga-card__meta-value">Início do ano · Ciclo anual</span>
+              </div>
+            </div>
               <div class="liga-card__tags">
                 <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Materno-infantil</span>
                 <span class="liga-tag"><i class="fa-solid fa-person-breastfeeding" aria-hidden="true"></i> Amamentação</span>
                 <span class="liga-tag"><i class="fa-solid fa-users" aria-hidden="true"></i> Extensão</span>
               </div>
+              <a href="https://www.instagram.com/_luama_uftm/" target="_blank" rel="noopener" class="liga-card__link">
+                Seguir no Instagram <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- Cirurgia Geral -->
+          <article class="liga-card" data-cat="cirurgia" data-aos="fade-up" data-aos-delay="0">
+            <div class="liga-card__header">
+              <div class="liga-card__icon-wrap"><img src="img/logo-lac.png" alt="Logo LACG"></div>
+              <div class="liga-card__heading">
+                <span class="liga-card__sigla">LACG</span>
+                <div class="liga-card__name">Liga Acadêmica de Cirurgia Geral</div>
+              </div>
+            </div>
+            <div class="liga-card__body">
+              <p class="liga-card__desc">
+                Liga voltada à formação prática e teórica em cirurgia geral,
+                aproximando o acadêmico do fluxo do centro cirúrgico, das técnicas
+                operatórias fundamentais e do manejo pré e pós-operatório do
+                paciente cirúrgico. Vinculada ao curso de Medicina da UFTM.
+              </p>
+              <div class="liga-card__tags">
+                <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Cirurgia</span>
+                <span class="liga-tag"><i class="fa-solid fa-scalpel" aria-hidden="true"></i> Cirurgia Geral</span>
+              </div>
+              <a href="https://www.instagram.com/lac.uftm/" target="_blank" rel="noopener" class="liga-card__link">
+                Seguir no Instagram <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- Liga do Trauma -->
+          <article class="liga-card" data-cat="cirurgia" data-aos="fade-up" data-aos-delay="60">
+            <div class="liga-card__header">
+              <div class="liga-card__icon-wrap"><img src="img/logo-trauma.png" alt="Logo Liga do Trauma"></div>
+              <div class="liga-card__heading">
+                <span class="liga-card__sigla">LT</span>
+                <div class="liga-card__name">Liga do Trauma</div>
+              </div>
+            </div>
+            <div class="liga-card__body">
+              <p class="liga-card__desc">
+                Dedicada ao atendimento inicial ao paciente politraumatizado, a
+                Liga do Trauma forma acadêmicos em protocolos de emergência,
+                suporte de vida no trauma e discussão de casos, com foco em
+                agilidade e segurança no atendimento pré e intra-hospitalar.
+              </p>
+              <div class="liga-card__tags">
+                <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Cirurgia</span>
+                <span class="liga-tag"><i class="fa-solid fa-truck-medical" aria-hidden="true"></i> Trauma</span>
+              </div>
+              <a href="https://www.instagram.com/ligadotraumauftm/" target="_blank" rel="noopener" class="liga-card__link">
+                Seguir no Instagram <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- Liga de Diabetes Mellitus -->
+          <article class="liga-card" data-cat="clinica" data-aos="fade-up" data-aos-delay="0">
+            <div class="liga-card__header">
+              <div class="liga-card__icon-wrap"><img src="img/logo-ldm.png" alt="Logo LDM"></div>
+              <div class="liga-card__heading">
+                <span class="liga-card__sigla">LDM</span>
+                <div class="liga-card__name">Liga de Diabetes Mellitus</div>
+              </div>
+            </div>
+            <div class="liga-card__body">
+              <p class="liga-card__desc">
+                Liga dedicada ao estudo do diabetes mellitus, seus mecanismos,
+                complicações e tratamento, com aulas teóricas, discussão de
+                casos e ações de extensão voltadas à prevenção e ao cuidado
+                do paciente diabético na comunidade.
+              </p>
+              <div class="liga-card__tags">
+                <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Clínica</span>
+                <span class="liga-tag"><i class="fa-solid fa-droplet" aria-hidden="true"></i> Endocrinologia</span>
+              </div>
+              <a href="https://www.instagram.com/ligadediabetesuftm/" target="_blank" rel="noopener" class="liga-card__link">
+                Seguir no Instagram <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- Liga de Cirurgia Plástica e Dermatologia -->
+          <article class="liga-card" data-cat="cirurgia" data-aos="fade-up" data-aos-delay="60">
+            <div class="liga-card__header">
+              <div class="liga-card__icon-wrap"><img src="img/logo-lcpd.png" alt="Logo LCPD"></div>
+              <div class="liga-card__heading">
+                <span class="liga-card__sigla">LCPD</span>
+                <div class="liga-card__name">Liga de Cirurgia Plástica e Dermatologia</div>
+              </div>
+            </div>
+            <div class="liga-card__body">
+              <p class="liga-card__desc">
+                Aproxima o acadêmico das técnicas de cirurgia plástica
+                reparadora e estética e da dermatologia clínica, com aulas
+                teóricas, discussão de casos e acompanhamento de
+                procedimentos ambulatoriais e cirúrgicos.
+              </p>
+              <div class="liga-card__tags">
+                <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Cirurgia</span>
+                <span class="liga-tag"><i class="fa-solid fa-spa" aria-hidden="true"></i> Dermatologia</span>
+              </div>
+              <a href="https://www.instagram.com/lcpd.uftm/" target="_blank" rel="noopener" class="liga-card__link">
+                Seguir no Instagram <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- Liga Acadêmica de Oftalmologia do Triângulo Mineiro -->
+          <article class="liga-card" data-cat="clinica" data-aos="fade-up" data-aos-delay="120">
+            <div class="liga-card__header">
+              <div class="liga-card__icon-wrap"><img src="img/logo-lotm.png" alt="Logo LOTM"></div>
+              <div class="liga-card__heading">
+                <span class="liga-card__sigla">LOTM</span>
+                <div class="liga-card__name">Liga Acadêmica de Oftalmologia do Triângulo Mineiro</div>
+              </div>
+            </div>
+            <div class="liga-card__body">
+              <p class="liga-card__desc">
+                Liga voltada ao estudo da oftalmologia, com aulas teóricas
+                sobre as principais doenças oculares, acompanhamento de
+                consultas e procedimentos, além de ações de extensão em
+                saúde ocular para a comunidade.
+              </p>
+              <div class="liga-card__tags">
+                <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Clínica</span>
+                <span class="liga-tag"><i class="fa-solid fa-eye" aria-hidden="true"></i> Oftalmologia</span>
+              </div>
+              <a href="https://www.instagram.com/ligaoftalmotm_lotm/" target="_blank" rel="noopener" class="liga-card__link">
+                Seguir no Instagram <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- Liga Acadêmica de Medicina Integrada ao Exercício -->
+          <article class="liga-card" data-cat="clinica" data-aos="fade-up" data-aos-delay="180">
+            <div class="liga-card__header">
+              <div class="liga-card__icon-wrap"><img src="img/logo-lamie.png" alt="Logo LAMIE"></div>
+              <div class="liga-card__heading">
+                <span class="liga-card__sigla">LAMIE</span>
+                <div class="liga-card__name">Liga Acadêmica de Medicina Integrada ao Exercício</div>
+              </div>
+            </div>
+            <div class="liga-card__body">
+              <p class="liga-card__desc">
+                Estuda a relação entre atividade física e saúde, unindo
+                medicina esportiva e prescrição de exercício, com aulas
+                teóricas, vivências práticas e ações de promoção de saúde
+                por meio do exercício físico.
+              </p>
+              <div class="liga-card__tags">
+                <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Clínica</span>
+                <span class="liga-tag"><i class="fa-solid fa-person-running" aria-hidden="true"></i> Medicina do Exercício</span>
+              </div>
+              <a href="https://www.instagram.com/lamieuftm/" target="_blank" rel="noopener" class="liga-card__link">
+                Seguir no Instagram <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- Liga Acadêmica de Clínica Médica -->
+          <article class="liga-card" data-cat="clinica" data-aos="fade-up" data-aos-delay="240">
+            <div class="liga-card__header">
+              <div class="liga-card__icon-wrap"><img src="img/logo-lacm.png" alt="Logo LACM"></div>
+              <div class="liga-card__heading">
+                <span class="liga-card__sigla">LACM</span>
+                <div class="liga-card__name">Liga Acadêmica de Clínica Médica</div>
+              </div>
+            </div>
+            <div class="liga-card__body">
+              <p class="liga-card__desc">
+                Volta-se ao raciocínio clínico do paciente internado e
+                ambulatorial, com discussão de casos, aulas teóricas e
+                acompanhamento de visitas e plantões na Clínica Médica do
+                hospital universitário.
+              </p>
+              <div class="liga-card__tags">
+                <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Clínica</span>
+                <span class="liga-tag"><i class="fa-solid fa-stethoscope" aria-hidden="true"></i> Clínica Médica</span>
+              </div>
+              <a href="https://www.instagram.com/lacmeduftm/" target="_blank" rel="noopener" class="liga-card__link">
+                Seguir no Instagram <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- Liga Acadêmica de Medicina Tropical -->
+          <article class="liga-card" data-cat="clinica" data-aos="fade-up" data-aos-delay="300">
+            <div class="liga-card__header">
+              <div class="liga-card__icon-wrap"><img src="img/logo-lamti.png" alt="Logo LAMTI"></div>
+              <div class="liga-card__heading">
+                <span class="liga-card__sigla">LAMTI</span>
+                <div class="liga-card__name">Liga Acadêmica de Medicina Tropical</div>
+              </div>
+            </div>
+            <div class="liga-card__body">
+              <p class="liga-card__desc">
+                Dedicada ao estudo das doenças tropicais e infectoparasitárias
+                prevalentes na região, com aulas teóricas, discussão de casos
+                e ações de extensão voltadas à prevenção e ao diagnóstico
+                precoce.
+              </p>
+              <div class="liga-card__tags">
+                <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Clínica</span>
+                <span class="liga-tag"><i class="fa-solid fa-mosquito" aria-hidden="true"></i> Medicina Tropical</span>
+              </div>
+              <a href="https://www.instagram.com/lamtiuftm/" target="_blank" rel="noopener" class="liga-card__link">
+                Seguir no Instagram <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- Liga Acadêmica de Pneumologia e Prevenção ao Tabagismo -->
+          <article class="liga-card" data-cat="clinica" data-aos="fade-up" data-aos-delay="360">
+            <div class="liga-card__header">
+              <div class="liga-card__icon-wrap"><img src="img/logo-lappt.png" alt="Logo LAPPT"></div>
+              <div class="liga-card__heading">
+                <span class="liga-card__sigla">LAPPT</span>
+                <div class="liga-card__name">Liga Acadêmica de Pneumologia e Prevenção ao Tabagismo</div>
+              </div>
+            </div>
+            <div class="liga-card__body">
+              <p class="liga-card__desc">
+                Estuda as doenças respiratórias e atua na prevenção e no
+                combate ao tabagismo, com aulas teóricas, acompanhamento
+                ambulatorial e ações extensionistas de conscientização na
+                comunidade.
+              </p>
+              <div class="liga-card__tags">
+                <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Clínica</span>
+                <span class="liga-tag"><i class="fa-solid fa-lungs" aria-hidden="true"></i> Pneumologia</span>
+              </div>
+              <a href="https://www.instagram.com/lappt.uftm/" target="_blank" rel="noopener" class="liga-card__link">
+                Seguir no Instagram <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+              </a>
             </div>
           </article>
 
             </div><!-- /ligas-slider__track -->
+
           </div><!-- /ligas-slider -->
+
           <button class="slider-side-btn" id="ligasNext" aria-label="Próxima liga">
             <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
           </button>
         </div><!-- /ligas-slider-wrap -->
         <div class="slider-controls">
-          <span class="slider-counter" id="ligasCounter" aria-live="polite">1 / 12</span>
+          <span class="slider-counter" id="ligasCounter" aria-live="polite">1 / 21</span>
           <div class="slider-dots" id="ligasDots" aria-hidden="true"></div>
         </div>
 
@@ -1753,59 +2280,45 @@
 
           <div class="outras-grid">
             <div class="outra-liga">
-              <div class="outra-liga__icon"><i class="fa-solid fa-bone" aria-hidden="true"></i></div>
+              <div class="outra-liga__icon"><i class="fa-solid fa-microscope" aria-hidden="true"></i></div>
               <div>
-                <div class="outra-liga__name">Liga Acadêmica de Ortopedia e Traumatologia</div>
-                <div class="outra-liga__cat">Cirurgia · Ortopedia</div>
+                <div class="outra-liga__name">Liga Acadêmica de Patologia</div>
+                <div class="outra-liga__cat">Pesquisa · Patologia</div>
               </div>
             </div>
             <div class="outra-liga">
-              <div class="outra-liga__icon"><i class="fa-solid fa-eye" aria-hidden="true"></i></div>
+              <div class="outra-liga__icon"><i class="fa-solid fa-droplet" aria-hidden="true"></i></div>
               <div>
-                <div class="outra-liga__name">Liga Acadêmica de Oftalmologia</div>
-                <div class="outra-liga__cat">Clínica · Oftalmologia</div>
+                <div class="outra-liga__name">Liga Acadêmica de Patologia Geral e Nefropatologia</div>
+                <div class="outra-liga__cat">Pesquisa · Nefropatologia</div>
               </div>
             </div>
             <div class="outra-liga">
-              <div class="outra-liga__icon"><i class="fa-solid fa-lungs" aria-hidden="true"></i></div>
+              <div class="outra-liga__icon"><i class="fa-solid fa-ear-listen" aria-hidden="true"></i></div>
               <div>
-                <div class="outra-liga__name">Liga Acadêmica de Pneumologia</div>
-                <div class="outra-liga__cat">Clínica · Pneumologia</div>
+                <div class="outra-liga__name">Liga Universitária de Otorrinolaringologia</div>
+                <div class="outra-liga__cat">Clínica · Otorrinolaringologia</div>
               </div>
             </div>
             <div class="outra-liga">
-              <div class="outra-liga__icon"><i class="fa-solid fa-shield-virus" aria-hidden="true"></i></div>
+              <div class="outra-liga__icon"><i class="fa-solid fa-hand-holding-heart" aria-hidden="true"></i></div>
               <div>
-                <div class="outra-liga__name">Liga Acadêmica de Infectologia</div>
-                <div class="outra-liga__cat">Clínica · Infectologia</div>
+                <div class="outra-liga__name">Liga Acadêmica de Cuidados Paliativos em Pediatria</div>
+                <div class="outra-liga__cat">Materno-infantil · Cuidados Paliativos</div>
               </div>
             </div>
             <div class="outra-liga">
-              <div class="outra-liga__icon"><i class="fa-solid fa-child" aria-hidden="true"></i></div>
+              <div class="outra-liga__icon"><i class="fa-solid fa-x-ray" aria-hidden="true"></i></div>
               <div>
-                <div class="outra-liga__name">Liga Acadêmica de Pediatria</div>
-                <div class="outra-liga__cat">Materno-infantil · Pediatria</div>
+                <div class="outra-liga__name">Liga Acadêmica de Radiologia e Diagnóstico por Imagem</div>
+                <div class="outra-liga__cat">Clínica · Radiologia</div>
               </div>
             </div>
             <div class="outra-liga">
-              <div class="outra-liga__icon"><i class="fa-solid fa-dna" aria-hidden="true"></i></div>
+              <div class="outra-liga__icon"><i class="fa-solid fa-wheelchair" aria-hidden="true"></i></div>
               <div>
-                <div class="outra-liga__name">Liga Acadêmica de Genética Médica</div>
-                <div class="outra-liga__cat">Pesquisa · Genética</div>
-              </div>
-            </div>
-            <div class="outra-liga">
-              <div class="outra-liga__icon"><i class="fa-solid fa-pills" aria-hidden="true"></i></div>
-              <div>
-                <div class="outra-liga__name">Liga Acadêmica de Medicina de Família e Comunidade</div>
-                <div class="outra-liga__cat">Atenção Primária · Extensão</div>
-              </div>
-            </div>
-            <div class="outra-liga">
-              <div class="outra-liga__icon"><i class="fa-solid fa-hand-holding-medical" aria-hidden="true"></i></div>
-              <div>
-                <div class="outra-liga__name">Liga Acadêmica de Cuidados Paliativos</div>
-                <div class="outra-liga__cat">Humanização · Cuidados Paliativos</div>
+                <div class="outra-liga__name">Liga de Saúde do Idoso</div>
+                <div class="outra-liga__cat">Humanização · Geriatria</div>
               </div>
             </div>
           </div>
@@ -1826,10 +2339,6 @@
           de conhecimento e serviço à saúde.
         </p>
         <div class="ligas-cta__actions">
-          <a href="https://dagvmeduftm.wordpress.com/ligas-academicas/" target="_blank" rel="noopener" class="btn btn--accent">
-            <i class="fa-solid fa-external-link-alt" aria-hidden="true"></i>
-            Site Oficial das Ligas
-          </a>
           <a href="sobre.html" class="btn btn--ghost-white">
             <i class="fa-solid fa-building-columns" aria-hidden="true"></i>
             Conhecer o DAGV
@@ -1849,28 +2358,46 @@
        ══════════════════════════════════════════════════════════ -->
   <footer class="footer">
     <div class="container footer__inner">
+
       <div class="footer__brand">
-        <img src="img/logo dourada-sem fundo.png" alt="Logo DAGV" class="footer__logo" width="64" height="54" loading="lazy" />
+        <img
+          src="img/logo dourada-sem fundo.png"
+          alt="Logo DAGV"
+          class="footer__logo"
+          width="64" height="54"
+          loading="lazy"
+        />
         <div>
           <p class="footer__name">DAGV – Gaspar Vianna</p>
           <p class="footer__sub">Medicina UFTM · Uberaba – MG</p>
         </div>
       </div>
+
       <nav class="footer__links" aria-label="Links úteis">
-        <a href="https://dagvmeduftm.wordpress.com/estatuto-dagv/" target="_blank" rel="noopener">Estatuto</a>
-        <a href="ligas.html">Ligas</a>
-        <a href="https://dagvmeduftm.wordpress.com/cursinho-carolina/" target="_blank" rel="noopener">Cursinho Carolina</a>
-        <a href="https://dagvmeduftm.wordpress.com/pet-medicina-1/" target="_blank" rel="noopener">PET Medicina</a>
-        <a href="https://dagvmeduftm.wordpress.com/dce-uftm/" target="_blank" rel="noopener">DCE UFTM</a>
+        <a href="estatuto.html">Estatuto</a>
+        <a href="criadores.html">Criadores</a>
+        <a href="sobre.html">Sobre o DAGV</a>
+        <a href="coordenacao.html">Coordenação</a>
+        <a href="historico2.html">Resgate Histórico</a>
+        <a href="index.html#contact">Suporte</a>
       </nav>
+
       <div class="footer__social">
-        <a href="https://www.instagram.com/dagvmeduftm/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a href="https://www.facebook.com/profile.php?id=100009254539973" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
-        <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7" target="_blank" rel="noopener" aria-label="Contato"><i class="fa-solid fa-envelope"></i></a>
+        <a href="https://www.instagram.com/dagvmeduftm/" target="_blank" rel="noopener" aria-label="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=100009254539973" target="_blank" rel="noopener" aria-label="Facebook">
+          <i class="fa-brands fa-facebook"></i>
+        </a>
+        <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7" target="_blank" rel="noopener" aria-label="Formulário de contato">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
       </div>
+
     </div>
     <div class="footer__bottom">
       <p>&copy; <span id="year"></span> Diretório Acadêmico Gaspar Vianna – Medicina UFTM. Todos os direitos reservados.</p>
+      <p class="footer__credit">Desenvolvido por <a href="criadores.html">Sérgio Lemuel Soares Santos &amp; João Paulo Soares Santos</a></p>
     </div>
   </footer>
 
@@ -1929,6 +2456,15 @@
         });
       }
 
+      function syncHeight() {
+        var active = visibleCards[currentIdx];
+        if (!active || !slider) return;
+        /* mede a altura real do conteúdo do card ativo (evita cortar no mobile) */
+        var h = active.scrollHeight;
+        var minH = window.innerWidth <= 640 ? 640 : 520;
+        slider.style.height = Math.max(h, minH) + 'px';
+      }
+
       function render() {
         var n = visibleCards.length;
         showCard(currentIdx);
@@ -1940,7 +2476,14 @@
         }
         if (prevBtn) prevBtn.disabled = currentIdx === 0;
         if (nextBtn) nextBtn.disabled = currentIdx >= n - 1;
+        /* pequeno delay pra garantir que o layout do card ativo já foi aplicado */
+        requestAnimationFrame(syncHeight);
       }
+
+      window.addEventListener('resize', function () {
+        clearTimeout(window._ligasResizeT);
+        window._ligasResizeT = setTimeout(syncHeight, 150);
+      }, { passive: true });
 
       function goTo(idx) {
         var n = visibleCards.length;

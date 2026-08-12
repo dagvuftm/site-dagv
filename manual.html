@@ -2,6 +2,13 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="48x48" href="img/favicon-48x48.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="img/android-chrome-192x192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="img/android-chrome-512x512.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Manual do Estudante DAGV – Tudo o que você precisa saber sobre horas complementares, campi, restaurante universitário e muito mais." />
   <title>Manual do Estudante – DAGV | Medicina UFTM</title>
@@ -111,6 +118,10 @@
     justify-content: center;
     animation: slideUp 1s var(--ease) .25s both;
   }
+  .manual-hero__actions {
+    display: flex; flex-wrap: wrap; gap: .8rem;
+    justify-content: center; margin-top: var(--space-lg);
+  }
   .manual-hero__nav-btn {
     display: inline-flex; align-items: center; gap: .45em;
     font-size: .8rem; font-weight: 600;
@@ -143,7 +154,7 @@
     display: flex; align-items: center; gap: .4em;
     font-size: .8rem; font-weight: 600; color: var(--clr-gray-3);
     padding: .4em 1em; border-radius: var(--radius-sm);
-    white-space: nowrap; text-decoration: none;
+    text-align: center; text-decoration: none;
     border: 1px solid transparent;
     transition: background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast);
   }
@@ -167,6 +178,12 @@
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: var(--space-md);
     margin-top: var(--space-xl);
+  }
+  /* Grids com poucos itens (ex.: os 3 cards de apoio ao RU) não devem
+     esticar/deslocar à esquerda quando não preenchem uma linha inteira */
+  .info-grid--center {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 320px));
+    justify-content: center;
   }
   .info-card {
     background: var(--clr-white);
@@ -258,9 +275,17 @@
   /* ── Campus cards ──────────────────────────────────────────── */
   .campus-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 340px));
+    justify-content: center;
     gap: var(--space-md);
     margin-top: var(--space-xl);
+  }
+  /* Variante usada na seção Siglas: 4 cards menores, cabem lado a lado
+     numa única linha em telas largas, mas encolhem/agrupam normalmente
+     via auto-fit — sem precisar de breakpoint novo. */
+  .campus-grid--compact {
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    justify-content: center;
   }
   .campus-card {
     background: var(--clr-white);
@@ -432,6 +457,7 @@
     background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.72);
     transform: translateY(-2px);
   }
+  .btn--sm { font-size: .85rem; padding: .65em 1.5em; }
 
   /* ── back link ─────────────────────────────────────────────── */
   .back-link {
@@ -454,14 +480,111 @@
     .info-grid   { grid-template-columns: 1fr; }
     .campus-grid { grid-template-columns: 1fr; }
     .manual-hero__nav { flex-direction: column; align-items: stretch; }
-    .manual-hero__nav-btn { justify-content: center; }
+    .manual-hero__nav-btn { justify-content: center; text-align: center; }
+    .manual-hero__actions { flex-direction: column; align-items: stretch; }
+    .manual-hero__actions .btn { justify-content: center; text-align: center; }
     .manual-cta__actions { flex-direction: column; align-items: stretch; }
     .manual-cta__actions .btn { justify-content: center; }
+    .manual-anchors__list {
+      display: grid; grid-template-columns: 1fr 1fr; gap: .4rem;
+    }
     .manual-anchors__link {
-      flex: 1 1 calc(50% - .3rem); justify-content: center;
-      text-align: center; min-height: 36px;
+      justify-content: center; text-align: center;
+      min-height: 44px; padding: .5em .6em;
     }
   }
+  /* Mini linha do tempo (destaques UFTM) */
+  .uftm-timeline {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: .8rem;
+  }
+  .uftm-timeline__item {
+    background: var(--clr-white);
+    border: 1px solid var(--clr-gray-1);
+    border-radius: var(--radius-sm);
+    padding: .8rem .9rem;
+    font-size: .82rem; color: var(--clr-gray-3); line-height: 1.4;
+  }
+  .uftm-timeline__item span {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.15rem; font-weight: 700; color: var(--clr-green);
+    margin-bottom: .2rem;
+  }
+  .manual-accordion { margin-top: 1rem; }
+
+  /* Grade compacta da cronologia completa (dentro do accordion) */
+  .uftm-chrono-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: .6rem .8rem;
+  }
+  .uftm-chrono-grid > div {
+    font-size: .84rem; color: var(--clr-gray-3); line-height: 1.55;
+    padding-bottom: .5rem; border-bottom: 1px dashed var(--clr-gray-1);
+  }
+  .uftm-chrono-grid > div strong {
+    color: var(--clr-green); font-weight: 700; margin-right: .35em;
+  }
+
+  /* Grade de siglas */
+  .siglas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: .6rem .9rem;
+  }
+  .siglas-grid__item {
+    background: var(--clr-white);
+    border: 1px solid var(--clr-gray-1);
+    border-radius: var(--radius-sm);
+    padding: .6rem .9rem;
+    font-size: .84rem; color: var(--clr-gray-3); line-height: 1.4;
+  }
+  .siglas-grid__item strong {
+    color: var(--clr-green-dark); font-weight: 700; margin-right: .4em;
+  }
+  @media (max-width: 640px) {
+    .uftm-chrono-grid { grid-template-columns: 1fr; }
+  }
+
+  /* Componentes reaproveitados de representacoes-academicas.html para as
+     novas seções (detalhes expansíveis / listas de definição) */
+  .detail-text ul { margin: 0 0 1rem; padding-left: 1.3rem; font-size: .92rem; color: var(--clr-gray-3); line-height: 1.75; }
+  .detail-text li { margin-bottom: .4rem; }
+  .rep-entity__deflist { margin: 0 0 1rem; }
+  .rep-entity__deflist dt {
+    font-weight: 700; color: var(--clr-dark); font-size: .9rem;
+    margin-top: .9rem;
+  }
+  .rep-entity__deflist dt:first-child { margin-top: 0; }
+  .rep-entity__deflist dd {
+    margin: .2rem 0 0; font-size: .9rem; color: var(--clr-gray-3); line-height: 1.7;
+  }
+  .rep-entity__toggle {
+    display: inline-flex; align-items: center; gap: .5em;
+    font-size: .85rem; font-weight: 600; color: var(--clr-green);
+    cursor: pointer; margin-top: .6rem; list-style: none;
+    padding: .5em 1em;
+    border: 1.5px solid rgba(42,122,75,.3);
+    border-radius: var(--radius-pill);
+    background: var(--clr-green-light);
+    width: fit-content;
+    transition: background var(--dur-fast), border-color var(--dur-fast);
+  }
+  .rep-entity__toggle:hover { background: rgba(42,122,75,.15); border-color: var(--clr-green); }
+  .rep-entity__toggle::-webkit-details-marker { display: none; }
+  .rep-entity__toggle::after {
+    content: '';
+    width: 8px; height: 8px;
+    border-right: 2px solid var(--clr-green);
+    border-bottom: 2px solid var(--clr-green);
+    transform: rotate(45deg);
+    transition: transform 220ms var(--ease);
+    margin-top: -3px;
+  }
+  details[open] > .rep-entity__toggle::after { transform: rotate(225deg); margin-top: 3px; }
+  .rep-entity__more { padding-top: .8rem; }
   </style>
 </head>
 <body>
@@ -472,10 +595,23 @@
   <header id="header" class="header">
     <div class="container header__inner">
 
+      <!-- =====================================================
+           [ADIÇÃO] Aba de menu – inserida antes do brand.
+           Posicionada à esquerda do logotipo graças ao flex
+           do .header__inner existente.
+           Nenhuma classe/id existente foi alterada.
+           ===================================================== -->
       <div class="sidemenu-wrap" id="sidemenuWrap">
-        <button class="sidemenu-tab" id="sidemenuTab"
-          aria-haspopup="true" aria-expanded="false"
-          aria-controls="sidemenuPanel" aria-label="Abrir menu de navegação">
+
+        <!-- Aba toggle -->
+        <button
+          class="sidemenu-tab"
+          id="sidemenuTab"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="sidemenuPanel"
+          aria-label="Abrir menu de navegação"
+        >
           <span class="sidemenu-tab__icon" aria-hidden="true">
             <span class="sidemenu-tab__bar"></span>
             <span class="sidemenu-tab__bar"></span>
@@ -484,8 +620,11 @@
           <span class="sidemenu-tab__label">Menu</span>
         </button>
 
+        <!-- Painel principal -->
         <div class="sidemenu-panel" id="sidemenuPanel" role="navigation" aria-label="Menu lateral">
           <ul class="sidemenu-list">
+
+            <!-- ── Links diretos principais ── -->
             <li class="sidemenu-list__item">
               <a href="sobre.html" class="sidemenu-list__link">
                 Sobre o DAGV
@@ -493,7 +632,7 @@
               </a>
             </li>
             <li class="sidemenu-list__item">
-              <a href="index.html#historico" class="sidemenu-list__link sidemenu-list__link--historico">
+              <a href="historico2.html" class="sidemenu-list__link sidemenu-list__link--historico">
                 Resgate Histórico
                 <i class="fa-solid fa-scroll sidemenu-list__icon" aria-hidden="true"></i>
               </a>
@@ -504,21 +643,35 @@
                 <i class="fa-solid fa-users sidemenu-list__icon" aria-hidden="true"></i>
               </a>
             </li>
-            <li class="sidemenu-list__sep" role="separator"></li>
             <li class="sidemenu-list__item">
-              <button class="sidemenu-list__btn" data-dropdown="informacoes"
-                aria-haspopup="true" aria-expanded="false">
+              <a href="criadores.html" class="sidemenu-list__link">
+                Criadores
+                <i class="fa-solid fa-code sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Dropdown: Informações DAGV ── -->
+            <li class="sidemenu-list__item">
+              <button
+                class="sidemenu-list__btn"
+                data-dropdown="informacoes"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
                 Informações DAGV
                 <i class="fa-solid fa-chevron-down sidemenu-list__arrow" aria-hidden="true"></i>
               </button>
               <ul class="sidemenu-dropdown" id="dropInformacoes">
-                <li><a href="https://dagvmeduftm.wordpress.com/estatuto-dagv/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">Estatuto</a></li>
-                <li><a href="https://dagvmeduftm.wordpress.com/galeria-de-fotos/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">Galeria de Fotos</a></li>
-              </ul>
+                <li><a href="estatuto.html" class="sidemenu-dropdown__link">Estatuto</a></li>              </ul>
             </li>
+
             <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Links institucionais ── -->
             <li class="sidemenu-list__item">
-              <a href="https://dagvmeduftm.wordpress.com/pet-medicina-1/" target="_blank" rel="noopener" class="sidemenu-list__link">
+              <a href="pet-medicina.html" class="sidemenu-list__link">
                 PET Medicina
                 <i class="fa-solid fa-flask sidemenu-list__icon" aria-hidden="true"></i>
               </a>
@@ -529,50 +682,71 @@
                 <i class="fa-solid fa-graduation-cap sidemenu-list__icon" aria-hidden="true"></i>
               </a>
             </li>
-            <!-- Item ativo: Manual do Estudante -->
             <li class="sidemenu-list__item">
-              <a href="manual.html" class="sidemenu-list__link sidemenu-list__link--active">
+              <a href="manual.html" class="sidemenu-list__link">
                 Manual do Estudante
                 <i class="fa-solid fa-book-open-reader sidemenu-list__icon" aria-hidden="true"></i>
               </a>
             </li>
             <li class="sidemenu-list__item">
-              <a href="https://dagvmeduftm.wordpress.com/cursinho-carolina/" target="_blank" rel="noopener" class="sidemenu-list__link">
+              <a href="cursinho-carolina.html" class="sidemenu-list__link">
                 Cursinho Carolina
                 <i class="fa-solid fa-book-open sidemenu-list__icon" aria-hidden="true"></i>
               </a>
             </li>
-            <li class="sidemenu-list__sep" role="separator"></li>
             <li class="sidemenu-list__item">
-              <button class="sidemenu-list__btn" data-dropdown="instituicoes"
-                aria-haspopup="true" aria-expanded="false">
-                Instituições
-                <i class="fa-solid fa-chevron-down sidemenu-list__arrow" aria-hidden="true"></i>
-              </button>
-              <ul class="sidemenu-dropdown" id="dropInstituicoes">
-                <li><a href="https://dagvmeduftm.wordpress.com/denem/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">DENEM</a></li>
-                <li><a href="https://dagvmeduftm.wordpress.com/dce-uftm/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">DCE</a></li>
-                <li><a href="https://dagvmeduftm.wordpress.com/cvu-uberaba/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">CVU</a></li>
-                <li><a href="https://dagvmeduftm.wordpress.com/cepop-uftm/" target="_blank" rel="noopener" class="sidemenu-dropdown__link">CEPOP</a></li>
-              </ul>
+              <a href="aaads-cachacina.html" class="sidemenu-list__link">
+                AAADS e Cachacina
+                <i class="fa-solid fa-shield-halved sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
             </li>
+            <li class="sidemenu-list__item">
+              <a href="representacoes-academicas.html" class="sidemenu-list__link">
+                Representações Acadêmicas
+                <i class="fa-solid fa-landmark sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+
             <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Final ── -->
             <li class="sidemenu-list__item">
               <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7" target="_blank" rel="noopener" class="sidemenu-list__link">
                 Suporte
                 <i class="fa-solid fa-headset sidemenu-list__icon" aria-hidden="true"></i>
               </a>
             </li>
-          </ul>
-        </div>
-      </div>
 
+          </ul>
+        </div><!-- /sidemenu-panel -->
+
+      </div><!-- /sidemenu-wrap -->
+      <!-- ===================================================== -->
+
+      <!-- Logo + Nome -->
       <a href="index.html" class="header__brand">
         <div class="header__logo-wrap">
-          <img src="img/logo dourada-sem fundo.png" alt="Logo DAGV"
-            class="header__logo-svg logo--gold" width="80" height="68" loading="eager" />
-          <img src="img/Logo DAGV sem fundo verm.png" alt="Logo DAGV"
-            class="header__logo-svg logo--red" width="80" height="68" loading="eager" aria-hidden="true" />
+          <!--
+            [ALTERAÇÃO] Logo DAGV – componente Logo dinâmico.
+            - Fundo vermelho/transparente → logo dourada (img.logo--gold)
+            - Fundo branco (scrolled)     → logo vermelha (img.logo--red)
+            A troca é feita via CSS: visibilidade controlada por .header.scrolled
+          -->
+          <img
+            src="img/logo dourada-sem fundo.png"
+            alt="Logo DAGV – Diretório Acadêmico Gaspar Vianna"
+            class="header__logo-svg logo--gold"
+            width="80" height="68"
+            loading="eager"
+          />
+          <img
+            src="img/Logo DAGV sem fundo verm.png"
+            alt="Logo DAGV – Diretório Acadêmico Gaspar Vianna"
+            class="header__logo-svg logo--red"
+            width="80" height="68"
+            loading="eager"
+            aria-hidden="true"
+          />
         </div>
         <div class="header__title-wrap">
           <span class="header__dagv"></span>
@@ -580,28 +754,33 @@
         </div>
       </a>
 
+      <!-- Nav desktop -->
       <nav class="nav" aria-label="Navegação principal">
         <ul class="nav__list">
-          <li><a href="sobre.html"         class="nav__link">Sobre</a></li>
-          <li><a href="coordenacao.html"   class="nav__link">Coordenações</a></li>
-          <li><a href="manual.html"        class="nav__link nav__link--active">Manual</a></li>
-          <li><a href="index.html#contact" class="nav__link nav__link--cta">Contato</a></li>
+          <li><a href="sobre.html"                    class="nav__link">Sobre</a></li>
+          <li><a href="coordenacao.html"              class="nav__link">Coordenações</a></li>
+          <li><a href="index.html#events"             class="nav__link">Instituições UFTM</a></li>
+          <li><a href="index.html#eventos-academicos" class="nav__link">Eventos</a></li>
+          <li><a href="index.html#contact"            class="nav__link nav__link--cta">Contato</a></li>
         </ul>
       </nav>
 
+      <!-- Hamburguer -->
       <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
 
+    <!-- Nav mobile (drawer) -->
     <nav class="nav-mobile" id="navMobile" aria-hidden="true">
       <ul class="nav-mobile__list">
-        <li><a href="index.html"         class="nav-mobile__link">Início</a></li>
-        <li><a href="sobre.html"         class="nav-mobile__link">Sobre o DAGV</a></li>
-        <li><a href="coordenacao.html"   class="nav-mobile__link">Coordenação</a></li>
-        <li><a href="ligas.html"         class="nav-mobile__link">Ligas Acadêmicas</a></li>
-        <li><a href="manual.html"        class="nav-mobile__link">Manual do Estudante</a></li>
-        <li><a href="index.html#contact" class="nav-mobile__link">Contato</a></li>
+        <li><a href="index.html"                    class="nav-mobile__link">Início</a></li>
+        <li><a href="sobre.html"                    class="nav-mobile__link">Sobre</a></li>
+        <li><a href="criadores.html"                class="nav-mobile__link">Criadores</a></li>
+        <li><a href="coordenacao.html"              class="nav-mobile__link">Coordenações</a></li>
+        <li><a href="index.html#events"             class="nav-mobile__link">Instituições UFTM</a></li>
+        <li><a href="index.html#eventos-academicos" class="nav-mobile__link">Eventos</a></li>
+        <li><a href="index.html#contact"            class="nav-mobile__link">Contato</a></li>
       </ul>
     </nav>
   </header>
@@ -628,10 +807,25 @@
           Tudo o que você precisa saber para se orientar na vida acadêmica da Medicina UFTM —
           Guia de horas complementares, campi, restaurante universitário e muito mais.
         </p>
+        <div class="manual-hero__actions">
+          <a href="documentos/manual-do-calouro-2026.pdf" target="_blank" rel="noopener" class="btn btn--accent">
+            <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i>
+            Baixar Manual do Calouro 2026 (PDF)
+          </a>
+          <a href="documentos/guia-de-horas-dagv.pdf" target="_blank" rel="noopener" class="btn btn--ghost-white">
+            <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i>
+            Baixar Guia de Horas (PDF)
+          </a>
+        </div>
         <!-- <div class="manual-hero__nav">
-          <a href="#horas"  class="manual-hero__nav-btn"><i class="fa-solid fa-clock" aria-hidden="true"></i> Manual de Horas</a>
+          <a href="#horas"  class="manual-hero__nav-btn"><i class="fa-solid fa-clock" aria-hidden="true"></i> Guia de Horas</a>
           <a href="#campi"  class="manual-hero__nav-btn"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> Campi e Locais</a>
           <a href="#ru"     class="manual-hero__nav-btn"><i class="fa-solid fa-utensils" aria-hidden="true"></i> Restaurante Universitário</a>
+          <a href="#uftm"     class="manual-hero__nav-btn"><i class="fa-solid fa-building-columns" aria-hidden="true"></i> UFTM</a>
+          <a href="#auxilios" class="manual-hero__nav-btn"><i class="fa-solid fa-hand-holding-dollar" aria-hidden="true"></i> Auxílios Estudantis</a>
+          <a href="#proace"   class="manual-hero__nav-btn"><i class="fa-solid fa-people-group" aria-hidden="true"></i> PROACE</a>
+          <a href="#inclusao" class="manual-hero__nav-btn"><i class="fa-solid fa-universal-access" aria-hidden="true"></i> Tutoria/Monitoria Inclusiva</a>
+          <a href="#siglas"   class="manual-hero__nav-btn"><i class="fa-solid fa-list" aria-hidden="true"></i> Siglas e Localização</a>
         </div> -->
       </div>
     </section>
@@ -641,9 +835,14 @@
          ═══════════════════════════════════════════════════════ -->
     <nav class="manual-anchors" aria-label="Navegação interna">
       <ul class="manual-anchors__list">
-        <li><a href="#horas" class="manual-anchors__link"><i class="fa-solid fa-clock" aria-hidden="true"></i> Manual de Horas</a></li>
+        <li><a href="#horas" class="manual-anchors__link"><i class="fa-solid fa-clock" aria-hidden="true"></i> Guia de Horas</a></li>
         <li><a href="#campi" class="manual-anchors__link"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> Campi e Locais</a></li>
         <li><a href="#ru"    class="manual-anchors__link"><i class="fa-solid fa-utensils" aria-hidden="true"></i> Restaurante Universitário</a></li>
+        <li><a href="#uftm"     class="manual-anchors__link"><i class="fa-solid fa-building-columns" aria-hidden="true"></i> UFTM</a></li>
+        <li><a href="#auxilios" class="manual-anchors__link"><i class="fa-solid fa-hand-holding-dollar" aria-hidden="true"></i> Auxílios Estudantis</a></li>
+        <li><a href="#proace"   class="manual-anchors__link"><i class="fa-solid fa-people-group" aria-hidden="true"></i> PROACE</a></li>
+        <li><a href="#inclusao" class="manual-anchors__link"><i class="fa-solid fa-universal-access" aria-hidden="true"></i> Tutoria/Monitoria Inclusiva</a></li>
+        <li><a href="#siglas"   class="manual-anchors__link"><i class="fa-solid fa-list" aria-hidden="true"></i> Siglas e Localização</a></li>
       </ul>
     </nav>
 
@@ -655,10 +854,10 @@
 
         <div class="section-header" data-aos="fade-up">
           <span class="section-tag">Carga Horária</span>
-          <h2 class="section-title" id="horas-title">Manual de Horas</h2>
+          <h2 class="section-title" id="horas-title">Guia de Horas</h2>
           <p class="section-desc">
-            Entenda como funcionam as horas complementares, estágios e atividades de extensão
-            no curso de Medicina da UFTM, e saiba onde encontrar os regulamentos oficiais.
+            Guia prático das horas complementares do curso de Medicina da UFTM — o que precisa
+            ser cumprido, como registrar e os prazos que valem a pena anotar.
           </p>
         </div>
 
@@ -666,38 +865,27 @@
 
           <div class="detail-text" data-aos="fade-right">
             <p>
-              O curso de Medicina da UFTM exige o cumprimento de <strong>horas complementares</strong>
-              ao longo da graduação, distribuídas em categorias como ensino, pesquisa, extensão
-              e atividades culturais. Essas horas enriquecem a formação e são obrigatórias para
-              a integralização curricular.
+              Durante a graduação em Medicina na UFTM, além das <strong>disciplinas
+              obrigatórias</strong>, o estudante deve cumprir cargas horárias complementares
+              fundamentais para sua formação acadêmica, científica e profissional. O
+              cumprimento dessas cargas é <strong>obrigatório</strong> e constitui pré-requisito
+              para progressão no curso, especialmente para ingresso no internato médico.
             </p>
             <p>
-              As <strong>Atividades Complementares de Graduação (ACG)</strong> devem ser
-              registradas no sistema acadêmico da UFTM e comprovadas mediante documentação
-              adequada (certificados, declarações, relatórios). Cada categoria tem critérios
-              específicos de validação.
-            </p>
-            <p>
-              Os <strong>estágios extracurriculares</strong> podem ser realizados em hospitais,
-              clínicas e instituições conveniadas, devendo seguir o regulamento próprio e
-              contar com supervisão de profissional habilitado. Verifique os convênios ativos
-              junto à Coordenação do Curso.
-            </p>
-            <p>
-              As atividades de <strong>extensão</strong> — como ligas acadêmicas, projetos
-              comunitários, campanhas de saúde e eventos científicos — são altamente incentivadas
-              e contam para a carga horária complementar, além de enriquecer o currículo
-              acadêmico e profissional.
+              As horas são divididas em três grandes blocos — <strong>AACCs</strong>
+              (atividades acadêmico-científico-culturais), <strong>AEXTs</strong> (atividades de
+              extensão) e <strong>disciplinas eletivas</strong> — cada um com regras próprias de
+              validação, detalhadas logo abaixo.
             </p>
 
             <div style="margin-top: var(--space-md); display: flex; flex-wrap: wrap; gap: .75rem;">
-              <a href="https://www.uftm.edu.br/medicina" target="_blank" rel="noopener" class="btn btn--primary" style="font-size:.85rem;">
-                <i class="fa-solid fa-external-link-alt" aria-hidden="true"></i>
-                Regulamento Oficial (UFTM)
+              <a href="documentos/guia-de-horas-dagv.pdf" target="_blank" rel="noopener" class="btn btn--primary btn--sm">
+                <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i>
+                Baixar Guia de Horas completo (PDF)
               </a>
-              <a href="https://dagvmeduftm.wordpress.com/" target="_blank" rel="noopener" class="btn btn--outline" style="font-size:.85rem;">
-                <i class="fa-brands fa-wordpress" aria-hidden="true"></i>
-                Portal DAGV
+              <a href="https://www.uftm.edu.br/medicina" target="_blank" rel="noopener" class="btn btn--outline btn--sm">
+                <i class="fa-solid fa-external-link-alt" aria-hidden="true"></i>
+                Matriz Curricular (UFTM)
               </a>
             </div>
           </div>
@@ -705,38 +893,141 @@
           <div class="detail-box" data-aos="fade-left" data-aos-delay="100">
             <div class="detail-box__title">
               <i class="fa-solid fa-list-check" aria-hidden="true"></i>
-              Categorias de Horas Complementares
+              Horas a Serem Cumpridas
             </div>
             <div class="detail-items">
               <div class="detail-item">
                 <i class="fa-solid fa-book" aria-hidden="true"></i>
-                <span><strong>Ensino:</strong> Monitorias, tutoria de pares, participação em disciplinas optativas e cursos reconhecidos.</span>
-              </div>
-              <div class="detail-item">
-                <i class="fa-solid fa-microscope" aria-hidden="true"></i>
-                <span><strong>Pesquisa:</strong> Iniciação científica (PIBIC/PIVIC), publicações, apresentações em congressos e simpósios.</span>
+                <span><strong>AACCs</strong> (Atividades Acadêmico-Científico-Culturais): <strong>120h</strong></span>
               </div>
               <div class="detail-item">
                 <i class="fa-solid fa-hands-holding-circle" aria-hidden="true"></i>
-                <span><strong>Extensão:</strong> Ligas acadêmicas, projetos comunitários, campanhas de saúde e ações sociais.</span>
+                <span><strong>AEXTs</strong> (Atividades de Extensão): <strong>675h</strong></span>
               </div>
               <div class="detail-item">
-                <i class="fa-solid fa-masks-theater" aria-hidden="true"></i>
-                <span><strong>Cultural/Esportivo:</strong> Participação em eventos culturais, representação estudantil e atividades esportivas institucionais.</span>
-              </div>
-              <div class="detail-item">
-                <i class="fa-solid fa-briefcase" aria-hidden="true"></i>
-                <span><strong>Estágio extracurricular:</strong> Atividades práticas em serviços de saúde conveniados, com supervisor habilitado.</span>
-              </div>
-              <div class="detail-item">
-                <i class="fa-solid fa-certificate" aria-hidden="true"></i>
-                <span><strong>Outros cursos:</strong> Línguas, informática, primeiros socorros e formações externas reconhecidas.</span>
+                <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+                <span><strong>Disciplinas Eletivas:</strong> <strong>120h</strong></span>
               </div>
             </div>
             <div class="detail-box__note">
-              ⚠️ Consulte o regulamento atualizado das ACG junto à Coordenação do Curso de Medicina da UFTM, pois as normas e cargas horárias mínimas podem ser revistas a cada semestre.
+              ⚠️ Todas as cargas horárias (AACCs, eletivas e extensão) devem estar concluídas
+              até o <strong>8º período</strong> — pré-requisito para entrar no internato (9º período).
             </div>
           </div>
+
+        </div>
+
+        <!-- Accordions com o detalhamento de cada bloco -->
+        <div style="margin-top: var(--space-xl); display: flex; flex-direction: column; gap: .8rem;">
+
+          <details class="manual-accordion">
+            <summary class="rep-entity__toggle">AACCs — Atividades Acadêmico-Científico-Culturais (120h)</summary>
+            <div class="rep-entity__more">
+              <p>
+                As AACCs compreendem atividades complementares que ampliam a formação do
+                estudante: congressos, simpósios e eventos científicos; projetos de pesquisa;
+                monitorias; publicações; representação estudantil; cursos e atividades
+                extracurriculares.
+              </p>
+              <p>
+                Existem limites de horas para cada tipo de atividade — consulte a tabela de
+                AACCs disponível em uftm.edu.br/medicina
+                (<em>Estágio, Normas e Formulários &gt; Formulários e Orientações &gt; Formulário
+                de AACC</em>) ou baixe o guia completo acima, que traz a tabela no Anexo A. Ela é
+                dividida em 4 grandes categorias, cada uma com mínimo e máximo de horas:
+                <strong>Ensino</strong>, <strong>Pesquisa</strong>, <strong>Representações</strong>
+                (facultativo) e <strong>Culturais, sociais, extensão e tutoria</strong>.
+              </p>
+              <div class="ru-notice">
+                <strong>Atenção:</strong> não confunda as horas de extensão dessa última categoria
+                com as AEXTs (item seguinte). Um mesmo certificado não deve ser usado
+                simultaneamente para AACC e AEXT — cada atividade é validada em apenas uma
+                categoria.
+              </div>
+              <p style="margin-top:.8rem;"><strong>Como lançar no SISCAD:</strong></p>
+              <ol style="padding-left: 1.2rem; font-size: .92rem; color: var(--clr-gray-3); line-height: 1.75;">
+                <li>Acessar o menu <strong>"AACC" → "Cadastro das atividades de AACC"</strong></li>
+                <li>Selecionar <strong>"Nova atividade"</strong></li>
+                <li>Informar categoria, tipo de atividade, período e carga horária</li>
+                <li>Clicar em <strong>"Salvar"</strong></li>
+              </ol>
+            </div>
+          </details>
+
+          <details class="manual-accordion">
+            <summary class="rep-entity__toggle">AEXTs — Atividades de Extensão (675h)</summary>
+            <div class="rep-entity__more">
+              <p>
+                As AEXTs são atividades de extensão extra disciplinas que envolvem ações
+                voltadas à comunidade e integração universidade-sociedade, como projetos e
+                programas de extensão e ligas acadêmicas com caráter extensionista. Muitos
+                projetos abrem vagas no início do ano — fique de olho no
+                <a href="https://www.uftm.edu.br/proext/banco-de-oportunidades/discentes" target="_blank" rel="noopener">Banco de Oportunidades da PROEXT</a>.
+              </p>
+              <div class="ru-notice">
+                São validadas como AEXT apenas as atividades em que o aluno participa
+                <strong>ativamente</strong> (certificado de ouvinte não é considerado), e apenas
+                as realizadas <strong>fora</strong> das disciplinas obrigatórias. Diferentemente
+                das AACCs, as AEXTs não possuem tabela de limites — é validada toda a carga
+                horária presente no certificado, desde que emitido pela PROEXT.
+              </div>
+              <p style="margin-top:.8rem;"><strong>Como registrar (via SISCAD):</strong></p>
+              <ol style="padding-left: 1.2rem; font-size: .92rem; color: var(--clr-gray-3); line-height: 1.75;">
+                <li>Acessar <strong>"Extensão" → "Atividades Acadêmicas"</strong></li>
+                <li>Clicar em <strong>"Nova atividade"</strong></li>
+                <li>Preencher título, período, categoria, tipo de atividade e carga horária</li>
+                <li>Clicar em <strong>"Salvar"</strong></li>
+              </ol>
+            </div>
+          </details>
+
+          <details class="manual-accordion">
+            <summary class="rep-entity__toggle">Disciplinas Eletivas (120h)</summary>
+            <div class="rep-entity__more">
+              <p>
+                As eletivas são disciplinas escolhidas pelo estudante para aprofundar
+                conhecimentos em áreas de interesse dentro da Medicina (ex.: Morfologia do
+                Sistema Tegumentar, Medicina Esportiva, Medicina e Espiritualidade, Diversidade
+                Sexual e de Gênero na Saúde, entre outras). A listagem oficial varia a cada
+                semestre conforme a oferta departamental e está na Matriz Curricular vigente em
+                uftm.edu.br/medicina. Devem ser selecionadas durante o período de matrícula no
+                SISCAD.
+              </p>
+              <div class="ru-notice">
+                Disciplinas cursadas em <strong>outros cursos de graduação</strong> não contam
+                como eletiva — isso caracteriza <strong>disciplina optativa</strong>, que exige
+                autorização da coordenação de Medicina e da coordenação do curso pretendido. Os
+                Componentes Curriculares de Enriquecimento (ENC) podem constar no histórico, mas
+                não têm carga horária contabilizada para integralização.
+              </div>
+            </div>
+          </details>
+
+          <details class="manual-accordion">
+            <summary class="rep-entity__toggle">Validação, Prazo e Outras Informações Importantes</summary>
+            <div class="rep-entity__more">
+              <p>
+                O lançamento no SISCAD <strong>não garante validação automática</strong> — é
+                obrigatório guardar todos os certificados para entregá-los à coordenação antes
+                do internato. A opção <strong>"Gerar Requerimento"</strong> deve ser usada
+                <u>apenas no 8º período</u>, no momento de entregar oficialmente todas as horas:
+                ao clicar nela, as atividades são enviadas para análise e o aluno perde o acesso
+                para editar/incluir novas atividades. Não clique antes da hora certa.
+              </p>
+              <div class="ru-notice">
+                Atividades de AACC cadastradas em categoria errada podem ser indeferidas — tire
+                dúvidas com a coordenação sempre que precisar. Os certificados são solicitados
+                pela coordenação no início do 8º período; organize-se para ter tudo pronto até o
+                fim do 7º.
+              </div>
+              <ul style="padding-left: 1.2rem; font-size: .92rem; color: var(--clr-gray-3); line-height: 1.75; margin-top:.8rem;">
+                <li>Preencha regularmente suas horas no SISCAD — não deixe para os períodos finais.</li>
+                <li>Um mesmo certificado não vale para AACC e AEXT ao mesmo tempo.</li>
+                <li>Guarde todos os certificados até a entrega final.</li>
+                <li>Ainda com dúvidas? Procure a coordenação do curso ou um membro do DAGV.</li>
+              </ul>
+            </div>
+          </details>
 
         </div>
 
@@ -745,33 +1036,33 @@
           <div class="info-card" data-aos="fade-up" data-aos-delay="0">
             <div class="info-card__icon"><i class="fa-solid fa-file-circle-check" aria-hidden="true"></i></div>
             <div class="info-card__title">Como registrar horas</div>
-            <p class="info-card__text">Acesse o portal acadêmico da UFTM (SGA ou sistema equivalente), localize a área de Atividades Complementares e faça o upload dos comprovantes em PDF. Aguarde validação da coordenação.</p>
+            <p class="info-card__text">Todo o lançamento de AACC e AEXT é feito pelo SISCAD, no menu correspondente a cada tipo de atividade. Guarde sempre os certificados originais.</p>
             <a href="https://www.uftm.edu.br" target="_blank" rel="noopener" class="info-card__link">
-              Portal Acadêmico UFTM <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              Acessar o SISCAD
             </a>
           </div>
           <div class="info-card" data-aos="fade-up" data-aos-delay="80">
             <div class="info-card__icon"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></div>
             <div class="info-card__title">Ligas Acadêmicas</div>
-            <p class="info-card__text">Participar de uma liga é uma das formas mais ricas de cumprir horas de extensão. Veja todas as ligas vinculadas ao DAGV e saiba como ingressar em cada uma.</p>
+            <p class="info-card__text">Participar de uma liga com caráter extensionista é uma das formas mais ricas de cumprir horas de AEXT. Veja todas as ligas vinculadas ao DAGV.</p>
             <a href="ligas.html" class="info-card__link">
-              Ver ligas acadêmicas <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              Ver ligas acadêmicas
             </a>
           </div>
           <div class="info-card" data-aos="fade-up" data-aos-delay="160">
-            <div class="info-card__icon"><i class="fa-solid fa-flask-vial" aria-hidden="true"></i></div>
-            <div class="info-card__title">Iniciação Científica</div>
-            <p class="info-card__text">O PIBIC e o PIVIC são programas de iniciação científica da UFTM. Contam para horas de pesquisa e são excelentes para o currículo. Os editais abrem geralmente em agosto.</p>
-            <a href="https://www.uftm.edu.br/pesquisa" target="_blank" rel="noopener" class="info-card__link">
-              Pesquisa na UFTM <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            <div class="info-card__icon"><i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i></div>
+            <div class="info-card__title">Tabela completa de AACC</div>
+            <p class="info-card__text">O detalhamento de cada categoria (Ensino, Pesquisa, Representações, Extensão e Tutoria) com horas mínimas e máximas está no Anexo do guia.</p>
+            <a href="documentos/guia-de-horas-dagv.pdf" target="_blank" rel="noopener" class="info-card__link">
+              Baixar tabela (PDF)
             </a>
           </div>
           <div class="info-card" data-aos="fade-up" data-aos-delay="240">
             <div class="info-card__icon"><i class="fa-solid fa-circle-question" aria-hidden="true"></i></div>
             <div class="info-card__title">Dúvidas sobre horas?</div>
-            <p class="info-card__text">Entre em contato com a Coordenadoria de Ensino, Pesquisa e Extensão do DAGV ou envie sua dúvida pelo formulário de suporte. Estamos aqui para ajudar.</p>
+            <p class="info-card__text">Entre em contato com a coordenação do curso ou envie sua dúvida pelo formulário de suporte do DAGV. Estamos aqui para ajudar.</p>
             <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7" target="_blank" rel="noopener" class="info-card__link">
-              Falar com o DAGV <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              Falar com o DAGV
             </a>
           </div>
         </div>
@@ -874,31 +1165,6 @@
             </div>
           </div>
 
-          <!-- UBS / UPS — Atenção Primária -->
-          <div class="campus-card" data-aos="fade-up" data-aos-delay="240">
-            <div class="campus-card__header">
-              <div class="campus-card__icon"><i class="fa-solid fa-house-medical" aria-hidden="true"></i></div>
-              <div>
-                <span class="campus-card__tag">Atenção Primária</span>
-                <div class="campus-card__name">Unidades Básicas de Saúde (UBS) — Uberaba</div>
-              </div>
-            </div>
-            <div class="campus-card__body">
-              <div class="campus-card__address">
-                <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-                Diversas unidades distribuídas nos bairros de Uberaba – MG
-              </div>
-              <div class="campus-card__activities">
-                <div class="campus-card__activity">Práticas de Medicina de Família e Comunidade</div>
-                <div class="campus-card__activity">Estágios em saúde coletiva e atenção básica</div>
-                <div class="campus-card__activity">Atividades de extensão e campanhas comunitárias</div>
-              </div>
-              <a href="https://www.uberaba.mg.gov.br/portal/conteudo,8" target="_blank" rel="noopener" class="campus-card__link">
-                <i class="fa-solid fa-map" aria-hidden="true"></i> Mapa das UBS de Uberaba
-              </a>
-            </div>
-          </div>
-
         </div>
 
         <!-- Aviso geral -->
@@ -938,49 +1204,31 @@
               <thead>
                 <tr>
                   <th>Público</th>
-                  <th>Almoço</th>
-                  <th>Jantar</th>
+                  <th>Valor</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>Estudante de graduação</td>
-                  <td class="ru-price">R$ 1,00</td>
-                  <td class="ru-price">R$ 1,00</td>
+                  <td>Estudantes de Graduação, Técnico (Cefores) e Pós-Graduação</td>
+                  <td class="ru-price">R$ 6,50</td>
                 </tr>
                 <tr>
-                  <td>Estudante de pós-graduação</td>
-                  <td class="ru-price">R$ 2,00</td>
-                  <td class="ru-price">R$ 2,00</td>
-                </tr>
-                <tr>
-                  <td>Servidor / Docente</td>
-                  <td class="ru-price">R$ 4,00</td>
-                  <td class="ru-price">R$ 4,00</td>
-                </tr>
-                <tr>
-                  <td>Visitante / Comunidade externa</td>
-                  <td class="ru-price">R$ 14,00</td>
-                  <td class="ru-price">R$ 14,00</td>
-                </tr>
-                <tr>
-                  <td>Estudante bolsista (assistência)</td>
-                  <td class="ru-free">Gratuito</td>
-                  <td class="ru-free">Gratuito</td>
+                  <td>Servidores, Terceirizados e Visitantes</td>
+                  <td class="ru-price">R$ 12,03</td>
                 </tr>
               </tbody>
             </table>
 
             <div class="ru-notice" style="margin-top: var(--space-md);">
-              <strong>ℹ️ Como pagar:</strong> O RU funciona com sistema de cartão universitário.
-              Carregue créditos no cartão estudantil (totens disponíveis no campus) antes de ir ao restaurante.
-              Estudantes com cadastro no Programa de Assistência Estudantil (PAE) têm acesso gratuito mediante aprovação.
+              <strong>ℹ️ Sobre os valores:</strong> O valor de R$ 6,50 já é o preço com subsídio
+              institucional para estudantes. Servidores, terceirizados e visitantes pagam o valor
+              integral da refeição (R$ 12,03), sem subsídio.
             </div>
 
             <div style="margin-top: var(--space-md);">
-              <a href="https://www.uftm.edu.br/ru" target="_blank" rel="noopener" class="btn btn--primary" style="font-size:.85rem;">
-                <i class="fa-solid fa-external-link-alt" aria-hidden="true"></i>
-                Página oficial do RU – UFTM
+              <a href="https://www.uftm.edu.br/proace/restaurante-universitario/cardapio-da-semana" target="_blank" rel="noopener" class="btn btn--primary btn--sm">
+                <i class="fa-solid fa-utensils" aria-hidden="true"></i>
+                Cardápio da Semana – RU
               </a>
             </div>
           </div>
@@ -994,52 +1242,56 @@
             <div class="ru-schedule">
               <div class="ru-meal">
                 <div class="ru-meal__name">
-                  <i class="fa-solid fa-sun" aria-hidden="true"></i> Café da Manhã
-                </div>
-                <div class="ru-meal__hours">Segunda a Sexta: 07h00 – 08h30</div>
-              </div>
-              <div class="ru-meal">
-                <div class="ru-meal__name">
                   <i class="fa-solid fa-cloud-sun" aria-hidden="true"></i> Almoço
                 </div>
-                <div class="ru-meal__hours">Segunda a Sexta: 11h30 – 13h30<br/>Sábados e feriados: 11h30 – 13h00</div>
+                <div class="ru-meal__hours">Das 11h00 às 14h00 (caixa aberto até 14h00)</div>
               </div>
               <div class="ru-meal">
                 <div class="ru-meal__name">
                   <i class="fa-solid fa-moon" aria-hidden="true"></i> Jantar
                 </div>
-                <div class="ru-meal__hours">Segunda a Sexta: 17h30 – 19h00<br/>Sábados: 17h30 – 18h30</div>
+                <div class="ru-meal__hours">Das 17h30 às 19h30 (caixa aberto até 19h30)</div>
               </div>
             </div>
 
             <div class="ru-notice" style="margin-top: var(--space-md);">
+              <strong>📍 Unidades em Uberaba:</strong> Unidade Abadia (Rua Vigário Carlos, 100) e
+              Unidade Univerdecidade.
+            </div>
+            <div class="ru-notice" style="margin-top: var(--space-sm, .5rem);">
               <strong>⚠️ Atenção:</strong> Os horários e valores do RU podem ser ajustados pela
               UFTM sem aviso prévio. Consulte sempre a
-              <a href="https://www.uftm.edu.br/ru" target="_blank" rel="noopener"
+              <a href="https://www.uftm.edu.br/proace/restaurante-universitario" target="_blank" rel="noopener"
                 style="color: var(--clr-green); font-weight: 600;">página oficial do RU</a>
               ou as redes sociais da UFTM para informações atualizadas.
               O DAGV repassa comunicados sobre alterações assim que são divulgados.
+            </div>
+            <div style="margin-top: var(--space-md);">
+              <a href="https://www.uftm.edu.br/proace/restaurante-universitario/cardapio-da-semana" target="_blank" rel="noopener" class="btn btn--outline btn--sm">
+                <i class="fa-solid fa-utensils" aria-hidden="true"></i>
+                Cardápio
+              </a>
             </div>
           </div>
 
         </div>
 
         <!-- Cards adicionais RU -->
-        <div class="info-grid" style="margin-top: var(--space-2xl);">
+        <div class="info-grid info-grid--center" style="margin-top: var(--space-2xl);">
           <div class="info-card" data-aos="fade-up" data-aos-delay="0">
             <div class="info-card__icon"><i class="fa-solid fa-id-card" aria-hidden="true"></i></div>
             <div class="info-card__title">Cartão Universitário</div>
-            <p class="info-card__text">Para utilizar o RU você precisa do cartão estudantil UFTM. Emita ou regularize o seu na Secretaria Acadêmica ou na Pró-Reitoria de Assuntos Estudantis (PROAE).</p>
-            <a href="https://www.uftm.edu.br/proae" target="_blank" rel="noopener" class="info-card__link">
-              PROAE – Assistência Estudantil <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            <p class="info-card__text">Para utilizar o RU você precisa do cartão estudantil UFTM. Emita ou regularize o seu na Secretaria Acadêmica ou na Pró-Reitoria de Assuntos Comunitários e Estudantis (PROACE).</p>
+            <a href="#proace" class="info-card__link">
+              Ver PROACE
             </a>
           </div>
           <div class="info-card" data-aos="fade-up" data-aos-delay="80">
             <div class="info-card__icon"><i class="fa-solid fa-hand-holding-heart" aria-hidden="true"></i></div>
             <div class="info-card__title">Assistência Estudantil</div>
-            <p class="info-card__text">Estudantes em vulnerabilidade socioeconômica podem solicitar acesso gratuito ao RU e outras bolsas pelo Programa de Assistência Estudantil (PAE). Inscrições abertas semestralmente.</p>
-            <a href="https://www.uftm.edu.br/proae/pae" target="_blank" rel="noopener" class="info-card__link">
-              Saiba mais sobre o PAE <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            <p class="info-card__text">Estudantes em vulnerabilidade socioeconômica podem solicitar auxílios financeiros (PAFAE) e apoio pedagógico pela PROACE. Inscrições abertas ao longo do ano.</p>
+            <a href="#auxilios" class="info-card__link">
+              Ver Auxílios Estudantis
             </a>
           </div>
           <div class="info-card" data-aos="fade-up" data-aos-delay="160">
@@ -1047,11 +1299,471 @@
             <div class="info-card__title">Localização do RU</div>
             <p class="info-card__text">O Restaurante Universitário está localizado no Campus I da UFTM, próximo ao bloco principal. Há sinalização no campus indicando o acesso.</p>
             <a href="https://maps.google.com/?q=Restaurante+Universit%C3%A1rio+UFTM+Uberaba" target="_blank" rel="noopener" class="info-card__link">
-              Ver no mapa <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              Ver no mapa
             </a>
           </div>
         </div>
 
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         4. A UFTM
+         ═══════════════════════════════════════════════════════ -->
+    <section id="uftm" class="manual-section manual-section--alt" aria-labelledby="uftm-title">
+      <div class="container">
+
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Sua Universidade</span>
+          <h2 class="section-title" id="uftm-title">UFTM</h2>
+          <p class="section-desc">
+            Conheça um pouco da história da instituição que você agora faz parte.
+          </p>
+        </div>
+
+        <div class="detail-grid">
+
+          <div class="detail-text" data-aos="fade-right">
+            <p>
+              A <strong>Universidade Federal do Triângulo Mineiro (UFTM)</strong>, anteriormente
+              denominada Faculdade de Medicina do Triângulo Mineiro (FMTM), foi transformada em
+              universidade em 2005, por meio da Lei nº 11.152. Trata-se de uma Instituição Federal
+              de Ensino Superior vinculada ao Ministério da Educação, com sede em Uberaba (MG) e
+              campus em Iturama, atendendo aproximadamente <strong>oito mil estudantes</strong>
+              entre graduação, pós-graduação e educação profissionalizante.
+            </p>
+            <p>
+              A instituição possui forte atuação na área da saúde, destacando-se pelo
+              <strong>Hospital de Clínicas da UFTM</strong>, reconhecido nacionalmente pela
+              qualidade de seus serviços. Além disso, abriga o Complexo Cultural e Científico de
+              Peirópolis, onde ficam o Museu dos Dinossauros e importantes sítios de escavação
+              paleontológica.
+            </p>
+            <p>
+              A história da instituição é marcada por diversos acontecimentos importantes, desde
+              a fundação da FMTM em 1953 até a consolidação como universidade multidisciplinar
+              nos dias de hoje — confira os principais marcos ao lado.
+            </p>
+
+            <div style="margin-top: var(--space-md); display: flex; flex-wrap: wrap; gap: .75rem;">
+              <a href="https://www.uftm.edu.br" target="_blank" rel="noopener" class="btn btn--primary btn--sm">
+                <i class="fa-solid fa-external-link-alt" aria-hidden="true"></i>
+                Site Oficial da UFTM
+              </a>
+            </div>
+          </div>
+
+          <div class="detail-box" data-aos="fade-left" data-aos-delay="100">
+            <div class="detail-box__title">
+              <i class="fa-solid fa-timeline" aria-hidden="true"></i>
+              Marcos da História
+            </div>
+            <div class="detail-items">
+              <div class="detail-item">
+                <i class="fa-solid fa-star" aria-hidden="true"></i>
+                <span><strong>1953:</strong> Fundação da Faculdade de Medicina do Triângulo Mineiro (FMTM).</span>
+              </div>
+              <div class="detail-item">
+                <i class="fa-solid fa-star" aria-hidden="true"></i>
+                <span><strong>1954:</strong> Criação do curso de graduação em Medicina.</span>
+              </div>
+              <div class="detail-item">
+                <i class="fa-solid fa-star" aria-hidden="true"></i>
+                <span><strong>1960:</strong> Federalização da escola de Medicina.</span>
+              </div>
+              <div class="detail-item">
+                <i class="fa-solid fa-star" aria-hidden="true"></i>
+                <span><strong>1982:</strong> Inauguração da sede do Hospital Escola.</span>
+              </div>
+              <div class="detail-item">
+                <i class="fa-solid fa-star" aria-hidden="true"></i>
+                <span><strong>2005:</strong> Transformação em Universidade Federal do Triângulo Mineiro.</span>
+              </div>
+              <div class="detail-item">
+                <i class="fa-solid fa-star" aria-hidden="true"></i>
+                <span><strong>2015:</strong> Criação do Campus Universitário de Iturama.</span>
+              </div>
+            </div>
+            <div class="detail-box__note">
+              📖 Quer a linha do tempo completa, com todos os cursos e programas criados desde 1953?
+              <a href="#uftm-chrono-details" onclick="document.getElementById('uftm-chrono-details').open = true;" style="color: var(--clr-accent); text-decoration: underline;">Ver cronologia completa</a>
+            </div>
+          </div>
+
+        </div>
+
+        <details class="manual-accordion" id="uftm-chrono-details" style="margin-top: var(--space-lg);">
+          <summary class="rep-entity__toggle">Cronologia completa (1953–2020)</summary>
+          <div class="rep-entity__more">
+            <div class="uftm-chrono-grid">
+              <div><strong>1953</strong> Fundação da Faculdade de Medicina do Triângulo Mineiro (FMTM).</div>
+              <div><strong>1954</strong> Criação do curso de graduação em Medicina.</div>
+              <div><strong>1960</strong> Federalização da escola de Medicina.</div>
+              <div><strong>1972</strong> Transformação da FMTM em Autarquia Federal.</div>
+              <div><strong>1982</strong> Inauguração da sede do Hospital Escola.</div>
+              <div><strong>1987</strong> Mestrado em Ciências da Saúde.</div>
+              <div><strong>1989</strong> Curso de graduação em Enfermagem.</div>
+              <div><strong>1990</strong> Implantação do CEFORES; técnico em Radiologia.</div>
+              <div><strong>1991</strong> Técnico em Enfermagem (CEFORES).</div>
+              <div><strong>1993</strong> Doutorado em Ciências da Saúde; técnico em Análises Clínicas.</div>
+              <div><strong>1996</strong> Técnicos em Farmácia e em Nutrição (CEFORES).</div>
+              <div><strong>1997</strong> Mestrado em Medicina Tropical e Infectologia.</div>
+              <div><strong>1999</strong> Curso de graduação em Biomedicina.</div>
+              <div><strong>2000</strong> Doutorado em Medicina Tropical e Infectologia.</div>
+              <div><strong>2005</strong> Transformação em Universidade Federal do Triângulo Mineiro.</div>
+              <div><strong>2006</strong> Fisioterapia, Nutrição, Terapia Ocupacional, Letras; técnico em Saúde Bucal.</div>
+              <div><strong>2007</strong> Mestrado em Atenção à Saúde; Mestrado em Ciências Fisiológicas.</div>
+              <div><strong>2008</strong> Curso de graduação em Psicologia.</div>
+              <div><strong>2009</strong> Educação Física, Serviço Social e diversas licenciaturas.</div>
+              <div><strong>2010</strong> Sete Engenharias; Mestrados em Inovação Tecnológica e Educação Física.</div>
+              <div><strong>2011</strong> Mestrado Profissional em Matemática em Rede Nacional.</div>
+              <div><strong>2012</strong> Mestrado em Educação; Doutorado em Atenção à Saúde.</div>
+              <div><strong>2013</strong> Programa Multicêntrico em Química de Minas Gerais.</div>
+              <div><strong>2014</strong> Licenciatura em Educação no Campo; Mestrados em Letras e Materiais.</div>
+              <div><strong>2015</strong> Criação do Campus de Iturama e novos programas.</div>
+              <div><strong>2016</strong> Curso de graduação em Agronomia (Iturama).</div>
+              <div><strong>2019</strong> Mestrado/Doutorado em Educação; especializações.</div>
+              <div><strong>2020</strong> Curso de graduação em Pedagogia (EAD).</div>
+            </div>
+          </div>
+        </details>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         5. AUXÍLIOS ESTUDANTIS
+         ═══════════════════════════════════════════════════════ -->
+    <section id="auxilios" class="manual-section" aria-labelledby="auxilios-title">
+      <div class="container">
+
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Assistência Estudantil</span>
+          <h2 class="section-title" id="auxilios-title">Auxílios Estudantis</h2>
+          <p class="section-desc">
+            O Programa de Auxílios Financeiros da Assistência Estudantil (PAFAE) apoia estudantes
+            em situação de vulnerabilidade socioeconômica.
+          </p>
+        </div>
+
+        <div class="detail-grid">
+
+          <div class="detail-text" data-aos="fade-right">
+            <p>
+              O <strong>PAFAE</strong> oferece auxílios financeiros a estudantes dos cursos
+              presenciais de graduação da UFTM – Campus Uberaba com renda familiar per capita de
+              até um salário mínimo, priorizando quem cursa a primeira graduação.
+            </p>
+            <p>
+              A inscrição é feita pelo <strong>Sistema UFTMNet</strong>, com o e-mail institucional,
+              anexando os documentos comprobatórios de renda. Os resultados são divulgados
+              mensalmente na página da PROACE, com possibilidade de recurso após o resultado
+              preliminar.
+            </p>
+
+            <div style="margin-top: var(--space-md); display: flex; flex-wrap: wrap; gap: .75rem;">
+              <a href="https://www.uftm.edu.br/bolsas/auxilio-financeiro-cursos-de-graduacao/editais-em-andamento" target="_blank" rel="noopener" class="btn btn--primary btn--sm">
+                <i class="fa-solid fa-file-lines" aria-hidden="true"></i>
+                Ver Edital na UFTM
+              </a>
+            </div>
+          </div>
+
+          <div class="detail-box" data-aos="fade-left" data-aos-delay="100">
+            <div class="detail-box__title">
+              <i class="fa-solid fa-sack-dollar" aria-hidden="true"></i>
+              Valores de Referência
+            </div>
+            <div class="detail-items">
+              <div class="detail-item">
+                <i class="fa-solid fa-utensils" aria-hidden="true"></i>
+                <span><strong>Alimentação:</strong> R$ 23 por dia letivo</span>
+              </div>
+              <div class="detail-item">
+                <i class="fa-solid fa-house" aria-hidden="true"></i>
+                <span><strong>Moradia:</strong> R$ 400 mensais</span>
+              </div>
+              <div class="detail-item">
+                <i class="fa-solid fa-bus" aria-hidden="true"></i>
+                <span><strong>Transporte urbano:</strong> aprox. R$ 5,50 por dia letivo</span>
+              </div>
+              <div class="detail-item">
+                <i class="fa-solid fa-route" aria-hidden="true"></i>
+                <span><strong>Transporte intermunicipal:</strong> até R$ 400 mensais</span>
+              </div>
+              <div class="detail-item">
+                <i class="fa-solid fa-child" aria-hidden="true"></i>
+                <span><strong>Creche:</strong> R$ 400 mensais (filhos de até 5 anos)</span>
+              </div>
+            </div>
+            <div class="detail-box__note">
+              ⚠️ Os valores são reajustados periodicamente pela UFTM. Confira sempre o edital
+              vigente antes de solicitar.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         6. PROACE
+         ═══════════════════════════════════════════════════════ -->
+    <section id="proace" class="manual-section manual-section--alt" aria-labelledby="proace-title">
+      <div class="container">
+
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Assistência Estudantil</span>
+          <h2 class="section-title" id="proace-title">PROACE</h2>
+          <p class="section-desc">
+            Pró-Reitoria de Assuntos Comunitários e Estudantis — responsável pela política de
+            assistência estudantil da UFTM.
+          </p>
+        </div>
+
+        <div class="detail-grid">
+
+          <div class="detail-text" data-aos="fade-right">
+            <p>
+              A <strong>PROACE</strong> é o setor da UFTM responsável por implementar a política
+              de assistência estudantil, contribuindo para a permanência, o bem-estar e o
+              desenvolvimento acadêmico dos alunos. Em articulação com o PNAES (Programa Nacional
+              de Assistência Estudantil), oferece acompanhamento pedagógico, apoio financeiro,
+              acompanhamento social e assistência em saúde.
+            </p>
+
+            <div style="margin-top: var(--space-md); display: flex; flex-wrap: wrap; gap: .75rem;">
+              <a href="https://www.instagram.com/proace.uftm/" target="_blank" rel="noopener" class="btn btn--primary btn--sm">
+                <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                @proace.uftm
+              </a>
+            </div>
+          </div>
+
+          <div class="detail-box" data-aos="fade-left" data-aos-delay="100">
+            <div class="detail-box__title">
+              <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+              Onde Encontrar
+            </div>
+            <div class="detail-items">
+              <div class="detail-item">
+                <i class="fa-solid fa-building" aria-hidden="true"></i>
+                <span><strong>Uberaba:</strong> 2º andar do Centro Educacional (CE)</span>
+              </div>
+              <div class="detail-item">
+                <i class="fa-solid fa-building" aria-hidden="true"></i>
+                <span><strong>UNIVERDE:</strong> Bloco C, próximo à biblioteca</span>
+              </div>
+              <div class="detail-item">
+                <i class="fa-solid fa-chalkboard-user" aria-hidden="true"></i>
+                <span><strong>Serviços:</strong> Acompanhamento pedagógico, apoio financeiro, acompanhamento social e assistência em saúde</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         7. TUTORIA E MONITORIA INCLUSIVAS
+         ═══════════════════════════════════════════════════════ -->
+    <section id="inclusao" class="manual-section" aria-labelledby="inclusao-title">
+      <div class="container">
+
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Acessibilidade</span>
+          <h2 class="section-title" id="inclusao-title">Tutoria e Monitoria Inclusivas</h2>
+          <p class="section-desc">
+            Apoio pedagógico para estudantes com deficiência ou necessidades educacionais
+            específicas (NEE).
+          </p>
+        </div>
+
+        <div class="detail-grid">
+
+          <div class="detail-text" data-aos="fade-right">
+            <p>
+              A <strong>Tutoria Inclusiva</strong> é vinculada à PROACE, por meio do Setor de
+              Acessibilidade (SEACE), responsável pelo acolhimento de estudantes com deficiência
+              visual, física, auditiva ou intelectual, TDAH, ansiedade, depressão, síndrome do
+              pânico, TEA e outras NEE — com orientação, adaptação de materiais e
+              tradução/interpretação em Libras.
+            </p>
+            <p>
+              Já a <strong>Monitoria Inclusiva</strong> (Edital nº 06/2026 da PROACE) permite que
+              cada estudante seja acompanhado por até dois monitores, com carga horária de 12h
+              semanais, na modalidade bolsista (R$ 400/mês) ou voluntária.
+            </p>
+            <p>
+              Para solicitar, agende um <strong>Acompanhamento Pedagógico Individual (API)</strong>
+              com o SAPED. A equipe avalia sua trajetória e pode encaminhar ofício à coordenação do
+              curso; em seguida, procure o professor da disciplina para preencher o formulário de
+              solicitação.
+            </p>
+
+            <div style="margin-top: var(--space-md); display: flex; flex-wrap: wrap; gap: .75rem;">
+              <a href="https://calendar.app.google/4wz1ggSFpSecVAm77" target="_blank" rel="noopener" class="btn btn--primary btn--sm">
+                <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
+                Agendar Atendimento
+              </a>
+            </div>
+          </div>
+
+          <div class="detail-box" data-aos="fade-left" data-aos-delay="100">
+            <div class="detail-box__title">
+              <i class="fa-solid fa-address-book" aria-hidden="true"></i>
+              Contatos
+            </div>
+            <div class="detail-items">
+              <div class="detail-item">
+                <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                <span><strong>Atendimento pedagógico:</strong> pedagogico.proace@uftm.edu.br</span>
+              </div>
+              <div class="detail-item">
+                <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                <span><strong>Telefone:</strong> (34) 3700-6995</span>
+              </div>
+              <div class="detail-item">
+                <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                <span><strong>SEACE:</strong> acessibilidade.proace@uftm.edu.br</span>
+              </div>
+              <div class="detail-item">
+                <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                <span><strong>Telefone SEACE:</strong> (34) 3700-6918</span>
+              </div>
+              <div class="detail-item">
+                <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                <span>Centro de Pesquisas Prof. Aluízio Rosa Prata, Bloco D — Rua Vigário Carlos, 100, Abadia</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         8. SIGLAS E LOCALIZAÇÃO
+         ═══════════════════════════════════════════════════════ -->
+    <section id="siglas" class="manual-section manual-section--alt" aria-labelledby="siglas-title">
+      <div class="container">
+
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Referência Rápida</span>
+          <h2 class="section-title" id="siglas-title">Siglas e Localização</h2>
+          <p class="section-desc">
+            Guia rápido das siglas mais usadas no dia a dia da UFTM e os endereços dos principais
+            locais.
+          </p>
+        </div>
+
+        <div class="detail-grid">
+          <div class="detail-text" data-aos="fade-right" style="grid-column: 1 / -1;">
+            <details class="manual-accordion">
+              <summary class="rep-entity__toggle">Ver todas as siglas</summary>
+              <div class="rep-entity__more">
+                <div class="uftm-chrono-grid">
+                  <div><strong>CE</strong> Centro Educacional</div>
+                  <div><strong>CEA</strong> Centro Educacional e Administrativo</div>
+                  <div><strong>CI</strong> Campus I</div>
+                  <div><strong>DMS</strong> Departamento de Medicina Social</div>
+                  <div><strong>ICBN</strong> Instituto de Ciências Biológicas e Naturais</div>
+                  <div><strong>ICS</strong> Instituto de Ciências da Saúde</div>
+                  <div><strong>CONSU</strong> Conselho Universitário</div>
+                  <div><strong>PROEXT</strong> Pró-Reitoria de Extensão Universitária</div>
+                  <div><strong>PROENS</strong> Pró-Reitoria de Ensino</div>
+                  <div><strong>HC</strong> Hospital de Clínicas</div>
+                  <div><strong>CEFORES</strong> Centro de Educação Profissional</div>
+                  <div><strong>NDE</strong> Núcleo Docente Estruturante</div>
+                  <div><strong>DENEM</strong> Direção Executiva Nacional dos Estudantes de Medicina</div>
+                  <div><strong>ABEM</strong> Associação Brasileira de Educação Médica</div>
+                  <div><strong>DAGV</strong> Diretório Acadêmico Gaspar Vianna</div>
+                </div>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <div class="campus-grid campus-grid--compact" style="margin-top: var(--space-xl);">
+
+          <div class="campus-card" data-aos="fade-up" data-aos-delay="0">
+            <div class="campus-card__header">
+              <div class="campus-card__icon"><i class="fa-solid fa-building-columns" aria-hidden="true"></i></div>
+              <div>
+                <span class="campus-card__tag">Sigla: CE</span>
+                <div class="campus-card__name">Centro Educacional</div>
+              </div>
+            </div>
+            <div class="campus-card__body">
+              <div class="campus-card__address">
+                <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                Av. Getúlio Guaritá, 159 — 38025-440, Uberaba/MG
+              </div>
+              <a href="https://maps.google.com/?q=Av.+Get%C3%BAlio+Guarit%C3%A1,+159,+Uberaba" target="_blank" rel="noopener" class="campus-card__link">
+                <i class="fa-solid fa-map" aria-hidden="true"></i> Ver no mapa
+              </a>
+            </div>
+          </div>
+
+          <div class="campus-card" data-aos="fade-up" data-aos-delay="80">
+            <div class="campus-card__header">
+              <div class="campus-card__icon"><i class="fa-solid fa-building-columns" aria-hidden="true"></i></div>
+              <div>
+                <span class="campus-card__tag">Sigla: CI / C1</span>
+                <div class="campus-card__name">Campus 1</div>
+              </div>
+            </div>
+            <div class="campus-card__body">
+              <div class="campus-card__address">
+                <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                Rua dos Andradas, 330 — 38025-200, Uberaba/MG
+              </div>
+              <a href="https://maps.google.com/?q=Rua+dos+Andradas,+330,+Uberaba" target="_blank" rel="noopener" class="campus-card__link">
+                <i class="fa-solid fa-map" aria-hidden="true"></i> Ver no mapa
+              </a>
+            </div>
+          </div>
+
+          <div class="campus-card" data-aos="fade-up" data-aos-delay="160">
+            <div class="campus-card__header">
+              <div class="campus-card__icon"><i class="fa-solid fa-building-columns" aria-hidden="true"></i></div>
+              <div>
+                <span class="campus-card__tag">Sigla: CEA</span>
+                <div class="campus-card__name">Centro Educacional e Administrativo</div>
+              </div>
+            </div>
+            <div class="campus-card__body">
+              <div class="campus-card__address">
+                <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                Av. Frei Paulino, 30 — 38025-180, Uberaba/MG
+              </div>
+              <a href="https://maps.google.com/?q=Av.+Frei+Paulino,+30,+Uberaba" target="_blank" rel="noopener" class="campus-card__link">
+                <i class="fa-solid fa-map" aria-hidden="true"></i> Ver no mapa
+              </a>
+            </div>
+          </div>
+
+          <div class="campus-card" data-aos="fade-up" data-aos-delay="240">
+            <div class="campus-card__header">
+              <div class="campus-card__icon"><i class="fa-solid fa-hospital" aria-hidden="true"></i></div>
+              <div>
+                <span class="campus-card__tag">Sigla: HC</span>
+                <div class="campus-card__name">Hospital de Clínicas</div>
+              </div>
+            </div>
+            <div class="campus-card__body">
+              <div class="campus-card__address">
+                <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                Av. Getúlio Guaritá, 330 — 38025-440, Uberaba/MG
+              </div>
+              <a href="https://maps.google.com/?q=Av.+Get%C3%BAlio+Guarit%C3%A1,+330,+Uberaba" target="_blank" rel="noopener" class="campus-card__link">
+                <i class="fa-solid fa-map" aria-hidden="true"></i> Ver no mapa
+              </a>
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
 
@@ -1074,21 +1786,8 @@
             <i class="fa-brands fa-instagram" aria-hidden="true"></i>
             Instagram DAGV
           </a>
-          <a href="index.html" class="btn btn--ghost-white">
-            <i class="fa-solid fa-house" aria-hidden="true"></i>
-            Voltar ao Início
-          </a>
         </div>
       </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════════
-         VOLTAR
-         ═══════════════════════════════════════════════════════ -->
-    <section class="back-section">
-      <a href="index.html" class="back-link">
-        Voltar ao site principal
-      </a>
     </section>
 
   </main>
@@ -1098,29 +1797,46 @@
        ═══════════════════════════════════════════════════════ -->
   <footer class="footer">
     <div class="container footer__inner">
+
       <div class="footer__brand">
-        <img src="img/logo dourada-sem fundo.png" alt="Logo DAGV"
-          class="footer__logo" width="64" height="54" loading="lazy" />
+        <img
+          src="img/logo dourada-sem fundo.png"
+          alt="Logo DAGV"
+          class="footer__logo"
+          width="64" height="54"
+          loading="lazy"
+        />
         <div>
           <p class="footer__name">DAGV – Gaspar Vianna</p>
           <p class="footer__sub">Medicina UFTM · Uberaba – MG</p>
         </div>
       </div>
+
       <nav class="footer__links" aria-label="Links úteis">
-        <a href="https://dagvmeduftm.wordpress.com/estatuto-dagv/" target="_blank" rel="noopener">Estatuto</a>
-        <a href="ligas.html">Ligas</a>
-        <a href="manual.html">Manual do Estudante</a>
-        <a href="https://dagvmeduftm.wordpress.com/pet-medicina-1/" target="_blank" rel="noopener">PET Medicina</a>
-        <a href="https://dagvmeduftm.wordpress.com/dce-uftm/" target="_blank" rel="noopener">DCE UFTM</a>
+        <a href="estatuto.html">Estatuto</a>
+        <a href="criadores.html">Criadores</a>
+        <a href="sobre.html">Sobre o DAGV</a>
+        <a href="coordenacao.html">Coordenação</a>
+        <a href="historico2.html">Resgate Histórico</a>
+        <a href="index.html#contact">Suporte</a>
       </nav>
+
       <div class="footer__social">
-        <a href="https://www.instagram.com/dagvmeduftm/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a href="https://www.facebook.com/profile.php?id=100009254539973" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
-        <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7" target="_blank" rel="noopener" aria-label="Contato"><i class="fa-solid fa-envelope"></i></a>
+        <a href="https://www.instagram.com/dagvmeduftm/" target="_blank" rel="noopener" aria-label="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=100009254539973" target="_blank" rel="noopener" aria-label="Facebook">
+          <i class="fa-brands fa-facebook"></i>
+        </a>
+        <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7" target="_blank" rel="noopener" aria-label="Formulário de contato">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
       </div>
+
     </div>
     <div class="footer__bottom">
       <p>&copy; <span id="year"></span> Diretório Acadêmico Gaspar Vianna – Medicina UFTM. Todos os direitos reservados.</p>
+      <p class="footer__credit">Desenvolvido por <a href="criadores.html">Sérgio Lemuel Soares Santos &amp; João Paulo Soares Santos</a></p>
     </div>
   </footer>
 

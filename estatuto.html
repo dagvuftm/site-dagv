@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="48x48" href="img/favicon-48x48.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="img/android-chrome-192x192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="img/android-chrome-512x512.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Estatuto do DAGV — Conjunto de regras que rege o funcionamento do Diretório Acadêmico Gaspar Vianna, Medicina UFTM." />
+  <meta name="keywords" content="DAGV, Medicina, UFTM, Estatuto, Diretório Acadêmico, Gaspar Vianna" />
+  <meta name="author" content="DAGV – Medicina UFTM" />
+  <title>Estatuto do DAGV – DAGV | Medicina UFTM</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/sidemenu.css" />
+
+  <style>
+    /* ──────────────── HERO ──────────────── */
+    .est-hero {
+      position: relative;
+      min-height: 48vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 80% 100% at 0% 60%,
+          #3d0018 0%,
+          var(--clr-green-dark) 38%,
+          transparent 72%),
+        linear-gradient(160deg,
+          var(--clr-green-dark) 0%,
+          var(--clr-green)      50%,
+          #1a0010               100%);
+      padding-top: calc(var(--header-h) + var(--space-2xl));
+      padding-bottom: var(--space-2xl);
+    }
+    .est-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(90deg,transparent,transparent 58px,rgba(255,255,255,.04) 58px,rgba(255,255,255,.04) 60px),
+        repeating-linear-gradient(0deg,transparent,transparent 58px,rgba(255,255,255,.04) 58px,rgba(255,255,255,.04) 60px);
+    }
+    .est-hero::after {
+      content: '';
+      position: absolute;
+      width: 480px; height: 480px;
+      border-radius: 50%;
+      border: 70px solid rgba(232,160,32,.09);
+      bottom: -180px; left: -120px;
+      pointer-events: none;
+    }
+    .est-hero__content {
+      position: relative; z-index: 1;
+      text-align: center; color: var(--clr-white);
+      max-width: 760px; padding-inline: var(--space-md);
+    }
+    .est-hero__eyebrow {
+      font-size: .78rem; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--clr-accent); font-weight: 600; margin-bottom: var(--space-sm); display: block;
+    }
+    .est-hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      font-weight: 700; line-height: 1.15; margin-bottom: var(--space-md);
+    }
+    .est-hero__title em { color: var(--clr-accent); font-style: italic; }
+    .est-hero__desc {
+      font-size: 1.05rem; line-height: 1.75;
+      color: rgba(255,255,255,.82); max-width: 580px; margin-inline: auto;
+    }
+
+    /* ──────────────── DOWNLOAD ──────────────── */
+    .est-download { padding-block: var(--space-xl); text-align: center; }
+    .est-download p { color: var(--clr-gray-3); max-width: 620px; margin: 0 auto var(--space-md); line-height: 1.75; }
+
+    /* ──────────────── DOCUMENTO (accordion por capítulo) ──────────────── */
+    .est-doc { padding-block: var(--space-2xl); background: var(--clr-off); }
+    .doc-chapter {
+      background: var(--clr-white);
+      border: 1px solid var(--clr-gray-1);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-sm);
+      overflow: hidden;
+    }
+    .doc-chapter summary {
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: 1.1rem 1.4rem;
+      font-family: var(--font-display);
+      font-weight: 700;
+      color: var(--clr-dark);
+      transition: background var(--dur-fast);
+    }
+    .doc-chapter summary::-webkit-details-marker { display: none; }
+    .doc-chapter summary::before {
+      content: '\25B8';
+      color: var(--clr-green);
+      transition: transform 200ms var(--ease);
+      flex-shrink: 0;
+    }
+    .doc-chapter[open] summary::before { transform: rotate(90deg); }
+    .doc-chapter summary:hover { background: var(--clr-green-light); }
+    .doc-chap-num {
+      font-size: .72rem; font-weight: 700; letter-spacing: .1em;
+      color: var(--clr-accent); text-transform: uppercase;
+      background: var(--clr-green-light); border-radius: var(--radius-pill);
+      padding: .3em .8em; flex-shrink: 0;
+    }
+    .doc-chap-title { font-size: 1rem; }
+    .doc-chapter > .doc-p,
+    .doc-chapter > .doc-section-title,
+    .doc-chapter > .doc-list {
+      padding-inline: 1.4rem 1.4rem;
+    }
+    .doc-chapter > .doc-p:last-child,
+    .doc-chapter > .doc-list:last-child { padding-bottom: 1.3rem; }
+    .doc-p {
+      font-size: .92rem; color: var(--clr-gray-3); line-height: 1.75;
+      margin: 0 0 .85rem;
+    }
+    .doc-p strong { color: var(--clr-dark); }
+    .doc-list {
+      font-size: .92rem; color: var(--clr-gray-3); line-height: 1.75;
+      margin: 0 0 .85rem; padding-left: 2.4rem;
+    }
+    .doc-list li { margin-bottom: .35rem; }
+    .doc-section-title {
+      font-size: .8rem; font-weight: 700; letter-spacing: .06em;
+      text-transform: uppercase; color: var(--clr-green-dark);
+      margin: 1.2rem 0 .6rem;
+      padding-left: 1.4rem;
+    }
+
+    /* ──────────────── VOLTAR ──────────────── */
+    .back-section {
+      text-align: center;
+      padding-block: var(--space-xl);
+      background:
+        radial-gradient(ellipse 60% 80% at 50% 50%, var(--clr-green-dark) 0%, transparent 70%),
+        linear-gradient(220deg, #1a0010 0%, var(--clr-green) 55%, var(--clr-green-dark) 100%);
+    }
+    .btn--ghost-white {
+      background: transparent; color: var(--clr-white);
+      border: 2px solid rgba(255,255,255,.42); font-weight: 600;
+    }
+    .btn--ghost-white:hover {
+      background: rgba(255,255,255,.1);
+      border-color: rgba(255,255,255,.72);
+      transform: translateY(-2px);
+    }
+    .btn--accent { background: var(--clr-accent); color: #3a2400; box-shadow: 0 4px 16px rgba(232,160,32,.4); }
+    .btn--accent:hover { background: #f5b230; box-shadow: 0 6px 20px rgba(232,160,32,.4); transform: translateY(-2px); }
+
+    @media (max-width: 560px) {
+      .doc-chapter summary { padding: .9rem 1rem; font-size: .92rem; }
+      .doc-chap-title { font-size: .88rem; }
+      .doc-chapter > .doc-p, .doc-chapter > .doc-list, .doc-chapter > .doc-section-title { padding-inline: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== HEADER ===================== -->
+  <header id="header" class="header">
+    <div class="container header__inner">
+
+      <!-- =====================================================
+           [ADIÇÃO] Aba de menu – inserida antes do brand.
+           Posicionada à esquerda do logotipo graças ao flex
+           do .header__inner existente.
+           Nenhuma classe/id existente foi alterada.
+           ===================================================== -->
+      <div class="sidemenu-wrap" id="sidemenuWrap">
+
+        <!-- Aba toggle -->
+        <button
+          class="sidemenu-tab"
+          id="sidemenuTab"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="sidemenuPanel"
+          aria-label="Abrir menu de navegação"
+        >
+          <span class="sidemenu-tab__icon" aria-hidden="true">
+            <span class="sidemenu-tab__bar"></span>
+            <span class="sidemenu-tab__bar"></span>
+            <span class="sidemenu-tab__bar"></span>
+          </span>
+          <span class="sidemenu-tab__label">Menu</span>
+        </button>
+
+        <!-- Painel principal -->
+        <div class="sidemenu-panel" id="sidemenuPanel" role="navigation" aria-label="Menu lateral">
+          <ul class="sidemenu-list">
+
+            <!-- ── Links diretos principais ── -->
+            <li class="sidemenu-list__item">
+              <a href="sobre.html" class="sidemenu-list__link">
+                Sobre o DAGV
+                <i class="fa-solid fa-building-columns sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="historico2.html" class="sidemenu-list__link sidemenu-list__link--historico">
+                Resgate Histórico
+                <i class="fa-solid fa-scroll sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="coordenacao.html" class="sidemenu-list__link">
+                Coordenação
+                <i class="fa-solid fa-users sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="criadores.html" class="sidemenu-list__link">
+                Criadores
+                <i class="fa-solid fa-code sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Dropdown: Informações DAGV ── -->
+            <li class="sidemenu-list__item">
+              <button
+                class="sidemenu-list__btn"
+                data-dropdown="informacoes"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Informações DAGV
+                <i class="fa-solid fa-chevron-down sidemenu-list__arrow" aria-hidden="true"></i>
+              </button>
+              <ul class="sidemenu-dropdown" id="dropInformacoes">
+                <li><a href="estatuto.html" class="sidemenu-dropdown__link">Estatuto</a></li>              </ul>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Links institucionais ── -->
+            <li class="sidemenu-list__item">
+              <a href="pet-medicina.html" class="sidemenu-list__link">
+                PET Medicina
+                <i class="fa-solid fa-flask sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="ligas.html" class="sidemenu-list__link">
+                Ligas Acadêmicas
+                <i class="fa-solid fa-graduation-cap sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="manual.html" class="sidemenu-list__link">
+                Manual do Estudante
+                <i class="fa-solid fa-book-open-reader sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="cursinho-carolina.html" class="sidemenu-list__link">
+                Cursinho Carolina
+                <i class="fa-solid fa-book-open sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="aaads-cachacina.html" class="sidemenu-list__link">
+                AAADS e Cachacina
+                <i class="fa-solid fa-shield-halved sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="representacoes-academicas.html" class="sidemenu-list__link">
+                Representações Acadêmicas
+                <i class="fa-solid fa-landmark sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <!-- ── Final ── -->
+            <li class="sidemenu-list__item">
+              <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7" target="_blank" rel="noopener" class="sidemenu-list__link">
+                Suporte
+                <i class="fa-solid fa-headset sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+
+          </ul>
+        </div><!-- /sidemenu-panel -->
+
+      </div><!-- /sidemenu-wrap -->
+      <!-- ===================================================== -->
+
+      <!-- Logo + Nome -->
+      <a href="index.html" class="header__brand">
+        <div class="header__logo-wrap">
+          <!--
+            [ALTERAÇÃO] Logo DAGV – componente Logo dinâmico.
+            - Fundo vermelho/transparente → logo dourada (img.logo--gold)
+            - Fundo branco (scrolled)     → logo vermelha (img.logo--red)
+            A troca é feita via CSS: visibilidade controlada por .header.scrolled
+          -->
+          <img
+            src="img/logo dourada-sem fundo.png"
+            alt="Logo DAGV – Diretório Acadêmico Gaspar Vianna"
+            class="header__logo-svg logo--gold"
+            width="80" height="68"
+            loading="eager"
+          />
+          <img
+            src="img/Logo DAGV sem fundo verm.png"
+            alt="Logo DAGV – Diretório Acadêmico Gaspar Vianna"
+            class="header__logo-svg logo--red"
+            width="80" height="68"
+            loading="eager"
+            aria-hidden="true"
+          />
+        </div>
+        <div class="header__title-wrap">
+          <span class="header__dagv"></span>
+          <span class="header__subtitle"></span>
+        </div>
+      </a>
+
+      <!-- Nav desktop -->
+      <nav class="nav" aria-label="Navegação principal">
+        <ul class="nav__list">
+          <li><a href="sobre.html"                    class="nav__link">Sobre</a></li>
+          <li><a href="coordenacao.html"              class="nav__link">Coordenações</a></li>
+          <li><a href="index.html#events"             class="nav__link">Instituições UFTM</a></li>
+          <li><a href="index.html#eventos-academicos" class="nav__link">Eventos</a></li>
+          <li><a href="index.html#contact"            class="nav__link nav__link--cta">Contato</a></li>
+        </ul>
+      </nav>
+
+      <!-- Hamburguer -->
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Nav mobile (drawer) -->
+    <nav class="nav-mobile" id="navMobile" aria-hidden="true">
+      <ul class="nav-mobile__list">
+        <li><a href="index.html"                    class="nav-mobile__link">Início</a></li>
+        <li><a href="sobre.html"                    class="nav-mobile__link">Sobre</a></li>
+        <li><a href="criadores.html"                class="nav-mobile__link">Criadores</a></li>
+        <li><a href="coordenacao.html"              class="nav-mobile__link">Coordenações</a></li>
+        <li><a href="index.html#events"             class="nav-mobile__link">Instituições UFTM</a></li>
+        <li><a href="index.html#eventos-academicos" class="nav-mobile__link">Eventos</a></li>
+        <li><a href="index.html#contact"            class="nav-mobile__link">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+
+    <!-- ===================== HERO ===================== -->
+    <section class="est-hero">
+      <div class="est-hero__content">
+        <span class="est-hero__eyebrow">Documento oficial</span>
+        <h1 class="est-hero__title">Estatuto do <em>DAGV</em></h1>
+        <p class="est-hero__desc">
+          O conjunto de regras para o pleno funcionamento do nosso Diretório Acadêmico Gaspar Vianna.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== DOWNLOAD ===================== -->
+    <section class="est-download">
+      <div class="container">
+        <p>
+          Abaixo encontra-se de forma integral o Estatuto do DAGV, organizado por capítulo. Caso deseje,
+          você pode também fazer o download do documento completo em PDF.
+        </p>
+        <a href="https://dagvmeduftm.wordpress.com/wp-content/uploads/2025/09/estatuto_dagv_final.pdf" target="_blank" rel="noopener" class="btn btn--primary">
+          <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i>
+          Baixar Estatuto em PDF
+        </a>
+      </div>
+    </section>
+
+    <!-- ===================== DOCUMENTO ===================== -->
+    <section class="est-doc">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Texto integral</span>
+          <h2 class="section-title">Capítulos do Estatuto</h2>
+          <p class="section-desc">Clique em cada capítulo para expandir o conteúdo.</p>
+        </div>
+
+        <div data-aos="fade-up">
+<details class="doc-chapter"><summary><span class="doc-chap-num">CAPÍTULO I</span><span class="doc-chap-title">DA CONSTITUIÇÃO, SEDE E FINS</span></summary>
+<p class="doc-p"><strong>Art. 1º</strong> – O Diretório Acadêmico Gaspar Vianna, doravante denominado DAGV, do curso de Medicina Universidade Federal do Triângulo Mineiro, sociedade civil de duração ilimitada, entidade sem fins lucrativos, apartidária, é o legítimo e único órgão de representação dos alunos de Medicina da UFTM.</p>
+<p class="doc-p"><strong>§ Único</strong> – O DAGV tem duração indeterminada, sendo dissolvido somente com a extinção do curso de Medicina oferecido pela UFTM.</p>
+<p class="doc-p"><strong>Art. 2º</strong> – O DAGV terá sua sede e foro na cidade de Uberaba, Estado de Minas Gerais.</p>
+<p class="doc-p"><strong>Art. 3º</strong> – O DAGV primar-se-á:</p>
+<ol class="doc-list">
+  <li>pela defesa do estado democrático de direito;</li>
+  <li>pelo ensino público, gratuito, de boa qualidade e acesso universal;</li>
+  <li>pela a luta contra todas as formas de opressão e exploração;</li>
+  <li>por uma universidade livre, soberana, pública, gratuita, de qualidade e cumpridora do seu papel de formação profissional, produção de conhecimento e extensão voltada a sociedade;</li>
+  <li>por uma sociedade com justiça social;</li>
+  <li>pela defesa do sistema público de saúde, gratuito, de qualidade e acesso universal;</li>
+  <li>pela defesa em juízo ativa e passivamente dos interesses coletivos;</li>
+  <li>prezar pela Ética e pelos Direitos Humanos dentro do ambiente acadêmico.</li>
+</ol>
+<p class="doc-p"><strong>§ Único –</strong> O DAGV está autorizado a impetrar mandato de segurança coletivo, por sua Coordenação Geral em nome de seus representados, ouvida a Gestão.</p>
+<p class="doc-p"><strong>Art. 4º</strong> – Seus fins:</p>
+<ol class="doc-list">
+  <li>defender os interesses dos estudantes de Medicina da UFTM sob todos os pontos de vista no que for de direito e justiça;</li>
+  <li>promover aproximação e solidariedade entre os corpos docente, discente e técnico-administrativo da UFTM;</li>
+  <li>promover e incentivar atividades que possam contribuir para o desenvolvimento científico, moral, intelectual, esportivo, artístico, cívico e social dos seus representados;</li>
+  <li>manter intercâmbio e colaboração com outras entidades estudantis e levar em consideração o que for discutido em seus fóruns;</li>
+  <li>reconhecer a Direção Executiva Nacional dos Estudantes de Medicina (DENEM) como a entidade representativa máxima de seus representados;</li>
+  <li>defender e elevar o nome da UFTM;</li>
+  <li>concorrer para o aprimoramento das instituições democráticas e incentivar a participação política dos alunos;</li>
+  <li>pugnar em defesa dos estudantes sem distinção de etnia, nacionalidade, gênero, convicção política, religiosa ou social; orientação sexual</li>
+  <li>lutar para o ensino voltado para o interesse da comunidade e acessível a todos os segmentos da população;</li>
+  <li>lutar contra toda forma de opressão e exploração, na defesa permanente dos Direitos Humanos;</li>
+  <li>defender uma formação acadêmica que seja condizente com as necessidades da população;</li>
+  <li>manter o princípio ético dos estudantes, observando a submissão dos interesses particulares e individuais aos da coletividade;</li>
+  <li>lutar pela humanização do profissional em formação na UFTM.</li>
+</ol>
+<p class="doc-p"><strong>Art. 5º</strong> – O DAGV reconhece a organização da sociedade civil em partidos políticos, grupos ideológicos e religiosos, associações, sindicatos, e outras entidades, mas não aceitará interferências destes nem se submeterá às suas diretrizes.</p>
+</details>
+<details class="doc-chapter"><summary><span class="doc-chap-num">CAPÍTULO II</span><span class="doc-chap-title">DOS REPRESENTADOS</span></summary>
+<p class="doc-p"><strong>Art. 6º</strong> – O quadro social do DAGV será formado pelos alunos de Medicina da UFTM regularmente matriculados.</p>
+<h4 class="doc-section-title">Seção I – Dos deveres dos representados</h4>
+<p class="doc-p"><strong>Art. 7º –</strong> Cumprir os dispositivos deste estatuto e as decisões das Assembleias Gerais e da Gestão do DAGV.</p>
+<p class="doc-p"><strong>Art. 8º</strong> – Zelar e fiscalizar o patrimônio moral e material do DAGV e da UFTM.</p>
+<p class="doc-p"><strong>Art. 9º</strong> – Recepcionar os calouros seguindo a política "anti-trote" preconizada nas diretrizes da Universidade Federal do Triângulo Mineiro.</p>
+<p class="doc-p"><strong>Art. 10</strong> – Votar e ser votado para qualquer cargo do DAGV, respeitadas as disposições estatutárias.</p>
+<h4 class="doc-section-title">Seção II – Dos direitos dos representados</h4>
+<p class="doc-p"><strong>Art. 11</strong> – Participar das assembleias regularmente convocadas, promovidas pela Gestão do DAGV.</p>
+<p class="doc-p"><strong>Art. 12</strong> – Participar das Assembleias regularmente convocadas, promovidas pela Gestão do DAGV.</p>
+<p class="doc-p"><strong>Art. 13</strong> – Apresentar propostas em Assembleias Gerais, reservando-lhe o direito a voz e voto, respeitadas as disposições estatutárias.</p>
+<p class="doc-p"><strong>Art. 14</strong> – Participar das reuniões ordinárias e extraordinárias da Gestão do DAGV, com direito a voz e voto.</p>
+<p class="doc-p"><strong>Art. 15</strong> – Encaminhar sugestões ou recorrer de atos e decisões que julgarem lesivos aos seus interesses através de representantes ou diretamente, por meio dos canais de comunicação oficiais e Reuniões Ordinárias do DAGV.</p>
+<p class="doc-p"><strong>Art. 16</strong> – Exigir vistoria dos livros de caixa e atas e demais documentos do Diretório Acadêmico "Gaspar Vianna".</p>
+<p class="doc-p"><strong>Art. 17</strong> – Recorrer à Assembleia Geral das decisões da Gestão quando julgá-las prejudiciais aos seus interesses ou contrárias a este estatuto.</p>
+<h4 class="doc-section-title">Seção III – Das penalidades</h4>
+<p class="doc-p"><strong>Art. 18 –</strong> Das penalidades passíveis de serem aplicadas:</p>
+<ol class="doc-list">
+  <li>indenização;</li>
+  <li>suspensão;</li>
+  <li>exclusão.</li>
+</ol>
+<p class="doc-p"><strong>Art. 19</strong> – A pena de indenização será aplicada ao representado que, por comprovada negligência ou deliberadamente causar dano ao patrimônio do DAGV, ficando a aplicação a critério da Gestão, decidido em Reunião Ordinária.</p>
+<p class="doc-p"><strong>§ Único</strong> – Estarão sujeitos ao pagamento de indenização os membros da Gestão que, após realização de inquérito tiverem comprovadamente se apossado de bens do DAGV, ficando a aplicação da pena a critério da reunião ordinária com quórum representativo em que essa pauta esteja em questão.</p>
+<p class="doc-p"><strong>Art. 20</strong> – A pena de suspensão será aplicada a qualquer representado que cometer faltas leves e médias, a critério da Reunião Ordinária ou Assembleia Geral com quórum representativo, em que esta pauta seja levantada.</p>
+<p class="doc-p"><strong>§ Único</strong> – O representado suspenso ficará privado dos direitos constantes da seção II do capítulo II, pelo tempo que durar a suspensão.</p>
+<p class="doc-p"><strong>Art. 21</strong> – A pena de exclusão será aplicada ao representado que cometer qualquer tipo de falta após duas suspensões ou que cometer falta grave, a critério da Reunião Ordinária ou Assembleia Geral com quórum representativo, em que essa pauta seja levantada.</p>
+</details>
+<details class="doc-chapter"><summary><span class="doc-chap-num">CAPÍTULO III</span><span class="doc-chap-title">DAS INSTÂNCIAS DELIBERATIVAS</span></summary>
+<p class="doc-p"><strong>Art. 22 –</strong> São instâncias deliberativas do Diretório Acadêmico "Gaspar Vianna", prevalecendo a seguinte hierarquia:</p>
+<ol class="doc-list">
+  <li>Assembleia Geral;</li>
+  <li>Reunião Ordinária;</li>
+  <li>Reunião da Gestão do DAGV.</li>
+</ol>
+<p class="doc-p"><strong>§ Único</strong> – Entende-se por deliberação da Gestão, decisões tomadas coletivamente por seus membros, respeitadas as decisões estatutárias.</p>
+</details>
+<details class="doc-chapter"><summary><span class="doc-chap-num">CAPÍTULO IV</span><span class="doc-chap-title">DAS ASSEMBLEIAS</span></summary>
+<p class="doc-p"><strong>Art. 23</strong> – A Assembleia Geral é o órgão soberano do DAGV, respeitadas as disposições deste estatuto, sendo formada pela reunião de representados, de acordo com o capítulo II.</p>
+<p class="doc-p"><strong>§ Único</strong> – As Assembleias Gerais podem ser:</p>
+<ol class="doc-list">
+  <li>Ordinárias;</li>
+  <li>Extraordinárias.</li>
+</ol>
+<p class="doc-p"><strong>Art. 24</strong> – A Assembleia Geral ordinária deverá ser realizada no final da gestão, no máximo sete dias após as eleições do DAGV para a prestação de contas da Gestão cujo mandato se finda e para a transmissão do cargo a outra, cujo mandato se inicia. Ela se dará por convocação única, deliberando com qualquer número de pessoas. A transição de gestão, bem como a prestação de contas, poderá ser realizada também através de reunião ordinária do DAGV.</p>
+<p class="doc-p"><strong>Art. 25</strong> – As Assembleias Gerais extraordinárias se realizarão:</p>
+<ol class="doc-list">
+  <li>quando a Coordenação Geral ou mais de 50% da Gestão julgá-las necessárias;</li>
+  <li>quando requeridas via manifestação documentada à Coordenação Geral do DAGV por, no mínimo, um quarto (¼) dos representados. Na hipótese do Coordenador Geral do Diretório Acadêmico Gaspar Vianna recusar a convocação ou deixar de fazê-la dentro de 24 horas, qualquer representado poderá convocar a Assembleia, devendo a plenária indicar um representante para dirigi-la.</li>
+</ol>
+<p class="doc-p"><strong>§ 1º</strong> – As Assembleias Gerais extraordinárias realizar-se-ão, inicialmente, a partir de uma primeira convocação.</p>
+<p class="doc-p"><strong>§ 2º</strong> – Na primeira convocação deverão estar presentes mais de 50% dos representados, sendo o início da mesma será prorrogado por 15 minutos caso o "quórum" não seja atingido. Caso após o prazo determinado o quórum ainda não tenha sido atingido, a assembleia terá seu início com o "quórum" presente e terá o mesmo valor deliberativo.</p>
+<p class="doc-p"><strong>Art. 26</strong> – A convocação da Assembleia Geral deve ser feita durante o período letivo.</p>
+<p class="doc-p"><strong>Art. 27</strong> – O aviso de realização da Assembleia deverá ser amplamente divulgado nos meios de comunicação oficiais do DAGV, com antecedência mínima de 48 horas, devendo nele constar pauta, local, data e a hora de sua realização.</p>
+<p class="doc-p"><strong>§ Único</strong> – em caso de urgência, a Assembleia Geral será convocada sem aviso prévio, podendo os presentes aprovarem o caráter de urgência da convocação. O caráter de urgência de uma assembleia geral será decidido em reunião ordinária da Gestão do DAGV.</p>
+<p class="doc-p"><strong>Art. 28</strong> – Os trabalhos das Assembleias Gerais serão dirigidos pelo Coordenador Geral do DAGV ou por seu substituto legal, de acordo com este estatuto, auxiliado por qualquer outro membro da Gestão ou representado indicado pelo dirigente da Assembleia.</p>
+<p class="doc-p"><strong>Art. 29</strong> – Nas Assembleias Gerais a palavra será concedida pelo Coordenador Geral, observando-se a ordem de inscrição dos oradores.</p>
+<p class="doc-p"><strong>§ 1º</strong> – As questões de ordem têm prioridade sobre os outros assuntos.</p>
+<p class="doc-p"><strong>§ 2º</strong> – Se houver desvirtuamento do assunto em pauta ou qualquer motivo que esteja em choque com as disposições deste estatuto, a palavra deverá ser tomada pelo Coordenador Geral ou qualquer um dos presentes, solicitando questão de encaminhamento.</p>
+<p class="doc-p"><strong>§ 3º</strong> – O tempo concedido a cada orador será estabelecido pelo Coordenador Geral, ou seu substituto, no início da assembleia, bem como o tempo de prorrogação, se necessário.</p>
+<p class="doc-p"><strong>Art. 30</strong> – As assembleias gerais só poderão deliberar com a presença de, pelo menos, um terço dos membros presentes na sua instalação, em qualquer convocação, sendo as aprovações realizadas por maioria simples dos presentes.</p>
+<p class="doc-p"><strong>Art. 31</strong> – Só terão direito a voto nas assembleias os representados efetivos do DAGV.</p>
+<p class="doc-p"><strong>Art. 32</strong> – Antes de se iniciar a discussão dos assuntos constantes na pauta, deverá ser pré-determinado pelo plenário o tempo máximo de duração da sessão.</p>
+<p class="doc-p"><strong>Art. 33</strong> – Compete às Assembleias Gerais:</p>
+<ol class="doc-list">
+  <li>decidir sobre as alterações e reformas do presente estatuto, respeitadas as disposições estatutárias;</li>
+  <li>designar um representante efetivo para presidir a assembleia geral quando a Coordenação Geral e seus substitutos legais alegarem impedimento;</li>
+  <li>deliberar, em última instância, segundo as normas estatutárias, os recursos interpostos às decisões da Gestão;</li>
+  <li>decidir sobre a suspensão e exclusão dos representados do DAGV;</li>
+  <li>decidir sobre a mudança de sede;</li>
+</ol>
+<p class="doc-p"><strong>Art. 34</strong> – Entende-se por Reunião Ordinária, a reunião aberta a todos os representados.</p>
+<p class="doc-p"><strong>§ 1º</strong> – As Reuniões Ordinárias ocorrerão durante o período letivo da faculdade semanalmente em dia fixo;</p>
+<p class="doc-p"><strong>§ 2º</strong> – As Reuniões Ordinárias serão convocadas e dirigidas pela Coordenação Geral ou qualquer outro membro da Gestão por ela indicado, devendo, para o seu funcionamento, estarem presentes pelo menos 50% das Coordenações (quatro) que compõem o DAGV em primeira chamada. Caso o quórum mínimo não seja atingido após 10 minutos, a reunião será realizada com os membros presentes;</p>
+<p class="doc-p"><strong>Art. 35</strong> – Entende-se por Reunião da Gestão, a reunião realizada unicamente por seus membros.</p>
+<p class="doc-p"><strong>§ 1º</strong> – As Reuniões da Gestão acontecerão quando a maioria dos membros da Gestão julgar necessário ou quando convocada pela Coordenação Geral.</p>
+<p class="doc-p"><strong>§ 2º</strong> – As deliberações das Reuniões da Gestão somente possuirão validade e poderão ser efetivadas após aprovação nas Reuniões Ordinárias, com exceção de deliberações referentes a penalizações eleitorais, as quais terão validade imediatamente após aprovação em Reunião da Gestão.</p>
+</details>
+<details class="doc-chapter"><summary><span class="doc-chap-num">CAPÍTULO V</span><span class="doc-chap-title">DA GESTÃO DO DAGV E SUAS ATRIBUIÇÕES</span></summary>
+<p class="doc-p"><strong>Art. 36</strong> – A Gestão do DAGV será constituída por membros das Coordenações abaixo definidas:</p>
+<ol class="doc-list">
+  <li>Coordenação Geral;</li>
+  <li>Secretaria Geral;</li>
+  <li>Coordenação de Desenvolvimento Tecnológico;</li>
+  <li>Coordenação de Finanças e Patrimônio;</li>
+  <li>Coordenação de Comunicação;</li>
+  <li>Coordenação de Ensino, Pesquisa e Extensão;</li>
+  <li>Coordenação Sociocultural;</li>
+  <li>Coordenação de Representação Estudantil;</li>
+  <li>Coordenação do Internato.</li>
+</ol>
+<p class="doc-p"><strong>§ Único</strong> – As coordenações serão constituídas pelo número de membros a ser especificado para cada coordenação conforme descrito abaixo. Todos os membros de uma mesma coordenação terão direitos, deveres e responsabilidades iguais entre si.</p>
+<p class="doc-p"><strong>Art. 37</strong> – Compete à Gestão:</p>
+<ol class="doc-list">
+  <li>dirigir e administrar o DAGV;</li>
+  <li>nomear funcionários, caso necessário, e fixar-lhes o vencimento;</li>
+  <li>criar, extinguir ou indicar comissões ou coordenações na medida das necessidades, respeitadas as disposições estatutárias;</li>
+  <li>as comissões devem ser compostas por membros efetivos da gestão em vigor ou por colaboradores aprovados previamente em Reunião Ordinária;</li>
+  <li>cumprir e fazer cumprir este estatuto, as decisões das assembleias gerais e da própria Gestão;</li>
+  <li>zelar pelo patrimônio do DAGV e da UFTM;</li>
+  <li>autorizar as despesas necessárias, decidindo sobre o destino do saldo apurado e apresentar, no final do mandato, o balanço à Assembleia Geral ordinária que dará o parecer final;</li>
+  <li>fazer-se representar por intermédio de sua Coordenação Geral ou substituto legal a nível municipal, estadual ou federal;</li>
+  <li>formar um comitê de recepção aos calouros, prestando-lhes esclarecimentos sobre o DAGV, bem como sobre o funcionamento geral da Universidade;</li>
+  <li>resolver casos omissos desse estatuto, levando posteriormente à aprovação da Assembleia Geral.</li>
+</ol>
+<p class="doc-p"><strong>Art. 38</strong> – Compete à Coordenação Geral do DAGV:</p>
+<ol class="doc-list">
+  <li>representar o DAGV quando este se fizer presente;</li>
+  <li>convocar e presidir as assembleias gerais, reuniões da Gestão e sessões, dirigindo os trabalhos;</li>
+  <li>autorizar, com a aprovação da Gestão, as despesas necessárias e lançar visto nas contas a pagar;</li>
+  <li>assinar, juntamente com a Coordenação de Finanças e Patrimônio, os cheques emitidos pelo DAGV;</li>
+  <li>superintender todos os serviços mantidos pelo DAGV, exercendo fiscalização sobre o trabalho das demais coordenações, e de todas as comissões, quer eleitas ou nomeadas;</li>
+  <li>transmitir provisoriamente, por escrito, ao substituto legal, os seus poderes, quando impedido por mais de 15 dias de exercer suas funções e atribuições;</li>
+  <li>assinar juntamente com a Secretaria Geral as deliberações das assembleias gerais e da Gestão: atas, ofícios e correspondências;</li>
+  <li>repassar aos demais membros da gestão as correspondências e as solicitações encaminhadas aos canais oficiais do DAGV;</li>
+  <li>apresentar juntamente com o coordenador de Finanças e Patrimônio a prestação de contas e dos bens do DAGV na Assembleia Geral ordinária;</li>
+  <li>constituir-se apenas por um membro sem colaboradores.</li>
+</ol>
+<p class="doc-p"><strong>Art. 39</strong> – Compete à Secretaria Geral:</p>
+<ol class="doc-list">
+  <li>substituir a Coordenação Geral em suas ausências e impedimentos;</li>
+  <li>auxiliar a Coordenação Geral sempre que for necessário;</li>
+  <li>secretariar todas as sessões e assembleias, sendo encarregado do livro de presença e da leitura dos papéis encaminhados à mesa;</li>
+  <li>manter controle da frequência dos membros da gestão para que estes estejam de acordo com a frequência mínima exigida pelo artigo 45;</li>
+  <li>redigir, visar e assinar todos os documentos do DAGV, referentes à secretaria;</li>
+  <li>organizar e dirigir a secretaria do DAGV;</li>
+  <li>redigir e organizar a aprovação das atas das instâncias deliberativas do DAGV;</li>
+  <li>preparar o material para as eleições, devendo divulgar após o período de inscrições para as eleições, a lista dos candidatos legalmente inscritos;</li>
+  <li>organizar e ter sobre sua guarda os arquivos e documentos do DAGV, sejam estes em vias físicas ou digitais, bem como as senhas e acessos das plataformas que detenham tais arquivos;</li>
+  <li>constituir-se apenas por um membro sem colaboradores.</li>
+</ol>
+<p class="doc-p"><strong>Art. 40</strong> – Compete à Coordenação de Desenvolvimento Tecnológico:</p>
+<ol class="doc-list">
+  <li>organizar e manter os sites do DAGV, mediante demanda da Coordenação Geral;</li>
+  <li>trabalhar em prol da sistematização das informações necessárias aos discentes do curso de Medicina da UFTM em um único espaço;</li>
+  <li>planejar maneiras de facilitar a divulgação de informações relevantes para os interesses do DAGV;</li>
+  <li>propor inovações tecnológicas que visem a facilitação da comunicação e aproximação com os discentes do curso de Medicina da UFTM;</li>
+  <li>constituir-se por no máximo dois membros, com igual responsabilidade sobre a coordenação.</li>
+</ol>
+<p class="doc-p"><strong>Art. 41</strong> – Compete à Coordenação de Finanças e Patrimônio:</p>
+<ol class="doc-list">
+  <li>ter sob sua guarda e responsabilidade todos os bens e pertences do DAGV;</li>
+  <li>organizar e manter em dia o livro-caixa;</li>
+  <li>prestar conta anualmente à Gestão e/ou à Assembleia Geral ordinária;</li>
+  <li>arrecadar as subvenções, rendas e doações feitas ao DAGV, assim como efetuar as despesas autorizadas pela Coordenação Geral;</li>
+  <li>assinar, conjuntamente com a Coordenação Geral, todos os papéis da coordenação de finanças, inclusive cheques;</li>
+  <li>buscar recursos e formas alternativas de viabilização dos trabalhos das coordenações, visando a independência financeira da entidade;</li>
+  <li>fazer do DAGV um ambiente físico agradável como forma de atrair os estudantes à sede do diretório acadêmico;</li>
+  <li>zelar pela conservação da sede do DAGV;</li>
+  <li>normatizar a utilização das dependências do diretório acadêmico tanto pela Gestão quanto pelos seus representados;</li>
+  <li>coordenar as reformas que se fizerem necessárias na sede do DAGV;</li>
+  <li>constituir-se por no máximo três membros com igual responsabilidade sobre a coordenação, sem colaboradores.</li>
+</ol>
+<p class="doc-p"><strong>Art. 42</strong> – Compete à Coordenação de Comunicação:</p>
+<ol class="doc-list">
+  <li>planejar, organizar e divulgar as informações e realizações do DAGV, devidamente autorizadas pela Gestão;</li>
+  <li>planejar e sugerir maneiras de ampliar o alcance do Instagram do DAGV;</li>
+  <li>responsabilizar-se pela manutenção dos murais, e-mail e demais mídias sociais do DAGV, com exceção do site;</li>
+  <li>repassar aos demais membros da gestão as correspondências e as solicitações encaminhadas aos canais oficiais do DAGV;</li>
+  <li>constituir-se de até quatro membros conforme necessidade da coordenação.</li>
+</ol>
+<p class="doc-p"><strong>Art. 43</strong> – Compete à Coordenação de Ensino, Pesquisa e Extensão:</p>
+<ol class="doc-list">
+  <li>promover reuniões, debates, conferências, etc., de caráter ético e/ou científico, que vise a formação do estudante;</li>
+  <li>organizar, promover e participar de atividades relacionadas ao ensino, à pesquisa e à extensão;</li>
+  <li>promover atividades que realizem a integração entre os estudantes, o sistema de saúde e as suas instâncias de participação popular;</li>
+  <li>levar ao conhecimento dos representados, bem como do público em geral, as atividades da Coordenação de Curso e da UFTM, ou mesmo atos, leis, e disposições governamentais que digam respeito à ciência;</li>
+  <li>participar das discussões acerca de métodos de avaliação do ensino superior e fomentar tais discussões dentro da escola;</li>
+  <li>lutar para que a instituição se submeta a projetos de avaliação, bem como aos processos de transformação sugeridos por eles;</li>
+  <li>promover discussões institucionais acerca dos modelos pedagógico e curricular utilizados em nossa escola;</li>
+  <li>estimular e promover a formação de ligas científicas;</li>
+  <li>promover a discussão do papel do estudante na produção científica da UFTM e procurar meios de abertura de grupos de pesquisa a todos os estudantes;</li>
+  <li>promover a extensão universitária;</li>
+  <li>buscar informar e conscientizar os estudantes sobre a importância de um sistema de saúde público, gratuito, que deve atender de forma igualitária e de qualidade toda a população com o objetivo de promover a prevenção das doenças;</li>
+  <li>constituir-se de até três membros e colaboradores conforme necessidade da coordenação.</li>
+</ol>
+<p class="doc-p"><strong>Art. 44</strong> – Compete à Coordenação Sociocultural:</p>
+<ol class="doc-list">
+  <li>comprar livros, assinar revistas e jornais, deixando-os à disposição dos representados;</li>
+  <li>editar apostilas, publicações, etc. de âmbito cultural;</li>
+  <li>incentivar e promover atividades de cunho cultural (teatro, música, cinema, literatura, etc.);</li>
+  <li>trabalhar a diversidade cultural brasileira com os acadêmicos;</li>
+  <li>organizar eventos sociais visando a integração entre representados e a comunidade;</li>
+  <li>constituir-se de até dois membros e colaboradores conforme a necessidade da coordenação.</li>
+</ol>
+<p class="doc-p"><strong>Art. 45</strong> – Compete à Coordenação de Representação Estudantil:</p>
+<ol class="doc-list">
+  <li>organizar as indicações formais dos representantes nos órgãos colegiados da UFTM e promover integração entre eles, através de reuniões e discussões;</li>
+  <li>organizar as indicações formais dos representantes das instâncias deliberativas da DENEM;</li>
+  <li>receber, buscar e organizar demandas do corpo discente e levá-las ao conhecimento de Gestão do DAGV;</li>
+  <li>incentivar e promover a participação e envolvimento dos estudantes em manifestações organizadas pelas entidades estudantis;</li>
+  <li>incentivar e promover a participação e envolvimento dos estudantes em eventos e reuniões organizadas pelas entidades estudantis;</li>
+  <li>divulgar pelos meios de comunicação do DAGV os assuntos pertinentes ao corpo discente e que estejam em pauta nos órgãos colegiados;</li>
+  <li>lutar pela viabilização de um ensino médico de qualidade;</li>
+  <li>organizar, promover e participar de atividades relacionadas ao movimento estudantil;</li>
+  <li>organizar, quando necessário, reuniões com todos os representantes discentes para dinamização das atividades da coordenação;</li>
+  <li>informar e tornar conhecidas as entidades de representação estudantil;</li>
+  <li>sugerir a inclusão, no plano de gestão, de diretrizes e propostas feitas por entidades estudantis;</li>
+  <li>realizar o intercâmbio de informações entre o DAGV e a CLEV-UFTM, DCE e demais entidades estudantis;</li>
+  <li>constituir-se de até quatro membros e colaboradores conforme a necessidade da coordenação.</li>
+</ol>
+<p class="doc-p"><strong>Art. 46</strong> – Compete à Coordenação do Internato:</p>
+<ol class="doc-list">
+  <li>prezar pelo ensino da Medicina no âmbito da formação prática, receber as demandas exigidas por seus períodos e trazer tais questões para reuniões com membros do DAGV;</li>
+  <li>estudar e tornar público toda a possibilidade de inclusão de discentes em representações e projetos relativos ao HC-UFTM;</li>
+  <li>manter boa relação com a já existente Comissão do Internato, de forma que o DAGV esteja ciente das pautas de suas reuniões, bem como de suas decisões e deliberações;</li>
+  <li>será composta por até 3 (três) integrantes, com uma vaga oferecida preferencialmente à um aluno que já seja membro da Comissão do Internato;</li>
+  <li>seus integrantes deverão ser obrigatoriamente estar em períodos relativos ao Internato;</li>
+  <li>as reuniões envolvendo essa coordenação ocorrerão de forma híbrida, respeitando a carga horária dos internos.</li>
+</ol>
+<p class="doc-p"><strong>Art. 47</strong> – O membro da Gestão que faltar a mais de 25% das Reuniões Ordinárias sem causa justificada perderá o mandato perdendo o direito de certificado.</p>
+<p class="doc-p"><strong>Art. 48</strong> – O membro da Gestão que perder o mandato, conforme artigo 47, ou por outro motivo estatutário, deverá ser notificado por meio de documentação formal assinado pela Coordenação Geral do DAGV.</p>
+<p class="doc-p"><strong>Art. 49</strong> – O membro da Gestão que se demitir deverá encaminhar à Coordenação Geral do DAGV, por meio de documentação formal, seu pedido de demissão.</p>
+<p class="doc-p"><strong>§ Único</strong> – Caso o membro demissionário não encaminhe seu pedido de demissão, via documentação formal, será incluído no artigo 48.</p>
+</details>
+<details class="doc-chapter"><summary><span class="doc-chap-num">CAPÍTULO VI</span><span class="doc-chap-title">DAS ELEIÇÕES, CAMPANHA ELEITORAL E POSSE</span></summary>
+<h4 class="doc-section-title">Seção I – Das eleições e apurações</h4>
+<p class="doc-p"><strong>Art. 50</strong> – As eleições gerais para os cargos da Gestão realizar-se-ão anualmente no decorrer do mês de outubro.</p>
+<p class="doc-p"><strong>§ 1º</strong> – As eleições serão disputadas por chapas, compostas pelos cargos constituintes da Gestão do DAGV, concorrida por meio de eleição nominal e secreta.</p>
+<p class="doc-p"><strong>§ 2º</strong> – As eleições serão marcadas pela Coordenação Geral do DAGV e amplamente divulgadas pelos canais de comunicação oficiais, com 30 dias de antecedência e serão realizadas no recinto da UFTM, das 8 às 20 horas, devendo a apuração ser realizada até um dia após seu término;</p>
+<p class="doc-p"><strong>§ 3º</strong> – O mandato da Gestão será de um ano. Caso não haja chapa candidata a assumir o DAGV, ou as eleições culminarem com a maioria dos votos em branco no primeiro turno, deve ser convocada uma Assembleia Geral para definir sobre essas questões.</p>
+<p class="doc-p"><strong>Art. 51</strong> – Às eleições somente poderão concorrer os representados, regularmente matriculados no curso de medicina da UFTM.</p>
+<p class="doc-p"><strong>§ 1º</strong> – Só poderão ser inscritas chapas com candidatos a todas as coordenações, com exceção da Coordenação do Internato, que devido a sua especificidade deverá ser formada após a posse da chapa eleita.</p>
+<p class="doc-p"><strong>§ 2º</strong> – As inscrições das chapas deverão ser feitas por escrito, assinadas por todos seus componentes, com antecedência mínima de 15 dias da data marcada para a realização das eleições. No ato da inscrição, a chapa deve apresentar o seu plano de gestão para o DAGV, caso não apresente, não será confirmada a inscrição. Tal plano de gestão será amplamente divulgado.</p>
+<p class="doc-p"><strong>Art. 52</strong> – Em caso de mais de uma chapa inscrita, poderá haver um debate envolvendo os candidatos à Coordenação Geral, ou um membro da chapa formalmente indicado e nomeado pelo candidato à Coordenação Geral da chapa em questão.</p>
+<p class="doc-p"><strong>§ 1º</strong> – O debate será conduzido pelo Coordenador Geral ou pelo Secretário Geral da gestão vigente;</p>
+<p class="doc-p"><strong>§ 2º</strong> – No debate, impreterivelmente, haverá tanto debate direto entre os candidatos, quanto perguntas direcionadas aos candidatos pela comunidade acadêmica como um todo;</p>
+<p class="doc-p"><strong>§ 3º</strong> – O tempo de fala de cada candidato deverá ser estabelecido no momento do debate, pelo seu condutor, após consulta com os candidatos.</p>
+<p class="doc-p"><strong>Art. 53</strong> – A chapa deverá ser composta por candidatos, todos efetivos, às seguintes coordenações, conforme as disposições do capítulo V:</p>
+<ol class="doc-list">
+  <li>Coordenação Geral;</li>
+  <li>Secretaria Geral;</li>
+  <li>Coordenação de Desenvolvimento Tecnológico;</li>
+  <li>Coordenação de Finanças e Patrimônio;</li>
+  <li>Coordenação de Comunicação;</li>
+  <li>Coordenação de Ensino, Pesquisa e Extensão;</li>
+  <li>Coordenação Sociocultural;</li>
+  <li>Coordenação de Representação Estudantil.</li>
+</ol>
+<p class="doc-p"><strong>Art. 54</strong> – Um mesmo representado não poderá se candidatar a duas coordenações numa mesma chapa.</p>
+<p class="doc-p"><strong>Art. 55</strong> – Não será permitido o voto por procuração devendo o representado assinar a lista de votantes no ato da votação.</p>
+<p class="doc-p"><strong>Art. 56</strong> – A Gestão cujo mandato se finda continuará no cargo até a posse da nova Gestão.</p>
+<p class="doc-p"><strong>Art. 57</strong> – A mesa de eleição e apuração compor-se-á:</p>
+<ol class="doc-list">
+  <li>pelo Coordenador Geral do DAGV, ou qualquer outro membro da Gestão por ele autorizado, quando impossibilitado de realizar essa ação;</li>
+  <li>pelo Secretário Geral do DAGV, ou por outro membro da Gestão por ele autorizado, quando impossibilitado de realizar essa ação;</li>
+  <li>um membro do corpo discente do curso de medicina da UFTM, escolhido de comum acordo entre as chapas concorrentes em reunião convocada após o período de inscrição de chapas e até 5 dias antes da realização das eleições.</li>
+</ol>
+<p class="doc-p"><strong>Art. 58</strong> – No caso de membros da Gestão do DAGV candidatarem-se, estarão impossibilitados de realizar ações referentes ao processo eleitoral a partir do ato de inscrição da chapa a qual pertençam. Após o término do processo eleitoral, o respectivo membro está habilitado a continuar na Gestão até o fim do mandato.</p>
+<p class="doc-p"><strong>Parágrafo Único</strong> – Caso todos os membros da Gestão do DAGV estejam concorrendo às eleições, os três membros da mesa e apuração serão escolhidos em Assembleia Geral.</p>
+<p class="doc-p"><strong>Art. 59</strong> – A votação será realizada a partir de um formulário do Google, com uma lista de assinaturas para o controle dos presentes.</p>
+<p class="doc-p"><strong>Art. 60</strong> – Será considerada vencedora a chapa que, no processo eleitoral:</p>
+<p class="doc-p"><strong>§ 1º</strong> – Concorrer como chapa única ou com outra chapa e obtiver maioria simples de votos válidos apurados;</p>
+<p class="doc-p"><strong>§ 2º</strong> – Concorrer com duas ou mais chapas e obtiver 50% mais um de votos válidos. Caso isso não ocorra, será convocado um segundo turno com as duas chapas mais votadas, em um prazo de 7 dias após o primeiro turno. No segundo turno, será eleita a chapa que obtiver a maioria simples dos votos.</p>
+<p class="doc-p"><strong>Art. 61</strong> – Em caso de empate, proceder-se-á nova eleição num prazo máximo de 72 horas após apuração dos votos, devendo concorrer apenas as chapas empatadas.</p>
+<p class="doc-p"><strong>§ Único</strong> – Os casos omissos neste estatuto, referentes a eleições, serão resolvidos pela mesa.</p>
+<h4 class="doc-section-title">Seção II – Da campanha eleitoral</h4>
+<p class="doc-p"><strong>Art. 62</strong> – Entende-se como campanha eleitoral a publicação, feita por próprios candidatos da chapa, de informações relativas a propostas e qualificação dos candidatos, bem como o envio de mensagens em grupos de quaisquer redes sociais incentivando a votação em determinada chapa.</p>
+<p class="doc-p"><strong>Art. 63</strong> – O início da campanha eleitoral acontecerá invariavelmente após o encerramento do período de inscrições das chapas, caso desrespeitado, a chapa infratora será indeferida.</p>
+<p class="doc-p"><strong>Art. 64</strong> – Vinte e quatro horas antes do início das eleições cessará toda a propaganda eleitoral, caso desrespeitado, a chapa infratora será indeferida.</p>
+<p class="doc-p"><strong>Parágrafo Único</strong> – A manutenção de stories de Instagram, status de WhatsApp e de quaisquer outras formas de divulgação similares a estas será considerada campanha eleitoral, ainda que sua publicação tenha ocorrido antes do limite estabelecido pelo Art. 64.</p>
+<p class="doc-p"><strong>Art. 65</strong> – A Gestão do DAGV não poderá dar contribuições financeiras para a campanha eleitoral, devendo seguir estritamente as disposições deste estatuto.</p>
+<h4 class="doc-section-title">Seção III – Da posse</h4>
+<p class="doc-p"><strong>Art. 66</strong> – Quatorze dias, no máximo, após as eleições, a Gestão do DAGV deverá dar posse, em Assembleia Geral Ordinária ou em Reunião Ordinária do DAGV, à nova Gestão eleita.</p>
+<p class="doc-p"><strong>Art. 67</strong> – Caso surja alguma contestação sobre os resultados da eleição, no máximo 48 horas após a divulgação oficial destes resultados, a Gestão do DAGV reunir-se-á e resolverá o caso segundo as disposições estatutárias.</p>
+<p class="doc-p"><strong>§ Único</strong> – Em caso de anulação das eleições, a Coordenação Geral do Diretório Acadêmico "Gaspar Vianna" deverá convocar novas eleições num prazo máximo de 10 dias a partir das eleições anuladas.</p>
+</details>
+<details class="doc-chapter"><summary><span class="doc-chap-num">CAPÍTULO VII</span><span class="doc-chap-title">DAS DISPOSIÇÕES GERAIS</span></summary>
+<p class="doc-p"><strong>Art. 68</strong> – Nenhum cargo eletivo ou de nomeação será remunerado.</p>
+<p class="doc-p"><strong>Art. 69</strong> – Os bens do DAGV deverão ser registrados em um livro especial, organizado pelo Coordenador de Finanças e Patrimônio.</p>
+<p class="doc-p"><strong>Art. 70</strong> – A reforma total ou parcial deste estatuto poderá efetuar-se em Assembleia Geral Extraordinária, convocada para este fim quando:</p>
+<ol class="doc-list">
+  <li>proposta por documentação formal à Coordenação Geral do DAGV, assinada por, no mínimo um terço dos representados;</li>
+  <li>proposta pela Gestão do DAGV.</li>
+</ol>
+<p class="doc-p"><strong>§ 1º</strong> – A Coordenação Geral do DAGV convocará Assembleia Geral Extraordinária para este fim, respeitadas as disposições estatuárias.</p>
+<p class="doc-p"><strong>§ 2º</strong> – A reforma parcial ou total deste estatuto só poderá ser realizada quando a Assembleia Geral convocada para este fim obtiver "quórum" de 50% mais um dos representados do DAGV.</p>
+<p class="doc-p"><strong>§ 3º</strong> – Caso seja realizada uma (1) convocação e não for obtido o "quórum" necessário, a reforma estatuária deverá ser aprovada por lista de assinaturas, exigindo-se que esta seja assinada por, no mínimo, 50% mais um dos representados do DAGV.</p>
+<p class="doc-p"><strong>§ 4º</strong> – A reforma parcial ou total deste estatuto entrará em vigor decorridos 7 dias de sua aprovação em Assembleia.</p>
+<p class="doc-p"><strong>Art. 71</strong> – No caso de demissão coletiva dos membros da Gestão, qualquer representado efetivo poderá convocar uma Assembleia Geral Extraordinária com a finalidade de indicar a Gestão provisória que terá prazo máximo de 30 dias para convocar eleições, segundo as disposições estatutárias.</p>
+<p class="doc-p"><strong>§ Único</strong> – A Gestão eleita nestas circunstâncias cumprirá apenas o mandato restante da Gestão demitida, devendo convocar as eleições ordinárias na data prevista por este estatuto.</p>
+<p class="doc-p"><strong>Art. 72</strong> – Para mudança da sede do DAGV, em casos de necessidade temporária deverá ser convocada Assembleia Geral Extraordinária para este fim, sendo que, neste caso, só poderá deliberar com "quórum" de 50% mais um em qualquer convocação, ou abaixo-assinado – depois de uma (1) convocação – com mais de 50% dos representados.</p>
+<p class="doc-p"><strong>Parágrafo Único</strong> – Dado o caráter inequívoco e histórico da sede do DAGV, qualquer pleito relacionado a sua mudança definitiva torna-se improcedente e, portanto, inaceitável.</p>
+</details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== VOLTAR ===================== -->
+    <section class="back-section">
+      <a href="index.html" class="btn btn--ghost-white">
+        <i class="fa-solid fa-house" aria-hidden="true"></i>
+        Voltar ao Início
+      </a>
+    </section>
+
+  </main>
+  <footer class="footer">
+    <div class="container footer__inner">
+
+      <div class="footer__brand">
+        <img
+          src="img/logo dourada-sem fundo.png"
+          alt="Logo DAGV"
+          class="footer__logo"
+          width="64" height="54"
+          loading="lazy"
+        />
+        <div>
+          <p class="footer__name">DAGV – Gaspar Vianna</p>
+          <p class="footer__sub">Medicina UFTM · Uberaba – MG</p>
+        </div>
+      </div>
+
+      <nav class="footer__links" aria-label="Links úteis">
+        <a href="estatuto.html">Estatuto</a>
+        <a href="criadores.html">Criadores</a>
+        <a href="sobre.html">Sobre o DAGV</a>
+        <a href="coordenacao.html">Coordenação</a>
+        <a href="historico2.html">Resgate Histórico</a>
+        <a href="index.html#contact">Suporte</a>
+      </nav>
+
+      <div class="footer__social">
+        <a href="https://www.instagram.com/dagvmeduftm/" target="_blank" rel="noopener" aria-label="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=100009254539973" target="_blank" rel="noopener" aria-label="Facebook">
+          <i class="fa-brands fa-facebook"></i>
+        </a>
+        <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7" target="_blank" rel="noopener" aria-label="Formulário de contato">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+      </div>
+
+    </div>
+    <div class="footer__bottom">
+      <p>&copy; <span id="year"></span> Diretório Acadêmico Gaspar Vianna – Medicina UFTM. Todos os direitos reservados.</p>
+      <p class="footer__credit">Desenvolvido por <a href="criadores.html">Sérgio Lemuel Soares Santos &amp; João Paulo Soares Santos</a></p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/sidemenu.js"></script>
+
+
+</body>
+</html>
