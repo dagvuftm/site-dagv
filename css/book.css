@@ -466,6 +466,11 @@
   cursor: zoom-in;
   box-shadow: 0 10px 40px rgba(0,0,0,.6);
   image-rendering: auto;
+  /* [FIX zoom mobile] o reset global "img { max-width:100% }" limitava
+     o zoom ao tamanho da tela (mais perceptível no mobile, onde a tela
+     é pequena) — aqui o tamanho é controlado 100% via JS (lbFitW/lbScale). */
+  max-width: none;
+  max-height: none;
 }
 
 .book-lightbox__img.is-zoomed { cursor: grab; }
