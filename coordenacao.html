@@ -1383,6 +1383,20 @@
       /* Injeta HTML dos cards */
       track.innerHTML = COORDENACOES.map(function (c, i) { return buildCard(c, i); }).join('');
 
+      /* [FIX] com o autoplay agora ligado só no card ativo (fix abaixo),
+         as fotos dos outros cards não eram mais "aquecidas" cedo pelos
+         timers de fundo — a primeira troca de foto ao entrar num card
+         novo tinha que decodificar a imagem na hora, travando. Pré-
+         carrega todas as fotos em segundo plano (sem depender de
+         timer/autoplay), fora da via rápida da thread principal. */
+      setTimeout(function () {
+        COORDENACOES.forEach(function (c) {
+          c.members.forEach(function (m) {
+            if (m.photo) { var im = new Image(); im.src = m.photo; }
+          });
+        });
+      }, 0);
+
       var cards   = Array.from(track.querySelectorAll('.crd-card'));
       var total   = cards.length;
       var current  = 0;
