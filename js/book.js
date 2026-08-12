@@ -650,7 +650,7 @@
          (que já começaram a montar em paralelo, acima) terminarem antes
          da revelação, sem atraso perceptível depois da capa abrir. Nas
          próximas aberturas (páginas já montadas) volta ao tempo normal. */
-      var rotDur = firstOpenDone ? 1.1 : 2.8;
+      var rotDur = 1.1;
       var tl = window.gsap.timeline({
         onComplete: function () {
           book.classList.remove('gsap-driving');
@@ -670,7 +670,7 @@
     } else {
       // Fallback: CSS puro assume a rotação (classe .is-open já cobre isso).
       book.classList.add('is-open');
-      setTimeout(onCoverOpen, firstOpenDone ? 950 : 2600);
+      setTimeout(onCoverOpen, 950);
       firstOpenDone = true;
     }
   }
