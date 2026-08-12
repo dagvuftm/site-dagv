@@ -614,7 +614,10 @@
     var onCoverOpen = function () { afterCoverOpen(targetIndex); };
 
     if (hasGsap && cover) {
-      var tl = window.gsap.timeline();
+      book.classList.add('gsap-driving');
+      var tl = window.gsap.timeline({
+        onComplete: function () { book.classList.remove('gsap-driving'); }
+      });
       tl.to(book, { scale: 1.04, duration: .35, ease: 'power2.out' })
         .to(cover, {
           rotationY: -165,
@@ -651,6 +654,7 @@
       });
     }
     book.classList.remove('is-open');
+    book.classList.remove('gsap-driving');
   }
 
   /* Clique na capa abre; clique fora (fechar/Esc) fecha.

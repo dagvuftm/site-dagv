@@ -287,6 +287,16 @@
   pointer-events: none;
 }
 
+/* [FIX abertura] quando o GSAP está no comando (classe adicionada via JS
+   antes do timeline começar), desliga a transição CSS do transform pra
+   não competir com a animação do GSAP na MESMA propriedade — essa
+   corrida entre os dois é o que fazia a capa "esticar" na primeira
+   abertura. Sem GSAP, a transição CSS normal continua servindo de
+   fallback (classe não é adicionada nesse caso). */
+.book.is-open.gsap-driving .book__cover--front {
+  transition: none;
+}
+
 .book__pages {
   position: absolute;
   top: 0; bottom: 0;
