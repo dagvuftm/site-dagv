@@ -294,7 +294,13 @@
     var fit = Math.min(vw / lbNatW, vh / lbNatH, 1);
     lbFitW = lbNatW * fit;
     lbFitH = lbNatH * fit;
-    LB_MAX = lbNatW / lbFitW; // 1 = encaixado na tela · LB_MAX = pixel a pixel (nativo)
+    /* [FIX mobile] o cálculo original usava só pixels CSS, mas em telas
+       retina/HiDPI (devicePixelRatio 2-3, a maioria dos celulares) isso
+       limitava o zoom bem antes do necessário. Multiplica pelo DPR pra
+       aproveitar a resolução real da tela, com um mínimo garantido de
+       2.5x mesmo em imagens menores. */
+    var dpr = window.devicePixelRatio || 1;
+    LB_MAX = Math.max((lbNatW / lbFitW) * dpr, 2.5);
     if (!keepScale) lbScale = 1;
     lbScale = Math.max(LB_MIN, Math.min(LB_MAX, lbScale));
     clampLbPan();
