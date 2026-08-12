@@ -619,6 +619,15 @@
 
     if (hasGsap && cover) {
       book.classList.add('gsap-driving');
+      /* [FIX] com a transição CSS desligada (gsap-driving), a classe
+         is-open logo abaixo já deixa o navegador aplicar o rotateY
+         final instantaneamente — daí o GSAP lia esse valor já pronto
+         como ponto de partida e não tinha nada pra animar (capa só
+         "sumia" direto pro estado aberto). Fixamos o estado inicial
+         explicitamente ANTES da classe entrar, garantindo que o GSAP
+         sempre anime de 0 até -165, não importa o que o CSS já tenha
+         aplicado. */
+      window.gsap.set(cover, { rotationY: 0, transformPerspective: 1800 });
       var tl = window.gsap.timeline({
         onComplete: function () { book.classList.remove('gsap-driving'); }
       });
