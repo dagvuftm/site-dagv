@@ -115,14 +115,10 @@
   function buildTextPage(doc) {
     var el = document.createElement('div');
     el.className = 'book-page';
-    /* [FIX mobile] textos longos (páginas do capítulo CAGV/Operação MED/
-       Federalização) cortavam no mobile — marca pra CSS reduzir a fonte
-       só nessas páginas e só em telas pequenas. */
-    var descClass = 'book-page__desc' + (doc.description && doc.description.length > 300 ? ' book-page__desc--long' : '');
     el.innerHTML =
       '<span class="book-page__year">' + doc.year + '</span>' +
       '<h3 class="book-page__title">' + doc.title + '</h3>' +
-      '<p class="' + descClass + '">' + doc.description + '</p>';
+      '<p class="book-page__desc">' + doc.description + '</p>';
     return el;
   }
 
@@ -141,7 +137,6 @@
         '<div class="book-page__media-caption">' +
           '<span class="book-page__year">' + doc.year + '</span>' +
           '<h3 class="book-page__title">' + doc.title + '</h3>' +
-          (doc.caption ? '<span class="book-page__caption">' + doc.caption + '</span>' : '') +
         '</div>' +
       '</div>';
     var media = el.querySelector('.book-page__media');
@@ -228,8 +223,9 @@
 
     /* Arrastar (mouse e um dedo) pra navegar quando ampliado */
     var dragging = false, startX = 0, startY = 0, startPanX = 0, startPanY = 0;
+    var isPinching = false;
     lightboxViewport.addEventListener('pointerdown', function (e) {
-      if (lbScale <= 1) return;
+      if (lbScale <= 1 || isPinching) return;
       dragging = true;
       startX = e.clientX; startY = e.clientY;
       startPanX = lbPanX; startPanY = lbPanY;
@@ -237,7 +233,7 @@
       lightboxImg.classList.add('is-dragging');
     });
     lightboxViewport.addEventListener('pointermove', function (e) {
-      if (!dragging) return;
+      if (!dragging || isPinching) return;
       lbPanX = startPanX + (e.clientX - startX);
       lbPanY = startPanY + (e.clientY - startY);
       clampLbPan();
@@ -254,6 +250,11 @@
     var pinchStartDist = 0, pinchStartScale = 1;
     lightboxViewport.addEventListener('touchstart', function (e) {
       if (e.touches.length === 2) {
+        isPinching = true;
+        // Cancela qualquer arraste de um dedo em andamento — evita que os
+        // dois handlers disputem lbPanX/lbPanY ao mesmo tempo.
+        dragging = false;
+        lightboxImg.classList.remove('is-dragging');
         pinchStartDist = touchDist(e.touches);
         pinchStartScale = lbScale;
       }
@@ -266,6 +267,11 @@
         setLbScale(pinchStartScale * factor, null, null);
       }
     }, { passive: false });
+    ['touchend', 'touchcancel'].forEach(function (evt) {
+      lightboxViewport.addEventListener(evt, function (e) {
+        if (e.touches.length < 2) isPinching = false;
+      }, { passive: true });
+    });
 
     window.addEventListener('resize', function () {
       if (lightbox.classList.contains('is-open')) recomputeLbFit(true);
@@ -294,13 +300,7 @@
     var fit = Math.min(vw / lbNatW, vh / lbNatH, 1);
     lbFitW = lbNatW * fit;
     lbFitH = lbNatH * fit;
-    /* [FIX mobile] o cálculo original usava só pixels CSS, mas em telas
-       retina/HiDPI (devicePixelRatio 2-3, a maioria dos celulares) isso
-       limitava o zoom bem antes do necessário. Multiplica pelo DPR pra
-       aproveitar a resolução real da tela, com um mínimo garantido de
-       2.5x mesmo em imagens menores. */
-    var dpr = window.devicePixelRatio || 1;
-    LB_MAX = Math.max((lbNatW / lbFitW) * dpr, 2.5);
+    LB_MAX = lbNatW / lbFitW; // 1 = encaixado na tela · LB_MAX = pixel a pixel (nativo)
     if (!keepScale) lbScale = 1;
     lbScale = Math.max(LB_MIN, Math.min(LB_MAX, lbScale));
     clampLbPan();
