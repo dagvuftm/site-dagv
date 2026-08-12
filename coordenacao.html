@@ -216,6 +216,13 @@
         box-shadow 400ms var(--ease);
       will-change: transform, filter, opacity, width;
       pointer-events: none;
+      /* [FIX travada no 1º clique] sem isso, o navegador só termina de
+         "preparar" a camada 3D (GPU) do card na primeira vez que ela
+         realmente se move — travando bem no primeiro clique da seta.
+         Isso força o navegador a montar a camada de composição já no
+         carregamento da página, em vez de na hora da 1ª troca. */
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
     }
 
     /* Posições 3D */
@@ -1627,6 +1634,16 @@
 
       /* ── Init ───────────────────────────────────────────────── */
       render();
+
+      /* [FIX travada no 1º clique] força o navegador a "aquecer" (montar
+         as camadas de composição/blur) de todos os cards já no
+         carregamento, em vez de deixar isso pro primeiro clique real do
+         usuário na seta. */
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          cards.forEach(function (c) { c.getBoundingClientRect(); });
+        });
+      });
     });
 
   }());
