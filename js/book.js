@@ -685,16 +685,28 @@
     closeBtn.classList.remove('is-visible');
     if (btnBookmark) btnBookmark.classList.remove('is-visible');
 
+    /* [FIX] antes 'is-open' (que controla a opacidade das páginas) era
+       removida na hora, mas a capa ainda levava .9s pra girar de volta
+       — as páginas somiam de repente enquanto a capa ainda tava
+       fechando. Agora só remove is-open quando a rotação da capa
+       realmente termina, igual foi feito na abertura. */
+    function finishClose() {
+      book.classList.remove('is-open');
+      book.classList.remove('gsap-driving');
+    }
+
     if (hasGsap && cover) {
+      book.classList.add('gsap-driving');
       window.gsap.to(cover, {
         rotationY: 0,
         transformPerspective: 1800,
         duration: .9,
-        ease: 'power3.inOut'
+        ease: 'power3.inOut',
+        onComplete: finishClose
       });
+    } else {
+      setTimeout(finishClose, 900);
     }
-    book.classList.remove('is-open');
-    book.classList.remove('gsap-driving');
   }
 
   /* Clique na capa abre; clique fora (fechar/Esc) fecha.
