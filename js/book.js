@@ -328,9 +328,13 @@
   function setLbScale(next, originX, originY) {
     var prev = lbScale;
     lbScale = Math.max(LB_MIN, Math.min(LB_MAX, next));
-    if (lbScale === 1) {
-      lbPanX = 0; lbPanY = 0;
-    } else if (originX !== null && originY !== null && prev !== lbScale) {
+    /* [FIX flicker mobile] antes havia um reset abrupto de lbPanX/lbPanY
+       pra 0 assim que a escala chegava exatamente em 1 — se a imagem
+       estava arrastada pro canto, ela "pulava" pro centro de repente,
+       causando a piscada ao reduzir o zoom com a pinça. clampLbPan()
+       já reduz o pan suavemente conforme a escala diminui, então não
+       precisa desse reset manual. */
+    if (originX !== null && originY !== null && prev !== lbScale) {
       // mantém o ponto sob o cursor/dedos fixo enquanto aplica o zoom
       var ratio = lbScale / prev;
       lbPanX = originX - (originX - lbPanX) * ratio;

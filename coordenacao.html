@@ -1388,11 +1388,16 @@
       var current  = 0;
       var expanded = false;
 
-      /* Inicia subcarrosséis */
+      /* Inicia subcarrosséis
+         [FIX] antes rodava o timer de TODAS as coordenadorias ao mesmo
+         tempo, mesmo fora de tela — sobrecarregava a thread principal
+         (causando a travadinha ao trocar de card) e fazia as fotos de
+         todos os cards passarem juntas. Agora só a coordenadoria
+         visível no momento tem o autoplay ativo. */
       COORDENACOES.forEach(function (c, i) {
         memberStates[i] = { current: 0, total: c.members.length, timer: null, paused: false };
-        startTimer(i);
       });
+      startTimer(current);
 
       /* Dots principais */
       COORDENACOES.forEach(function (_, i) {
@@ -1455,7 +1460,9 @@
       /* ── Navegação principal ────────────────────────────────── */
       function goTo(idx) {
         collapseCard();
+        stopTimer(current); /* [FIX] pausa o autoplay do card que está saindo */
         current = ((idx % total) + total) % total;
+        startTimer(current); /* [FIX] só ativa o autoplay do card visível */
         render();
       }
 
