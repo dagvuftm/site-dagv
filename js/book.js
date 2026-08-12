@@ -251,10 +251,11 @@
     });
 
     /* Pinça (dois dedos) pra zoom progressivo no celular */
-    var pinchStartDist = 0, pinchStartScale = 1;
+    var pinchStartDist = 0, pinchStartScale = 1, isPinching = false;
     lightboxViewport.addEventListener('touchstart', function (e) {
       if (e.touches.length === 2) {
         e.preventDefault();
+        isPinching = true;
         pinchStartDist = touchDist(e.touches);
         pinchStartScale = lbScale;
       }
@@ -267,9 +268,25 @@
         setLbScale(pinchStartScale * factor, null, null);
       }
     }, { passive: false });
+    ['touchend', 'touchcancel'].forEach(function (evt) {
+      lightboxViewport.addEventListener(evt, function (e) {
+        if (e.touches.length < 2) isPinching = false;
+      });
+    });
 
+    /* [FIX flicker mobile] o navegador dispara 'resize' repetidamente
+       durante o próprio gesto de pinça (barra de endereço escondendo/
+       reaparecendo). Isso recalculava o fit no meio do gesto e brigava
+       com o setLbScale da pinça, causando a imagem "piscar" ao dar
+       zoom out. Agora ignora resize enquanto o dedo ainda está na tela
+       e faz debounce pro resto dos casos (rotação de tela etc). */
+    var resizeT;
     window.addEventListener('resize', function () {
-      if (lightbox.classList.contains('is-open')) recomputeLbFit(true);
+      if (isPinching) return;
+      clearTimeout(resizeT);
+      resizeT = setTimeout(function () {
+        if (lightbox.classList.contains('is-open')) recomputeLbFit(true);
+      }, 150);
     });
   }
 
