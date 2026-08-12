@@ -620,11 +620,16 @@
        aquele atraso visível até as páginas aparecerem. Como o
        .book__pages já fica com opacity:0 até a classe is-pages-visible
        entrar, é seguro montar tudo em paralelo, escondido, enquanto a
-       capa ainda está girando. Quando a animação termina, só falta
-       revelar (instantâneo). */
+       capa ainda está girando.
+       [FIX 2] a montagem em si é pesada (site inteiro de páginas +
+       StPageFlip) e síncrona — chamar ela direto aqui travava a thread
+       principal ANTES do GSAP sequer desenhar o primeiro frame, dando
+       a sensação de clique "congelado". Empurramos pra depois do
+       próximo repaint (setTimeout 0) pra a animação já estar visível
+       na tela quando o trabalho pesado começar. */
     if (!pagesInitialized) {
-      initPagesExperience(targetIndex);
       pagesInitialized = true;
+      setTimeout(function () { initPagesExperience(targetIndex); }, 0);
     }
 
     var onCoverOpen = function () { afterCoverOpen(targetIndex); };
@@ -645,7 +650,7 @@
          (que já começaram a montar em paralelo, acima) terminarem antes
          da revelação, sem atraso perceptível depois da capa abrir. Nas
          próximas aberturas (páginas já montadas) volta ao tempo normal. */
-      var rotDur = firstOpenDone ? 1.1 : 1.9;
+      var rotDur = firstOpenDone ? 1.1 : 2.8;
       var tl = window.gsap.timeline({
         onComplete: function () {
           book.classList.remove('gsap-driving');
@@ -665,7 +670,7 @@
     } else {
       // Fallback: CSS puro assume a rotação (classe .is-open já cobre isso).
       book.classList.add('is-open');
-      setTimeout(onCoverOpen, firstOpenDone ? 950 : 1700);
+      setTimeout(onCoverOpen, firstOpenDone ? 950 : 2600);
       firstOpenDone = true;
     }
   }
