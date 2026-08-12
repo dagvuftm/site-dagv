@@ -48,6 +48,7 @@
   }
 
   var isOpen = false;
+  var firstOpenDone = false; /* [FIX] 1ª abertura fica um pouco mais lenta, dando tempo de montar as páginas */
   var pageFlip = null;
   var flipSound = null;
 
@@ -639,14 +640,23 @@
          sempre anime de 0 até -165, não importa o que o CSS já tenha
          aplicado. */
       window.gsap.set(cover, { rotationY: 0, transformPerspective: 1800 });
+      /* [FIX] na 1ª abertura da sessão, a animação da capa fica mais
+         lenta de propósito — dá mais tempo pras ~189 páginas + StPageFlip
+         (que já começaram a montar em paralelo, acima) terminarem antes
+         da revelação, sem atraso perceptível depois da capa abrir. Nas
+         próximas aberturas (páginas já montadas) volta ao tempo normal. */
+      var rotDur = firstOpenDone ? 1.1 : 1.9;
       var tl = window.gsap.timeline({
-        onComplete: function () { book.classList.remove('gsap-driving'); }
+        onComplete: function () {
+          book.classList.remove('gsap-driving');
+          firstOpenDone = true;
+        }
       });
       tl.to(book, { scale: 1.04, duration: .35, ease: 'power2.out' })
         .to(cover, {
           rotationY: -165,
           transformPerspective: 1800,
-          duration: 1.1,
+          duration: rotDur,
           ease: 'power3.inOut',
           onComplete: onCoverOpen
         }, '-=.1')
@@ -655,7 +665,8 @@
     } else {
       // Fallback: CSS puro assume a rotação (classe .is-open já cobre isso).
       book.classList.add('is-open');
-      setTimeout(onCoverOpen, 950);
+      setTimeout(onCoverOpen, firstOpenDone ? 950 : 1700);
+      firstOpenDone = true;
     }
   }
 
