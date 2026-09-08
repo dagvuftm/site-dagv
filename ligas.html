@@ -737,7 +737,8 @@
   /* ── Outras ligas – lista compacta ──────────────────────────── */
   .outras-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-template-columns: repeat(3, minmax(260px, 1fr));
+    justify-content: center;
     gap: var(--space-sm);
     margin-top: var(--space-lg);
   }
@@ -841,6 +842,10 @@
     .obj-grid          { grid-template-columns: 1fr 1fr; }
     .participar-grid   { grid-template-columns: 1fr; }
     .participar-info   { max-width: 480px; }
+  }
+
+  @media (max-width: 900px) {
+    .outras-grid        { grid-template-columns: repeat(2, minmax(220px, 1fr)); }
   }
 
   @media (max-width: 768px) {
@@ -981,6 +986,12 @@
               <a href="representacoes-academicas.html" class="sidemenu-list__link">
                 Representações Acadêmicas
                 <i class="fa-solid fa-landmark sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="plantao-boas-vindas-internato.html" class="sidemenu-list__link">
+                Plantão de Boas-Vindas ao Internato
+                <i class="fa-solid fa-user-doctor sidemenu-list__icon" aria-hidden="true"></i>
               </a>
             </li>
 
@@ -2036,6 +2047,24 @@
                 operatórias fundamentais e do manejo pré e pós-operatório do
                 paciente cirúrgico. Vinculada ao curso de Medicina da UFTM.
               </p>
+              <div class="liga-card__meta">
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Coordenador Docente</span>
+                  <span class="liga-card__meta-value">Dr. Luciano Pelegrinelli</span>
+                </div>
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Nº de Ligantes</span>
+                  <span class="liga-card__meta-value">25 ligantes</span>
+                </div>
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Pré-Requisito</span>
+                  <span class="liga-card__meta-value">Mínimo 4º período</span>
+                </div>
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Admissão / Duração</span>
+                  <span class="liga-card__meta-value">Início do ano · Ciclo anual</span>
+                </div>
+              </div>
               <div class="liga-card__tags">
                 <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Cirurgia</span>
                 <span class="liga-tag"><i class="fa-solid fa-scalpel" aria-hidden="true"></i> Cirurgia Geral</span>
@@ -2062,6 +2091,24 @@
                 suporte de vida no trauma e discussão de casos, com foco em
                 agilidade e segurança no atendimento pré e intra-hospitalar.
               </p>
+              <div class="liga-card__meta">
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Coordenador Docente</span>
+                  <span class="liga-card__meta-value">Roberto Lenza</span>
+                </div>
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Nº de Ligantes</span>
+                  <span class="liga-card__meta-value">30 ligantes</span>
+                </div>
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Pré-Requisito</span>
+                  <span class="liga-card__meta-value">A partir do 1º período</span>
+                </div>
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Admissão / Duração</span>
+                  <span class="liga-card__meta-value">Meio do ano · Ciclo anual</span>
+                </div>
+              </div>
               <div class="liga-card__tags">
                 <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Cirurgia</span>
                 <span class="liga-tag"><i class="fa-solid fa-truck-medical" aria-hidden="true"></i> Trauma</span>
@@ -2088,6 +2135,24 @@
                 casos e ações de extensão voltadas à prevenção e ao cuidado
                 do paciente diabético na comunidade.
               </p>
+              <div class="liga-card__meta">
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Coordenadora Docente</span>
+                  <span class="liga-card__meta-value">Dra. Flávia Alves Ribeiro</span>
+                </div>
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Nº de Ligantes</span>
+                  <span class="liga-card__meta-value">20 ligantes</span>
+                </div>
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Pré-Requisito</span>
+                  <span class="liga-card__meta-value">Sem pré-requisitos</span>
+                </div>
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Admissão / Duração</span>
+                  <span class="liga-card__meta-value">Início do ano · Ciclo anual</span>
+                </div>
+              </div>
               <div class="liga-card__tags">
                 <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Clínica</span>
                 <span class="liga-tag"><i class="fa-solid fa-droplet" aria-hidden="true"></i> Endocrinologia</span>
@@ -2114,6 +2179,24 @@
                 teóricas, discussão de casos e acompanhamento de
                 procedimentos ambulatoriais e cirúrgicos.
               </p>
+              <div class="liga-card__meta">
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Coordenador Docente</span>
+                  <span class="liga-card__meta-value">Dr. Manoel Pereira</span>
+                </div>
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Nº de Ligantes</span>
+                  <span class="liga-card__meta-value">30 ligantes</span>
+                </div>
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Pré-Requisito</span>
+                  <span class="liga-card__meta-value">Sem pré-requisitos</span>
+                </div>
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Admissão / Duração</span>
+                  <span class="liga-card__meta-value">Início do ano · Ciclo anual</span>
+                </div>
+              </div>
               <div class="liga-card__tags">
                 <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Cirurgia</span>
                 <span class="liga-tag"><i class="fa-solid fa-spa" aria-hidden="true"></i> Dermatologia</span>
@@ -2140,6 +2223,24 @@
                 consultas e procedimentos, além de ações de extensão em
                 saúde ocular para a comunidade.
               </p>
+              <div class="liga-card__meta">
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Coordenador Docente</span>
+                  <span class="liga-card__meta-value">Dr. Firmani M. B. de Senne</span>
+                </div>
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Nº de Ligantes</span>
+                  <span class="liga-card__meta-value">30 ligantes</span>
+                </div>
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Pré-Requisito</span>
+                  <span class="liga-card__meta-value">Sem pré-requisitos</span>
+                </div>
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Admissão / Duração</span>
+                  <span class="liga-card__meta-value">Início do ano · Ciclo anual</span>
+                </div>
+              </div>
               <div class="liga-card__tags">
                 <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Clínica</span>
                 <span class="liga-tag"><i class="fa-solid fa-eye" aria-hidden="true"></i> Oftalmologia</span>
@@ -2166,6 +2267,24 @@
                 teóricas, vivências práticas e ações de promoção de saúde
                 por meio do exercício físico.
               </p>
+              <div class="liga-card__meta">
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Coordenador Docente</span>
+                  <span class="liga-card__meta-value">Dr. Marco Aurélio Grecco</span>
+                </div>
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Nº de Ligantes</span>
+                  <span class="liga-card__meta-value">20 ligantes</span>
+                </div>
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Pré-Requisito</span>
+                  <span class="liga-card__meta-value">Sem pré-requisitos</span>
+                </div>
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Admissão / Duração</span>
+                  <span class="liga-card__meta-value">Início do ano · Ciclo anual</span>
+                </div>
+              </div>
               <div class="liga-card__tags">
                 <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Clínica</span>
                 <span class="liga-tag"><i class="fa-solid fa-person-running" aria-hidden="true"></i> Medicina do Exercício</span>
@@ -2192,6 +2311,24 @@
                 acompanhamento de visitas e plantões na Clínica Médica do
                 hospital universitário.
               </p>
+              <div class="liga-card__meta">
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Coordenadora Docente</span>
+                  <span class="liga-card__meta-value">Dra. Ana Flávia Carrijo</span>
+                </div>
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Nº de Ligantes</span>
+                  <span class="liga-card__meta-value">18 ligantes</span>
+                </div>
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Pré-Requisito</span>
+                  <span class="liga-card__meta-value">Ter cursado Semiologia</span>
+                </div>
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Admissão / Duração</span>
+                  <span class="liga-card__meta-value">Início do ano · Ciclo anual</span>
+                </div>
+              </div>
               <div class="liga-card__tags">
                 <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Clínica</span>
                 <span class="liga-tag"><i class="fa-solid fa-stethoscope" aria-hidden="true"></i> Clínica Médica</span>
@@ -2218,6 +2355,24 @@
                 e ações de extensão voltadas à prevenção e ao diagnóstico
                 precoce.
               </p>
+              <div class="liga-card__meta">
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Coordenador Docente</span>
+                  <span class="liga-card__meta-value">Dr. Juliano Molina</span>
+                </div>
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Nº de Ligantes</span>
+                  <span class="liga-card__meta-value">33 ligantes</span>
+                </div>
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Pré-Requisito</span>
+                  <span class="liga-card__meta-value">Sem pré-requisitos</span>
+                </div>
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Admissão / Duração</span>
+                  <span class="liga-card__meta-value">Início do ano · Ciclo anual</span>
+                </div>
+              </div>
               <div class="liga-card__tags">
                 <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Clínica</span>
                 <span class="liga-tag"><i class="fa-solid fa-mosquito" aria-hidden="true"></i> Medicina Tropical</span>
@@ -2244,6 +2399,24 @@
                 ambulatorial e ações extensionistas de conscientização na
                 comunidade.
               </p>
+              <div class="liga-card__meta">
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Coordenador Docente</span>
+                  <span class="liga-card__meta-value">Dr. Leandro Yamamoto</span>
+                </div>
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Nº de Ligantes</span>
+                  <span class="liga-card__meta-value">12 ligantes</span>
+                </div>
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Pré-Requisito</span>
+                  <span class="liga-card__meta-value">Sem pré-requisitos</span>
+                </div>
+                <div class="liga-card__meta-item">
+                  <span class="liga-card__meta-label">Admissão / Duração</span>
+                  <span class="liga-card__meta-value">Início do ano · Ciclo anual</span>
+                </div>
+              </div>
               <div class="liga-card__tags">
                 <span class="liga-tag"><i class="fa-solid fa-tag" aria-hidden="true"></i> Clínica</span>
                 <span class="liga-tag"><i class="fa-solid fa-lungs" aria-hidden="true"></i> Pneumologia</span>

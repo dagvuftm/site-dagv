@@ -408,6 +408,23 @@
   }
   .ru-notice strong { color: var(--clr-dark); }
 
+  .manual-alert {
+    background: var(--clr-green-dark);
+    color: #fff;
+    border-radius: var(--radius-sm);
+    padding: 1rem 1.2rem;
+    margin-top: .9rem;
+    font-size: .9rem;
+    line-height: 1.65;
+    display: flex;
+    align-items: flex-start;
+    gap: .7rem;
+    box-shadow: var(--shadow-sm);
+  }
+  .manual-alert i { font-size: 1.2rem; margin-top: .1rem; flex-shrink: 0; }
+  .manual-alert strong { color: #fff; }
+  .manual-alert u { text-decoration-thickness: 2px; }
+
   /* ── CTA footer ────────────────────────────────────────────── */
   .manual-cta {
     background:
@@ -706,6 +723,12 @@
                 <i class="fa-solid fa-landmark sidemenu-list__icon" aria-hidden="true"></i>
               </a>
             </li>
+            <li class="sidemenu-list__item">
+              <a href="plantao-boas-vindas-internato.html" class="sidemenu-list__link">
+                Plantão de Boas-Vindas ao Internato
+                <i class="fa-solid fa-user-doctor sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
 
             <li class="sidemenu-list__sep" role="separator"></li>
 
@@ -911,7 +934,8 @@
             </div>
             <div class="detail-box__note">
               ⚠️ Todas as cargas horárias (AACCs, eletivas e extensão) devem estar concluídas
-              até o <strong>8º período</strong> — pré-requisito para entrar no internato (9º período).
+              até o <strong>8º período</strong>. A não integralização impede o ingresso no
+              internato médico (9º período) e pode gerar atraso na progressão do curso.
             </div>
           </div>
 
@@ -951,6 +975,15 @@
                 <li>Informar categoria, tipo de atividade, período e carga horária</li>
                 <li>Clicar em <strong>"Salvar"</strong></li>
               </ol>
+              <div class="manual-alert">
+                <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+                <span>
+                  <strong>Atenção:</strong> <u>não clique em "gerar requerimento"</u> no sistema —
+                  isso fará com que você perca o acesso. Além de registrar no SISCAD, guarde
+                  seus certificados, pois precisará entregá-los para validação das horas antes
+                  de entrar no internato.
+                </span>
+              </div>
             </div>
           </details>
 
@@ -978,6 +1011,15 @@
                 <li>Preencher título, período, categoria, tipo de atividade e carga horária</li>
                 <li>Clicar em <strong>"Salvar"</strong></li>
               </ol>
+              <div class="manual-alert">
+                <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+                <span>
+                  <strong>Atenção:</strong> <u>não clique em "gerar requerimento"</u> no sistema —
+                  isso fará com que você perca o acesso. Além de registrar no SISCAD, guarde
+                  seus certificados, pois precisará entregá-los para validação das horas antes
+                  de entrar no internato.
+                </span>
+              </div>
             </div>
           </details>
 
@@ -987,12 +1029,18 @@
               <p>
                 As eletivas são disciplinas escolhidas pelo estudante para aprofundar
                 conhecimentos em áreas de interesse dentro da Medicina (ex.: Morfologia do
-                Sistema Tegumentar, Medicina Esportiva, Medicina e Espiritualidade, Diversidade
+                Sistema Tegumentar, Medicina Esportiva, Anatomia Aplicada aos Recursos de Imagem,
+                Medicina e Espiritualidade, Estudo da Ciência e História da Medicina, Diversidade
                 Sexual e de Gênero na Saúde, entre outras). A listagem oficial varia a cada
                 semestre conforme a oferta departamental e está na Matriz Curricular vigente em
-                uftm.edu.br/medicina. Devem ser selecionadas durante o período de matrícula no
-                SISCAD.
+                uftm.edu.br/medicina (<em>Projetos pedagógicos e Matriz Curricular &gt; Matriz
+                Curricular &gt; Matriz Curricular 2025.1</em>).
               </p>
+              <p style="margin-top:.8rem;"><strong>Como cursar:</strong></p>
+              <ul style="padding-left: 1.2rem; font-size: .92rem; color: var(--clr-gray-3); line-height: 1.75;">
+                <li>Devem ser selecionadas durante o período de matrícula no SISCAD;</li>
+                <li>Estão disponíveis na listagem de disciplinas do curso.</li>
+              </ul>
               <div class="ru-notice">
                 Disciplinas cursadas em <strong>outros cursos de graduação</strong> não contam
                 como eletiva — isso caracteriza <strong>disciplina optativa</strong>, que exige
@@ -1000,6 +1048,12 @@
                 Componentes Curriculares de Enriquecimento (ENC) podem constar no histórico, mas
                 não têm carga horária contabilizada para integralização.
               </div>
+              <p style="margin-top:.8rem;">
+                Caso o aluno tenha realizado disciplina no curso de Medicina em <strong>outra
+                matriz curricular</strong> e ela conste em seu histórico como ENC, deve, após a
+                aprovação da disciplina, <strong>solicitar imediatamente o aproveitamento</strong>
+                para regularizar seu histórico.
+              </p>
             </div>
           </details>
 
@@ -1029,15 +1083,84 @@
             </div>
           </details>
 
-        </div>
+          <details class="manual-accordion">
+            <summary class="rep-entity__toggle">Anexo A — Tabela completa de correspondência AACC</summary>
+            <div class="rep-entity__more">
+              <p>
+                Tabela de correspondência entre carga horária e tipo de atividade complementar
+                (a partir da Matriz Curricular 2025/1). Um mesmo item não pode ser pontuado em
+                mais de um quesito; casos omissos são analisados pela Comissão de Avaliação das
+                AACCs.
+              </p>
 
-        <!-- Cards de orientações práticas -->
+              <p style="margin-top: 1rem;"><strong>I — Atividades de Ensino</strong> (mínimo 40h/a · máximo 80h/a)</p>
+              <table class="ru-table">
+                <thead><tr><th>Descrição</th><th>Horas</th></tr></thead>
+                <tbody>
+                  <tr><td>Participação em projetos de ensino certificados pela Pró-Reitoria de Ensino</td><td class="ru-price">30h/a por projeto</td></tr>
+                  <tr><td>Participação como ouvinte em congressos, seminários, simpósios, cursos e demais eventos <strong>não</strong> relacionados com a área da saúde</td><td class="ru-price">Máximo 15h/a</td></tr>
+                  <tr><td>Participação como ouvinte em congressos, seminários, simpósios, cursos e demais eventos relacionados com a área da saúde</td><td class="ru-price">Máximo 40h/a</td></tr>
+                  <tr><td>Participação em atividades que visam aprimoramento curricular e do Projeto Pedagógico do Curso, como participação no NDE — mínimo de 5 reuniões para ter as 15h/a</td><td class="ru-price">15h/a</td></tr>
+                  <tr><td>Realização de cursos de idiomas e/ou certificação de proficiência</td><td class="ru-price">Máximo 15h/a</td></tr>
+                  <tr><td>Atuação como monitor de disciplina</td><td class="ru-price">20h/a por monitoria · máx. 40h/a</td></tr>
+                  <tr><td>Componentes curriculares cursados em outro curso superior</td><td class="ru-price">Máximo 15h/a</td></tr>
+                  <tr><td>Estágio não obrigatório na área de saúde</td><td class="ru-price">Máximo 20h/a</td></tr>
+                  <tr><td>Cursos à distância na área de saúde</td><td class="ru-price">Máximo 10h/a</td></tr>
+                </tbody>
+              </table>
+
+              <p style="margin-top: 1.4rem;"><strong>II — Atividades de Pesquisa</strong> (mínimo 40h/a · máximo 80h/a)</p>
+              <table class="ru-table">
+                <thead><tr><th>Descrição</th><th>Horas</th></tr></thead>
+                <tbody>
+                  <tr><td>Participação em projeto de pesquisa certificado pela Pró-Reitoria de Pesquisa</td><td class="ru-price">40h/a por projeto</td></tr>
+                  <tr><td>Apresentação de trabalhos em congressos, seminários, simpósios, jornadas e encontros, como autor principal ou apresentador</td><td class="ru-price">20h/a por trabalho</td></tr>
+                  <tr><td>Participação como coautor de trabalhos apresentados em congressos, seminários, simpósios, jornadas e encontros</td><td class="ru-price">10h/a por trabalho</td></tr>
+                  <tr><td>Publicação de artigo científico em periódico indexado</td><td class="ru-price">80h/a por trabalho</td></tr>
+                  <tr><td>Publicação de artigo em periódico não indexado</td><td class="ru-price">40h/a por trabalho</td></tr>
+                  <tr><td>Publicações em outros meios de divulgação</td><td class="ru-price">10h/a por trabalho</td></tr>
+                </tbody>
+              </table>
+
+              <p style="margin-top: 1.4rem;"><strong>III — Representações</strong> (facultativas)</p>
+              <table class="ru-table">
+                <thead><tr><th>Descrição</th><th>Horas</th></tr></thead>
+                <tbody>
+                  <tr><td>Membro de Centro Acadêmico e Entidades Representativas</td><td class="ru-price">50h/a por gestão</td></tr>
+                  <tr><td>Membro titular ou suplente de Colegiados e Conselhos</td><td class="ru-price">30h/a por gestão</td></tr>
+                  <tr><td>Representante de sala (mínimo de 1 ano)</td><td class="ru-price">30h/a</td></tr>
+                  <tr><td>Participação nas Comissões e Comitês do HC, com frequência mínima de 75% nas reuniões</td><td class="ru-price">30h/a</td></tr>
+                </tbody>
+              </table>
+
+              <p style="margin-top: 1.4rem;"><strong>IV — Atividades Culturais, Sociais, Extensão e Tutoria</strong> (mínimo 40h/a · máximo 80h/a)</p>
+              <table class="ru-table">
+                <thead><tr><th>Descrição</th><th>Horas</th></tr></thead>
+                <tbody>
+                  <tr><td>Participação em projetos de extensão certificados junto à Pró-Reitoria de Extensão</td><td class="ru-price">40h/a por projeto</td></tr>
+                  <tr><td>Participação no Programa de Educação pelo Trabalho (PET Saúde) ou no Programa de Educação Tutorial (PET)</td><td class="ru-price">40h/a</td></tr>
+                  <tr><td>Participação em eventos desportivos</td><td class="ru-price">5h por atividade · máx. 15h/a</td></tr>
+                  <tr><td>Participação em eventos artístico-culturais</td><td class="ru-price">5h por atividade · máx. 15h/a</td></tr>
+                  <tr><td>Participação em Tutoria, certificada pelo tutor</td><td class="ru-price">40h/a</td></tr>
+                  <tr><td>Atividades voluntárias junto à comunidade externa</td><td class="ru-price">10h/a por comprovante · máx. 40h/a</td></tr>
+                  <tr><td>Participação em Comissão Organizadora de Evento Científico ou Cultural</td><td class="ru-price">Máximo 15h/a</td></tr>
+                </tbody>
+              </table>
+
+              <div style="margin-top: var(--space-md);">
+                <a href="documentos/guia-de-horas-dagv.pdf" target="_blank" rel="noopener" class="btn btn--outline btn--sm">
+                  <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i>
+                  Baixar tabela em PDF (formulário para preenchimento)
+                </a>
+              </div>
+            </div>
+          </details>
         <div class="info-grid" style="margin-top: var(--space-2xl);">
           <div class="info-card" data-aos="fade-up" data-aos-delay="0">
             <div class="info-card__icon"><i class="fa-solid fa-file-circle-check" aria-hidden="true"></i></div>
             <div class="info-card__title">Como registrar horas</div>
             <p class="info-card__text">Todo o lançamento de AACC e AEXT é feito pelo SISCAD, no menu correspondente a cada tipo de atividade. Guarde sempre os certificados originais.</p>
-            <a href="https://www.uftm.edu.br" target="_blank" rel="noopener" class="info-card__link">
+            <a href="https://siscad.uftm.edu.br/" target="_blank" rel="noopener" class="info-card__link">
               Acessar o SISCAD
             </a>
           </div>

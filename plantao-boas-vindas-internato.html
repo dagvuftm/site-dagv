@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="48x48" href="img/favicon-48x48.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="img/android-chrome-192x192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="img/android-chrome-512x512.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Plantão de Boas-Vindas ao Internato — iniciativa do DAGV para preparar os estudantes de Medicina da UFTM para o início do internato médico." />
+  <meta name="keywords" content="DAGV, Medicina, UFTM, internato, plantão de boas-vindas" />
+  <meta name="author" content="DAGV – Medicina UFTM" />
+  <title>Plantão de Boas-Vindas ao Internato – DAGV | Medicina UFTM</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/sidemenu.css" />
+
+  <style>
+    /* ──────────────── HERO ──────────────── */
+    .pbv-hero {
+      position: relative;
+      min-height: 52vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 80% 100% at 0% 60%,
+          #3d0018 0%,
+          var(--clr-green-dark) 38%,
+          transparent 72%),
+        linear-gradient(160deg,
+          var(--clr-green-dark) 0%,
+          var(--clr-green)      50%,
+          #1a0010               100%);
+      padding-top: calc(var(--header-h) + var(--space-2xl));
+      padding-bottom: var(--space-2xl);
+    }
+    .pbv-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        -55deg,
+        rgba(255,255,255,.025) 0px,
+        rgba(255,255,255,.025) 1px,
+        transparent 1px,
+        transparent 36px
+      );
+      pointer-events: none;
+    }
+    .pbv-hero__content {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      text-align: center;
+      padding-inline: var(--space-md);
+    }
+    .pbv-hero__eyebrow {
+      display: inline-block;
+      font-size: .78rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--clr-accent);
+      margin-bottom: 1rem;
+    }
+    .pbv-hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700; color: var(--clr-white);
+      line-height: 1.15; margin-bottom: 1.1rem;
+    }
+    .pbv-hero__title em { font-style: italic; color: var(--clr-accent); }
+    .pbv-hero__desc {
+      font-size: 1.05rem; color: rgba(255,255,255,.85);
+      line-height: 1.7; max-width: 620px; margin-inline: auto;
+    }
+
+    /* ──────────────── CONTEÚDO ──────────────── */
+    .pbv-content { padding-block: var(--space-2xl); }
+    .pbv-content .container { max-width: 820px; }
+    .pbv-content p {
+      font-size: .98rem; color: var(--clr-gray-3);
+      line-height: 1.85; margin-bottom: 1.3rem;
+    }
+    .pbv-content p:last-child { margin-bottom: 0; }
+    .pbv-content strong { color: var(--clr-dark); }
+
+    .pbv-highlight {
+      background: var(--clr-green-light);
+      border-left: 4px solid var(--clr-green);
+      border-radius: var(--radius-sm);
+      padding: 1.1rem 1.4rem;
+      font-size: .92rem; color: var(--clr-green-dark);
+      line-height: 1.7; margin: 1.6rem 0;
+    }
+    .pbv-highlight strong { color: var(--clr-green-dark); }
+
+    /* ──────────────── GALERIA (mesmo padrão da home) ──────────────── */
+    .pbv-gallery { padding-block: var(--space-2xl); }
+    .pbv-stage {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      aspect-ratio: 16 / 7;
+      background: linear-gradient(135deg, var(--clr-green-dark) 0%, var(--clr-green) 55%, #3d0018 100%);
+      box-shadow: 0 12px 40px rgba(26,0,16,.18);
+      user-select: none;
+      isolation: isolate;
+    }
+    .pbv-slide {
+      position: absolute; inset: 0;
+      opacity: 0;
+      transition: opacity 800ms var(--ease);
+      z-index: 0;
+    }
+    .pbv-slide.is-active { opacity: 1; z-index: 1; }
+    .pbv-slide figure { margin: 0; width: 100%; height: 100%; position: relative; }
+    .pbv-slide__img {
+      width: 100%; height: 100%;
+      object-fit: contain; object-position: center;
+      display: block;
+    }
+    .pbv-slide__placeholder {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 1rem;
+      background: linear-gradient(145deg, var(--clr-green-dark) 0%, var(--clr-green) 60%, #3d0018 100%);
+      color: rgba(255,255,255,.55);
+    }
+    .pbv-slide__placeholder i    { font-size: 4rem; }
+    .pbv-slide__placeholder span {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 3vw, 1.6rem);
+      font-style: italic; color: rgba(255,255,255,.8); letter-spacing: .03em;
+      text-align: center; padding-inline: 1.5rem;
+    }
+    .pbv-slide__placeholder small {
+      font-size: .78rem; color: rgba(255,255,255,.38);
+      letter-spacing: .1em; text-transform: uppercase;
+    }
+    .pbv-slide__overlay {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      padding: 1.2rem var(--space-md) 1rem;
+      background: linear-gradient(to top, rgba(26,0,16,.72) 0%, rgba(26,0,16,.3) 55%, transparent 100%);
+      display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem;
+    }
+    .pbv-slide__caption {
+      font-size: .82rem; color: rgba(255,255,255,.85);
+      font-style: italic; line-height: 1.4; text-shadow: 0 1px 4px rgba(0,0,0,.5);
+    }
+    .pbv-slide__count {
+      font-size: .75rem; font-weight: 600;
+      color: rgba(255,255,255,.6); white-space: nowrap;
+      letter-spacing: .04em; flex-shrink: 0;
+    }
+    .pbv-btn {
+      position: absolute; top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,.35);
+      background: rgba(26,0,16,.45);
+      color: rgba(255,255,255,.9);
+      font-size: .95rem;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      transition: background 200ms var(--ease), border-color 200ms var(--ease),
+        transform 200ms var(--ease), opacity 200ms var(--ease);
+    }
+    .pbv-btn--prev { left:  .75rem; }
+    .pbv-btn--next { right: .75rem; }
+    .pbv-btn:hover {
+      background: var(--clr-green); border-color: var(--clr-green);
+      transform: translateY(-50%) scale(1.08);
+    }
+    .pbv-btn:focus-visible { outline: 3px solid var(--clr-accent); outline-offset: 3px; }
+    .pbv-btn:disabled { opacity: .28; cursor: not-allowed; }
+    .pbv-dots {
+      display: flex; justify-content: center; align-items: center;
+      gap: .45rem; margin-top: 1.2rem;
+    }
+    .pbv-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      border: none; padding: 0; background: var(--clr-gray-1);
+      cursor: pointer;
+      transition: background 200ms var(--ease), width 200ms var(--ease);
+    }
+    .pbv-dot.is-active {
+      background: var(--clr-green); width: 22px; border-radius: 4px;
+    }
+
+    @media (max-width: 768px) {
+      .pbv-stage { aspect-ratio: 4 / 3; }
+      .pbv-btn   { width: 36px; height: 36px; font-size: .85rem; }
+    }
+    @media (max-width: 480px) {
+      .pbv-stage { aspect-ratio: 1 / 1; }
+    }
+
+    /* ──────────────── AGRADECIMENTOS ──────────────── */
+    .pbv-thanks {
+      background: var(--clr-green-light);
+      border-radius: var(--radius-md);
+      padding: 1.6rem 1.8rem;
+      margin-top: var(--space-xl);
+    }
+    .pbv-thanks__title {
+      font-size: .8rem; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--clr-green-dark);
+      margin-bottom: .6rem; display: flex; align-items: center; gap: .5em;
+    }
+    .pbv-thanks p { font-size: .9rem; color: var(--clr-green-dark); line-height: 1.7; margin: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== HEADER ===================== -->
+  <header id="header" class="header">
+    <div class="container header__inner">
+
+      <div class="sidemenu-wrap" id="sidemenuWrap">
+
+        <button
+          class="sidemenu-tab"
+          id="sidemenuTab"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="sidemenuPanel"
+          aria-label="Abrir menu de navegação"
+        >
+          <span class="sidemenu-tab__icon" aria-hidden="true">
+            <span class="sidemenu-tab__bar"></span>
+            <span class="sidemenu-tab__bar"></span>
+            <span class="sidemenu-tab__bar"></span>
+          </span>
+          <span class="sidemenu-tab__label">Menu</span>
+        </button>
+
+        <div class="sidemenu-panel" id="sidemenuPanel" role="navigation" aria-label="Menu lateral">
+          <ul class="sidemenu-list">
+
+            <li class="sidemenu-list__item">
+              <a href="sobre.html" class="sidemenu-list__link">
+                Sobre o DAGV
+                <i class="fa-solid fa-building-columns sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="historico2.html" class="sidemenu-list__link sidemenu-list__link--historico">
+                Resgate Histórico
+                <i class="fa-solid fa-scroll sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="coordenacao.html" class="sidemenu-list__link">
+                Coordenação
+                <i class="fa-solid fa-users sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="criadores.html" class="sidemenu-list__link">
+                Criadores
+                <i class="fa-solid fa-code sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <li class="sidemenu-list__item">
+              <button
+                class="sidemenu-list__btn"
+                data-dropdown="informacoes"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Informações DAGV
+                <i class="fa-solid fa-chevron-down sidemenu-list__arrow" aria-hidden="true"></i>
+              </button>
+              <ul class="sidemenu-dropdown" id="dropInformacoes">
+                <li><a href="estatuto.html" class="sidemenu-dropdown__link">Estatuto</a></li>              </ul>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <li class="sidemenu-list__item">
+              <a href="pet-medicina.html" class="sidemenu-list__link">
+                PET Medicina
+                <i class="fa-solid fa-flask sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="ligas.html" class="sidemenu-list__link">
+                Ligas Acadêmicas
+                <i class="fa-solid fa-graduation-cap sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="manual.html" class="sidemenu-list__link">
+                Manual do Estudante
+                <i class="fa-solid fa-book-open-reader sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="cursinho-carolina.html" class="sidemenu-list__link">
+                Cursinho Carolina
+                <i class="fa-solid fa-book-open sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="aaads-cachacina.html" class="sidemenu-list__link">
+                AAADS e Cachacina
+                <i class="fa-solid fa-shield-halved sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="representacoes-academicas.html" class="sidemenu-list__link">
+                Representações Acadêmicas
+                <i class="fa-solid fa-landmark sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="sidemenu-list__item">
+              <a href="plantao-boas-vindas-internato.html" class="sidemenu-list__link">
+                Plantão de Boas-Vindas ao Internato
+                <i class="fa-solid fa-user-doctor sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+
+            <li class="sidemenu-list__sep" role="separator"></li>
+
+            <li class="sidemenu-list__item">
+              <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7" target="_blank" rel="noopener" class="sidemenu-list__link">
+                Suporte
+                <i class="fa-solid fa-headset sidemenu-list__icon" aria-hidden="true"></i>
+              </a>
+            </li>
+
+          </ul>
+        </div><!-- /sidemenu-panel -->
+
+      </div><!-- /sidemenu-wrap -->
+
+      <!-- Logo + Nome -->
+      <a href="index.html" class="header__brand">
+        <div class="header__logo-wrap">
+          <img
+            src="img/logo dourada-sem fundo.png"
+            alt="Logo DAGV – Diretório Acadêmico Gaspar Vianna"
+            class="header__logo-svg logo--gold"
+            width="80" height="68"
+            loading="eager"
+          />
+          <img
+            src="img/Logo DAGV sem fundo verm.png"
+            alt="Logo DAGV – Diretório Acadêmico Gaspar Vianna"
+            class="header__logo-svg logo--red"
+            width="80" height="68"
+            loading="eager"
+            aria-hidden="true"
+          />
+        </div>
+        <div class="header__title-wrap">
+          <span class="header__dagv"></span>
+          <span class="header__subtitle"></span>
+        </div>
+      </a>
+
+      <!-- Nav desktop -->
+      <nav class="nav" aria-label="Navegação principal">
+        <ul class="nav__list">
+          <li><a href="sobre.html"                    class="nav__link">Sobre</a></li>
+          <li><a href="coordenacao.html"              class="nav__link">Coordenações</a></li>
+          <li><a href="index.html#events"             class="nav__link">Instituições UFTM</a></li>
+          <li><a href="index.html#eventos-academicos" class="nav__link">Eventos</a></li>
+          <li><a href="index.html#contact"            class="nav__link nav__link--cta">Contato</a></li>
+        </ul>
+      </nav>
+
+      <!-- Hamburguer -->
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Nav mobile (drawer) -->
+    <nav class="nav-mobile" id="navMobile" aria-hidden="true">
+      <ul class="nav-mobile__list">
+        <li><a href="index.html"                    class="nav-mobile__link">Início</a></li>
+        <li><a href="sobre.html"                    class="nav-mobile__link">Sobre</a></li>
+        <li><a href="criadores.html"                class="nav-mobile__link">Criadores</a></li>
+        <li><a href="coordenacao.html"              class="nav-mobile__link">Coordenações</a></li>
+        <li><a href="index.html#events"             class="nav-mobile__link">Instituições UFTM</a></li>
+        <li><a href="index.html#eventos-academicos" class="nav-mobile__link">Eventos</a></li>
+        <li><a href="index.html#contact"            class="nav-mobile__link">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===================== HERO ===================== -->
+    <section class="pbv-hero">
+      <div class="pbv-hero__content">
+        <span class="pbv-hero__eyebrow">Formação Médica · UFTM</span>
+        <h1 class="pbv-hero__title">Plantão de <em>Boas-Vindas</em> ao Internato</h1>
+        <p class="pbv-hero__desc">
+          Preparação prática, segura e acolhedora para os estudantes que estão prestes a
+          iniciar os estágios do internato médico.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== CONTEÚDO ===================== -->
+    <section class="pbv-content">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Iniciativa do DAGV</span>
+          <h2 class="section-title">Plantão de Boas-Vindas ao Internato</h2>
+        </div>
+
+        <div data-aos="fade-up">
+          <p>
+            O <strong>Plantão de Boas-Vindas ao Internato</strong> é uma iniciativa do Diretório
+            Acadêmico Gaspar Vianna (DAGV) criada com o objetivo de proporcionar aos novos
+            internos uma preparação mais segura, prática e confiante para o início dos estágios
+            do internato médico.
+          </p>
+          <p>
+            Em sua <strong>1ª edição</strong>, o evento reuniu estudantes para uma tarde de
+            revisão e treinamento de temas e habilidades relevantes para essa nova etapa da
+            formação médica, incluindo <strong>punção venosa</strong>, <strong>gasometria</strong>,
+            <strong>monitorização</strong>, <strong>documentação médica</strong>, entre outros
+            conteúdos essenciais à rotina dos internos.
+          </p>
+          <p>
+            A iniciativa surgiu a partir da identificação de dificuldades e desafios enfrentados
+            pelos estudantes durante a transição para o internato, buscando oferecer um espaço de
+            preparação, troca de conhecimentos e aproximação com situações práticas que fazem
+            parte do cotidiano dos estágios.
+          </p>
+
+          <div class="pbv-highlight">
+            <i class="fa-solid fa-heart" aria-hidden="true"></i>
+            O DAGV agradece o apoio da Coordenação do curso de Medicina e da Gerência de Ensino e
+            Pesquisa (GEP) do Hospital de Clínicas da UFTM (HC-UFTM), bem como a participação e
+            colaboração das turmas <strong>MedUFTM 94</strong> e <strong>MedUFTM 95</strong>, que
+            contribuíram para a realização desta iniciativa.
+          </div>
+
+          <p>
+            Este primeiro Plantão de Boas-Vindas ao Internato representa mais uma ação voltada ao
+            fortalecimento da formação acadêmica e ao apoio aos estudantes durante uma das etapas
+            mais importantes da graduação em Medicina.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== GALERIA DE FOTOS ===================== -->
+    <section class="pbv-gallery">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">1ª Edição</span>
+          <h2 class="section-title">Fotos do Evento</h2>
+          <p class="section-desc">
+            Momentos do primeiro Plantão de Boas-Vindas ao Internato.
+          </p>
+        </div>
+
+        <div class="pbv-stage" id="pbvStage" tabindex="0" aria-live="polite" aria-atomic="false" data-aos="fade-up" data-aos-delay="80">
+          <button class="pbv-btn pbv-btn--prev" id="pbvBtnPrev" aria-label="Foto anterior">
+            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+          </button>
+          <button class="pbv-btn pbv-btn--next" id="pbvBtnNext" aria-label="Próxima foto">
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <div class="pbv-dots" id="pbvDots" role="group" aria-label="Fotos"></div>
+      </div>
+    </section>
+
+    <script>
+    (function () {
+      'use strict';
+
+      /* Fotos do 1º Plantão de Boas-Vindas ao Internato. */
+      var SLIDES = [
+        { src: 'img/plantao-boasvindas/plantao-boasvindas-01.jpg', caption: 'Aula sobre documentação médica e prontuário no Plantão de Boas-Vindas ao Internato' },
+        { src: 'img/plantao-boasvindas/plantao-boasvindas-02.jpg', caption: 'Treinamento prático para os novos internos' },
+        { src: 'img/plantao-boasvindas/plantao-boasvindas-03.jpg', caption: 'Revisão do método SOAP para passagem de casos' },
+        { src: 'img/plantao-boasvindas/plantao-boasvindas-04.jpg', caption: 'Estudantes acompanham a apresentação sobre rotina do internato' },
+        { src: 'img/plantao-boasvindas/plantao-boasvindas-05.jpg', caption: 'Momentos de treinamento prático entre os internos' },
+        { src: 'img/plantao-boasvindas/plantao-boasvindas-06.jpg', caption: 'Turmas MedUFTM 94 e 95 no 1º Plantão de Boas-Vindas ao Internato' },
+        { src: 'img/plantao-boasvindas/plantao-boasvindas-07.jpg', caption: 'Discussão de casos clínicos e condutas da rotina hospitalar' },
+        { src: 'img/plantao-boasvindas/plantao-boasvindas-08.jpg', caption: 'Preparação prática para o início dos estágios do internato' },
+        { src: 'img/plantao-boasvindas/plantao-boasvindas-09.jpg', caption: 'Integração entre os internos durante o plantão' },
+        { src: 'img/plantao-boasvindas/plantao-boasvindas-10.jpg', caption: 'Orientações sobre monitorização e gasometria' },
+        { src: 'img/plantao-boasvindas/plantao-boasvindas-11.jpg', caption: 'Participantes do 1º Plantão de Boas-Vindas ao Internato' },
+        { src: 'img/plantao-boasvindas/plantao-boasvindas-12.jpg', caption: 'Apoio da Coordenação do curso e da GEP do HC-UFTM' },
+        { src: 'img/plantao-boasvindas/plantao-boasvindas-13.jpg', caption: 'Estudantes revisam conteúdos essenciais da rotina de internato' },
+        { src: 'img/plantao-boasvindas/plantao-boasvindas-14.jpg', caption: 'Momento de troca de conhecimentos entre os estudantes' },
+        { src: 'img/plantao-boasvindas/plantao-boasvindas-15.jpg', caption: 'Atividade prática conduzida durante o evento' },
+        { src: 'img/plantao-boasvindas/plantao-boasvindas-16.jpg', caption: 'Encerramento do 1º Plantão de Boas-Vindas ao Internato' }
+      ];
+
+      var stage = document.getElementById('pbvStage');
+      var dotsWrap = document.getElementById('pbvDots');
+      var btnPrev = document.getElementById('pbvBtnPrev');
+      var btnNext = document.getElementById('pbvBtnNext');
+      if (!stage) return;
+
+      var current = 0;
+
+      SLIDES.forEach(function (s, i) {
+        var slide = document.createElement('div');
+        slide.className = 'pbv-slide' + (i === 0 ? ' is-active' : '');
+        var figure = document.createElement('figure');
+
+        if (s.src) {
+          var img = document.createElement('img');
+          img.className = 'pbv-slide__img';
+          img.src = s.src;
+          img.alt = s.caption || '';
+          img.loading = 'lazy';
+          figure.appendChild(img);
+        } else {
+          var ph = document.createElement('div');
+          ph.className = 'pbv-slide__placeholder';
+          ph.innerHTML = '<i class="fa-solid fa-camera-retro" aria-hidden="true"></i>' +
+            '<span>' + (s.caption || 'Foto em breve') + '</span>' +
+            '<small>Plantão de Boas-Vindas ao Internato</small>';
+          figure.appendChild(ph);
+        }
+
+        var overlay = document.createElement('div');
+        overlay.className = 'pbv-slide__overlay';
+        overlay.innerHTML =
+          '<span class="pbv-slide__caption">' + (s.caption || '') + '</span>' +
+          '<span class="pbv-slide__count">' + (i + 1) + ' / ' + SLIDES.length + '</span>';
+        figure.appendChild(overlay);
+
+        slide.appendChild(figure);
+        stage.appendChild(slide);
+      });
+
+      var slideEls = Array.from(stage.querySelectorAll('.pbv-slide'));
+
+      SLIDES.forEach(function (_, i) {
+        var dot = document.createElement('button');
+        dot.className = 'pbv-dot' + (i === 0 ? ' is-active' : '');
+        dot.setAttribute('aria-label', 'Ir para foto ' + (i + 1));
+        dot.addEventListener('click', function () { goTo(i); });
+        dotsWrap.appendChild(dot);
+      });
+      var dotEls = Array.from(dotsWrap.querySelectorAll('.pbv-dot'));
+
+      function goTo(i) {
+        current = (i + SLIDES.length) % SLIDES.length;
+        slideEls.forEach(function (el, idx) { el.classList.toggle('is-active', idx === current); });
+        dotEls.forEach(function (el, idx) { el.classList.toggle('is-active', idx === current); });
+      }
+
+      btnPrev.addEventListener('click', function () { goTo(current - 1); });
+      btnNext.addEventListener('click', function () { goTo(current + 1); });
+
+      if (SLIDES.length < 2) {
+        btnPrev.disabled = true;
+        btnNext.disabled = true;
+      }
+
+      /* Autoplay suave, pausa ao interagir */
+      var autoplayId = null;
+      function startAutoplay() {
+        stopAutoplay();
+        if (SLIDES.length > 1) autoplayId = setInterval(function () { goTo(current + 1); }, 5000);
+      }
+      function stopAutoplay() { if (autoplayId) clearInterval(autoplayId); }
+      startAutoplay();
+      stage.addEventListener('mouseenter', stopAutoplay);
+      stage.addEventListener('mouseleave', startAutoplay);
+      stage.addEventListener('touchstart', stopAutoplay, { passive: true });
+    })();
+    </script>
+
+    <!-- ===================== AGRADECIMENTOS (resumo) ===================== -->
+    <section class="pbv-content" style="padding-top: 0;">
+      <div class="container">
+        <div class="pbv-thanks" data-aos="fade-up">
+          <div class="pbv-thanks__title">
+            <i class="fa-solid fa-hands-holding-circle" aria-hidden="true"></i>
+            Apoio e Colaboração
+          </div>
+          <p>
+            Coordenação do curso de Medicina · Gerência de Ensino e Pesquisa (GEP) do HC-UFTM ·
+            Turmas MedUFTM 94 e MedUFTM 95
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+
+      <div class="footer__brand">
+        <img
+          src="img/logo dourada-sem fundo.png"
+          alt="Logo DAGV"
+          class="footer__logo"
+          width="64" height="54"
+          loading="lazy"
+        />
+        <div>
+          <p class="footer__name">DAGV – Gaspar Vianna</p>
+          <p class="footer__sub">Medicina UFTM · Uberaba – MG</p>
+        </div>
+      </div>
+
+      <nav class="footer__links" aria-label="Links úteis">
+        <a href="estatuto.html">Estatuto</a>
+        <a href="criadores.html">Criadores</a>
+        <a href="sobre.html">Sobre o DAGV</a>
+        <a href="coordenacao.html">Coordenação</a>
+        <a href="historico2.html">Resgate Histórico</a>
+        <a href="index.html#contact">Suporte</a>
+      </nav>
+
+      <div class="footer__social">
+        <a href="https://www.instagram.com/dagvmeduftm/" target="_blank" rel="noopener" aria-label="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=100009254539973" target="_blank" rel="noopener" aria-label="Facebook">
+          <i class="fa-brands fa-facebook"></i>
+        </a>
+        <a href="https://forms.gle/PcHVQ6hcJ2NtRVKD7" target="_blank" rel="noopener" aria-label="Formulário de contato">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+      </div>
+
+    </div>
+    <div class="footer__bottom">
+      <p>&copy; <span id="year"></span> Diretório Acadêmico Gaspar Vianna – Medicina UFTM. Todos os direitos reservados.</p>
+      <p class="footer__credit">Desenvolvido por <a href="criadores.html">Sérgio Lemuel Soares Santos &amp; João Paulo Soares Santos</a></p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/sidemenu.js"></script>
+
+</body>
+</html>

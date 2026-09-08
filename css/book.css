@@ -660,6 +660,7 @@
   z-index: 1000;
   border-radius: 0;
   min-height: 100vh;
+  min-height: 100dvh;
   margin: 0;
 }
 
@@ -675,13 +676,40 @@
   /* Zoom visual só por transform — o tamanho REAL que o StPageFlip
      mede nunca muda entre modos, então ele nunca precisa remedir
      nem cai em bugs de página dupla / sumiço. Calcula um fator
-     fluido que cabe na altura da tela (reservando ~150px pros
-     botões) e também não estoura a largura em telas estreitas. */
-  --book-scale: max(1, min(
-    calc((100vh - 150px) / 426.67px),
-    calc(92vw / var(--cover-w)),
-    2.4
+     fluido que cabe na altura da tela (reservando ~110px pros
+     botões) e também não estoura a largura em telas estreitas.
+     Piso de .8 garante que o livro sempre apareça grande/legível
+     no caso normal. Usa 100dvh (altura visível real) em vez de
+     100vh, que em mobile inclui área coberta pela barra do navegador. */
+  --book-scale: max(.8, min(
+    calc((100vh - 110px) / 426.67px),
+    calc(96vw / var(--cover-w)),
+    2.6
   ));
+  --book-scale: max(.8, min(
+    calc((100dvh - 110px) / 426.67px),
+    calc(96vw / var(--cover-w)),
+    2.6
+  ));
+}
+
+/* [FIX] Celular deitado (paisagem, tela baixa): aqui o piso de .8
+   acima pode não caber e cortar o topo do livro. Nesse caso
+   específico, deixa a escala encolher livremente (sem piso) pra
+   sempre caber inteira na tela, mesmo que fique um pouco menor. */
+@media (orientation: landscape) and (max-height: 520px) {
+  .book-scene.is-fullscreen .book {
+    --book-scale: min(
+      calc((100vh - 90px) / 426.67px),
+      calc(96vw / var(--cover-w)),
+      2.6
+    );
+    --book-scale: min(
+      calc((100dvh - 90px) / 426.67px),
+      calc(96vw / var(--cover-w)),
+      2.6
+    );
+  }
 }
 
 body.book-fullscreen-lock {
@@ -835,7 +863,9 @@ html.book-fullscreen-lock {
 }
 
 .book-index-panel__item {
-  display: block;
+  display: flex;
+  align-items: baseline;
+  gap: .6em;
   width: 100%;
   text-align: left;
   padding: .6em .5em;
@@ -843,6 +873,14 @@ html.book-fullscreen-lock {
   font-size: .85rem;
   color: var(--hist-warm-dark);
   transition: background 160ms var(--ease);
+}
+
+.book-index-panel__item span {
+  flex: 0 0 auto;
+  font-weight: 700;
+  color: var(--clr-green);
+  font-variant-numeric: tabular-nums;
+  font-size: .78rem;
 }
 
 .book-index-panel__item:hover,
