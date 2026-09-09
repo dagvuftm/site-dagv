@@ -1202,21 +1202,21 @@
                     <div class="team__card">
                       <div class="team__avatar"><img src="img/tesoureiro1.jpeg" alt="Nome do Presidente" /></div>
                       <h4 class="team__name">Anna Laura<span class="team__nickname">(Nobel-98)</span></h4>
-                      <p class="team__role">Tesoureiro(a)</p>
+                      <p class="team__role">Coordenador(a) de Finanças</p>
                     </div>
                   </li>
                   <li class="carousel__slide">
                     <div class="team__card">
                       <div class="team__avatar"><img src="img/tesoureiro2.jpeg" alt="Nome do Presidente" /></div>
                       <h4 class="team__name">Dylmadson<span class="team__nickname">(Diu-98)</span></h4>
-                      <p class="team__role">Tesoureiro(a)</p>
+                      <p class="team__role">Coordenador(a) de Finanças</p>
                     </div>
                   </li>
                   <li class="carousel__slide">
                     <div class="team__card">
                       <div class="team__avatar"><img src="img/tesoureiro3.jpeg" alt="Nome do Presidente" /></div>
                       <h4 class="team__name">Ianca Brenda<span class="team__nickname">(Tia-98)</span></h4>
-                      <p class="team__role">Tesoureiro(a)</p>
+                      <p class="team__role">Coordenador(a) de Finanças</p>
                     </div>
                   </li>
                 </ul>
@@ -1658,6 +1658,67 @@
         color: var(--clr-white);
       }
 
+      /* Coluna direita: agrupa a lista de representações + o bloco de
+         voluntariado como UM único item flex, preservando o layout
+         original de 2 colunas (info | coluna) do card. */
+      .inst-sub-col {
+        flex: 2;
+        min-width: 220px;
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+      }
+      .inst-sub-col .inst-sub-list {
+        flex: none;
+        min-width: 0;
+      }
+
+      /* Separador "Atividade voluntária" () */
+      .inst-sub-divider {
+        display: flex;
+        align-items: baseline;
+        gap: .6rem;
+        margin: .5rem 0 -.05rem;
+      }
+      .inst-sub-divider__label {
+        flex-shrink: 0;
+        font-size: .68rem;
+        font-weight: 700;
+        letter-spacing: .06em;
+        text-transform: uppercase;
+        color: var(--clr-accent);
+        white-space: nowrap;
+      }
+      .inst-sub-divider::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: var(--clr-gray-1);
+        align-self: center;
+      }
+      .inst-sub-divider__desc {
+        font-size: .74rem;
+        color: var(--clr-gray-2);
+        line-height: 1.5;
+        margin: -.15rem 0 .1rem;
+      }
+      .inst-sub-item--voluntary {
+        border-color: var(--clr-accent);
+        background: #fdf6e8;
+      }
+      .inst-sub-item--voluntary .inst-sub-item__icon {
+        background: rgba(232,160,32,.18);
+        color: var(--clr-accent);
+      }
+      .inst-sub-item--voluntary:hover {
+        border-color: var(--clr-accent);
+        background: #faecc8;
+      }
+      .inst-sub-item--voluntary:hover .inst-sub-item__icon {
+        background: var(--clr-accent);
+        color: var(--clr-white);
+      }
+
       /* Quando uma logo (<img>) for usada no lugar do ícone <i> */
       .inst-sub-item__icon img {
         width: 100%;
@@ -1781,8 +1842,9 @@
             <div class="inst-card__body">
               <h3 class="inst-card__title">PET Medicina</h3>
               <p class="inst-card__desc">
-                Programa de Educação Tutorial com atividades de pesquisa, ensino e
-                extensão em parceria com o DAGV e a coordenação do curso.
+                O Programa de Educação Tutorial (PET) é um programa fomentado pelo Ministério
+                da Educação com o intuito de estimular na universidade a pesquisa, o ensino e
+                a extensão.
               </p>
             </div>
             <div class="inst-card__footer">
@@ -1796,84 +1858,119 @@
             </div>
           </article>
 
-          <!-- ④ Representações Estudantis (card agrupado) ──── -->
-          <article class="inst-card inst-card--repr" data-aos="fade-up" data-aos-delay="240" style="cursor:default;">
-            <div class="inst-card__stripe inst-card__stripe--repr"></div>
-            <div class="inst-card__body inst-card__body--repr">
+          <!-- ④ Representações e Ação Social (cards divididos) ──── -->
+          <article class="inst-card inst-card--repr" data-aos="fade-up" data-aos-delay="240" style="background: transparent; box-shadow: none; padding: 0; border: none; display: flex; flex-direction: column; gap: 1rem; cursor: default;">
+            
+            <!-- Card 1: Representações Estudantis -->
+            <div style="background: var(--clr-white); border: 1px solid var(--clr-gray-1); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); overflow: hidden; display: flex; flex-direction: column;">
+              <div class="inst-card__stripe inst-card__stripe--repr"></div>
+              <div class="inst-card__body inst-card__body--repr" style="padding: 1rem 1.75rem;">
 
-              <!-- Info lateral -->
-              <div class="inst-card__info">
-                <div class="inst-card__logo-wrap">
-                  <div class="inst-card__icon-wrap">
-                    <i class="fa-solid fa-landmark" aria-hidden="true"></i>
+                <!-- Info lateral -->
+                <div class="inst-card__info">
+                  <div class="inst-card__logo-wrap">
+                    <div class="inst-card__icon-wrap">
+                      <i class="fa-solid fa-landmark" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                  <span class="inst-badge inst-badge--repr">
+                    <i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Representação
+                  </span>
+                  <h3 class="inst-card__title" style="font-size: 1.15rem; margin-bottom: 0;">Representações<br/>Estudantis</h3>
+                  <p class="inst-card__desc" style="font-size: 0.8rem; line-height: 1.4; margin-bottom: 0;">
+                    Entidades que representam os estudantes em âmbito local, regional e nacional.
+                  </p>
+                </div>
+
+                <!-- Coluna: entidades de representação -->
+                <div class="inst-sub-col" style="justify-content: center;">
+                  <div class="inst-sub-list">
+                    <a href="representacoes-academicas.html#denem"
+                       class="inst-sub-item" style="padding: 0.45rem 0.8rem;"
+                       aria-label="DENEM – Direção Executiva Nacional dos Estudantes de Medicina">
+                      <div class="inst-sub-item__icon" style="width: 26px; height: 26px; font-size: 0.8rem;">
+                        <i class="fa-solid fa-globe" aria-hidden="true"></i>
+                      </div>
+                      <div>
+                        <span class="inst-sub-item__label" style="font-size: 0.82rem;">DENEM</span>
+                        <span class="inst-sub-item__sub" style="font-size: 0.7rem;">Representação Nacional</span>
+                      </div>
+                      <i class="fa-solid fa-chevron-right inst-sub-item__arr" aria-hidden="true"></i>
+                    </a>
+
+                    <a href="representacoes-academicas.html#dce"
+                       class="inst-sub-item" style="padding: 0.45rem 0.8rem;"
+                       aria-label="DCE UFTM – Diretório Central dos Estudantes">
+                      <div class="inst-sub-item__icon" style="width: 26px; height: 26px; font-size: 0.8rem;">
+                        <i class="fa-solid fa-building-columns" aria-hidden="true"></i>
+                      </div>
+                      <div>
+                        <span class="inst-sub-item__label" style="font-size: 0.82rem;">DCE UFTM</span>
+                        <span class="inst-sub-item__sub" style="font-size: 0.7rem;">Diretório Central dos Estudantes</span>
+                      </div>
+                      <i class="fa-solid fa-chevron-right inst-sub-item__arr" aria-hidden="true"></i>
+                    </a>
+
+                    <a href="representacoes-academicas.html#clev"
+                       class="inst-sub-item" style="padding: 0.45rem 0.8rem;"
+                       aria-label="CLEV – Coordenação Local de Estágios e Vivências">
+                      <div class="inst-sub-item__icon" style="width: 26px; height: 26px; font-size: 0.8rem;">
+                        <i class="fa-solid fa-plane-departure" aria-hidden="true"></i>
+                      </div>
+                      <div>
+                        <span class="inst-sub-item__label" style="font-size: 0.82rem;">CLEV</span>
+                        <span class="inst-sub-item__sub" style="font-size: 0.7rem;">Estágios e Vivências</span>
+                      </div>
+                      <i class="fa-solid fa-chevron-right inst-sub-item__arr" aria-hidden="true"></i>
+                    </a>
                   </div>
                 </div>
-                <span class="inst-badge inst-badge--repr">
-                  <i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Representação
-                </span>
-                <h3 class="inst-card__title">Representações<br/>Estudantis</h3>
-                <p class="inst-card__desc">
-                  Entidades que representam os estudantes em âmbito local,
-                  regional e nacional.
-                </p>
               </div>
-
-              <!-- Sub-cards das entidades -->
-              <div class="inst-sub-list">
-                <a href="representacoes-academicas.html#denem"
-                   class="inst-sub-item"
-                   aria-label="DENEM – Direção Executiva Nacional dos Estudantes de Medicina">
-                  <div class="inst-sub-item__icon">
-                    <i class="fa-solid fa-globe" aria-hidden="true"></i>
-                  </div>
-                  <div>
-                    <span class="inst-sub-item__label">DENEM</span>
-                    <span class="inst-sub-item__sub">Representação Nacional</span>
-                  </div>
-                  <i class="fa-solid fa-chevron-right inst-sub-item__arr" aria-hidden="true"></i>
-                </a>
-
-                <a href="representacoes-academicas.html#dce"
-                   class="inst-sub-item"
-                   aria-label="DCE UFTM – Diretório Central dos Estudantes">
-                  <div class="inst-sub-item__icon">
-                    <i class="fa-solid fa-building-columns" aria-hidden="true"></i>
-                  </div>
-                  <div>
-                    <span class="inst-sub-item__label">DCE UFTM</span>
-                    <span class="inst-sub-item__sub">Diretório Central dos Estudantes</span>
-                  </div>
-                  <i class="fa-solid fa-chevron-right inst-sub-item__arr" aria-hidden="true"></i>
-                </a>
-
-                <a href="representacoes-academicas.html#clev"
-                   class="inst-sub-item"
-                   aria-label="CLEV – Coordenação Local de Estágios e Vivências">
-                  <div class="inst-sub-item__icon">
-                    <i class="fa-solid fa-plane-departure" aria-hidden="true"></i>
-                  </div>
-                  <div>
-                    <span class="inst-sub-item__label">CLEV</span>
-                    <span class="inst-sub-item__sub">Estágios e Vivências</span>
-                  </div>
-                  <i class="fa-solid fa-chevron-right inst-sub-item__arr" aria-hidden="true"></i>
-                </a>
-
-                <a href="representacoes-academicas.html#cvu"
-                   class="inst-sub-item"
-                   aria-label="CVU Uberaba – Centro de Vivência Universitária">
-                  <div class="inst-sub-item__icon">
-                    <i class="fa-solid fa-city" aria-hidden="true"></i>
-                  </div>
-                  <div>
-                    <span class="inst-sub-item__label">CVU Uberaba</span>
-                    <span class="inst-sub-item__sub">Centro de Vivência Universitária</span>
-                  </div>
-                  <i class="fa-solid fa-chevron-right inst-sub-item__arr" aria-hidden="true"></i>
-                </a>
-              </div>
-
             </div>
+
+            <!-- Card 2: Ação Social -->
+            <div style="background: var(--clr-white); border: 1px solid var(--clr-gray-1); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); overflow: hidden; display: flex; flex-direction: column;">
+              <div class="inst-card__stripe inst-card__stripe--repr" style="background: linear-gradient(90deg, #7a5900, var(--clr-accent));"></div>
+              <div class="inst-card__body inst-card__body--repr" style="padding: 1rem 1.75rem;">
+
+                <!-- Info lateral -->
+                <div class="inst-card__info">
+                  <div class="inst-card__logo-wrap">
+                    <div class="inst-card__icon-wrap" style="background: rgba(232,160,32,.18); color: var(--clr-accent);">
+                      <i class="fa-solid fa-hand-holding-heart" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                  <span class="inst-badge inst-badge--repr">
+                    <i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Ação Social
+                  </span>
+                  <h3 class="inst-card__title" style="font-size: 1.15rem; margin-bottom: 5%;">Atividade Voluntária</h3>
+                
+                </div>
+
+                <!-- Coluna: bloco de voluntariado -->
+                <div class="inst-sub-col" style="justify-content: center;">
+                  <div class="inst-sub-list">
+                    <a href="representacoes-academicas.html#cvu"
+                       class="inst-sub-item inst-sub-item--voluntary" style="padding: 0.45rem 0.8rem;"
+                       aria-label="CVU Uberaba – Centro de Vivência Universitária">
+                      <div class="inst-sub-item__icon" style="width: 26px; height: 26px; font-size: 0.8rem;">
+                        <i class="fa-solid fa-city" aria-hidden="true"></i>
+                      </div>
+                      <div>
+                        <span class="inst-sub-item__label" style="font-size: 0.82rem;">CVU Uberaba</span>
+                        <span class="inst-sub-item__sub" style="font-size: 0.7rem;">Centro de Vivência Universitária</span>
+                      </div>
+                      <i class="fa-solid fa-chevron-right inst-sub-item__arr" aria-hidden="true"></i>
+
+                    </a>
+                      <p class="inst-card__desc" style="font-size: 0.8rem; line-height: 1.4; margin-bottom: 0;">
+                    Estudantes que se dedicam a ações solidárias, campanhas e projetos sociais em parceria com a comunidade.
+                  </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </article>
 
           <!-- ⑤ Cachacina & AAADS ───────────────────────────────────── -->
@@ -2281,7 +2378,7 @@
         {
           id:    1,
           label: 'Recepção dos Calouros',
-          icon:  'fa-solid fa-hat-wizard',
+          
           desc:  'Recepção promovida pelo DAGV para acolher a turma 102, a mais nova geração de calouros de Medicina da UFTM, com a tradicional entrega da boina verde e boas-vindas à vida acadêmica.',
           slides: [
             { src: 'img/recepcao-calouros/recepcao-calouros-01.jpg', caption: 'Recepção da turma 102 pelo DAGV, com a tradicional boina verde dos calouros' },
@@ -2310,7 +2407,7 @@
         {
           id:    2,
           label: 'Plantão de Boas-Vindas ao Internato',
-          icon:  'fa-solid fa-user-doctor',
+          
           desc:  'Iniciativa do DAGV que reúne os novos internos para uma tarde de revisão e treinamento prático — punção venosa, gasometria, monitorização e documentação médica — antes do início dos estágios do internato.',
           slides: [
             { src: 'img/plantao-boasvindas/plantao-boasvindas-01.jpg', caption: 'Treinamento prático para os novos internos no Plantão de Boas-Vindas ao Internato' },
@@ -2534,7 +2631,7 @@
          [ADIÇÃO] Section: Resgate Histórico
          Inserida entre #events e #contact.
          Estilos próprios em css/historico.css.
-         Redirecionamento para historico2.html via botão CTA.
+         Redirecionamento para resgatehistorico.html via botão CTA.
          ===================================================== -->
     <section id="historico" class="historico">
       <div class="container historico__inner">
@@ -2565,9 +2662,9 @@
             Botão CTA "Veja +"
             – Animação shimmer branco → dourado da esquerda para direita (CSS puro)
             – Fonte ligeiramente maior que o padrão do site (.92rem → 1.05rem)
-            – Redireciona para historico2.html
+            – Redireciona para resgatehistorico.html
           -->
-          <a href="historico2.html" class="btn-historico" aria-label="Ver página completa do Resgate Histórico">
+          <a href="resgatehistorico.html" class="btn-historico" aria-label="Ver página completa do Resgate Histórico">
             Confira
           </a>
 
@@ -2730,7 +2827,7 @@
         <a href="criadores.html">Criadores</a>
         <a href="sobre.html">Sobre o DAGV</a>
         <a href="coordenacao.html">Coordenação</a>
-        <a href="historico2.html">Resgate Histórico</a>
+        <a href="resgatehistorico.html">Resgate Histórico</a>
         <a href="index.html#contact">Suporte</a>
       </nav>
 

@@ -81,7 +81,7 @@
       color: rgba(255,255,255,.82); max-width: 580px; margin-inline: auto;
     }
 
-    /* ──────────────── NAV INTERNA (mesmo padrão de historico2.html) ──────────────── */
+    /* ──────────────── NAV INTERNA (mesmo padrão de resgatehistorico.html) ──────────────── */
     .rep-anchors {
       background: var(--clr-off);
       border-bottom: 2px solid var(--clr-gray-1);
@@ -100,7 +100,38 @@
       transition: background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast);
     }
     .rep-anchors__link:hover { background: var(--clr-green-light); color: var(--clr-green); border-color: rgba(42,122,75,.15); }
+    .rep-anchors__divider {
+      display: flex; align-items: center; gap: .5em;
+      padding-inline: .3em; color: var(--clr-gray-2);
+    }
+    .rep-anchors__divider::before {
+      content: ''; width: 1px; height: 1.1em; background: var(--clr-gray-1);
+    }
+    .rep-anchors__divider span {
+      font-size: .68rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .05em; color: var(--clr-accent); white-space: nowrap;
+    }
+    .rep-anchors__link--voluntary:hover { background: #fdf6e8; color: var(--clr-accent); border-color: rgba(232,160,32,.25); }
     @media (max-width: 560px) { .rep-anchors__link { flex: 1 1 45%; justify-content: center; text-align: center; } }
+    @media (max-width: 560px) { .rep-anchors__divider { flex: 1 1 100%; justify-content: center; } .rep-anchors__divider::before { display: none; } }
+
+    .section-tag--voluntary { color: var(--clr-accent); background: #fdf6e8; }
+
+    .rep-section-divider {
+      max-width: 680px; margin: var(--space-2xl) auto var(--space-lg); padding-inline: var(--space-md);
+      text-align: center;
+    }
+    .rep-section-divider::before {
+      content: ''; display: block; height: 1px; background: var(--clr-gray-1);
+      max-width: 220px; margin: 0 auto var(--space-md);
+    }
+    .rep-section-divider span {
+      display: inline-block; font-size: .75rem; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--clr-accent); margin-bottom: .5rem;
+    }
+    .rep-section-divider p {
+      font-size: .85rem; color: var(--clr-gray-2); line-height: 1.6; margin: 0;
+    }
 
     /* ──────────────── SEÇÕES DE ENTIDADES ──────────────── */
     .rep-entity { padding-block: var(--space-2xl); scroll-margin-top: calc(var(--header-h) + 60px); }
@@ -243,7 +274,7 @@
               </a>
             </li>
             <li class="sidemenu-list__item">
-              <a href="historico2.html" class="sidemenu-list__link sidemenu-list__link--historico">
+              <a href="resgatehistorico.html" class="sidemenu-list__link sidemenu-list__link--historico">
                 Resgate Histórico
                 <i class="fa-solid fa-scroll sidemenu-list__icon" aria-hidden="true"></i>
               </a>
@@ -421,7 +452,8 @@
         <li><a href="#denem" class="rep-anchors__link"><i class="fa-solid fa-globe" aria-hidden="true"></i> DENEM</a></li>
         <li><a href="#dce" class="rep-anchors__link"><i class="fa-solid fa-building-columns" aria-hidden="true"></i> DCE UFTM</a></li>
         <li><a href="#clev" class="rep-anchors__link"><i class="fa-solid fa-plane-departure" aria-hidden="true"></i> CLEV</a></li>
-        <li><a href="#cvu" class="rep-anchors__link"><i class="fa-solid fa-hand-holding-heart" aria-hidden="true"></i> CVU Uberaba</a></li>
+        <li class="rep-anchors__divider" aria-hidden="true"><span>Ação Social</span></li>
+        <li><a href="#cvu" class="rep-anchors__link rep-anchors__link--voluntary"><i class="fa-solid fa-hand-holding-heart" aria-hidden="true"></i> CVU Uberaba</a></li>
       </ul>
     </nav>
 
@@ -620,11 +652,17 @@
       </div>
     </section>
 
+    <!-- ===================== SEPARADOR: AÇÃO SOCIAL ===================== -->
+    <div class="rep-section-divider">
+      <span>Ação Social</span>
+      <p>Estudantes que se dedicam a ações solidárias, campanhas e projetos sociais em parceria com a comunidade.</p>
+    </div>
+
     <!-- ===================== CVU UBERABA ===================== -->
     <section class="rep-entity" id="cvu">
       <div class="container">
         <div class="section-header" data-aos="fade-up">
-          <span class="section-tag">Representação Local</span>
+          <span class="section-tag section-tag--voluntary">Atividade Voluntária</span>
           <h2 class="section-title">CVU Uberaba</h2>
           <p class="section-desc">Centro de Voluntariado Universitário</p>
         </div>
@@ -722,7 +760,7 @@
         <a href="criadores.html">Criadores</a>
         <a href="sobre.html">Sobre o DAGV</a>
         <a href="coordenacao.html">Coordenação</a>
-        <a href="historico2.html">Resgate Histórico</a>
+        <a href="resgatehistorico.html">Resgate Histórico</a>
         <a href="index.html#contact">Suporte</a>
       </nav>
 

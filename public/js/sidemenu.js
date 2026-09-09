@@ -40,7 +40,7 @@
       var pageMap = {
         'sobre.html':       'sobre.html',
         'coordenacao.html': 'coordenacao.html',
-        'historico2.html':  'historico2.html',
+        'resgatehistorico.html':  'resgatehistorico.html',
         'ligas.html':       'ligas.html',
         'cursinho.html':    'cursinho.html',
         'pet.html':         'pet.html',
