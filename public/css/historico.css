@@ -180,7 +180,9 @@
   transition: background 280ms var(--ease),
               transform  250ms var(--ease),
               border-color 280ms var(--ease);
-  cursor: default;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
 }
 
 .historico__doc-card:hover {

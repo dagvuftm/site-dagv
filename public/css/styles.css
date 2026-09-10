@@ -1239,11 +1239,11 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 /* ── Responsividade ───────────────────────────────────── */
 @media (max-width: 1024px) {
   .inst-grid { grid-template-columns: repeat(2, 1fr); }
-  /* [FIX tablet] .inst-card--repr mantinha span:2 herdado do
-     desktop — num grid de 2 colunas isso quebrava o encaixe dos
-     6 cards (repr "pulava" pra própria linha, deixando o 5º card
-     sozinho com espaço vazio ao lado). Agora os 4 primeiros ficam
-     iguais (2×2) e só o 5º (cachacina-aaads) ocupa a linha toda. */
+  /* .inst-card--repr (span:2 no desktop) preenchia a linha toda
+     sozinho num grid de 2 colunas, deixando o 5º card (cachacina-aaads)
+     também sozinho com espaço vazio ao lado. Repr vira span:1 pra
+     parear 2×2 com os 3 primeiros, e cachacina-aaads ocupa a linha
+     toda por ser o último e ímpar. */
   .inst-card--repr { grid-column: span 1; }
   .inst-card--cachacina-aaads { grid-column: 1 / -1; }
 }

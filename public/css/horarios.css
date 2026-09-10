@@ -1,0 +1,295 @@
+/* ============================================================
+   horarios.css — estilos exclusivos de horarios.html
+   Paleta, tipografia e tokens herdados de styles.css.
+   Hero reaproveita o padrão visual .manual-hero (manual.html).
+   ============================================================ */
+
+/* ── Hero (mesmo padrão visual de .manual-hero) ──────────────── */
+.manual-hero {
+  position: relative;
+  min-height: 42vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 80% 100% at 0% 60%, #3d0018 0%, var(--clr-green-dark) 38%, transparent 72%),
+    linear-gradient(160deg, var(--clr-green-dark) 0%, var(--clr-green) 50%, #1a0010 100%);
+  padding-top:    calc(var(--header-h) + 4rem);
+  padding-bottom: 4rem;
+}
+.manual-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(-55deg,
+      rgba(255,255,255,.025) 0px, rgba(255,255,255,.025) 1px,
+      transparent 1px, transparent 36px);
+  pointer-events: none;
+}
+.manual-hero__orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.manual-hero__orb--1 {
+  width: 420px; height: 420px;
+  border: 52px solid rgba(232,160,32,.08);
+  top: -140px; left: -120px;
+}
+.manual-hero__orb--2 {
+  width: 220px; height: 220px;
+  border: 30px solid rgba(255,255,255,.05);
+  bottom: -50px; right: 7%;
+}
+.manual-hero__content {
+  position: relative; z-index: 2;
+  max-width: 800px; text-align: center;
+  padding-inline: var(--space-md);
+  display: flex; flex-direction: column; align-items: center;
+}
+.manual-hero__eyebrow {
+  display: inline-flex; align-items: center; gap: .55em;
+  font-size: .73rem; font-weight: 700; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--clr-accent);
+  background: rgba(232,160,32,.1);
+  border: 1px solid rgba(232,160,32,.28);
+  border-radius: var(--radius-pill);
+  padding: .32em 1.1em; margin-bottom: var(--space-md);
+}
+.manual-hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 3.6rem);
+  font-weight: 700; color: var(--clr-white);
+  line-height: 1.1; margin-bottom: .75rem;
+}
+.manual-hero__title em {
+  font-style: italic; color: var(--clr-accent);
+  text-decoration: underline;
+  text-decoration-color: rgba(232,160,32,.3);
+  text-underline-offset: 7px;
+  text-decoration-thickness: 2px;
+}
+.manual-hero__desc {
+  font-size: 1.02rem; color: rgba(255,255,255,.72);
+  max-width: 580px; line-height: 1.78;
+  margin-bottom: var(--space-lg);
+}
+.manual-hero__actions {
+  display: flex; flex-wrap: wrap; gap: .8rem;
+  justify-content: center;
+}
+
+/* ── Abas de período ────────────────────────────────────────── */
+.sched-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin-bottom: var(--space-lg);
+}
+.sched-tab {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: .88rem;
+  padding: .65em 1.3em;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid rgba(147,1,66,.25);
+  background: var(--clr-off);
+  color: var(--clr-green);
+  cursor: pointer;
+  transition: background 220ms var(--ease), color 220ms var(--ease),
+              border-color 220ms var(--ease), transform 220ms var(--ease);
+}
+.sched-tab:hover {
+  border-color: var(--clr-green);
+  transform: translateY(-2px);
+}
+.sched-tab.is-active {
+  background: var(--clr-green);
+  border-color: var(--clr-green);
+  color: #fff;
+}
+
+/* ── Cabeçalho do painel ────────────────────────────────────── */
+.sched-panel__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: var(--space-sm);
+}
+.sched-panel__title-wrap {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+}
+.sched-panel__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(147,1,66,.08);
+  color: var(--clr-green);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+.sched-panel__title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  margin: 0;
+  color: var(--clr-dark);
+}
+.sched-panel__label {
+  font-size: .8rem;
+  color: var(--clr-gray-3);
+  font-weight: 500;
+}
+.sched-pdf-link {
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--clr-green);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: .4em;
+  white-space: nowrap;
+}
+.sched-pdf-link:hover { text-decoration: underline; }
+
+/* ── Aviso / disclaimer ─────────────────────────────────────── */
+.sched-disclaimer {
+  display: flex;
+  gap: .7rem;
+  align-items: flex-start;
+  background: rgba(232,160,32,.1);
+  border: 1px solid rgba(232,160,32,.3);
+  border-radius: var(--radius-md);
+  padding: .9rem 1.1rem;
+  font-size: .86rem;
+  color: var(--clr-gray-3);
+  margin-bottom: var(--space-md);
+}
+.sched-disclaimer i {
+  color: var(--clr-accent-dark);
+  margin-top: .15rem;
+}
+
+/* ── Tabelas ─────────────────────────────────────────────────── */
+.sched-table-scroll {
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(147,1,66,.12);
+  -webkit-overflow-scrolling: touch;
+}
+table.sched-grade,
+table.sched-rot {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .85rem;
+  min-width: 620px;
+  table-layout: fixed;
+}
+.sched-grade th, .sched-grade td,
+.sched-rot th, .sched-rot td {
+  padding: .7em .6em;
+  text-align: center;
+  vertical-align: middle;
+  border-bottom: 1px solid rgba(147,1,66,.1);
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.25;
+}
+.sched-grade th, .sched-rot th {
+  background: var(--clr-green);
+  color: #fff;
+  font-family: var(--font-body);
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+}
+.sched-grade tbody tr:nth-child(odd),
+.sched-rot tbody tr:nth-child(odd) {
+  background: var(--clr-off);
+}
+.sched-grade td.time, .sched-rot td:first-child {
+  font-weight: 600;
+  color: var(--clr-green);
+}
+.sched-grade td.empty { color: var(--clr-gray-2); }
+.sched-grade tr.interval td {
+  background: rgba(232,160,32,.12);
+  font-style: italic;
+  color: var(--clr-accent-dark);
+  text-align: center;
+}
+
+/* ── Nota / rodapé de tabela ─────────────────────────────────── */
+.sched-note {
+  font-size: .85rem;
+  color: var(--clr-gray-3);
+  margin-top: var(--space-sm);
+}
+
+/* ── Lista de disciplinas ────────────────────────────────────── */
+.sched-section-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  margin: var(--space-lg) 0 var(--space-sm);
+  color: var(--clr-dark);
+}
+.sched-disciplinas {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: .6rem .9rem;
+}
+.sched-disciplinas li {
+  display: flex;
+  flex-direction: column;
+  gap: .15rem;
+  padding: .7em .9em;
+  background: var(--clr-off);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(147,1,66,.1);
+}
+.sched-disciplinas .nome {
+  font-weight: 600;
+  font-size: .88rem;
+  color: var(--clr-dark);
+}
+.sched-disciplinas .prof {
+  font-size: .78rem;
+  color: var(--clr-gray-3);
+}
+
+/* ── CTA final ───────────────────────────────────────────────── */
+.sched-cta {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.sched-cta h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  color: var(--clr-dark);
+  margin-bottom: .6rem;
+}
+.sched-cta p {
+  color: var(--clr-gray-3);
+  margin-bottom: var(--space-md);
+}
+.sched-cta .cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .8rem;
+  justify-content: center;
+}
+
+@media (max-width: 640px) {
+  .sched-panel__header { flex-direction: column; align-items: flex-start; }
+}
